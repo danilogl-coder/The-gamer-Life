@@ -35,6 +35,8 @@ var pets: PetSystem
 var special: SpecialCareerSystem
 var school_life: SchoolLifeSystem
 var dating: DatingSystem
+var society: SocietySystem
+var dialogue: DialogueSystem
 var pipeline: YearPipeline
 
 
@@ -67,6 +69,8 @@ func _init(p_data: DataRegistry, p_bus: EventBus = null) -> void:
 	special = SpecialCareerSystem.new(self)
 	school_life = SchoolLifeSystem.new(self)
 	dating = DatingSystem.new(self)
+	society = SocietySystem.new(self)
+	dialogue = DialogueSystem.new(self)
 	pipeline = YearPipeline.new(self)
 
 
@@ -84,6 +88,7 @@ func new_life(p_seed: int, options: Dictionary = {}) -> void:
 		state.data.legacy.merge(meta_legacy.duplicate(true), true)
 		state.data.legacy.perks = []
 	world.init_world()
+	society.init_society()
 	state.data.challenge = options.get("challenge", "")
 	state.data.settings = {"mature": bool(options.get("mature", true))}
 	var player := factory.create_newborn_player(options)
@@ -159,7 +164,7 @@ var save_points: Array = []
 func advance_year() -> Dictionary:
 	if is_dead() or has_pending_events():
 		return {"ok": false, "reason": "ui.blocked"}
-	save_points.append(JSON.stringify(snapshot()))
+	save_points.append(JSON.stringify(snapshot(), "", false, true))
 	if save_points.size() > SAVE_POINTS:
 		save_points.pop_front()
 	pipeline.advance()
@@ -203,6 +208,18 @@ func command(name: String, args: Array = []) -> Dictionary:
 	var p := player()
 	var result = null
 	match name:
+		"reply":
+			result = dialogue.reply(args[0])
+		"end_talk":
+			dialogue.end_conversation()
+			result = {"ok": true}
+		"vote":
+			if int(p.age) < 18 or crime.in_prison(p):
+				result = {"ok": false, "reason": "ui.blocked"}
+			else:
+				p.vote = args[0]
+				activities.bump_counter("civic.votes")
+				result = {"ok": true, "key": "log.voted", "params": {"party": "@party." + str(args[0])}}
 		"apply_job": result = career.apply(p, args[0], career.interview_score(p, args[1]) if args.size() > 1 else 0.0)
 		"quit_job":
 			career.fire(p, "quit")

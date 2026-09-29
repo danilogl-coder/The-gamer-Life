@@ -36,7 +36,7 @@ func test_probability_bounds() -> void:
 func test_save_load_roundtrip_is_deterministic() -> void:
 	var a := new_sim(777)
 	live_years(a, 12)
-	var snap: Dictionary = JSON.parse_string(JSON.stringify(a.snapshot()))
+	var snap: Dictionary = JSON.parse_string(JSON.stringify(a.snapshot(), "", false, true))
 	snap = SaveSystem.normalize(snap)
 	var b := LifeSimulation.new(data)
 	b.load_state(SaveSystem.migrate(snap))

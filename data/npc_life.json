@@ -1,0 +1,1368 @@
+[
+ {
+  "id": "promoted",
+  "age": [
+   20,
+   65
+  ],
+  "w": 1.2,
+  "crit": [
+   [
+    "npc.employed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "promote"
+   },
+   {
+    "op": "mood",
+    "v": 12
+   },
+   {
+    "op": "cash",
+    "v": 1500
+   }
+  ],
+  "mods": [
+   [
+    "npc.c",
+    0.02,
+    50
+   ],
+   [
+    "w.economy",
+    0.8,
+    0
+   ],
+   [
+    "npc.aspires.career",
+    0.6
+   ]
+  ],
+  "notify": "social",
+  "player_mood": 2
+ },
+ {
+  "id": "fired",
+  "age": [
+   20,
+   65
+  ],
+  "w": 1.0,
+  "crit": [
+   [
+    "npc.employed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "lose_job"
+   },
+   {
+    "op": "mood",
+    "v": -18
+   },
+   {
+    "op": "stress",
+    "v": 15
+   }
+  ],
+  "mods": [
+   [
+    "npc.c",
+    -0.02,
+    50
+   ],
+   [
+    "w.unemployment",
+    8.0,
+    0.08
+   ],
+   [
+    "tech.automation",
+    0.4
+   ]
+  ],
+  "notify": "social",
+  "player_mood": -3
+ },
+ {
+  "id": "new_job",
+  "age": [
+   18,
+   64
+  ],
+  "w": 1.3,
+  "crit": [
+   [
+    "npc.unemployed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "new_job"
+   },
+   {
+    "op": "mood",
+    "v": 15
+   }
+  ],
+  "mods": [
+   [
+    "npc.c",
+    0.015,
+    50
+   ],
+   [
+    "w.economy",
+    0.8,
+    0
+   ]
+  ],
+  "notify": "social",
+  "player_mood": 2
+ },
+ {
+  "id": "quit_dream",
+  "age": [
+   22,
+   55
+  ],
+  "w": 0.35,
+  "crit": [
+   [
+    "npc.employed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "lose_job"
+   },
+   {
+    "op": "mood",
+    "v": 10
+   },
+   {
+    "op": "interest"
+   }
+  ],
+  "mods": [
+   [
+    "npc.o",
+    0.03,
+    50
+   ],
+   [
+    "npc.aspires.adventure",
+    1.0
+   ]
+  ],
+  "notify": "social"
+ },
+ {
+  "id": "raise",
+  "age": [
+   20,
+   65
+  ],
+  "w": 1.0,
+  "crit": [
+   [
+    "npc.employed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "cash",
+    "v": 2000,
+    "salary": true
+   },
+   {
+    "op": "mood",
+    "v": 6
+   }
+  ],
+  "mods": [
+   [
+    "w.good_economy",
+    0.5
+   ]
+  ]
+ },
+ {
+  "id": "retired",
+  "age": [
+   58,
+   75
+  ],
+  "w": 1.5,
+  "crit": [
+   [
+    "npc.employed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "retire"
+   },
+   {
+    "op": "mood",
+    "v": 10
+   }
+  ],
+  "mods": [
+   [
+    "npc.age",
+    0.1,
+    60
+   ]
+  ],
+  "notify": "social",
+  "player_mood": 1,
+  "cd": 99
+ },
+ {
+  "id": "business_open",
+  "age": [
+   24,
+   60
+  ],
+  "w": 0.35,
+  "crit": [
+   [
+    "npc.cash",
+    ">",
+    15000
+   ]
+  ],
+  "fx": [
+   {
+    "op": "business"
+   },
+   {
+    "op": "cash",
+    "v": -12000
+   },
+   {
+    "op": "mood",
+    "v": 12
+   }
+  ],
+  "mods": [
+   [
+    "npc.aspires.wealth",
+    1.0
+   ],
+   [
+    "npc.o",
+    0.02,
+    50
+   ],
+   [
+    "city.booming",
+    0.6
+   ]
+  ],
+  "notify": "major",
+  "player_mood": 2,
+  "cd": 10
+ },
+ {
+  "id": "business_closed",
+  "age": [
+   24,
+   75
+  ],
+  "w": 0.0,
+  "crit": [
+   [
+    "npc.age",
+    ">",
+    200
+   ]
+  ],
+  "fx": [],
+  "notify": "major",
+  "player_mood": -2
+ },
+ {
+  "id": "lottery",
+  "age": [
+   18,
+   90
+  ],
+  "w": 0.04,
+  "crit": [],
+  "fx": [
+   {
+    "op": "cash",
+    "v": 250000
+   },
+   {
+    "op": "mood",
+    "v": 30
+   }
+  ],
+  "notify": "major",
+  "player_mood": 3,
+  "cd": 50
+ },
+ {
+  "id": "bad_investment",
+  "age": [
+   25,
+   80
+  ],
+  "w": 0.5,
+  "crit": [
+   [
+    "npc.cash",
+    ">",
+    5000
+   ]
+  ],
+  "fx": [
+   {
+    "op": "cash",
+    "min": -9000,
+    "max": -2000
+   },
+   {
+    "op": "mood",
+    "v": -12
+   }
+  ],
+  "mods": [
+   [
+    "npc.aspires.wealth",
+    0.8
+   ],
+   [
+    "w.bad_economy",
+    0.8
+   ]
+  ],
+  "notify": "social"
+ },
+ {
+  "id": "married",
+  "age": [
+   20,
+   60
+  ],
+  "w": 1.1,
+  "crit": [
+   [
+    "npc.married",
+    "!"
+   ],
+   [
+    "npc.spouse_is_player",
+    "!"
+   ],
+   [
+    "role",
+    "!=",
+    "spouse"
+   ],
+   [
+    "role",
+    "!=",
+    "partner"
+   ],
+   [
+    "role",
+    "!=",
+    "fiance"
+   ],
+   [
+    "role",
+    "!=",
+    "ex"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "marry"
+   },
+   {
+    "op": "mood",
+    "v": 20
+   }
+  ],
+  "mods": [
+   [
+    "npc.aspires.family",
+    1.0
+   ],
+   [
+    "npc.aspires.romance",
+    1.0
+   ],
+   [
+    "npc.e",
+    0.01,
+    50
+   ],
+   [
+    "npc.age",
+    -0.03,
+    35
+   ]
+  ],
+  "notify": "major",
+  "player_mood": 3,
+  "cd": 6
+ },
+ {
+  "id": "divorce",
+  "age": [
+   22,
+   85
+  ],
+  "w": 0.7,
+  "crit": [
+   [
+    "npc.married"
+   ],
+   [
+    "npc.spouse_is_player",
+    "!"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "divorce"
+   },
+   {
+    "op": "mood",
+    "v": -20
+   },
+   {
+    "op": "stress",
+    "v": 15
+   }
+  ],
+  "mods": [
+   [
+    "npc.marriage",
+    -0.06,
+    45
+   ],
+   [
+    "npc.n",
+    0.02,
+    50
+   ],
+   [
+    "npc.devout",
+    -0.5
+   ]
+  ],
+  "notify": "major",
+  "player_mood": -3,
+  "cd": 5
+ },
+ {
+  "id": "baby",
+  "age": [
+   20,
+   44
+  ],
+  "w": 1.0,
+  "crit": [
+   [
+    "npc.married"
+   ],
+   [
+    "npc.spouse_is_player",
+    "!"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "baby"
+   },
+   {
+    "op": "mood",
+    "v": 18
+   }
+  ],
+  "mods": [
+   [
+    "npc.aspires.family",
+    1.2
+   ],
+   [
+    "npc.kids",
+    -0.35,
+    1
+   ],
+   [
+    "npc.age",
+    -0.05,
+    30
+   ]
+  ],
+  "notify": "major",
+  "player_mood": 3,
+  "cd": 2
+ },
+ {
+  "id": "fell_ill",
+  "age": [
+   30,
+   110
+  ],
+  "w": 1.0,
+  "crit": [],
+  "fx": [
+   {
+    "op": "sick",
+    "pool": [
+     "flu",
+     "hypertension",
+     "diabetes",
+     "back_pain",
+     "depression",
+     "arthritis",
+     "asthma",
+     "migraine"
+    ]
+   },
+   {
+    "op": "mood",
+    "v": -12
+   },
+   {
+    "op": "health",
+    "v": -12
+   }
+  ],
+  "mods": [
+   [
+    "npc.age",
+    0.03,
+    40
+   ],
+   [
+    "city.polluted",
+    0.4
+   ]
+  ],
+  "notify": "social",
+  "player_mood": -2
+ },
+ {
+  "id": "recovered",
+  "age": [
+   5,
+   110
+  ],
+  "w": 1.4,
+  "crit": [
+   [
+    "npc.sick"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "recover"
+   },
+   {
+    "op": "mood",
+    "v": 12
+   },
+   {
+    "op": "health",
+    "v": 12
+   }
+  ],
+  "mods": [
+   [
+    "tech.gene_therapy",
+    1.0
+   ]
+  ],
+  "notify": "social",
+  "player_mood": 2
+ },
+ {
+  "id": "accident",
+  "age": [
+   10,
+   95
+  ],
+  "w": 0.4,
+  "crit": [],
+  "fx": [
+   {
+    "op": "health",
+    "v": -30
+   },
+   {
+    "op": "mood",
+    "v": -15
+   },
+   {
+    "op": "stress",
+    "v": 10
+   }
+  ],
+  "mods": [
+   [
+    "npc.o",
+    0.01,
+    50
+   ],
+   [
+    "city.dangerous",
+    0.5
+   ]
+  ],
+  "notify": "major",
+  "player_mood": -3
+ },
+ {
+  "id": "moved_away",
+  "age": [
+   18,
+   70
+  ],
+  "w": 0.6,
+  "crit": [
+   [
+    "npc.far",
+    "!"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "friend",
+     "best_friend",
+     "sibling",
+     "acquaintance",
+     "coworker",
+     "classmate",
+     "child",
+     "grandchild"
+    ]
+   ]
+  ],
+  "fx": [
+   {
+    "op": "move"
+   },
+   {
+    "op": "mood",
+    "v": 5
+   }
+  ],
+  "mods": [
+   [
+    "npc.o",
+    0.02,
+    50
+   ],
+   [
+    "npc.aspires.adventure",
+    0.8
+   ],
+   [
+    "w.bad_economy",
+    0.3
+   ],
+   [
+    "city.decaying",
+    0.5
+   ]
+  ],
+  "notify": "social",
+  "cd": 8
+ },
+ {
+  "id": "moved_back",
+  "age": [
+   18,
+   80
+  ],
+  "w": 0.8,
+  "crit": [
+   [
+    "npc.far"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "return"
+   },
+   {
+    "op": "mood",
+    "v": 8
+   }
+  ],
+  "mods": [
+   [
+    "bond",
+    0.02,
+    50
+   ]
+  ],
+  "notify": "social",
+  "cd": 4
+ },
+ {
+  "id": "new_hobby",
+  "age": [
+   8,
+   95
+  ],
+  "w": 1.2,
+  "crit": [],
+  "fx": [
+   {
+    "op": "interest"
+   },
+   {
+    "op": "mood",
+    "v": 5
+   }
+  ],
+  "mods": [
+   [
+    "npc.o",
+    0.02,
+    50
+   ]
+  ],
+  "cd": 4
+ },
+ {
+  "id": "found_faith",
+  "age": [
+   16,
+   95
+  ],
+  "w": 0.35,
+  "crit": [
+   [
+    "npc.faith",
+    "<",
+    70
+   ]
+  ],
+  "fx": [
+   {
+    "op": "faith",
+    "v": 25
+   },
+   {
+    "op": "mood",
+    "v": 8
+   }
+  ],
+  "mods": [
+   [
+    "npc.mood.down",
+    0.8
+   ],
+   [
+    "npc.mood.miserable",
+    1.2
+   ]
+  ],
+  "notify": "social",
+  "cd": 15
+ },
+ {
+  "id": "lost_faith",
+  "age": [
+   16,
+   95
+  ],
+  "w": 0.25,
+  "crit": [
+   [
+    "npc.faith",
+    ">",
+    60
+   ]
+  ],
+  "fx": [
+   {
+    "op": "faith",
+    "v": -30
+   }
+  ],
+  "mods": [
+   [
+    "npc.o",
+    0.02,
+    50
+   ]
+  ],
+  "notify": "social",
+  "cd": 15
+ },
+ {
+  "id": "political_turn",
+  "age": [
+   20,
+   95
+  ],
+  "w": 0.4,
+  "crit": [],
+  "fx": [
+   {
+    "op": "politics",
+    "v": 40
+   }
+  ],
+  "mods": [
+   [
+    "likes.politics",
+    1.0
+   ],
+   [
+    "news.protests",
+    0.8
+   ],
+   [
+    "election_year",
+    0.5
+   ]
+  ],
+  "cd": 10
+ },
+ {
+  "id": "travel",
+  "age": [
+   16,
+   90
+  ],
+  "w": 0.8,
+  "crit": [
+   [
+    "npc.cash",
+    ">",
+    3000
+   ]
+  ],
+  "fx": [
+   {
+    "op": "cash",
+    "v": -2500
+   },
+   {
+    "op": "mood",
+    "v": 14
+   }
+  ],
+  "mods": [
+   [
+    "npc.likes.travel",
+    1.5
+   ],
+   [
+    "npc.o",
+    0.02,
+    50
+   ]
+  ],
+  "cd": 2
+ },
+ {
+  "id": "pet",
+  "age": [
+   6,
+   90
+  ],
+  "w": 0.6,
+  "crit": [],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 10
+   }
+  ],
+  "mods": [
+   [
+    "npc.likes.animals",
+    1.5
+   ]
+  ],
+  "cd": 8
+ },
+ {
+  "id": "awakened",
+  "age": [
+   10,
+   50
+  ],
+  "w": 0.12,
+  "crit": [
+   [
+    "npc.awakened",
+    "!"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "awaken"
+   },
+   {
+    "op": "mood",
+    "v": 5
+   }
+  ],
+  "mods": [
+   [
+    "we.awakening_wave",
+    4.0
+   ],
+   [
+    "we.rift_surge",
+    1.5
+   ],
+   [
+    "tech.hunter_age",
+    0.8
+   ]
+  ],
+  "notify": "major",
+  "cd": 99
+ },
+ {
+  "id": "arrested",
+  "age": [
+   16,
+   75
+  ],
+  "w": 0.25,
+  "crit": [
+   [
+    "npc.jailed",
+    "!"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "jail"
+   },
+   {
+    "op": "mood",
+    "v": -25
+   },
+   {
+    "op": "memory",
+    "v": "shame",
+    "sev": 0
+   }
+  ],
+  "mods": [
+   [
+    "npc.a",
+    -0.03,
+    50
+   ],
+   [
+    "npc.broke",
+    0.8
+   ],
+   [
+    "city.dangerous",
+    0.5
+   ],
+   [
+    "npc.trait.impulsive",
+    0.6
+   ]
+  ],
+  "notify": "major",
+  "player_mood": -3,
+  "cd": 10
+ },
+ {
+  "id": "award",
+  "age": [
+   14,
+   90
+  ],
+  "w": 0.4,
+  "crit": [],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 15
+   }
+  ],
+  "mods": [
+   [
+    "npc.c",
+    0.02,
+    50
+   ],
+   [
+    "npc.aspires.fame",
+    0.8
+   ]
+  ],
+  "notify": "social",
+  "player_mood": 1,
+  "cd": 5
+ },
+ {
+  "id": "heartbreak",
+  "age": [
+   14,
+   40
+  ],
+  "w": 0.7,
+  "crit": [
+   [
+    "npc.married",
+    "!"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "mood",
+    "v": -18
+   }
+  ],
+  "mods": [
+   [
+    "npc.aspires.romance",
+    1.0
+   ],
+   [
+    "npc.n",
+    0.02,
+    50
+   ]
+  ],
+  "cd": 2
+ },
+ {
+  "id": "burnout",
+  "age": [
+   22,
+   65
+  ],
+  "w": 0.5,
+  "crit": [
+   [
+    "npc.employed"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "stress",
+    "v": 25
+   },
+   {
+    "op": "mood",
+    "v": -15
+   }
+  ],
+  "mods": [
+   [
+    "npc.stress",
+    0.03,
+    40
+   ],
+   [
+    "npc.c",
+    0.01,
+    50
+   ],
+   [
+    "npc.n",
+    0.02,
+    50
+   ]
+  ],
+  "notify": "social"
+ },
+ {
+  "id": "debt",
+  "age": [
+   20,
+   80
+  ],
+  "w": 0.5,
+  "crit": [
+   [
+    "npc.broke"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "stress",
+    "v": 20
+   },
+   {
+    "op": "mood",
+    "v": -12
+   }
+  ],
+  "mods": [
+   [
+    "w.bad_economy",
+    0.8
+   ]
+  ],
+  "notify": "social",
+  "cd": 4
+ },
+ {
+  "id": "graduated",
+  "age": [
+   17,
+   30
+  ],
+  "w": 1.0,
+  "crit": [
+   [
+    "npc.band.young"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 15
+   }
+  ],
+  "mods": [
+   [
+    "npc.aspires.knowledge",
+    0.8
+   ]
+  ],
+  "notify": "social",
+  "player_mood": 1,
+  "cd": 6
+ },
+ {
+  "id": "reconnected",
+  "age": [
+   15,
+   95
+  ],
+  "w": 0.6,
+  "crit": [
+   [
+    "bond",
+    "<",
+    40
+   ]
+  ],
+  "fx": [
+   {
+    "op": "player_bond",
+    "v": 10
+   },
+   {
+    "op": "mood",
+    "v": 5
+   }
+  ],
+  "mods": [
+   [
+    "npc.a",
+    0.02,
+    50
+   ]
+  ],
+  "notify": "social",
+  "cd": 5
+ },
+ {
+  "id": "grudge",
+  "age": [
+   10,
+   95
+  ],
+  "w": 0.4,
+  "crit": [
+   [
+    "grudge",
+    ">",
+    15
+   ]
+  ],
+  "fx": [
+   {
+    "op": "player_bond",
+    "v": -6
+   }
+  ],
+  "mods": [
+   [
+    "npc.trait.vengeful",
+    1.5
+   ],
+   [
+    "npc.a",
+    -0.02,
+    50
+   ]
+  ],
+  "notify": "social",
+  "player_mood": -1,
+  "cd": 4
+ },
+ {
+  "id": "volunteer",
+  "age": [
+   14,
+   90
+  ],
+  "w": 0.4,
+  "crit": [],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 10
+   },
+   {
+    "op": "faith",
+    "v": 5
+   }
+  ],
+  "mods": [
+   [
+    "npc.a",
+    0.03,
+    50
+   ],
+   [
+    "npc.devout",
+    0.6
+   ]
+  ],
+  "cd": 10
+ },
+ {
+  "id": "grandkid_visit",
+  "age": [
+   55,
+   100
+  ],
+  "w": 0.5,
+  "crit": [
+   [
+    "npc.kids",
+    ">",
+    0
+   ]
+  ],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 8
+   }
+  ]
+ },
+ {
+  "id": "school_trouble",
+  "age": [
+   8,
+   17
+  ],
+  "w": 0.8,
+  "crit": [
+   [
+    "npc.band.teen"
+   ]
+  ],
+  "fx": [
+   {
+    "op": "mood",
+    "v": -8
+   },
+   {
+    "op": "stress",
+    "v": 10
+   }
+  ],
+  "mods": [
+   [
+    "npc.c",
+    -0.02,
+    50
+   ],
+   [
+    "npc.trait.impulsive",
+    0.6
+   ]
+  ],
+  "notify": "social",
+  "cd": 2
+ },
+ {
+  "id": "school_star",
+  "age": [
+   7,
+   17
+  ],
+  "w": 0.6,
+  "crit": [],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 10
+   }
+  ],
+  "mods": [
+   [
+    "npc.c",
+    0.02,
+    50
+   ]
+  ],
+  "cd": 2
+ },
+ {
+  "id": "first_love",
+  "age": [
+   12,
+   19
+  ],
+  "w": 0.6,
+  "crit": [],
+  "fx": [
+   {
+    "op": "mood",
+    "v": 14
+   }
+  ],
+  "mods": [
+   [
+    "npc.e",
+    0.01,
+    50
+   ]
+  ],
+  "cd": 99
+ },
+ {
+  "id": "released",
+  "age": [
+   0,
+   200
+  ],
+  "w": 0.0,
+  "crit": [
+   [
+    "npc.age",
+    ">",
+    999
+   ]
+  ],
+  "fx": [],
+  "notify": "social"
+ }
+]

@@ -57,6 +57,7 @@ func tax_rate(p: Dictionary, income: float) -> float:
 	var rate := float(c.get("tax", 0.25))
 	if income > float(_sim.data.bal("finance.high_income", 150000)) * float(c.get("salary_mult", 1.0)):
 		rate += float(_sim.data.bal("finance.high_income_extra_tax", 0.08))
+	rate += _sim.society.policy("tax")
 	return clampf(rate - _sim.gamer.mod("tax_reduction"), 0.0, 0.7)
 
 

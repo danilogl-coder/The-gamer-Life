@@ -68,6 +68,7 @@ func _rebuild_mods() -> void:
 	for perk in _sim.state.data.legacy.get("perks", []):
 		_add_mods(_sim.data.get_def("items", perk).get("mods", {}), 1.0)
 	_add_mods(_sim.world.active_mods(), 1.0)
+	_add_mods(_sim.society.mods(p), 1.0)
 	_add_mods(_sim.pets.mods(p), 1.0)
 	_add_mods(_sim.school_life.mods(p), 1.0)
 	for item_id in p.gamer.get("inventory", {}):

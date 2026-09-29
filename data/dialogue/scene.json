@@ -1,0 +1,1180 @@
+[
+ {
+  "id": "set_kitchen",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.kitchen"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_kitchen_rain",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.kitchen"
+   ],
+   [
+    "weather.rain"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_kitchen_cooks",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.kitchen"
+   ],
+   [
+    "sp.quirk.cooks_too_much"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_kitchen_broke",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.kitchen"
+   ],
+   [
+    "w.bad_economy"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_living",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.living_room"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_living_news",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.living_room"
+   ],
+   [
+    "news.election"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_living_game",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.living_room"
+   ],
+   [
+    "news.champion"
+   ],
+   [
+    "sp.likes.sports"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_table",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.table"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_table_big",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.table"
+   ],
+   [
+    "sp.kids",
+    ">",
+    2
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_car",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.car"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_car_old",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.car"
+   ],
+   [
+    "sp.quirk.old_songs"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_phone",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.phone"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_phone_night",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.phone"
+   ],
+   [
+    "time.night"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_phone_owl",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.phone"
+   ],
+   [
+    "sp.quirk.night_owl"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_phone_early",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.phone"
+   ],
+   [
+    "sp.quirk.early_bird"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_video",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.video_call"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_visit",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.visit"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_visit_plants",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.visit"
+   ],
+   [
+    "sp.quirk.plants"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_visit_clean",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.visit"
+   ],
+   [
+    "sp.quirk.clean_freak"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_visit_messy",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.visit"
+   ],
+   [
+    "sp.quirk.messy"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_school",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.school"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_school_rain",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.school"
+   ],
+   [
+    "weather.rain"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_school_teacher",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.school"
+   ],
+   [
+    "role.teacher"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_work",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.work"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_work_boss",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.work"
+   ],
+   [
+    "role.boss"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_work_auto",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.work"
+   ],
+   [
+    "tech.automation"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_cafe",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.cafe"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_cafe_coffee",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.cafe"
+   ],
+   [
+    "sp.quirk.coffee"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_cafe_mana",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.cafe"
+   ],
+   [
+    "tech.mana_tech"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_bar",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.bar"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_bar_game",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.bar"
+   ],
+   [
+    "sp.fan"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_park",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.park"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_park_sun",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.park"
+   ],
+   [
+    "weather.sun"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_park_cold",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.park"
+   ],
+   [
+    "weather.cold"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_park_smog",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.park"
+   ],
+   [
+    "city.polluted"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_street",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.street"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_street_danger",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.street"
+   ],
+   [
+    "city.dangerous"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_street_closed",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.street"
+   ],
+   [
+    "news.place_closed"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_street_boom",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.street"
+   ],
+   [
+    "city.booming"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_street_breaks",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.street"
+   ],
+   [
+    "we.dungeon_break"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_prison",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.prison"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_prison_visit",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.prison"
+   ],
+   [
+    "family"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_hospital",
+  "concept": "setting",
+  "crit": [
+   [
+    "loc.hospital_bed"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_hot",
+  "concept": "setting",
+  "crit": [
+   [
+    "weather.hot"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ],
+   [
+    "loc.prison",
+    "!"
+   ],
+   [
+    "loc.hospital_bed",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6
+ },
+ {
+  "id": "set_storm",
+  "concept": "setting",
+  "crit": [
+   [
+    "weather.storm"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6
+ },
+ {
+  "id": "set_late",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.quirk.late"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ],
+   [
+    "loc.prison",
+    "!"
+   ],
+   [
+    "loc.hospital_bed",
+    "!"
+   ]
+  ],
+  "n": 2,
+  "w": 0.8
+ },
+ {
+  "id": "set_phoneaddict",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.quirk.phone_addict"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "w": 0.8
+ },
+ {
+  "id": "set_overdressed",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.quirk.overdresser"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ],
+   [
+    "loc.hospital_bed",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "w": 0.8
+ },
+ {
+  "id": "set_hums",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.quirk.hums"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "w": 0.8
+ },
+ {
+  "id": "set_miserable",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.mood.miserable"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "set_kid",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.band.child"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "set_toddler",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.band.toddler"
+   ]
+  ],
+  "n": 1,
+  "bonus": 2
+ },
+ {
+  "id": "set_elder_chair",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.band.elder"
+   ],
+   [
+    "loc.phone",
+    "!"
+   ],
+   [
+    "loc.hospital_bed",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "set_awakened",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.awakened"
+   ],
+   [
+    "p.rank",
+    ">",
+    0
+   ],
+   [
+    "loc.phone",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "set_rich",
+  "concept": "setting",
+  "crit": [
+   [
+    "sp.rich"
+   ],
+   [
+    "loc.visit"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "g_generic",
+  "concept": "greet",
+  "crit": [],
+  "n": 2,
+  "w": 0.3
+ },
+ {
+  "id": "g_sweet",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.sweet"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_formal",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.formal"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_slang",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.slang"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_blunt",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_sarcastic",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_shy",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.shy"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_dramatic",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.dramatic"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_nerdy",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.nerdy"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_calm",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.calm"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_kid",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.kid"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_elder",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.voice.elder"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_mom",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.mother"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_mom_blunt",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.mother"
+   ],
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_dad",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.father"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_dad_formal",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.father"
+   ],
+   [
+    "sp.voice.formal"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "g_grandma",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.grandparent"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_sib",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.sibling"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_sib_young",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "sp.band.child"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "g_spouse",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.spouse"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_spouse_cold",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.spouse"
+   ],
+   [
+    "bond",
+    "<",
+    30
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "g_partner",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.partner"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_child",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.band.teen"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_child_adult",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.age",
+    ">=",
+    20
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_boss",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.boss"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_teacher",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.teacher"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_inmate",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.inmate"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_ex",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.ex"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_happy",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.mood.happy"
+   ],
+   [
+    "bond",
+    ">=",
+    60
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "g_down",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.mood.down"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "g_miserable",
+  "concept": "greet",
+  "crit": [
+   [
+    "sp.mood.miserable"
+   ]
+  ],
+  "n": 2,
+  "bonus": 2
+ },
+ {
+  "id": "g_grudge",
+  "concept": "greet",
+  "crit": [
+   [
+    "grudge",
+    ">",
+    25
+   ]
+  ],
+  "n": 2,
+  "bonus": 2
+ },
+ {
+  "id": "g_first",
+  "concept": "greet",
+  "crit": [
+   [
+    "talks",
+    "==",
+    0
+   ],
+   [
+    "family",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "g_long",
+  "concept": "greet",
+  "crit": [
+   [
+    "bond",
+    "<",
+    35
+   ],
+   [
+    "family"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "g_bff",
+  "concept": "greet",
+  "crit": [
+   [
+    "role.best_friend"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "g_famous",
+  "concept": "greet",
+  "crit": [
+   [
+    "p.famous"
+   ],
+   [
+    "family",
+    "!"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "g_famous_family",
+  "concept": "greet",
+  "crit": [
+   [
+    "p.famous"
+   ],
+   [
+    "family"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "g_prison_family",
+  "concept": "greet",
+  "crit": [
+   [
+    "p.prison"
+   ],
+   [
+    "family"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "g_video",
+  "concept": "greet",
+  "crit": [
+   [
+    "loc.video_call"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "g_hospital",
+  "concept": "greet",
+  "crit": [
+   [
+    "loc.hospital_bed"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "catch_any",
+  "concept": "catch",
+  "crit": [],
+  "n": 1
+ }
+]

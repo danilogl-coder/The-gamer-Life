@@ -12,13 +12,19 @@ extends RefCounted
 ##   6. Health        aging, stress, habits, diseases, DEATH CHECK
 ##   7. Relations     bond decay, memory fading, romance checks (cheating...)
 ##      Pets          aging, bond, familiars
-##   8. NPCs          relevant NPCs age, work, marry, have kids, die, pruning
+##   8. NPCs          relevant NPCs age, mood, marriages, life events (their
+##                    own jobs, weddings, babies, illnesses, moves...), die
+##      Gossip        people hear about what you did and judge it
+##                    by their own values
 ##  OPEN THE NEW YEAR
 ##   9. Calendar      age+1, world year+1, milestones
 ##  10. World         economy cycle, inflation, markets, world events
+##      Society       cities, businesses, government & elections, tech eras,
+##                    celebrities, sports, newspaper
 ##  11. Quests        deadlines/failures, new quest offers
 ##  12. Scheduled     delayed consequences whose time has come
 ##  13. Random events weighted by data, rarity, cooldowns, conditions
+##      Reach-outs    people close to you call you about their lives
 ##  14. Titles & achievements
 ##  15. New year budget (free time), auto school enrollment
 
@@ -45,15 +51,18 @@ func advance() -> void:
 	_sim.relations.process_year(p)
 	_sim.pets.process_year(p)
 	_sim.npcs.process_year(p)
+	_sim.society.spread_gossip(p)
 	# --- new year ---
 	p.age = int(p.age) + 1
 	_sim.state.data.world_year = int(_sim.state.data.world_year) + 1
 	_milestones(p)
 	_sim.world.process_year()
+	_sim.society.process_year()
 	_sim.gamer.invalidate()
 	_sim.quests.process_year()
 	_sim.events.process_scheduled()
 	_sim.events.roll_year()
+	_sim.dialogue.process_year(p)
 	_sim.titles_check()
 	_sim.achievements.check()
 	_sim.skills.check_fusions(p)

@@ -1,0 +1,623 @@
+[
+ {
+  "id": "log.arrested",
+  "type": "arrested",
+  "vis": 0.55,
+  "opinion": -3,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.kind",
+    -2
+   ],
+   [
+    "devout",
+    -3
+   ],
+   [
+    "trait.cruel",
+    5
+   ],
+   [
+    "trait.loyal",
+    2
+   ],
+   [
+    "pol.conservative",
+    -3
+   ]
+  ],
+  "news": true,
+  "fame_min": 20
+ },
+ {
+  "id": "log.prison",
+  "type": "prison",
+  "vis": 0.7,
+  "opinion": -4,
+  "tone": "bad",
+  "judge": [
+   [
+    "devout",
+    -3
+   ],
+   [
+    "trait.loyal",
+    3
+   ],
+   [
+    "trait.cruel",
+    3
+   ]
+  ],
+  "news": true,
+  "fame_min": 20
+ },
+ {
+  "id": "log.released",
+  "type": "released",
+  "vis": 0.4,
+  "opinion": 1,
+  "tone": "neutral",
+  "judge": [
+   [
+    "trait.kind",
+    2
+   ]
+  ]
+ },
+ {
+  "id": "log.escaped",
+  "type": "escaped",
+  "vis": 0.85,
+  "opinion": -2,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.adventurous",
+    4
+   ],
+   [
+    "pol.conservative",
+    -4
+   ]
+  ],
+  "news": true,
+  "fame_min": 0
+ },
+ {
+  "id": "log.married",
+  "type": "married",
+  "vis": 0.7,
+  "opinion": 3,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.romantic",
+    3
+   ],
+   [
+    "aspires.family",
+    2
+   ]
+  ],
+  "news": true,
+  "fame_min": 40
+ },
+ {
+  "id": "log.divorced",
+  "type": "divorced",
+  "vis": 0.6,
+  "opinion": -1,
+  "tone": "bad",
+  "judge": [
+   [
+    "devout",
+    -4
+   ],
+   [
+    "pol.conservative",
+    -2
+   ],
+   [
+    "trait.kind",
+    1
+   ]
+  ],
+  "news": true,
+  "fame_min": 40
+ },
+ {
+  "id": "log.child_born",
+  "type": "baby",
+  "vis": 0.8,
+  "opinion": 4,
+  "tone": "good",
+  "judge": [
+   [
+    "aspires.family",
+    3
+   ],
+   [
+    "trait.kind",
+    1
+   ]
+  ],
+  "news": true,
+  "fame_min": 50
+ },
+ {
+  "id": "log.adopted",
+  "type": "adopted",
+  "vis": 0.7,
+  "opinion": 4,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.kind",
+    3
+   ]
+  ]
+ },
+ {
+  "id": "log.promoted",
+  "type": "promoted",
+  "vis": 0.45,
+  "opinion": 2,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.jealous",
+    -4
+   ],
+   [
+    "trait.materialistic",
+    1
+   ],
+   [
+    "aspires.career",
+    1
+   ]
+  ]
+ },
+ {
+  "id": "log.job_fired",
+  "type": "fired",
+  "vis": 0.5,
+  "opinion": -1,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.responsible",
+    -2
+   ],
+   [
+    "trait.kind",
+    2
+   ]
+  ]
+ },
+ {
+  "id": "log.job_start",
+  "type": "new_job",
+  "vis": 0.35,
+  "opinion": 1,
+  "tone": "good"
+ },
+ {
+  "id": "log.edu_graduated",
+  "type": "graduated",
+  "vis": 0.6,
+  "opinion": 3,
+  "tone": "good",
+  "judge": [
+   [
+    "aspires.knowledge",
+    2
+   ],
+   [
+    "trait.jealous",
+    -2
+   ]
+  ]
+ },
+ {
+  "id": "log.dropout",
+  "type": "dropout",
+  "vis": 0.5,
+  "opinion": -3,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.responsible",
+    -3
+   ],
+   [
+    "trait.adventurous",
+    2
+   ]
+  ]
+ },
+ {
+  "id": "log.pol_elected",
+  "type": "elected",
+  "vis": 0.95,
+  "opinion": 2,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.ambitious",
+    2
+   ],
+   [
+    "trait.humble",
+    -1
+   ],
+   [
+    "likes.politics",
+    2
+   ]
+  ],
+  "news": true,
+  "fame_min": 0
+ },
+ {
+  "id": "log.biz_bankrupt",
+  "type": "bankrupt",
+  "vis": 0.6,
+  "opinion": -2,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.kind",
+    1
+   ],
+   [
+    "trait.cruel",
+    -1
+   ]
+  ],
+  "news": true,
+  "fame_min": 30
+ },
+ {
+  "id": "log.music_hit",
+  "type": "hit_song",
+  "vis": 0.8,
+  "opinion": 3,
+  "tone": "good",
+  "judge": [
+   [
+    "likes.music",
+    3
+   ],
+   [
+    "trait.jealous",
+    -3
+   ]
+  ],
+  "news": true,
+  "fame_min": 10
+ },
+ {
+  "id": "log.music_platinum",
+  "type": "platinum",
+  "vis": 0.9,
+  "opinion": 4,
+  "tone": "good",
+  "judge": [
+   [
+    "likes.music",
+    3
+   ],
+   [
+    "trait.jealous",
+    -3
+   ]
+  ],
+  "news": true,
+  "fame_min": 10
+ },
+ {
+  "id": "log.sport_title",
+  "type": "sport_title",
+  "vis": 0.85,
+  "opinion": 3,
+  "tone": "good",
+  "judge": [
+   [
+    "likes.sports",
+    4
+   ],
+   [
+    "trait.jealous",
+    -2
+   ]
+  ],
+  "news": true,
+  "fame_min": 10
+ },
+ {
+  "id": "log.act_award",
+  "type": "acting_award",
+  "vis": 0.9,
+  "opinion": 4,
+  "tone": "good",
+  "judge": [
+   [
+    "likes.movies",
+    3
+   ],
+   [
+    "trait.jealous",
+    -3
+   ]
+  ],
+  "news": true,
+  "fame_min": 10
+ },
+ {
+  "id": "log.inf_viral",
+  "type": "viral",
+  "vis": 0.7,
+  "opinion": 1,
+  "tone": "neutral",
+  "judge": [
+   [
+    "band.elder",
+    -2
+   ],
+   [
+    "band.teen",
+    3
+   ],
+   [
+    "band.young",
+    2
+   ]
+  ],
+  "news": true,
+  "fame_min": 20
+ },
+ {
+  "id": "log.emigrated",
+  "type": "emigrated",
+  "vis": 0.7,
+  "opinion": -3,
+  "tone": "neutral",
+  "judge": [
+   [
+    "aspires.adventure",
+    3
+   ],
+   [
+    "trait.loyal",
+    -2
+   ]
+  ]
+ },
+ {
+  "id": "log.gang_join",
+  "type": "gang",
+  "vis": 0.5,
+  "opinion": -4,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.cruel",
+    4
+   ],
+   [
+    "devout",
+    -3
+   ],
+   [
+    "trait.kind",
+    -2
+   ]
+  ]
+ },
+ {
+  "id": "log.npc_killed",
+  "type": "killer",
+  "vis": 0.6,
+  "opinion": -15,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.cruel",
+    5
+   ],
+   [
+    "trait.kind",
+    -8
+   ]
+  ],
+  "news": true,
+  "fame_min": 0
+ },
+ {
+  "id": "log.roy_crowned",
+  "type": "crowned",
+  "vis": 1.0,
+  "opinion": 5,
+  "tone": "good",
+  "judge": [
+   [
+    "pol.conservative",
+    3
+   ],
+   [
+    "pol.progressive",
+    -3
+   ]
+  ],
+  "news": true,
+  "fame_min": 0
+ },
+ {
+  "id": "log.mil_medal",
+  "type": "medal",
+  "vis": 0.8,
+  "opinion": 4,
+  "tone": "good",
+  "judge": [
+   [
+    "pol.conservative",
+    3
+   ],
+   [
+    "pol.progressive",
+    -1
+   ]
+  ],
+  "news": true,
+  "fame_min": 10
+ },
+ {
+  "id": "log.maf_rank",
+  "type": "mafia",
+  "vis": 0.3,
+  "opinion": -2,
+  "tone": "bad",
+  "judge": [
+   [
+    "trait.cruel",
+    3
+   ],
+   [
+    "devout",
+    -3
+   ]
+  ]
+ },
+ {
+  "id": "log.faction_join",
+  "type": "faction",
+  "vis": 0.3,
+  "opinion": 1,
+  "tone": "neutral",
+  "judge": [
+   [
+    "awakened",
+    3
+   ]
+  ]
+ },
+ {
+  "id": "log.bought_property",
+  "type": "house",
+  "vis": 0.5,
+  "opinion": 1,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.jealous",
+    -2
+   ],
+   [
+    "trait.materialistic",
+    1
+   ]
+  ]
+ },
+ {
+  "id": "log.fined",
+  "type": "fined",
+  "vis": 0.3,
+  "opinion": -1,
+  "tone": "bad"
+ },
+ {
+  "id": "log.acquitted",
+  "type": "acquitted",
+  "vis": 0.5,
+  "opinion": 1,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.loyal",
+    1
+   ]
+  ],
+  "news": true,
+  "fame_min": 30
+ },
+ {
+  "id": "log.inheritance",
+  "type": "inherited",
+  "vis": 0.4,
+  "opinion": 0,
+  "tone": "neutral",
+  "judge": [
+   [
+    "trait.materialistic",
+    -2
+   ],
+   [
+    "trait.jealous",
+    -2
+   ]
+  ]
+ },
+ {
+  "id": "log.lawsuit_won",
+  "type": "lawsuit_won",
+  "vis": 0.4,
+  "opinion": 0,
+  "tone": "neutral",
+  "judge": [
+   [
+    "trait.vengeful",
+    2
+   ]
+  ]
+ },
+ {
+  "id": "log.scholarship",
+  "type": "scholarship",
+  "vis": 0.5,
+  "opinion": 2,
+  "tone": "good",
+  "judge": [
+   [
+    "aspires.knowledge",
+    2
+   ]
+  ]
+ },
+ {
+  "id": "log.sport_retired",
+  "type": "retired_sport",
+  "vis": 0.6,
+  "opinion": 1,
+  "tone": "neutral",
+  "judge": [
+   [
+    "likes.sports",
+    2
+   ]
+  ],
+  "news": true,
+  "fame_min": 20
+ },
+ {
+  "id": "log.biz_sold",
+  "type": "sold_company",
+  "vis": 0.7,
+  "opinion": 1,
+  "tone": "good",
+  "judge": [
+   [
+    "trait.materialistic",
+    2
+   ],
+   [
+    "trait.jealous",
+    -3
+   ]
+  ],
+  "news": true,
+  "fame_min": 20
+ }
+]

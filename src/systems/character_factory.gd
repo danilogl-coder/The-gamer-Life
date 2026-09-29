@@ -186,7 +186,7 @@ func _base_character(country: String, sex: String, age: int) -> Dictionary:
 	var stats := {}
 	for s in STAT_IDS:
 		stats[s] = float(_sim.rng.randi_range(1, 3))
-	return {
+	var ch := {
 		"id": id, "first_name": "", "last_name": "", "sex": sex, "age": age,
 		"alive": true, "is_player": false, "country": country, "wealth": "middle",
 		"look": {
@@ -210,7 +210,11 @@ func _base_character(country: String, sex: String, age: int) -> Dictionary:
 		"memory": [],
 		"sexuality": _sim.rng.pick_weighted(["straight", "gay", "bi"], [88, 6, 6]),
 		"birth_month": _sim.rng.randi_range(1, 12),
+		"life_log": [],
+		"known_marks": [],
 	}
+	Persona.build(ch, _sim)
+	return ch
 
 
 static func zodiac_of(ch: Dictionary) -> String:
@@ -315,6 +319,7 @@ func _inherit_genes(child: Dictionary, mother: Dictionary, father: Dictionary) -
 		avg /= parents.size()
 		child.hidden[h] = clampf(avg * 0.6 + _sim.rng.randn(50, 16) * 0.4, 1, 99)
 	child.attrs.looks = clampf((float(parents[0].attrs.looks) + _sim.rng.randn(50, 18)) / 2.0, 5, 99)
+	Persona.inherit(child, parents, _sim)
 
 
 func _random_first(country: String, sex: String) -> String:

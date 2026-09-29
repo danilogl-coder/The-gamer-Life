@@ -1,0 +1,4296 @@
+[
+ {
+  "id": "ev_fired",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.fired"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_fired_auto",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.fired"
+   ],
+   [
+    "tech.automation"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "ev_fired_blunt",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.fired"
+   ],
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "ev_fired_drama",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.fired"
+   ],
+   [
+    "sp.voice.dramatic"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "ev_promoted",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.promoted"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_promoted_humble",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.promoted"
+   ],
+   [
+    "sp.trait.humble"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "ev_promoted_arrogant",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.promoted"
+   ],
+   [
+    "sp.trait.arrogant"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "ev_new_job",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.new_job"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "ev_quit_dream",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.quit_dream"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_retired",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.retired"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_business",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.business_open"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "ev_business_closed",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.business_closed"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "work",
+  "bonus": 3
+ },
+ {
+  "id": "ev_lottery",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.lottery"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "money",
+  "bonus": 3
+ },
+ {
+  "id": "ev_lottery_kind",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.lottery"
+   ],
+   [
+    "sp.a",
+    ">=",
+    65
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "money",
+  "bonus": 4,
+  "fx_good": {
+   "congrats": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": 5000
+    }
+   ],
+   "celebrate": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": 5000
+    }
+   ]
+  }
+ },
+ {
+  "id": "ev_bad_invest",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.bad_investment"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "ev_married",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.married"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "ev_divorce",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.divorce"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "ev_divorce_relief",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.divorce"
+   ],
+   [
+    "sp.mood.happy"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "love",
+  "bonus": 3
+ },
+ {
+  "id": "ev_baby",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.baby"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "family",
+  "bonus": 2
+ },
+ {
+  "id": "ev_ill",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.fell_ill"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "health",
+  "bonus": 2
+ },
+ {
+  "id": "ev_ill_elder",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.fell_ill"
+   ],
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "health",
+  "bonus": 3
+ },
+ {
+  "id": "ev_recovered",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.recovered"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "health",
+  "bonus": 2
+ },
+ {
+  "id": "ev_accident",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.accident"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "health",
+  "bonus": 2
+ },
+ {
+  "id": "ev_moved",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.moved_away"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_moved_back",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.moved_back"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_hobby",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.new_hobby"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby",
+  "bonus": 2
+ },
+ {
+  "id": "ev_faith",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.found_faith"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "faith",
+  "bonus": 2
+ },
+ {
+  "id": "ev_lost_faith",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.lost_faith"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "faith",
+  "bonus": 2
+ },
+ {
+  "id": "ev_activist",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.political_turn"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 2
+ },
+ {
+  "id": "ev_travel",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.travel"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "hobby",
+  "bonus": 2
+ },
+ {
+  "id": "ev_pet",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.pet"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "hobby",
+  "bonus": 2
+ },
+ {
+  "id": "ev_awakened",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.awakened"
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "dungeons",
+  "bonus": 3
+ },
+ {
+  "id": "ev_released",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.released"
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "ev_award",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.award"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_heartbreak",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.heartbreak"
+   ]
+  ],
+  "n": 2,
+  "reply": "bad_news",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "ev_burnout",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.burnout"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "health",
+  "bonus": 2
+ },
+ {
+  "id": "ev_debt",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.debt"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "ev_graduated",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.graduated"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "school",
+  "bonus": 2
+ },
+ {
+  "id": "ev_volunteer",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.volunteer"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "their_life",
+  "bonus": 2
+ },
+ {
+  "id": "ev_school_trouble",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.school_trouble"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "school",
+  "bonus": 2
+ },
+ {
+  "id": "ev_first_love",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.first_love"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "ev_grandkids",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.ev.grandkid_visit"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "family",
+  "bonus": 2
+ },
+ {
+  "id": "you_grades_bad_mom",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "stepparent"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.grades",
+    "<",
+    40
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "school",
+  "bonus": 1
+ },
+ {
+  "id": "you_grades_bad_strict",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.grades",
+    "<",
+    40
+   ],
+   [
+    "sp.c",
+    ">=",
+    60
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "school",
+  "bonus": 2
+ },
+ {
+  "id": "you_grades_bad_sweet",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.grades",
+    "<",
+    40
+   ],
+   [
+    "sp.voice.sweet"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "school",
+  "bonus": 2
+ },
+ {
+  "id": "you_grades_good",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent",
+     "stepparent"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.grades",
+    ">=",
+    80
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "school",
+  "bonus": 1
+ },
+ {
+  "id": "you_grades_teacher_bad",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.teacher"
+   ],
+   [
+    "p.grades",
+    "<",
+    45
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "school",
+  "bonus": 1
+ },
+ {
+  "id": "you_grades_teacher_good",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.teacher"
+   ],
+   [
+    "p.grades",
+    ">=",
+    80
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "school",
+  "bonus": 1
+ },
+ {
+  "id": "you_classmate_test",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "classmate",
+     "friend",
+     "best_friend"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.band.teen"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "school"
+ },
+ {
+  "id": "you_popular",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "classmate",
+     "friend"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.pop",
+    ">=",
+    75
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "school",
+  "bonus": 1
+ },
+ {
+  "id": "you_unpopular",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "sibling"
+    ]
+   ],
+   [
+    "p.student"
+   ],
+   [
+    "p.pop",
+    "<",
+    20
+   ],
+   [
+    "p.band.teen"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "school",
+  "bonus": 1
+ },
+ {
+  "id": "you_unemployed_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "stepparent"
+    ]
+   ],
+   [
+    "p.unemployed"
+   ],
+   [
+    "p.age",
+    ">=",
+    20
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "you_unemployed_recession",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.unemployed"
+   ],
+   [
+    "w.bad_economy"
+   ],
+   [
+    "p.age",
+    ">=",
+    20
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "you_unemployed_sib",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "p.unemployed"
+   ],
+   [
+    "p.age",
+    ">=",
+    22
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "you_job_proud",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.employed"
+   ],
+   [
+    "p.ev.promoted"
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "you_job_boss_good",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.boss"
+   ],
+   [
+    "p.employed"
+   ],
+   [
+    "bond",
+    ">=",
+    65
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "you_job_boss_bad",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.boss"
+   ],
+   [
+    "p.employed"
+   ],
+   [
+    "bond",
+    "<",
+    40
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "you_coworker_gossip",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.coworker"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "work"
+ },
+ {
+  "id": "you_coworker_auto",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.coworker"
+   ],
+   [
+    "tech.ai_assistants"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "you_rich_sibling",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "sibling",
+     "friend",
+     "acquaintance"
+    ]
+   ],
+   [
+    "p.rich"
+   ],
+   [
+    "sp.broke"
+   ]
+  ],
+  "n": 1,
+  "reply": "ask_favor",
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "you_rich_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.rich"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "you_broke_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.broke"
+   ],
+   [
+    "p.age",
+    ">=",
+    18
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "you_debt",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "spouse",
+     "sibling"
+    ]
+   ],
+   [
+    "p.debt"
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "you_single_mom",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.single"
+   ],
+   [
+    "p.age",
+    ">=",
+    28
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "love",
+  "bonus": 1
+ },
+ {
+  "id": "you_single_devout",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.single"
+   ],
+   [
+    "p.age",
+    ">=",
+    30
+   ],
+   [
+    "sp.devout"
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "you_single_modern",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.single"
+   ],
+   [
+    "p.age",
+    ">=",
+    30
+   ],
+   [
+    "sp.pol.progressive"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "you_married_kids",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.married"
+   ],
+   [
+    "p.kids",
+    "==",
+    0
+   ],
+   [
+    "p.age",
+    ">=",
+    27
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "you_partner_meet",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.dating"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "love",
+  "bonus": 1
+ },
+ {
+  "id": "you_married_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.married"
+   ],
+   [
+    "bond",
+    ">=",
+    60
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "love"
+ },
+ {
+  "id": "you_kids_grandparent",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.kids",
+    ">",
+    0
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "you_addict",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "spouse",
+     "sibling",
+     "best_friend",
+     "partner"
+    ]
+   ],
+   [
+    "p.addict"
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "health",
+  "bonus": 2
+ },
+ {
+  "id": "you_addict_blunt",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.addict"
+   ],
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "health",
+  "bonus": 3
+ },
+ {
+  "id": "you_ill",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.ill"
+   ],
+   [
+    "bond",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "health",
+  "bonus": 1
+ },
+ {
+  "id": "you_stressed",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.stress",
+    ">=",
+    75
+   ],
+   [
+    "bond",
+    ">=",
+    50
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "health",
+  "bonus": 1
+ },
+ {
+  "id": "you_prison_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.prison"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "you",
+  "bonus": 2
+ },
+ {
+  "id": "you_prison_spouse",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.prison"
+   ],
+   [
+    "role.spouse"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "family",
+  "bonus": 2
+ },
+ {
+  "id": "you_inmate",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.inmate"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "you_inmate_escape",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.inmate"
+   ],
+   [
+    "sp.a",
+    "<",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "chat",
+  "bonus": 1
+ },
+ {
+  "id": "you_famous",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.famous"
+   ],
+   [
+    "family",
+    "!"
+   ],
+   [
+    "role.inmate",
+    "!"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "you",
+  "bonus": 1
+ },
+ {
+  "id": "you_famous_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.famous"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "you",
+  "bonus": 1
+ },
+ {
+  "id": "you_level_awakened",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.awakened"
+   ],
+   [
+    "p.level",
+    ">=",
+    30
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "you_strong",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.level",
+    ">=",
+    40
+   ],
+   [
+    "sp.awakened",
+    "!"
+   ],
+   [
+    "sp.age",
+    ">=",
+    12
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "you",
+  "bonus": 1
+ },
+ {
+  "id": "you_skill",
+  "concept": "talk",
+  "crit": [
+   [
+    "p.level",
+    ">=",
+    15
+   ],
+   [
+    "bond",
+    ">=",
+    55
+   ],
+   [
+    "sp.age",
+    ">=",
+    10
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "you"
+ },
+ {
+  "id": "knows_arrested_devout",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.arrested"
+   ],
+   [
+    "sp.devout"
+   ],
+   [
+    "p.prison",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 5,
+  "topic": "grudge",
+  "bonus": 3
+ },
+ {
+  "id": "knows_arrested_cruel",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.arrested"
+   ],
+   [
+    "sp.trait.cruel"
+   ],
+   [
+    "p.prison",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 5,
+  "topic": "you",
+  "bonus": 3
+ },
+ {
+  "id": "knows_arrested",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.arrested"
+   ],
+   [
+    "p.prison",
+    "!"
+   ]
+  ],
+  "n": 2,
+  "reply": "conflict",
+  "cd": 5,
+  "topic": "you",
+  "bonus": 2
+ },
+ {
+  "id": "knows_divorced",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.divorced"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "cd": 6,
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "knows_divorced_devout",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.divorced"
+   ],
+   [
+    "sp.devout"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 6,
+  "topic": "faith",
+  "bonus": 3
+ },
+ {
+  "id": "knows_promoted_jealous",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.promoted"
+   ],
+   [
+    "sp.trait.jealous"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 4,
+  "topic": "work",
+  "bonus": 3
+ },
+ {
+  "id": "knows_promoted",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.promoted"
+   ],
+   [
+    "family",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 4,
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "knows_baby",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.baby"
+   ],
+   [
+    "family",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 4,
+  "topic": "family",
+  "bonus": 2
+ },
+ {
+  "id": "knows_married",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.married"
+   ],
+   [
+    "family",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 5,
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "knows_fired",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.fired"
+   ],
+   [
+    "sp.a",
+    ">=",
+    55
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "cd": 4,
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "knows_fired_mean",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.fired"
+   ],
+   [
+    "sp.a",
+    "<",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 4,
+  "topic": "work",
+  "bonus": 3
+ },
+ {
+  "id": "knows_dropout",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.dropout"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 5,
+  "topic": "school",
+  "bonus": 3
+ },
+ {
+  "id": "knows_emigrated",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.emigrated"
+   ],
+   [
+    "family"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 6,
+  "topic": "family",
+  "bonus": 3
+ },
+ {
+  "id": "knows_gang",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.gang"
+   ],
+   [
+    "sp.a",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 5,
+  "topic": "you",
+  "bonus": 3
+ },
+ {
+  "id": "knows_viral",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.viral"
+   ],
+   [
+    "sp.band.teen"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 4,
+  "topic": "you",
+  "bonus": 3
+ },
+ {
+  "id": "knows_viral_elder",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.viral"
+   ],
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 4,
+  "topic": "you",
+  "bonus": 3
+ },
+ {
+  "id": "knows_elected_aligned",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.elected"
+   ],
+   [
+    "aligned"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 4,
+  "topic": "politics",
+  "bonus": 3
+ },
+ {
+  "id": "knows_elected_mis",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.elected"
+   ],
+   [
+    "misaligned"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "cd": 4,
+  "topic": "politics",
+  "bonus": 3
+ },
+ {
+  "id": "knows_house",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.house"
+   ],
+   [
+    "sp.trait.jealous"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 5,
+  "topic": "money",
+  "bonus": 3
+ },
+ {
+  "id": "knows_hit",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.hit_song"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 4,
+  "topic": "you",
+  "bonus": 2
+ },
+ {
+  "id": "knows_killer",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.knows.killer"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "tags": [
+   "mature"
+  ],
+  "bonus": 4
+ },
+ {
+  "id": "mem_insult",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.insult"
+   ],
+   [
+    "grudge",
+    ">",
+    10
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 2
+ },
+ {
+  "id": "mem_insult_vengeful",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.insult"
+   ],
+   [
+    "sp.trait.vengeful"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 3
+ },
+ {
+  "id": "mem_fight",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.beaten"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 3
+ },
+ {
+  "id": "mem_argument",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.argument"
+   ],
+   [
+    "grudge",
+    ">",
+    8
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 2
+ },
+ {
+  "id": "mem_betrayal",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.betrayal"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 3
+ },
+ {
+  "id": "mem_helped",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.helped"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "cd": 4,
+  "topic": "chat",
+  "bonus": 2
+ },
+ {
+  "id": "mem_lent",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.lent_money"
+   ],
+   [
+    "sp.c",
+    ">=",
+    50
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 3,
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "mem_lent_shady",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.lent_money"
+   ],
+   [
+    "sp.c",
+    "<",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 3,
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "mem_gift",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.gift"
+   ],
+   [
+    "bond",
+    ">=",
+    55
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 4,
+  "topic": "chat",
+  "bonus": 1
+ },
+ {
+  "id": "mem_comforted",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.comforted"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 5,
+  "topic": "chat",
+  "bonus": 2
+ },
+ {
+  "id": "mem_harsh_parent",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.harsh_parent"
+   ],
+   [
+    "role.child"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 5,
+  "topic": "family",
+  "bonus": 3
+ },
+ {
+  "id": "mem_saved",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.saved_life"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 5,
+  "topic": "chat",
+  "bonus": 3
+ },
+ {
+  "id": "mem_bragged",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.bragged"
+   ],
+   [
+    "sp.trait.jealous"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 2
+ },
+ {
+  "id": "mem_refused",
+  "concept": "talk",
+  "crit": [
+   [
+    "mem.refused_help"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 2
+ },
+ {
+  "id": "conf_miserable",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.mood.miserable"
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "health",
+  "bonus": 1
+ },
+ {
+  "id": "conf_marriage_bad",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.marriage",
+    "<",
+    30
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "family",
+  "bonus": 2
+ },
+ {
+  "id": "conf_marriage_bad_friend",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.marriage",
+    "<",
+    30
+   ],
+   [
+    "role in mother,father",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "conf_stress",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.stress",
+    ">=",
+    70
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "health"
+ },
+ {
+  "id": "conf_lonely_elder",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.band.elder"
+   ],
+   [
+    "bond",
+    "<",
+    60
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "past",
+  "bonus": 1
+ },
+ {
+  "id": "conf_unemployed",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.unemployed"
+   ],
+   [
+    "sp.age",
+    ">=",
+    25
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "work"
+ },
+ {
+  "id": "conf_broke",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.broke"
+   ],
+   [
+    "bond",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "ask_favor",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "conf_sick",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.sick"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "health"
+ },
+ {
+  "id": "conf_crush_you",
+  "concept": "talk",
+  "crit": [
+   [
+    "family",
+    "!"
+   ],
+   [
+    "p.married",
+    "!"
+   ],
+   [
+    "compat",
+    ">=",
+    70
+   ],
+   [
+    "bond",
+    ">=",
+    70
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ],
+   [
+    "role in partner,fiance,spouse,ex",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "flirt",
+  "once": true,
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "dream_wealth",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.wealth"
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "future"
+ },
+ {
+  "id": "dream_fame",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.fame"
+   ],
+   [
+    "sp.age",
+    ">=",
+    12
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "future"
+ },
+ {
+  "id": "dream_family",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.family"
+   ],
+   [
+    "sp.married",
+    "!"
+   ],
+   [
+    "sp.age",
+    ">=",
+    20
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "future"
+ },
+ {
+  "id": "dream_adventure",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.adventure"
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "future"
+ },
+ {
+  "id": "dream_knowledge",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.knowledge"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "future"
+ },
+ {
+  "id": "dream_power",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.power"
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "future"
+ },
+ {
+  "id": "dream_career",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.career"
+   ],
+   [
+    "sp.employed"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "work"
+ },
+ {
+  "id": "dream_peace",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.peace"
+   ],
+   [
+    "sp.age",
+    ">=",
+    30
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "future"
+ },
+ {
+  "id": "dream_romance",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.romance"
+   ],
+   [
+    "sp.married",
+    "!"
+   ],
+   [
+    "sp.age",
+    ">=",
+    15
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "love"
+ },
+ {
+  "id": "dream_faith",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.aspires.faith"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "faith"
+ },
+ {
+  "id": "int_music",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.music"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_music_old",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.music"
+   ],
+   [
+    "sp.quirk.old_songs"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "hobby",
+  "bonus": 1
+ },
+ {
+  "id": "int_sports",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.sports"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "sports"
+ },
+ {
+  "id": "int_sports_won",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.sports"
+   ],
+   [
+    "sp.team_won"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "sports",
+  "bonus": 3
+ },
+ {
+  "id": "int_sports_champ",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.sports"
+   ],
+   [
+    "news.champion"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "sports",
+  "bonus": 1
+ },
+ {
+  "id": "int_games",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.games"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_games_vr",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.games"
+   ],
+   [
+    "tech.vr_worlds"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby",
+  "bonus": 1
+ },
+ {
+  "id": "int_cooking",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.cooking"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_politics",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.politics"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "politics"
+ },
+ {
+  "id": "int_faith",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.faith"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "faith"
+ },
+ {
+  "id": "int_fashion",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.fashion"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_tech",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.tech"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_tech_ai",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.tech"
+   ],
+   [
+    "tech.ai_assistants"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "hobby",
+  "bonus": 1
+ },
+ {
+  "id": "int_books",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.books"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_garden",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.gardening"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_cars",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.cars"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_travel",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.travel"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_money",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.money"
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "money"
+ },
+ {
+  "id": "int_gossip",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.gossip"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "gossip"
+ },
+ {
+  "id": "int_movies",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.movies"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_animals",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.animals"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_fitness",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.fitness"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_dungeons",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.dungeons"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "dungeons"
+ },
+ {
+  "id": "int_art",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.art"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_science",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.science"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_nature",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.nature"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "hobby"
+ },
+ {
+  "id": "int_history",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.likes.history"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "past"
+ },
+ {
+  "id": "quirk_horoscope",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.quirk.horoscope"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 2,
+  "topic": "chat",
+  "bonus": 1
+ },
+ {
+  "id": "quirk_puns",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.quirk.puns"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 2,
+  "topic": "chat",
+  "bonus": 1
+ },
+ {
+  "id": "quirk_superstitious",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.quirk.superstitious"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 2,
+  "topic": "chat",
+  "bonus": 1
+ },
+ {
+  "id": "quirk_penny",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.quirk.penny_pincher"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "cd": 2,
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "quirk_collector",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.quirk.collector"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 3,
+  "topic": "hobby",
+  "bonus": 1
+ },
+ {
+  "id": "quirk_story",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.quirk.storyteller"
+   ],
+   [
+    "sp.age",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "elder",
+  "cd": 2,
+  "topic": "past",
+  "bonus": 1
+ },
+ {
+  "id": "w_recession",
+  "concept": "talk",
+  "crit": [
+   [
+    "w.bad_economy"
+   ],
+   [
+    "sp.age",
+    ">=",
+    18
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "news"
+ },
+ {
+  "id": "w_recession_rich",
+  "concept": "talk",
+  "crit": [
+   [
+    "w.bad_economy"
+   ],
+   [
+    "sp.rich"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "w_boom",
+  "concept": "talk",
+  "crit": [
+   [
+    "w.good_economy"
+   ],
+   [
+    "sp.age",
+    ">=",
+    18
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "news"
+ },
+ {
+  "id": "w_epidemic",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.epidemic"
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "health",
+  "bonus": 1
+ },
+ {
+  "id": "w_dungeon_break",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.dungeon_break"
+   ]
+  ],
+  "n": 2,
+  "reply": "confide",
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "w_awakening",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.awakening_wave"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "w_strike",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.general_strike"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "news",
+  "bonus": 1
+ },
+ {
+  "id": "w_strike_cons",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.general_strike"
+   ],
+   [
+    "sp.pol.conservative"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "news",
+  "bonus": 2
+ },
+ {
+  "id": "w_crypto",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.crypto_mania"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "w_housing",
+  "concept": "talk",
+  "crit": [
+   [
+    "we.housing_crash"
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "money",
+  "bonus": 1
+ },
+ {
+  "id": "w_crime",
+  "concept": "talk",
+  "crit": [
+   [
+    "city.dangerous"
+   ],
+   [
+    "sp.age",
+    ">=",
+    12
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "city"
+ },
+ {
+  "id": "w_crime_cons",
+  "concept": "talk",
+  "crit": [
+   [
+    "city.dangerous"
+   ],
+   [
+    "sp.pol.conservative"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "city",
+  "bonus": 1
+ },
+ {
+  "id": "w_crime_prog",
+  "concept": "talk",
+  "crit": [
+   [
+    "city.dangerous"
+   ],
+   [
+    "sp.pol.progressive"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "city",
+  "bonus": 1
+ },
+ {
+  "id": "w_city_boom",
+  "concept": "talk",
+  "crit": [
+   [
+    "city.booming"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "city"
+ },
+ {
+  "id": "w_city_decay",
+  "concept": "talk",
+  "crit": [
+   [
+    "city.decaying"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "city"
+ },
+ {
+  "id": "w_closed_place",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.place_closed"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "city",
+  "bonus": 1
+ },
+ {
+  "id": "w_new_place",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.place_open"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "city",
+  "bonus": 1
+ },
+ {
+  "id": "w_smog",
+  "concept": "talk",
+  "crit": [
+   [
+    "city.polluted"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "city"
+ },
+ {
+  "id": "w_election",
+  "concept": "talk",
+  "crit": [
+   [
+    "election_year"
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ]
+  ],
+  "n": 2,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 1
+ },
+ {
+  "id": "w_gov_like",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.pol.progressive"
+   ],
+   [
+    "gov.party.aurora"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 2
+ },
+ {
+  "id": "w_gov_hate_prog",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.pol.progressive"
+   ],
+   [
+    "gov.party.ordem"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 2
+ },
+ {
+  "id": "w_gov_like_cons",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.pol.conservative"
+   ],
+   [
+    "gov.party.ordem"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 2
+ },
+ {
+  "id": "w_gov_hate_cons",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.pol.conservative"
+   ],
+   [
+    "gov.party",
+    "in",
+    [
+     "aurora",
+     "trabalho"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 2
+ },
+ {
+  "id": "w_protests",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.protests"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "politics",
+  "bonus": 1
+ },
+ {
+  "id": "w_gov_player",
+  "concept": "talk",
+  "crit": [
+   [
+    "gov.player"
+   ],
+   [
+    "family",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "politics",
+  "bonus": 3
+ },
+ {
+  "id": "w_gov_player_fam",
+  "concept": "talk",
+  "crit": [
+   [
+    "gov.player"
+   ],
+   [
+    "family"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "politics",
+  "bonus": 3
+ },
+ {
+  "id": "w_rift_ban",
+  "concept": "talk",
+  "crit": [
+   [
+    "gov.rift.ban"
+   ],
+   [
+    "sp.awakened"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "w_rift_registry",
+  "concept": "talk",
+  "crit": [
+   [
+    "gov.rift.registry"
+   ],
+   [
+    "sp.awakened"
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "w_tech_ai_worry",
+  "concept": "talk",
+  "crit": [
+   [
+    "tech.ai_assistants"
+   ],
+   [
+    "sp.employed"
+   ],
+   [
+    "sp.age",
+    ">=",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "topic": "news"
+ },
+ {
+  "id": "w_tech_auto_worker",
+  "concept": "talk",
+  "crit": [
+   [
+    "tech.automation"
+   ],
+   [
+    "sp.jobcat",
+    "in",
+    [
+     "commerce",
+     "transport",
+     "food",
+     "admin"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "w_tech_vr_elder",
+  "concept": "talk",
+  "crit": [
+   [
+    "tech.vr_worlds"
+   ],
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "news",
+  "bonus": 1
+ },
+ {
+  "id": "w_tech_mana",
+  "concept": "talk",
+  "crit": [
+   [
+    "tech.mana_tech"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "dungeons"
+ },
+ {
+  "id": "w_tech_longevity",
+  "concept": "talk",
+  "crit": [
+   [
+    "tech.longevity"
+   ],
+   [
+    "sp.age",
+    ">=",
+    60
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "health",
+  "bonus": 1
+ },
+ {
+  "id": "w_celeb_scandal",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.celeb_scandal"
+   ],
+   [
+    "sp.likes.gossip"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "gossip",
+  "bonus": 2
+ },
+ {
+  "id": "w_celeb_died",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.celeb_died"
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "news",
+  "bonus": 1
+ },
+ {
+  "id": "w_celeb_wedding",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.celeb_wedding"
+   ],
+   [
+    "sp.likes.gossip"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "gossip",
+  "bonus": 2
+ },
+ {
+  "id": "w_hunter_hero",
+  "concept": "talk",
+  "crit": [
+   [
+    "news.hunter_hero"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "dungeons",
+  "bonus": 1
+ },
+ {
+  "id": "r_spouse_home",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.spouse"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "family"
+ },
+ {
+  "id": "r_spouse_kids",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.spouse"
+   ],
+   [
+    "p.kids",
+    ">",
+    0
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "r_spouse_money",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.spouse"
+   ],
+   [
+    "p.broke"
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "r_spouse_jealous",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.spouse"
+   ],
+   [
+    "sp.trait.jealous"
+   ],
+   [
+    "bond",
+    "<",
+    60
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "r_spouse_romantic",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "spouse",
+     "partner"
+    ]
+   ],
+   [
+    "sp.trait.romantic"
+   ],
+   [
+    "bond",
+    ">=",
+    65
+   ]
+  ],
+  "n": 1,
+  "reply": "flirt",
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "r_partner_future",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.partner"
+   ],
+   [
+    "bond",
+    ">=",
+    60
+   ]
+  ],
+  "n": 2,
+  "reply": "flirt",
+  "topic": "love"
+ },
+ {
+  "id": "r_partner_cold",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.partner"
+   ],
+   [
+    "bond",
+    "<",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "topic": "love",
+  "bonus": 1
+ },
+ {
+  "id": "r_ex",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.ex"
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "love"
+ },
+ {
+  "id": "r_sibling_childhood",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "p.age",
+    ">=",
+    18
+   ],
+   [
+    "sp.age",
+    ">=",
+    18
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "family"
+ },
+ {
+  "id": "r_sibling_kid",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "sp.band.child"
+   ]
+  ],
+  "n": 2,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "r_sibling_teen",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "sp.band.teen"
+   ]
+  ],
+  "n": 1,
+  "reply": "chat",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "r_parent_advice_young",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.band.child"
+   ]
+  ],
+  "n": 2,
+  "reply": "kid",
+  "topic": "family"
+ },
+ {
+  "id": "r_parent_teen",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.band.teen"
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "family"
+ },
+ {
+  "id": "r_parent_old",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "sp.age",
+    ">=",
+    65
+   ]
+  ],
+  "n": 2,
+  "reply": "elder",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "r_grand_story",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.grandparent"
+   ]
+  ],
+  "n": 2,
+  "reply": "elder",
+  "topic": "past"
+ },
+ {
+  "id": "r_grand_war",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.grandparent"
+   ],
+   [
+    "sp.pol.conservative"
+   ]
+  ],
+  "n": 1,
+  "reply": "elder",
+  "topic": "past",
+  "bonus": 1
+ },
+ {
+  "id": "r_grand_rift",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.grandparent"
+   ],
+   [
+    "sp.awakened"
+   ]
+  ],
+  "n": 1,
+  "reply": "elder",
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "r_child_kid",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.band.child"
+   ]
+  ],
+  "n": 2,
+  "reply": "kid",
+  "topic": "family"
+ },
+ {
+  "id": "r_child_toddler",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.band.toddler"
+   ]
+  ],
+  "n": 1,
+  "reply": "kid",
+  "topic": "family"
+ },
+ {
+  "id": "r_child_teen",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.band.teen"
+   ]
+  ],
+  "n": 2,
+  "reply": "nag",
+  "topic": "family"
+ },
+ {
+  "id": "r_child_adult",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.age",
+    ">=",
+    22
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "family"
+ },
+ {
+  "id": "r_friend_plans",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "friend",
+     "best_friend"
+    ]
+   ]
+  ],
+  "n": 2,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "r_bff_secret",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.best_friend"
+   ],
+   [
+    "bond",
+    ">=",
+    80
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "r_rival",
+  "concept": "talk",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "rival",
+     "enemy"
+    ]
+   ]
+  ],
+  "n": 2,
+  "reply": "conflict",
+  "topic": "grudge"
+ },
+ {
+  "id": "r_teacher_future",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.teacher"
+   ],
+   [
+    "p.band.teen"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future"
+ },
+ {
+  "id": "r_boss_crisis",
+  "concept": "talk",
+  "crit": [
+   [
+    "role.boss"
+   ],
+   [
+    "w.bad_economy"
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "topic": "work",
+  "bonus": 1
+ },
+ {
+  "id": "gen_calm",
+  "concept": "talk",
+  "crit": [],
+  "n": 3,
+  "w": 0.5,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_weather_rain",
+  "concept": "talk",
+  "crit": [
+   [
+    "weather.rain"
+   ]
+  ],
+  "n": 1,
+  "w": 0.4,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_weather_hot",
+  "concept": "talk",
+  "crit": [
+   [
+    "weather.hot"
+   ]
+  ],
+  "n": 1,
+  "w": 0.4,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_sweet",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.sweet"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_sarcastic",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_nerdy",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.nerdy"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_dramatic",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.dramatic"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_shy",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.shy"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_slang",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.slang"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_blunt",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_formal",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.formal"
+   ]
+  ],
+  "n": 1,
+  "w": 0.6,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_kid",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.kid"
+   ]
+  ],
+  "n": 1,
+  "w": 0.8,
+  "reply": "kid",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_elder",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.voice.elder"
+   ]
+  ],
+  "n": 1,
+  "w": 0.8,
+  "reply": "elder",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_happy",
+  "concept": "talk",
+  "crit": [
+   [
+    "sp.mood.happy"
+   ]
+  ],
+  "n": 1,
+  "w": 0.5,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "gen_night",
+  "concept": "talk",
+  "crit": [
+   [
+    "time.night"
+   ],
+   [
+    "loc.phone"
+   ]
+  ],
+  "n": 1,
+  "w": 0.5,
+  "reply": "chat",
+  "topic": "chat"
+ },
+ {
+  "id": "adv_generic",
+  "concept": "advice",
+  "crit": [],
+  "n": 2,
+  "reply": "advice",
+  "topic": "future"
+ },
+ {
+  "id": "adv_school",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.student"
+   ]
+  ],
+  "n": 2,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_money",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.broke"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_love_single",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.single"
+   ],
+   [
+    "p.age",
+    ">=",
+    20
+   ]
+  ],
+  "n": 2,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_love_married",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.married"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_work",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.employed"
+   ]
+  ],
+  "n": 2,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_unemployed",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.unemployed"
+   ],
+   [
+    "p.age",
+    ">=",
+    18
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_elder",
+  "concept": "advice",
+  "crit": [
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 2,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_cynic",
+  "concept": "advice",
+  "crit": [
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_devout",
+  "concept": "advice",
+  "crit": [
+   [
+    "sp.devout"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_ambitious",
+  "concept": "advice",
+  "crit": [
+   [
+    "sp.trait.ambitious"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 1
+ },
+ {
+  "id": "adv_awakened",
+  "concept": "advice",
+  "crit": [
+   [
+    "sp.awakened"
+   ],
+   [
+    "p.level",
+    ">=",
+    10
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 2
+ },
+ {
+  "id": "adv_addict",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.addict"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 2
+ },
+ {
+  "id": "adv_prison",
+  "concept": "advice",
+  "crit": [
+   [
+    "p.prison"
+   ]
+  ],
+  "n": 1,
+  "reply": "advice",
+  "topic": "future",
+  "bonus": 2
+ }
+]

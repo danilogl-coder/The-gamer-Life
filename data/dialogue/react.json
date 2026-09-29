@@ -1,0 +1,2222 @@
+[
+ {
+  "id": "rc_fired",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.fired"
+   ],
+   [
+    "bond",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "rc_promoted",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.promoted"
+   ],
+   [
+    "bond",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "rc_married",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.married"
+   ],
+   [
+    "bond",
+    ">=",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "love",
+  "bonus": 3
+ },
+ {
+  "id": "rc_baby",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.baby"
+   ],
+   [
+    "bond",
+    ">=",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "family",
+  "bonus": 3
+ },
+ {
+  "id": "rc_divorce",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.divorce"
+   ],
+   [
+    "bond",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "love",
+  "bonus": 3
+ },
+ {
+  "id": "rc_parents_div",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.divorce"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "family",
+  "bonus": 4
+ },
+ {
+  "id": "rc_ill",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.fell_ill"
+   ],
+   [
+    "bond",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "health",
+  "bonus": 3
+ },
+ {
+  "id": "rc_accident",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.accident"
+   ],
+   [
+    "bond",
+    ">=",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "health",
+  "bonus": 3
+ },
+ {
+  "id": "rc_lottery",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.lottery"
+   ],
+   [
+    "bond",
+    ">=",
+    60
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "money",
+  "bonus": 4,
+  "fx_good": {
+   "congrats": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": 10000
+    }
+   ],
+   "celebrate": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": 10000
+    }
+   ],
+   "listen": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": 10000
+    }
+   ]
+  }
+ },
+ {
+  "id": "rc_business",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.business_open"
+   ],
+   [
+    "bond",
+    ">=",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "topic": "work",
+  "bonus": 3
+ },
+ {
+  "id": "rc_moved",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.moved_away"
+   ],
+   [
+    "bond",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "bad_news",
+  "topic": "their_life",
+  "bonus": 3
+ },
+ {
+  "id": "rc_arrested",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.arrested"
+   ],
+   [
+    "bond",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "ask_favor",
+  "topic": "their_life",
+  "bonus": 4
+ },
+ {
+  "id": "rc_awakened",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev_now.awakened"
+   ],
+   [
+    "bond",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "topic": "dungeons",
+  "bonus": 4
+ },
+ {
+  "id": "rc_broke",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.broke"
+   ],
+   [
+    "bond",
+    ">=",
+    55
+   ],
+   [
+    "p.broke",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "ask_favor",
+  "cd": 3,
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "rc_debt",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.ev.debt"
+   ],
+   [
+    "bond",
+    ">=",
+    50
+   ],
+   [
+    "p.broke",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "ask_favor",
+  "cd": 3,
+  "topic": "money",
+  "bonus": 2
+ },
+ {
+  "id": "rc_lonely_elder",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.band.elder"
+   ],
+   [
+    "bond",
+    "<",
+    55
+   ],
+   [
+    "bond",
+    ">=",
+    20
+   ]
+  ],
+  "n": 2,
+  "reply": "elder",
+  "cd": 2,
+  "topic": "family"
+ },
+ {
+  "id": "rc_parent_nag_marry",
+  "concept": "reach",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.single"
+   ],
+   [
+    "p.age",
+    ">=",
+    30
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 3,
+  "topic": "love"
+ },
+ {
+  "id": "rc_parent_nag_job",
+  "concept": "reach",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.unemployed"
+   ],
+   [
+    "p.age",
+    ">=",
+    21
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 2,
+  "topic": "work"
+ },
+ {
+  "id": "rc_worried_prison",
+  "concept": "reach",
+  "crit": [
+   [
+    "p.prison"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "spouse",
+     "sibling",
+     "best_friend"
+    ]
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "cd": 1,
+  "topic": "you",
+  "bonus": 2
+ },
+ {
+  "id": "rc_worried_addict",
+  "concept": "reach",
+  "crit": [
+   [
+    "p.addict"
+   ],
+   [
+    "bond",
+    ">=",
+    50
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 2,
+  "topic": "health",
+  "bonus": 2
+ },
+ {
+  "id": "rc_proud",
+  "concept": "reach",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.ev.graduated"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 3,
+  "topic": "school",
+  "bonus": 3
+ },
+ {
+  "id": "rc_proud_promo",
+  "concept": "reach",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "grandparent"
+    ]
+   ],
+   [
+    "p.ev.promoted"
+   ]
+  ],
+  "n": 1,
+  "reply": "good_news",
+  "cd": 3,
+  "topic": "work",
+  "bonus": 2
+ },
+ {
+  "id": "rc_knows_arrest",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.knows.arrested"
+   ],
+   [
+    "family"
+   ],
+   [
+    "p.prison",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 5,
+  "topic": "you",
+  "bonus": 3
+ },
+ {
+  "id": "rc_grudge",
+  "concept": "reach",
+  "crit": [
+   [
+    "grudge",
+    ">",
+    30
+   ],
+   [
+    "bond",
+    "<",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 3,
+  "topic": "grudge",
+  "bonus": 2
+ },
+ {
+  "id": "rc_crush",
+  "concept": "reach",
+  "crit": [
+   [
+    "family",
+    "!"
+   ],
+   [
+    "p.married",
+    "!"
+   ],
+   [
+    "p.dating",
+    "!"
+   ],
+   [
+    "compat",
+    ">=",
+    72
+   ],
+   [
+    "bond",
+    ">=",
+    72
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ],
+   [
+    "role in partner,fiance,spouse,ex",
+    "!"
+   ]
+  ],
+  "n": 1,
+  "reply": "flirt",
+  "once": true,
+  "topic": "love",
+  "bonus": 3
+ },
+ {
+  "id": "rc_bff_invite",
+  "concept": "reach",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "friend",
+     "best_friend"
+    ]
+   ],
+   [
+    "bond",
+    ">=",
+    60
+   ]
+  ],
+  "n": 2,
+  "reply": "good_news",
+  "cd": 2,
+  "topic": "chat"
+ },
+ {
+  "id": "rc_child_help",
+  "concept": "reach",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.age",
+    ">=",
+    18
+   ],
+   [
+    "sp.broke"
+   ]
+  ],
+  "n": 1,
+  "reply": "ask_favor",
+  "cd": 3,
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "rc_child_teen_trouble",
+  "concept": "reach",
+  "crit": [
+   [
+    "role.child"
+   ],
+   [
+    "sp.ev_now.school_trouble"
+   ]
+  ],
+  "n": 1,
+  "reply": "kid",
+  "topic": "school",
+  "bonus": 3
+ },
+ {
+  "id": "rc_spouse_distant",
+  "concept": "reach",
+  "crit": [
+   [
+    "role.spouse"
+   ],
+   [
+    "bond",
+    "<",
+    35
+   ]
+  ],
+  "n": 1,
+  "reply": "conflict",
+  "cd": 2,
+  "topic": "love",
+  "bonus": 2
+ },
+ {
+  "id": "rc_dungeon_break",
+  "concept": "reach",
+  "crit": [
+   [
+    "we.dungeon_break"
+   ],
+   [
+    "bond",
+    ">=",
+    50
+   ]
+  ],
+  "n": 1,
+  "reply": "confide",
+  "cd": 2,
+  "topic": "dungeons",
+  "bonus": 2
+ },
+ {
+  "id": "rc_epidemic",
+  "concept": "reach",
+  "crit": [
+   [
+    "we.epidemic"
+   ],
+   [
+    "bond",
+    ">=",
+    55
+   ],
+   [
+    "sp.age",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "nag",
+  "cd": 2,
+  "topic": "health"
+ },
+ {
+  "id": "rc_election",
+  "concept": "reach",
+  "crit": [
+   [
+    "election_year"
+   ],
+   [
+    "sp.likes.politics"
+   ],
+   [
+    "bond",
+    ">=",
+    45
+   ]
+  ],
+  "n": 1,
+  "reply": "opinion",
+  "cd": 4,
+  "topic": "politics"
+ },
+ {
+  "id": "rc_hospital_last",
+  "concept": "reach",
+  "crit": [
+   [
+    "sp.health",
+    "<",
+    20
+   ],
+   [
+    "sp.band.elder"
+   ],
+   [
+    "bond",
+    ">=",
+    40
+   ]
+  ],
+  "n": 1,
+  "reply": "elder",
+  "cd": 2,
+  "topic": "family",
+  "bonus": 3
+ },
+ {
+  "id": "rx_comfort_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.comfort"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_comfort_good_sweet",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.comfort"
+   ],
+   [
+    "good"
+   ],
+   [
+    "sp.voice.sweet"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_comfort_good_blunt",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.comfort"
+   ],
+   [
+    "good"
+   ],
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_comfort_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.comfort"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_joke_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.joke"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_joke_good_sarc",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.joke"
+   ],
+   [
+    "good"
+   ],
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_joke_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.joke"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_joke_bad_drama",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.joke"
+   ],
+   [
+    "good",
+    "!"
+   ],
+   [
+    "sp.voice.dramatic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_listen_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply",
+    "in",
+    [
+     "listen",
+     "ask_about"
+    ]
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_listen_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply",
+    "in",
+    [
+     "listen",
+     "ask_about"
+    ]
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_share_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.share"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_share_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.share"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_brag_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.brag"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_brag_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.brag"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_money_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply",
+    "in",
+    [
+     "help_money",
+     "lend"
+    ]
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_money_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply",
+    "in",
+    [
+     "help_money",
+     "lend"
+    ]
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_refuse_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.refuse"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_refuse_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.refuse"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_advise_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.advise"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_advise_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.advise"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_advise_bad_teen",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.advise"
+   ],
+   [
+    "good",
+    "!"
+   ],
+   [
+    "sp.band.teen"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_shrug_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.shrug"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_shrug_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.shrug"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_congrats_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.congrats"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_congrats_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.congrats"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_celebrate_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.celebrate"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_celebrate_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.celebrate"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_envy_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.envy"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_envy_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.envy"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_agree_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.agree"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_agree_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.agree"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_disagree_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.disagree"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_disagree_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.disagree"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_disagree_bad_pol",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.disagree"
+   ],
+   [
+    "good",
+    "!"
+   ],
+   [
+    "sp.likes.politics"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_subject_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.change_subject"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_subject_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.change_subject"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_promise_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.promise"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_promise_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.promise"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_argue_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.argue"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_argue_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.argue"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 3
+ },
+ {
+  "id": "rx_argue_bad_parent",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.argue"
+   ],
+   [
+    "good",
+    "!"
+   ],
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "p.band.teen"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_explain_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.explain"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_explain_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.explain"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_apology_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.apologize"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_apology_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.apologize"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_apology_bad_veng",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.apologize"
+   ],
+   [
+    "good",
+    "!"
+   ],
+   [
+    "sp.trait.vengeful"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_support_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.support"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_support_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.support"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_tease_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.tease"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_tease_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.tease"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_sweet_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.sweet"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_sweet_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.sweet"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_flirt_crush_good",
+  "concept": "react",
+  "crit": [
+   [
+    "topic",
+    "in",
+    [
+     "conf_crush_you",
+     "rc_crush"
+    ]
+   ],
+   [
+    "reply",
+    "in",
+    [
+     "support",
+     "sweet",
+     "tease"
+    ]
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1,
+  "bonus": 2
+ },
+ {
+  "id": "rx_play_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.play"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_play_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.play"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_teach_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.teach"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_teach_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.teach"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_scold_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.scold"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_scold_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.scold"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_thank_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.thank"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_thank_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.thank"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_doubt_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.doubt"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_doubt_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.doubt"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "rx_leave_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.leave"
+   ],
+   [
+    "good"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_leave_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.leave"
+   ],
+   [
+    "good",
+    "!"
+   ]
+  ],
+  "n": 2
+ },
+ {
+  "id": "rx_leave_elder",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.leave"
+   ],
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "rx_any_elder_good",
+  "concept": "react",
+  "crit": [
+   [
+    "reply",
+    "in",
+    [
+     "listen",
+     "ask_about"
+    ]
+   ],
+   [
+    "good"
+   ],
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_comp_ok",
+  "concept": "int.compliment.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_comp_ok_shy",
+  "concept": "int.compliment.ok",
+  "crit": [
+   [
+    "sp.voice.shy"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_comp_ok_arrog",
+  "concept": "int.compliment.ok",
+  "crit": [
+   [
+    "sp.trait.arrogant"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_comp_ok_sarc",
+  "concept": "int.compliment.ok",
+  "crit": [
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_comp_fail",
+  "concept": "int.compliment.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_insult_ok",
+  "concept": "int.insult.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_insult_ok_cruel",
+  "concept": "int.insult.ok",
+  "crit": [
+   [
+    "sp.trait.cruel"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_insult_ok_shy",
+  "concept": "int.insult.ok",
+  "crit": [
+   [
+    "sp.voice.shy"
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "i_insult_ok_mom",
+  "concept": "int.insult.ok",
+  "crit": [
+   [
+    "role.mother"
+   ]
+  ],
+  "n": 1,
+  "bonus": 2
+ },
+ {
+  "id": "i_insult_fail",
+  "concept": "int.insult.fail",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_gift_ok",
+  "concept": "int.gift.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_gift_ok_mat",
+  "concept": "int.gift.ok",
+  "crit": [
+   [
+    "sp.trait.materialistic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_gift_ok_kid",
+  "concept": "int.gift.ok",
+  "crit": [
+   [
+    "sp.band.child"
+   ]
+  ],
+  "n": 1,
+  "bonus": 2
+ },
+ {
+  "id": "i_gift_fail",
+  "concept": "int.gift.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_askm_ok",
+  "concept": "int.ask_money.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_askm_ok_mom",
+  "concept": "int.ask_money.ok",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_askm_fail",
+  "concept": "int.ask_money.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_askm_fail_broke",
+  "concept": "int.ask_money.fail",
+  "crit": [
+   [
+    "sp.broke"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_askm_fail_penny",
+  "concept": "int.ask_money.fail",
+  "crit": [
+   [
+    "sp.quirk.penny_pincher"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_apol_ok",
+  "concept": "int.apologize.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_apol_fail",
+  "concept": "int.apologize.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_apol_fail_veng",
+  "concept": "int.apologize.fail",
+  "crit": [
+   [
+    "sp.trait.vengeful"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_argue_ok",
+  "concept": "int.argue.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_argue_fail",
+  "concept": "int.argue.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_argue_fail_drama",
+  "concept": "int.argue.fail",
+  "crit": [
+   [
+    "sp.voice.dramatic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_flirt_ok",
+  "concept": "int.flirt.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_flirt_ok_rom",
+  "concept": "int.flirt.ok",
+  "crit": [
+   [
+    "sp.trait.romantic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_flirt_fail",
+  "concept": "int.flirt.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_askout_ok",
+  "concept": "int.ask_out.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_askout_fail",
+  "concept": "int.ask_out.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_propose_ok",
+  "concept": "int.propose.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_propose_fail",
+  "concept": "int.propose.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_spend_ok",
+  "concept": "int.spend_time.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_spend_ok_elder",
+  "concept": "int.spend_time.ok",
+  "crit": [
+   [
+    "sp.band.elder"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_spend_fail",
+  "concept": "int.spend_time.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_befriend_ok",
+  "concept": "int.befriend.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_befriend_fail",
+  "concept": "int.befriend.fail",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_fight_ok",
+  "concept": "int.fight.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_fight_fail",
+  "concept": "int.fight.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_prank_ok",
+  "concept": "int.prank.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_prank_fail",
+  "concept": "int.prank.fail",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_rumor_ok",
+  "concept": "int.rumor.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_rumor_fail",
+  "concept": "int.rumor.fail",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_bully_ok",
+  "concept": "int.bully.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_bully_fail",
+  "concept": "int.bully.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_givem_ok",
+  "concept": "int.give_money.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_suckup_ok",
+  "concept": "int.suck_up.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_suckup_fail",
+  "concept": "int.suck_up.fail",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_discipline_ok",
+  "concept": "int.discipline.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_discipline_fail",
+  "concept": "int.discipline.fail",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_breakup_ok",
+  "concept": "int.break_up.ok",
+  "crit": [],
+  "n": 2
+ },
+ {
+  "id": "i_breakup_ok_drama",
+  "concept": "int.break_up.ok",
+  "crit": [
+   [
+    "sp.voice.dramatic"
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ },
+ {
+  "id": "i_advice_ok",
+  "concept": "int.ask_advice.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_teach_ok",
+  "concept": "int.teach_child.ok",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_teach_fail",
+  "concept": "int.teach_child.fail",
+  "crit": [],
+  "n": 1
+ },
+ {
+  "id": "i_hookup_ok",
+  "concept": "int.hookup.ok",
+  "crit": [],
+  "n": 1,
+  "tags": [
+   "mature"
+  ]
+ },
+ {
+  "id": "i_any_ok",
+  "concept": "int.any.ok",
+  "crit": [],
+  "n": 2,
+  "w": 0.3
+ },
+ {
+  "id": "i_any_ok_sweet",
+  "concept": "int.any.ok",
+  "crit": [
+   [
+    "sp.voice.sweet"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "i_any_ok_slang",
+  "concept": "int.any.ok",
+  "crit": [
+   [
+    "sp.voice.slang"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "i_any_ok_formal",
+  "concept": "int.any.ok",
+  "crit": [
+   [
+    "sp.voice.formal"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "i_any_ok_kid",
+  "concept": "int.any.ok",
+  "crit": [
+   [
+    "sp.voice.kid"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "i_any_fail",
+  "concept": "int.any.fail",
+  "crit": [],
+  "n": 2,
+  "w": 0.3
+ },
+ {
+  "id": "i_any_fail_blunt",
+  "concept": "int.any.fail",
+  "crit": [
+   [
+    "sp.voice.blunt"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "i_any_fail_sarc",
+  "concept": "int.any.fail",
+  "crit": [
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 1
+ },
+ {
+  "id": "i_any_fail_grudge",
+  "concept": "int.any.fail",
+  "crit": [
+   [
+    "grudge",
+    ">",
+    20
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
+ }
+]

@@ -1,0 +1,48 @@
+[
+ {
+  "id": "aurora",
+  "ideology": -60,
+  "tax": 0.04,
+  "welfare": 0.8,
+  "police": 0.1,
+  "rift": "registry",
+  "base": 0
+ },
+ {
+  "id": "trabalho",
+  "ideology": -25,
+  "tax": 0.02,
+  "welfare": 0.65,
+  "police": 0.2,
+  "rift": "registry",
+  "base": 2
+ },
+ {
+  "id": "centro",
+  "ideology": 5,
+  "tax": 0.0,
+  "welfare": 0.45,
+  "police": 0.3,
+  "rift": "free",
+  "base": 3
+ },
+ {
+  "id": "ordem",
+  "ideology": 55,
+  "tax": -0.03,
+  "welfare": 0.2,
+  "police": 0.6,
+  "rift": "ban",
+  "base": 0
+ },
+ {
+  "id": "desperta",
+  "ideology": 25,
+  "tax": -0.01,
+  "welfare": 0.3,
+  "police": 0.3,
+  "rift": "free",
+  "base": -4,
+  "era": "hunter_age"
+ }
+]

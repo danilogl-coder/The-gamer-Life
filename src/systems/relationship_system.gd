@@ -239,6 +239,12 @@ func interact(npc_id: String, interaction_id: String) -> Dictionary:
 			return {"ok": false, "reason": "ui.no_money"}
 		_sim.finance.add_cash(_sim.player(), -cost)
 	r.yr = int(r.get("yr", 0)) + 1
+	if def.has("scene"):
+		_sim.activities.bump_counter("social." + interaction_id)
+		_sim.activities.bump_counter("social.total")
+		_sim.gamer.add_exp(_sim.player(), float(def.get("exp", 3)))
+		var conv: Dictionary = _sim.dialogue.start_conversation(npc_id, def.scene)
+		return {"ok": true, "success": true, "conversation": conv}
 	var success := true
 	if def.has("chance"):
 		success = _sim.prob.roll_spec(def.chance, ctx)
@@ -249,7 +255,12 @@ func interact(npc_id: String, interaction_id: String) -> Dictionary:
 	_sim.gamer.add_exp(_sim.player(), float(def.get("exp", 3)))
 	_sim.gamer.add_stat_xp(_sim.player(), "cha", float(def.get("cha_xp", 4)))
 	var text_key: String = "int.%s.%s" % [interaction_id, "ok" if success else "fail"]
-	return {"ok": true, "success": success, "key": text_key, "params": {"name": npc.first_name}, "gains": ctx.get("gains", {})}
+	var out := {"ok": true, "success": success, "key": text_key, "params": {"name": npc.first_name}, "gains": ctx.get("gains", {})}
+	if npc.get("alive", true):
+		var quote: Dictionary = _sim.dialogue.react_to_interaction(npc, interaction_id, success)
+		if not quote.is_empty():
+			out.quote = quote
+	return out
 
 
 # ---------------------------------------------------------------------------
@@ -401,6 +412,8 @@ func process_year(p: Dictionary) -> void:
 func _decay(npc: Dictionary, r: Dictionary) -> void:
 	var baseline := 60.0 if FAMILY_ROLES.has(r.role) else 35.0
 	var speed := 0.08 if int(r.get("yr", 0)) > 0 else 0.15
+	if npc.get("far", false):
+		speed *= 1.6
 	for t in npc.traits:
 		speed *= float(_sim.data.get_def("traits", t).get("bond_decay", 1.0))
 	r.score = clampf(lerpf(float(r.score), baseline, speed), 0, 100)

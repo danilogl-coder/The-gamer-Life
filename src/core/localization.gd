@@ -42,9 +42,17 @@ func t_entry(entry: Dictionary) -> String:
 	for p in raw:
 		var v = raw[p]
 		if typeof(v) == TYPE_STRING and v.begins_with("@"):
-			v = t(v.substr(1))
+			v = t_ref(v)
 		params[p] = v
 	return t(entry.get("key", ""), params)
+
+
+## "@key" -> t(key); "@key|arg" -> t(key, {"n": arg}) (e.g. place names).
+func t_ref(v: String) -> String:
+	var bar := v.find("|")
+	if bar < 0:
+		return t(v.substr(1))
+	return t(v.substr(1, bar - 1), {"n": v.substr(bar + 1)})
 
 
 ## Every *.json inside locale/<code>/ is merged, so content packs can ship

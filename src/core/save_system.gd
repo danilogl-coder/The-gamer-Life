@@ -33,6 +33,13 @@ static var MIGRATIONS: Dictionary = {
 			if ch.get("is_player", false):
 				ch.merge({"school": {"popularity": 30.0, "clique": "", "clubs": {}}, "will": {"mode": "equal", "favorite": ""},
 					"licenses": [], "job_hours": "normal", "surgeries": {}}, false),
+	# v3 -> v4: living world. Personas, the society (cities, government, tech,
+	# celebrities, news) are created lazily by their systems on first access;
+	# here we only add the per-character containers.
+	3: func(d: Dictionary) -> void:
+		for id in d.get("npcs", {}):
+			d.npcs[id].merge({"life_log": [], "known_marks": []}, false)
+		d.merge({"conversation": {}}, false),
 }
 
 
@@ -84,7 +91,7 @@ static func _write(path: String, data: Dictionary) -> Error:
 	var f := FileAccess.open(tmp, FileAccess.WRITE)
 	if f == null:
 		return FileAccess.get_open_error()
-	f.store_string(JSON.stringify(data))
+	f.store_string(JSON.stringify(data, "", false, true))
 	f.close()
 	# Atomic-ish replace so a crash mid-write never corrupts the save.
 	if FileAccess.file_exists(path):
@@ -105,7 +112,7 @@ static func _read(path: String) -> Dictionary:
 static func normalize(v):
 	match typeof(v):
 		TYPE_FLOAT:
-			if is_equal_approx(v, roundf(v)) and absf(v) < 9.0e15:
+			if v == roundf(v) and absf(v) < 9.0e15:
 				return int(v)
 			return v
 		TYPE_DICTIONARY:

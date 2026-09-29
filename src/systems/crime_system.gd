@@ -38,7 +38,7 @@ func commit(crime_id: String, ctx: Dictionary) -> Dictionary:
 		p.criminal.heat = float(p.criminal.heat) + float(def.get("heat", 10)) * maxf(0.2, 1.0 - _sim.gamer.mod("stealth"))
 		_sim.gamer.add_exp(p, float(def.get("exp", 10)))
 		# Evidence may surface later.
-		if _sim.prob.roll_neutral(float(def.get("investigation", 0.15)) + float(p.criminal.heat) * 0.003):
+		if _sim.prob.roll_neutral(float(def.get("investigation", 0.15)) * (1.0 + _sim.society.policy("police")) + float(p.criminal.heat) * 0.003):
 			_sim.events.schedule("crime_investigation", _sim.rng.randi_range(1, 4))
 			_sim.state.set_flag("pending_case_" + crime_id)
 			p.criminal.pending = crime_id

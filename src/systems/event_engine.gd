@@ -165,6 +165,8 @@ func params_for(inst: Dictionary) -> Dictionary:
 
 
 func visible_choices(inst: Dictionary) -> Array:
+	if inst.id == "__talk":
+		return _talk_choices(inst)
 	var def: Dictionary = _sim.data.events.get(inst.id, {})
 	var ctx := context_for(inst)
 	var out: Array = []
@@ -176,8 +178,24 @@ func visible_choices(inst: Dictionary) -> Array:
 	return out
 
 
+## A pending conversation started by an NPC: the scene is built once, the
+## replies are the choices.
+func _talk_choices(inst: Dictionary) -> Array:
+	var conv: Dictionary = _sim.state.data.get("conversation", {})
+	if conv.is_empty() or conv.get("npc", "") != inst.actor:
+		conv = _sim.dialogue.start_conversation(inst.actor, inst.get("concept", "reach"))
+	var out: Array = []
+	for r in conv.get("replies", []):
+		out.append({"id": r.id, "p": r.chance})
+	if out.is_empty():
+		out.append({"id": "ok"})
+	return out
+
+
 ## Chance shown to the player for a choice (the System shows odds!).
 func choice_chance(inst: Dictionary, choice: Dictionary) -> float:
+	if choice.has("p"):
+		return float(choice.p)
 	if not choice.has("chance"):
 		return -1.0
 	return _sim.prob.compute(choice.chance, context_for(inst))
@@ -187,6 +205,13 @@ func resolve_current(choice_id: String) -> Dictionary:
 	if pending().is_empty():
 		return {"ok": false}
 	var inst: Dictionary = pending()[0]
+	if inst.id == "__talk":
+		_talk_choices(inst)
+		pending().pop_front()
+		if choice_id == "ok":
+			_sim.dialogue.end_conversation()
+			return {"ok": true, "key": ""}
+		return _sim.dialogue.reply(choice_id)
 	var def: Dictionary = _sim.data.events.get(inst.id, {})
 	var choice: Dictionary = {}
 	for c in visible_choices(inst):

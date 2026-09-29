@@ -42,7 +42,7 @@ func set_hours(p: Dictionary, h: String) -> Dictionary:
 func current_salary(p: Dictionary) -> float:
 	if not is_employed(p) or _sim.crime.in_prison(p):
 		return float(p.career.get("pension", 0.0))
-	return float(p.career.salary) * _sim.world.salary_mult() * float(hours(p).salary)
+	return float(p.career.salary) * _sim.world.salary_mult() * float(hours(p).salary) * _sim.society.job_mult(p.career.job)
 
 
 func level_mult(level: int) -> float:

@@ -1,0 +1,1267 @@
+[
+ {
+  "id": "listen",
+  "groups": [
+   "chat",
+   "confide",
+   "elder",
+   "opinion",
+   "bad_news",
+   "good_news",
+   "kid"
+  ],
+  "base": 0.72,
+  "mods": [
+   [
+    "sp.a",
+    0.003,
+    50
+   ],
+   [
+    "sp.e",
+    0.003,
+    50
+   ],
+   [
+    "sp.voice.shy",
+    0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    }
+   ],
+   "mood": 4
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 1
+    }
+   ]
+  },
+  "order": 10
+ },
+ {
+  "id": "joke",
+  "groups": [
+   "chat",
+   "bad_news",
+   "nag",
+   "flirt",
+   "kid",
+   "conflict"
+  ],
+  "base": 0.45,
+  "mods": [
+   [
+    "sp.e",
+    0.006,
+    50
+   ],
+   [
+    "sp.n",
+    -0.005,
+    50
+   ],
+   [
+    "sp.voice.sarcastic",
+    0.15
+   ],
+   [
+    "sp.mood.miserable",
+    -0.3
+   ],
+   [
+    "sp.voice.formal",
+    -0.12
+   ],
+   [
+    "sp.quirk.puns",
+    0.2
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 6
+    }
+   ],
+   "mood": 8
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -4
+    }
+   ],
+   "mood": -4
+  },
+  "order": 20
+ },
+ {
+  "id": "share",
+  "groups": [
+   "chat"
+  ],
+  "base": 0.6,
+  "mods": [
+   [
+    "sp.a",
+    0.004,
+    50
+   ],
+   [
+    "compat",
+    0.004,
+    50
+   ],
+   [
+    "sp.voice.blunt",
+    -0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -1
+    }
+   ]
+  },
+  "order": 30
+ },
+ {
+  "id": "brag",
+  "groups": [
+   "chat",
+   "good_news"
+  ],
+  "base": 0.3,
+  "mods": [
+   [
+    "sp.a",
+    -0.004,
+    50
+   ],
+   [
+    "sp.trait.materialistic",
+    0.25
+   ],
+   [
+    "sp.trait.jealous",
+    -0.3
+   ],
+   [
+    "p.famous",
+    0.2
+   ],
+   [
+    "sp.trait.humble",
+    -0.2
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 3
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -6
+    }
+   ],
+   "memory": "bragged",
+   "sev": 8
+  },
+  "order": 60
+ },
+ {
+  "id": "ask_about",
+  "groups": [
+   "chat",
+   "good_news",
+   "elder",
+   "kid",
+   "confide"
+  ],
+  "base": 0.7,
+  "mods": [
+   [
+    "sp.e",
+    0.004,
+    50
+   ],
+   [
+    "sp.voice.shy",
+    -0.1
+   ],
+   [
+    "sp.voice.storyteller",
+    0.1
+   ],
+   [
+    "sp.quirk.storyteller",
+    0.15
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    }
+   ],
+   "mood": 5
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 1
+    }
+   ]
+  },
+  "order": 15
+ },
+ {
+  "id": "comfort",
+  "groups": [
+   "bad_news",
+   "confide",
+   "conflict"
+  ],
+  "base": 0.72,
+  "mods": [
+   [
+    "sp.a",
+    0.003,
+    50
+   ],
+   [
+    "sp.n",
+    0.003,
+    50
+   ],
+   [
+    "sp.voice.blunt",
+    -0.12
+   ],
+   [
+    "bond",
+    0.003,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 8
+    }
+   ],
+   "mood": 12,
+   "memory": "comforted",
+   "sev": -12
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 1
+    }
+   ]
+  },
+  "order": 5
+ },
+ {
+  "id": "help_money",
+  "groups": [
+   "bad_news",
+   "ask_favor"
+  ],
+  "base": 0.9,
+  "mods": [
+   [
+    "sp.trait.arrogant",
+    -0.2
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": -1000
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 10
+    }
+   ],
+   "mood": 15,
+   "memory": "helped",
+   "sev": -25
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": -1000
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 2
+    }
+   ],
+   "memory": "pitied",
+   "sev": 5
+  },
+  "order": 8,
+  "cost": 1000
+ },
+ {
+  "id": "advise",
+  "groups": [
+   "bad_news",
+   "confide",
+   "nag"
+  ],
+  "base": 0.45,
+  "mods": [
+   [
+    "sp.o",
+    0.004,
+    50
+   ],
+   [
+    "sp.c",
+    0.003,
+    50
+   ],
+   [
+    "sp.trait.arrogant",
+    -0.2
+   ],
+   [
+    "stat_wis",
+    0.0,
+    0
+   ],
+   [
+    "sp.band.teen",
+    -0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 6
+    }
+   ],
+   "mood": 6
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -3
+    }
+   ]
+  },
+  "order": 25
+ },
+ {
+  "id": "shrug",
+  "groups": [
+   "bad_news",
+   "nag",
+   "opinion"
+  ],
+  "base": 0.2,
+  "mods": [
+   [
+    "sp.a",
+    -0.004,
+    50
+   ],
+   [
+    "sp.voice.calm",
+    0.15
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 0
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -6
+    }
+   ],
+   "mood": -5,
+   "memory": "cold",
+   "sev": 8
+  },
+  "order": 70
+ },
+ {
+  "id": "congrats",
+  "groups": [
+   "good_news"
+  ],
+  "base": 0.88,
+  "mods": [
+   [
+    "sp.trait.humble",
+    -0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    }
+   ],
+   "mood": 5
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 1
+    }
+   ]
+  },
+  "order": 5
+ },
+ {
+  "id": "celebrate",
+  "groups": [
+   "good_news"
+  ],
+  "base": 0.85,
+  "mods": [
+   [
+    "sp.e",
+    0.004,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": -150
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 9
+    }
+   ],
+   "mood": 10,
+   "memory": "celebrated",
+   "sev": -10
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": -150
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 2
+    }
+   ]
+  },
+  "order": 8,
+  "cost": 150
+ },
+ {
+  "id": "envy",
+  "groups": [
+   "good_news"
+  ],
+  "base": 0.12,
+  "mods": [
+   [
+    "sp.trait.cruel",
+    0.3
+   ],
+   [
+    "sp.voice.sarcastic",
+    0.2
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -1
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -10
+    }
+   ],
+   "mood": -8,
+   "memory": "jealous_jab",
+   "sev": 14
+  },
+  "order": 80
+ },
+ {
+  "id": "agree",
+  "groups": [
+   "opinion",
+   "nag"
+  ],
+  "base": 0.75,
+  "mods": [
+   [
+    "aligned",
+    0.15
+   ],
+   [
+    "misaligned",
+    -0.35
+   ],
+   [
+    "sp.trait.arrogant",
+    0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 4
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -1
+    }
+   ]
+  },
+  "order": 10
+ },
+ {
+  "id": "disagree",
+  "groups": [
+   "opinion"
+  ],
+  "base": 0.35,
+  "mods": [
+   [
+    "sp.o",
+    0.007,
+    50
+   ],
+   [
+    "sp.n",
+    -0.004,
+    50
+   ],
+   [
+    "sp.trait.arrogant",
+    -0.2
+   ],
+   [
+    "aligned",
+    0.2
+   ],
+   [
+    "sp.voice.nerdy",
+    0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 4
+    }
+   ],
+   "mood": 3
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -7
+    }
+   ],
+   "mood": -6,
+   "memory": "argued",
+   "sev": 10
+  },
+  "order": 20
+ },
+ {
+  "id": "change_subject",
+  "groups": [
+   "opinion",
+   "nag",
+   "conflict"
+  ],
+  "base": 0.55,
+  "mods": [
+   [
+    "sp.n",
+    -0.003,
+    50
+   ],
+   [
+    "sp.voice.calm",
+    0.1
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 1
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -3
+    }
+   ]
+  },
+  "order": 40
+ },
+ {
+  "id": "promise",
+  "groups": [
+   "nag"
+  ],
+  "base": 0.65,
+  "mods": [
+   [
+    "sp.a",
+    0.004,
+    50
+   ],
+   [
+    "said.r_promise",
+    -0.25
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    }
+   ],
+   "mood": 6
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -4
+    }
+   ]
+  },
+  "order": 10
+ },
+ {
+  "id": "argue",
+  "groups": [
+   "nag",
+   "conflict"
+  ],
+  "base": 0.22,
+  "mods": [
+   [
+    "sp.a",
+    0.003,
+    50
+   ],
+   [
+    "sp.voice.sweet",
+    0.1
+   ],
+   [
+    "p.band.teen",
+    -0.05
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 2
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -9
+    }
+   ],
+   "mood": -6,
+   "memory": "argued",
+   "sev": 12
+  },
+  "order": 30
+ },
+ {
+  "id": "explain",
+  "groups": [
+   "nag",
+   "conflict"
+  ],
+  "base": 0.5,
+  "mods": [
+   [
+    "sp.o",
+    0.005,
+    50
+   ],
+   [
+    "sp.c",
+    0.002,
+    50
+   ],
+   [
+    "grudge",
+    -0.008,
+    0
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 6
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -2
+    }
+   ]
+  },
+  "order": 20
+ },
+ {
+  "id": "apologize",
+  "groups": [
+   "conflict"
+  ],
+  "base": 0.5,
+  "mods": [
+   [
+    "sp.a",
+    0.006,
+    50
+   ],
+   [
+    "grudge",
+    -0.008,
+    0
+   ],
+   [
+    "sp.trait.vengeful",
+    -0.25
+   ],
+   [
+    "sp.trait.kind",
+    0.15
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 8
+    }
+   ],
+   "mood": 5,
+   "memory": "forgave",
+   "sev": -20
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -2
+    }
+   ]
+  },
+  "order": 5
+ },
+ {
+  "id": "lend",
+  "groups": [
+   "ask_favor"
+  ],
+  "base": 0.92,
+  "mods": [],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": -2000
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 10
+    }
+   ],
+   "mood": 12,
+   "memory": "lent_money",
+   "sev": -20
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "amount": -2000
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 4
+    }
+   ]
+  },
+  "order": 5,
+  "cost": 2000
+ },
+ {
+  "id": "refuse",
+  "groups": [
+   "ask_favor"
+  ],
+  "base": 0.35,
+  "mods": [
+   [
+    "sp.a",
+    0.005,
+    50
+   ],
+   [
+    "sp.c",
+    0.003,
+    50
+   ],
+   [
+    "p.broke",
+    0.3
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -1
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -8
+    }
+   ],
+   "mood": -8,
+   "memory": "refused_help",
+   "sev": 14
+  },
+  "order": 30
+ },
+ {
+  "id": "support",
+  "groups": [
+   "confide",
+   "flirt"
+  ],
+  "base": 0.8,
+  "mods": [
+   [
+    "bond",
+    0.003,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 8
+    }
+   ],
+   "mood": 10,
+   "memory": "supported",
+   "sev": -15
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 2
+    }
+   ]
+  },
+  "order": 6
+ },
+ {
+  "id": "tease",
+  "groups": [
+   "flirt",
+   "kid",
+   "chat"
+  ],
+  "base": 0.5,
+  "mods": [
+   [
+    "sp.e",
+    0.005,
+    50
+   ],
+   [
+    "sp.n",
+    -0.004,
+    50
+   ],
+   [
+    "sp.trait.romantic",
+    0.1
+   ],
+   [
+    "bond",
+    0.003,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 6
+    }
+   ],
+   "mood": 6
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -4
+    }
+   ]
+  },
+  "order": 35
+ },
+ {
+  "id": "sweet",
+  "groups": [
+   "flirt"
+  ],
+  "base": 0.72,
+  "mods": [
+   [
+    "sp.trait.romantic",
+    0.15
+   ],
+   [
+    "sp.a",
+    0.003,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 7
+    }
+   ],
+   "mood": 8
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 0
+    }
+   ]
+  },
+  "order": 10
+ },
+ {
+  "id": "play",
+  "groups": [
+   "kid"
+  ],
+  "base": 0.88,
+  "mods": [],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 7
+    }
+   ],
+   "mood": 10
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 2
+    }
+   ]
+  },
+  "order": 5
+ },
+ {
+  "id": "teach",
+  "groups": [
+   "kid"
+  ],
+  "base": 0.6,
+  "mods": [
+   [
+    "sp.o",
+    0.005,
+    50
+   ],
+   [
+    "sp.c",
+    0.004,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 4
+    },
+    {
+     "type": "STAT_XP",
+     "stat": "wis",
+     "amount": 6
+    }
+   ],
+   "mood": 3
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -1
+    }
+   ]
+  },
+  "order": 15
+ },
+ {
+  "id": "scold",
+  "groups": [
+   "kid",
+   "conflict"
+  ],
+  "base": 0.3,
+  "mods": [
+   [
+    "sp.c",
+    0.004,
+    50
+   ],
+   [
+    "sp.a",
+    0.003,
+    50
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -1
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -6
+    }
+   ],
+   "mood": -8,
+   "memory": "scolded",
+   "sev": 8
+  },
+  "order": 60
+ },
+ {
+  "id": "thank",
+  "groups": [
+   "advice",
+   "elder"
+  ],
+  "base": 0.9,
+  "mods": [],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    },
+    {
+     "type": "STAT_XP",
+     "stat": "wis",
+     "amount": 10
+    }
+   ],
+   "mood": 6
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 2
+    }
+   ]
+  },
+  "order": 5
+ },
+ {
+  "id": "doubt",
+  "groups": [
+   "advice"
+  ],
+  "base": 0.35,
+  "mods": [
+   [
+    "sp.o",
+    0.006,
+    50
+   ],
+   [
+    "sp.trait.arrogant",
+    -0.2
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 3
+    },
+    {
+     "type": "STAT_XP",
+     "stat": "wis",
+     "amount": 14
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -5
+    }
+   ],
+   "memory": "argued",
+   "sev": 6
+  },
+  "order": 20
+ },
+ {
+  "id": "leave",
+  "groups": [
+   "chat",
+   "opinion",
+   "elder",
+   "conflict",
+   "confide",
+   "good_news",
+   "bad_news",
+   "nag",
+   "ask_favor",
+   "flirt",
+   "kid",
+   "advice"
+  ],
+  "base": 0.8,
+  "mods": [
+   [
+    "sp.n",
+    -0.004,
+    50
+   ],
+   [
+    "sp.voice.dramatic",
+    -0.15
+   ]
+  ],
+  "good": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 0
+    }
+   ]
+  },
+  "bad": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -2
+    }
+   ]
+  },
+  "order": 90
+ }
+]

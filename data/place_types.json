@@ -1,0 +1,110 @@
+[
+ {
+  "id": "bakery",
+  "start": 2,
+  "w": 3
+ },
+ {
+  "id": "cafe",
+  "start": 2,
+  "w": 3
+ },
+ {
+  "id": "bar",
+  "start": 2,
+  "w": 3
+ },
+ {
+  "id": "restaurant",
+  "start": 2,
+  "w": 3
+ },
+ {
+  "id": "market",
+  "start": 1,
+  "w": 2,
+  "essential": true
+ },
+ {
+  "id": "gym",
+  "start": 1,
+  "w": 2
+ },
+ {
+  "id": "church",
+  "start": 1,
+  "w": 1,
+  "essential": true
+ },
+ {
+  "id": "park",
+  "start": 1,
+  "w": 0,
+  "essential": true
+ },
+ {
+  "id": "club",
+  "start": 1,
+  "w": 1
+ },
+ {
+  "id": "bookstore",
+  "start": 1,
+  "w": 1
+ },
+ {
+  "id": "salon",
+  "start": 1,
+  "w": 2
+ },
+ {
+  "id": "shop",
+  "start": 1,
+  "w": 2
+ },
+ {
+  "id": "mechanic",
+  "start": 1,
+  "w": 1
+ },
+ {
+  "id": "arcade",
+  "start": 0,
+  "w": 1
+ },
+ {
+  "id": "guild",
+  "start": 1,
+  "w": 1
+ },
+ {
+  "id": "hospital",
+  "start": 1,
+  "w": 0,
+  "essential": true
+ },
+ {
+  "id": "school",
+  "start": 1,
+  "w": 0,
+  "essential": true
+ },
+ {
+  "id": "vr_lounge",
+  "start": 0,
+  "w": 2,
+  "era": "vr_worlds"
+ },
+ {
+  "id": "mana_cafe",
+  "start": 0,
+  "w": 2,
+  "era": "mana_tech"
+ },
+ {
+  "id": "robot_shop",
+  "start": 0,
+  "w": 1,
+  "era": "automation"
+ }
+]

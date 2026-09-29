@@ -12,10 +12,12 @@ const TABLES := [
 	"monsters", "dungeons", "diseases", "countries", "traits", "items",
 	"achievements", "interactions", "world_events", "properties", "crimes",
 	"factions", "stats", "special_careers", "pets", "possessions", "challenges", "cliques", "clubs", "interview_questions", "ribbons", "lawyers", "lawsuits", "gangs",
+	"dialogue_replies", "npc_life", "marks", "tech_eras", "parties", "place_types",
 ]
 
 var tables: Dictionary = {}
 var events: Dictionary = {}
+var dialogue: Dictionary = {}
 var balance: Dictionary = {}
 var names: Dictionary = {}
 
@@ -25,15 +27,21 @@ func load_all() -> DataRegistry:
 		tables[table] = _index(_read_json(DATA_DIR + table + ".json"))
 	balance = _read_json(DATA_DIR + "balance.json")
 	names = _read_json(DATA_DIR + "names.json")
-	events = {}
-	var dir := DirAccess.open(DATA_DIR + "events")
+	events = _load_dir("events")
+	dialogue = _load_dir("dialogue")
+	return self
+
+
+func _load_dir(sub: String) -> Dictionary:
+	var out := {}
+	var dir := DirAccess.open(DATA_DIR + sub)
 	if dir:
 		var files := Array(dir.get_files())
 		files.sort()
 		for f in files:
 			if f.ends_with(".json"):
-				events.merge(_index(_read_json(DATA_DIR + "events/" + f)))
-	return self
+				out.merge(_index(_read_json(DATA_DIR + sub + "/" + f)))
+	return out
 
 
 func table(name: String) -> Dictionary:

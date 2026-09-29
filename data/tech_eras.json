@@ -1,0 +1,100 @@
+[
+ {
+  "id": "social_media",
+  "at": 2
+ },
+ {
+  "id": "smartphones",
+  "at": 5,
+  "mods": {}
+ },
+ {
+  "id": "streaming",
+  "at": 9,
+  "job_pay": {
+   "entertainment": 0.06
+  }
+ },
+ {
+  "id": "hunter_age",
+  "at": 14,
+  "mods": {
+   "gold_find": 0.05
+  },
+  "job_pay": {
+   "awakened": 0.08
+  }
+ },
+ {
+  "id": "ai_assistants",
+  "at": 20,
+  "mods": {
+   "study_gain": 0.1
+  },
+  "job_pay": {
+   "admin": -0.08,
+   "tech": 0.08
+  }
+ },
+ {
+  "id": "automation",
+  "at": 28,
+  "job_pay": {
+   "commerce": -0.12,
+   "transport": -0.15,
+   "food": -0.08,
+   "admin": -0.12,
+   "industry": -0.06,
+   "tech": 0.1
+  }
+ },
+ {
+  "id": "green_energy",
+  "at": 34,
+  "mods": {
+   "disease_resist": 0.03
+  },
+  "job_pay": {
+   "construction": 0.05
+  }
+ },
+ {
+  "id": "vr_worlds",
+  "at": 40,
+  "mods": {
+   "happiness": 1.0
+  },
+  "job_pay": {
+   "entertainment": 0.05
+  }
+ },
+ {
+  "id": "mana_tech",
+  "at": 48,
+  "mods": {
+   "max_mp": 0.1
+  },
+  "job_pay": {
+   "awakened": 0.12,
+   "science": 0.08
+  }
+ },
+ {
+  "id": "gene_therapy",
+  "at": 58,
+  "mods": {
+   "disease_resist": 0.1
+  },
+  "job_pay": {
+   "health": 0.06
+  }
+ },
+ {
+  "id": "longevity",
+  "at": 70,
+  "mods": {
+   "lifespan": 4,
+   "aging_resist": 0.05
+  }
+ }
+]

@@ -36,7 +36,8 @@
      "amount": 4
     }
    ]
-  }
+  },
+  "scene": "talk"
  },
  {
   "id": "compliment",
@@ -1547,7 +1548,8 @@
      "amount": 5
     }
    ]
-  }
+  },
+  "scene": "advice"
  },
  {
   "id": "murder",

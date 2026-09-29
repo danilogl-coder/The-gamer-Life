@@ -267,5 +267,172 @@
     "vol": 0.55
    }
   ]
+ },
+ "society": {
+  "city_parts": {
+   "pt": {
+    "pre": [
+     "São ",
+     "Vila ",
+     "Porto ",
+     "Santa ",
+     "Nova ",
+     "Campo ",
+     "",
+     "",
+     ""
+    ],
+    "core": [
+     "Aurora",
+     "Serra",
+     "Lagoa",
+     "Pedra",
+     "Rio Claro",
+     "Cedro",
+     "Brisa",
+     "Palmares",
+     "Ventania",
+     "Alvorada",
+     "Jacarandá",
+     "Ipê",
+     "Marajó",
+     "Itaúna"
+    ],
+    "suf": [
+     " do Sul",
+     " Alegre",
+     " Grande",
+     "",
+     "",
+     " Nova",
+     " do Norte"
+    ]
+   },
+   "en": {
+    "pre": [
+     "New ",
+     "Port ",
+     "East ",
+     "Fort ",
+     "",
+     "",
+     "West "
+    ],
+    "core": [
+     "Harbor",
+     "Ridge",
+     "Ash",
+     "Maple",
+     "Stone",
+     "River",
+     "Crest",
+     "Oak",
+     "Cedar",
+     "Brook",
+     "Elm",
+     "Pine"
+    ],
+    "suf": [
+     "ton",
+     "field",
+     "ville",
+     " Falls",
+     " Bay",
+     "",
+     "wood"
+    ]
+   },
+   "kr": {
+    "pre": [
+     ""
+    ],
+    "core": [
+     "Seo",
+     "Han",
+     "Dae",
+     "Gwang",
+     "Mi",
+     "Cheong",
+     "Yeon",
+     "Hwa",
+     "Bu"
+    ],
+    "suf": [
+     "won",
+     "ju",
+     "san",
+     "pyeong",
+     "do",
+     "cheon",
+     "gang"
+    ]
+   },
+   "jp": {
+    "pre": [
+     ""
+    ],
+    "core": [
+     "Aki",
+     "Hana",
+     "Kita",
+     "Mizu",
+     "Taka",
+     "Yama",
+     "Kawa",
+     "Shira",
+     "Kiri"
+    ],
+    "suf": [
+     "zawa",
+     "hama",
+     "saki",
+     "mura",
+     "oka",
+     "gawa",
+     "shima"
+    ]
+   },
+   "fr": {
+    "pre": [
+     "Saint-",
+     "",
+     "",
+     "Val-",
+     "Mont"
+    ],
+    "core": [
+     "Clair",
+     "Beau",
+     "Fleur",
+     "Roche",
+     "Lune",
+     "Bois",
+     "Rive",
+     "Belle"
+    ],
+    "suf": [
+     "mont",
+     "ville",
+     "-sur-Mer",
+     "lac",
+     "rive",
+     "",
+     "fort"
+    ]
+   }
+  },
+  "celeb_fields": [
+   "music",
+   "sport",
+   "film",
+   "influencer",
+   "politics",
+   "hunter",
+   "business"
+  ],
+  "max_places": 22
+ },
+ "npc_life": {
+  "yearly_chance": 0.45
  }
 }
