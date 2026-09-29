@@ -30,7 +30,38 @@ func _ready() -> void:
 
 
 func _open_world() -> void:
-	ui.open_sheet(App.t("ui.world"), WorldView.new())
+	ui.overlay.add_child(WorldView.new())
+
+
+## Big tappable news ticker: the latest headline, opens the World screen.
+func _world_ticker(sim: LifeSimulation) -> Control:
+	var b := Button.new()
+	b.custom_minimum_size = Vector2(0, 104)
+	b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	b.pressed.connect(_open_world)
+	var row := W.hbox(14)
+	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	row.offset_left = 14
+	row.offset_right = -14
+	var globe := W.icon("globe", UiTheme.SYSTEM_EDGE, 5)
+	globe.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(globe)
+	var col := W.vbox(2)
+	col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col.alignment = BoxContainer.ALIGNMENT_CENTER
+	col.add_child(W.label(App.t("ui.world").to_upper() + " · " + sim.society.city().name, UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
+	var news: Array = sim.society.recent_news(1)
+	var line := App.tr_entry(news[-1]) if not news.is_empty() else App.t("ui.world_tap")
+	var l := W.label(line, UiTheme.FONT_M, UiTheme.TEXT)
+	l.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	l.clip_text = true
+	col.add_child(l)
+	row.add_child(col)
+	row.add_child(W.label("›", UiTheme.FONT_XL, UiTheme.SYSTEM_EDGE))
+	b.add_child(row)
+	return b
 
 
 func refresh() -> void:
@@ -74,10 +105,6 @@ func _render_header(sim: LifeSimulation, p: Dictionary) -> void:
 		money.add_child(W.label(App.t("ui.debt_short", {"v": Fmt.money(float(p.finance.debt))}), UiTheme.FONT_S, UiTheme.BAD))
 	money.add_child(W.icon("clock", UiTheme.SYSTEM_EDGE, 3))
 	money.add_child(W.label(App.t("ui.free_time", {"n": sim.activities.free_slots(p), "max": int(p.time.slots)}), UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	money.add_child(spacer)
-	money.add_child(W.button("🌍 " + App.t("ui.world"), _open_world, 56, UiTheme.FONT_S))
 	card.get_child(0).add_child(money)
 	var bars := W.grid(2, 8)
 	for a in ["health", "happiness", "stress", "looks"]:
@@ -91,6 +118,7 @@ func _render_header(sim: LifeSimulation, p: Dictionary) -> void:
 		bars.add_child(col)
 	card.get_child(0).add_child(bars)
 	_header.add_child(card)
+	_header.add_child(_world_ticker(sim))
 
 
 func _subtitle(sim: LifeSimulation, p: Dictionary) -> String:
