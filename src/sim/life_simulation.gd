@@ -201,6 +201,7 @@ func command(name: String, args: Array = []) -> Dictionary:
 		"sc_action": result = special.perform(p, args[0], args[1])
 		"buy_possession": result = finance.buy_possession(p, args[0])
 		"sell_possession": result = finance.sell_possession(p, args[0])
+		"emigrate": result = finance.emigrate(p, args[0])
 		"auto_allocate":
 			result = {"ok": gamer.auto_allocate(p)}
 		_:

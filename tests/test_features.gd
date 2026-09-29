@@ -99,3 +99,14 @@ func test_mature_filter_hides_content() -> void:
 		ids.append(e.id)
 	check(not ids.has("casino") and not ids.has("party"), "mature activities hidden: %s" % [ids])
 	check(not sim.events.is_eligible(data.events.party_stranger, {}), "mature event blocked")
+
+
+func test_emigration_changes_country_and_job() -> void:
+	var sim := _adult(37)
+	var p := sim.player()
+	sim.career.hire(p, "janitor", true)
+	var target := "nortavia" if p.country != "nortavia" else "akitsu"
+	var r := sim.command("emigrate", [target])
+	check(r.ok, "emigrate: %s" % r)
+	check(p.country == target, "country changed")
+	check(p.career.job == "", "lost job when moving")

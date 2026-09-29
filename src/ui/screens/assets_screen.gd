@@ -25,6 +25,7 @@ func refresh() -> void:
 	_properties(sim, p)
 	_possessions(sim, p)
 	_markets(sim, p)
+	_migration(sim, p)
 
 
 func _summary(sim: LifeSimulation, p: Dictionary) -> void:
@@ -145,3 +146,19 @@ func _markets(sim: LifeSimulation, p: Dictionary) -> void:
 			row.add_child(W.button(App.t("ui.sell_all"), func(): ui.show_result(App.sim.command("sell_investment", [asset.id])), 68, 18))
 		card.add_child(row)
 		_box.add_child(W.card(card))
+
+
+func _migration(sim: LifeSimulation, p: Dictionary) -> void:
+	if int(p.age) < 18:
+		return
+	_box.add_child(W.section(App.t("ui.migration")))
+	_box.add_child(W.label(App.t("ui.migration_hint"), 18, UiTheme.TEXT_DIM, true))
+	for id in App.data.table("countries"):
+		if id == p.country:
+			continue
+		var def: Dictionary = App.data.get_def("countries", id)
+		var text := "%s · %s\n%s" % [App.t("country." + id), Fmt.money(sim.finance.emigration_cost(p, id)),
+			App.t("ui.country_line", {"s": Fmt.pct(float(def.salary_mult)), "t": Fmt.pct(float(def.tax)), "c": Fmt.pct(float(def.cost_of_living)), "r": Fmt.pct(float(def.get("rift", 1.0)))})]
+		var b := W.button(text, func(): ui.show_result(App.sim.command("emigrate", [id])), 84, 18)
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		_box.add_child(b)

@@ -245,10 +245,11 @@ Performance: nada roda por frame. A simulação só acontece quando o jogador ag
 | 3 Economia | Dinheiro, impostos, dívida, crédito, empréstimos, imóveis, veículos, colecionáveis, mercado (inclui Núcleos de Mana) | ✅ |
 | 4 Sociedade | Amizades, romance, casamento, divórcio, filhos, netos, memórias, reputação | ✅ (redes sociais profundas: próximo) |
 | 5 Vida alternativa | Crime, investigação, julgamento, prisão (estado próprio), fuga, recurso | ✅ |
-| 6 Carreiras especiais | Módulos `SpecialCareer`: Música (compor, gravar, turnê, gravadora), Atleta (ligas, temporadas, títulos, patrocínio, doping), Empresa (setor, preço, contratações, marketing, P&D, concorrência, venda/falência), Influenciador (plataformas fictícias, viral, cancelamento, publis). Próximos: Político, Ator, Astronauta | ✅ (4) |
+| 6 Carreiras especiais | Módulos `SpecialCareer`: Música (compor, gravar, turnê, gravadora), Atleta (ligas, temporadas, títulos, patrocínio, doping), Empresa (setor, preço, contratações, marketing, P&D, concorrência, venda/falência), Influenciador (plataformas fictícias, viral, cancelamento, publis), Política (comícios, arrecadação, eleições vereador→presidente, medidas que mexem na economia do mundo, escândalos da sua ficha). Próximos: Ator, Astronauta | ✅ (5) |
 | 7 Meta | Conquistas, legado, dinastias, Pontos de Alma, perks, **desafios** ("De Professor a Milionário"…) com recompensa em Pontos de Alma | ✅ |
 | 8 Pets/Familiares | Pets comuns; domar monstros (Re:Monster); **nomear** familiares (Tensura) gasta MP e os faz evoluir; lutam e dividem EXP | ✅ |
 | 8b Patrimônio | Veículos (depreciação, clássicos valorizam, pane/acidente/blitz) e colecionáveis (random walk) | ✅ |
+| 8d Migração | Mudar de país altera salário, impostos, custo de vida e densidade de fendas (drops); perde o emprego; vínculos distantes esfriam (idiomas e CAR ajudam) | ✅ |
 | 8c Classificação | Tag `mature` em atividades/eventos + opção na tela inicial | ✅ |
 | 9 Conteúdo | Escalar para 1000+ eventos, 300 empregos, 100 doenças… (só dados) | ⏳ |
 

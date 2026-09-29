@@ -348,6 +348,40 @@ func _update_possessions(p: Dictionary) -> float:
 	return upkeep
 
 
+# ---------------------------------------------------------------------------
+# Migration
+# ---------------------------------------------------------------------------
+
+func emigration_cost(p: Dictionary, country_id: String) -> float:
+	return 3000.0 * float(_sim.data.get_def("countries", country_id).get("cost_of_living", 1.0)) * float(_sim.state.data.world.price_index)
+
+
+## Moving abroad changes salaries, taxes, cost of living and the dungeon
+## density (rifts). You lose your job and distant bonds cool off; languages
+## help you adapt.
+func emigrate(p: Dictionary, country_id: String) -> Dictionary:
+	if country_id == p.country or _sim.data.get_def("countries", country_id).is_empty():
+		return {"ok": false, "reason": "ui.invalid"}
+	if int(p.age) < 18 or _sim.crime.in_prison(p):
+		return {"ok": false, "reason": "job.block.age"}
+	var cost := emigration_cost(p, country_id)
+	if float(p.finance.cash) < cost:
+		return {"ok": false, "reason": "ui.no_money"}
+	add_cash(p, -cost)
+	var old: String = p.country
+	p.country = country_id
+	if _sim.career.is_employed(p):
+		_sim.career.fire(p, "quit")
+	var adapt: float = 0.5 + _sim.gamer.effective_stat(p, "cha") * 0.01 + float(_sim.state.counter("act.learn_language")) * 0.05
+	for id in p.rels.keys():
+		if not (p.rels[id].role in ["spouse", "child", "partner", "fiance"]):
+			_sim.relations.change_score(id, -15.0 / maxf(adapt, 0.5))
+	p.attrs.stress = clampf(float(p.attrs.stress) + 15.0 / maxf(adapt, 0.5), 0, 100)
+	_sim.activities.bump_counter("migration.moves")
+	_sim.add_log("log.emigrated", {"from": "@country." + old, "to": "@country." + country_id}, "major")
+	return {"ok": true, "key": "ui.emigrated", "params": {"country": "@country." + country_id}}
+
+
 func npc_starting_cash(npc: Dictionary) -> float:
 	var mult := {"poor": 0.1, "working": 0.4, "middle": 1.0, "upper": 4.0, "elite": 20.0}
 	return maxf(0.0, float(mult.get(npc.wealth, 1.0)) * maxf(0, int(npc.age) - 18) * 1500.0 * _sim.rng.randf_range(0.5, 1.5))
