@@ -70,6 +70,9 @@ docs/                    Este documento
 | `PetSystem` | Pets (envelhecem, dão felicidade) e **familiares**: monstros domados (skill Domar) que lutam, sobem de nível e, ao serem **nomeados** (gasta 80% do MP), evoluem para espécies nomeadas com bônus | dungeon, MP, CAR | combate, mods, felicidade |
 | `SchoolLifeSystem` | Vida escolar: **popularidade**, panelinhas com requisitos, clubes/equipes com posto (membro → titular → capitão) e treino | CAR, FOR, INT, looks | popularidade, mods, EXP |
 | `DatingSystem` | App de encontros: candidatos gerados com filtros, compatibilidade (inclui signo), escolha | CAR, looks, idade | vínculos |
+| `Persona` | Big Five, voz (muda com a idade), interesses, política, fé, aspiração, mania, bordão — para todos os personagens | traços, ocultos | persona |
+| `DialogueSystem` | Diálogo por regras e fatos de contexto (estilo Valve): cena, falas, respostas com chance, reações, ligações de NPCs. Ver `docs/LIVING_WORLD.md` | tudo | falas, memórias, relação |
+| `SocietySystem` | Cidades, lugares, governo e eleições, eras tecnológicas, famosos, liga, jornal, marcas e fofoca | mundo, jogador | sociedade, opinião dos NPCs |
 | `YearPipeline` | Ordem exata do "+1 ANO" | — | — |
 | `LifeSimulation` | Orquestrador + API pública (`advance_year`, `do_activity`, `interact`, `choose`, `allocate_stat`, `command`) + `resolve(path)` | — | — |
 
@@ -256,6 +259,7 @@ Performance: nada roda por frame. A simulação só acontece quando o jogador ag
 | 8d Migração | Mudar de país altera salário, impostos, custo de vida e densidade de fendas (drops); perde o emprego; vínculos distantes esfriam (idiomas e CAR ajudam) | ✅ |
 | 8c Classificação | Tag `mature` em atividades/eventos + opção na tela inicial | ✅ |
 | 8e **Profundidade BitLife** | Pesquisa completa em `docs/BITLIFE_GAP_ANALYSIS.md`: vida escolar (popularidade, panelinhas, clubes), entrevistas com perguntas, carga horária, app de encontros, FIV/barriga de aluguel/gêmeos, testamento e heranças de família, fitas de vida, karma, signos, advogados, gangues, condicional, processos, 7 carreiras especiais novas (Ator, Astronauta, Militar, Máfia, Modelo, Hustler, Realeza), cirurgias, licenças, baladas/cassino/blackjack, pontos de retorno | ✅ |
+| 8f **Mundo vivo** | Personas, diálogo contextual (533 regras), vidas de NPC (39 eventos), casamento dos pais, ligações, cidade, governo, tecnologia, famosos, jornal, fofoca julgada por valores, eventos do mundo, save v4 | ✅ |
 | 9 Conteúdo | Escalar para 1000+ eventos, 300 empregos, 100 doenças… (só dados) | ⏳ |
 
 ---
