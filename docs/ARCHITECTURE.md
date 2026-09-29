@@ -277,6 +277,20 @@ xvfb-run godot --rendering-driver opengl3 --resolution 720x1280 -s res://tests/u
 
 Os testes cobrem: determinismo do RNG, condições, probabilidade, save/load determinístico, migrations, **integridade referencial de todos os dados** (skills, itens, eventos, empregos, missões, títulos, facções), chaves de localização, passagem de ano, bloqueio por evento pendente, progressão escolar, requisitos de emprego, economia de adulto/menor, fertilidade por idade, morte + herdeiro + herança, eventos agendados, skill por repetição, level up/pontos, dungeon, prisão e vidas completas até a morte.
 
+### Resultado da simulação em massa (referência de balanceamento)
+
+| Métrica | Casual (60 vidas) | Grinder de dungeons (20 vidas) |
+|---|---|---|
+| Idade média de morte | 72 | 96 |
+| Patrimônio (média / mediana) | 2,4M / 0,54M | 20M |
+| Casados | 65% | 30% |
+| Nível aos 18 / 40 / morte | 6 / 10 / 14 | 6 / 54 / 264 |
+| Evoluiu de rank (1 / 2) | 0% / 0% | 100% / 85% |
+| Mortes em dungeon | 0% | 10% |
+| Eventos por vida | ~127 | ~150 |
+
+A diferença entre as colunas é o objetivo: quem abraça o Sistema vira uma força absurda (escala OP), mas paga com tempo (menos casamentos e filhos) e risco real de morte.
+
 ## Como adicionar conteúdo (sem código)
 
 1. **Evento**: acrescente um objeto em `data/events/<tema>.json` e as chaves `ev.<id>.*` em `locale/pt|en/events.json`.

@@ -13,14 +13,15 @@ func _initialize() -> void:
 	data = DataRegistry.new().load_all()
 	var st := {"death_age": 0.0, "worth": 0.0, "married": 0, "children": 0.0, "crime": 0, "prison": 0,
 		"level18": 0.0, "level40": 0.0, "level_end": 0.0, "rank1": 0, "rank2": 0, "revealed": 0,
-		"unemployed40": 0, "alive40": 0, "uni": 0, "dungeon_deaths": 0, "jobs": {}, "causes": {}, "events": 0}
+		"unemployed40": 0, "alive40": 0, "worths": [], "uni": 0, "dungeon_deaths": 0, "jobs": {}, "causes": {}, "events": 0}
 	var t0 := Time.get_ticks_msec()
 	for i in n:
 		_life(1000 + i, grinder, st)
 	var f := float(n)
 	print("=== %d lives (%s) in %.1fs ===" % [n, "grinder" if grinder else "casual", (Time.get_ticks_msec() - t0) / 1000.0])
 	print("avg death age      %.1f" % (st.death_age / f))
-	print("avg net worth      %.0f" % (st.worth / f))
+	st.worths.sort()
+	print("net worth avg %.0f  median %.0f" % [st.worth / f, st.worths[st.worths.size() / 2]])
 	print("married            %.0f%%" % (st.married * 100.0 / f))
 	print("avg children       %.2f" % (st.children / f))
 	print("university grads   %.0f%%" % (st.uni * 100.0 / f))
@@ -67,6 +68,7 @@ func _life(seed: int, grinder: bool, st: Dictionary) -> void:
 	var p := sim.player()
 	st.death_age += p.age
 	st.worth += sim.finance.net_worth(p)
+	st.worths.append(sim.finance.net_worth(p))
 	st.married += 1 if sim.state.counter("social.marriages") > 0 else 0
 	st.children += sim.state.counter("family.children")
 	st.crime += 1 if sim.state.counter("crime.total") > 0 else 0

@@ -63,7 +63,7 @@ func push(kind: String, text: String, chips: Array) -> void:
 		var old := _stack.get_child(0)
 		_stack.remove_child(old)
 		old.queue_free()
-	var tw := create_tween()
+	var tw := card.create_tween()
 	tw.tween_property(card, "modulate:a", 1.0, 0.12)
 	tw.tween_interval(1.6 + text.length() * 0.02)
 	tw.tween_property(card, "modulate:a", 0.0, 0.35)
