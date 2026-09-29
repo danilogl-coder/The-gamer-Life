@@ -113,6 +113,8 @@ func is_eligible(def: Dictionary, actor: Dictionary) -> bool:
 		return false
 	if _sim.crime.in_prison(p) != def.get("tags", []).has("prison"):
 		return false
+	if not _sim.allows(def.get("tags", [])):
+		return false
 	return _sim.cond.check_all(def.get("conditions", []), {"actor": actor})
 
 

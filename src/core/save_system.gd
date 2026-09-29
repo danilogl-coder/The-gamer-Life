@@ -12,7 +12,14 @@ const META_PATH := "user://meta.json"
 
 ## version -> Callable(data: Dictionary) -> void, upgrading to version+1.
 static var MIGRATIONS: Dictionary = {
-	# 1: func(d): d["new_field"] = default  (example for the next version)
+	# v1 -> v2: special careers, pets/familiars, possessions, settings.
+	1: func(d: Dictionary) -> void:
+		for id in d.get("npcs", {}):
+			var ch: Dictionary = d.npcs[id]
+			if ch.get("is_player", false):
+				ch.merge({"special": {}, "pets": []}, false)
+				ch.get("finance", {}).merge({"possessions": []}, false)
+		d.merge({"challenge": "", "settings": {"mature": true}}, false),
 }
 
 

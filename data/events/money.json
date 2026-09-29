@@ -236,9 +236,9 @@
   "weight": 6,
   "conditions": [
    {
-    "path": "skill.driving",
-    "op": ">=",
-    "value": 1
+    "path": "calc.has_vehicle",
+    "op": "==",
+    "value": true
    }
   ],
   "choices": [

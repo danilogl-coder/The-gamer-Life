@@ -13,7 +13,7 @@ func _initialize() -> void:
 	data = DataRegistry.new().load_all()
 	var st := {"death_age": 0.0, "worth": 0.0, "married": 0, "children": 0.0, "crime": 0, "prison": 0,
 		"level18": 0.0, "level40": 0.0, "level_end": 0.0, "rank1": 0, "rank2": 0, "revealed": 0,
-		"unemployed40": 0, "alive40": 0, "worths": [], "uni": 0, "dungeon_deaths": 0, "jobs": {}, "causes": {}, "events": 0}
+		"unemployed40": 0, "alive40": 0, "worths": [], "special": {}, "uni": 0, "dungeon_deaths": 0, "jobs": {}, "causes": {}, "events": 0}
 	var t0 := Time.get_ticks_msec()
 	for i in n:
 		_life(1000 + i, grinder, st)
@@ -33,6 +33,7 @@ func _initialize() -> void:
 	print("events per life    %.1f" % (st.events / f))
 	print("causes: ", _top(st.causes, 8))
 	print("jobs:   ", _top(st.jobs, 12))
+	print("special:", _top(st.special, 12))
 	quit()
 
 
@@ -83,6 +84,11 @@ func _life(seed: int, grinder: bool, st: Dictionary) -> void:
 	st.causes[cause] = int(st.causes.get(cause, 0)) + 1
 	if cause == "cause.dungeon":
 		st.dungeon_deaths += 1
+	for k in ["music.albums", "sport.titles", "biz.sold", "pets.pet", "pets.familiar", "pets.named"]:
+		st.special[k] = int(st.special.get(k, 0)) + sim.state.counter(k)
+	for k in sim.state.data.counters:
+		if str(k).begins_with("sc.start."):
+			st.special[k] = int(st.special.get(k, 0)) + 1
 	for h in p.career.history:
 		st.jobs[h.job] = int(st.jobs.get(h.job, 0)) + 1
 
@@ -117,6 +123,7 @@ func _play_year(sim: LifeSimulation, bot: RandomNumberGenerator, grinder: bool) 
 				if sim.command("apply_job", [id]).ok:
 					break
 	_romance(sim, bot, p)
+	_special(sim, bot, p)
 	var cats := ["system", "mind", "body", "leisure", "love", "work", "health", "crime", "prison"]
 	var guard := 0
 	while sim.activities.free_slots(p) > 0 and guard < 20 and not sim.is_dead() and not sim.has_pending_events():
@@ -140,6 +147,18 @@ func _play_year(sim: LifeSimulation, bot: RandomNumberGenerator, grinder: bool) 
 		if options.is_empty():
 			break
 		sim.do_activity(options[bot.randi_range(0, options.size() - 1)])
+
+
+func _special(sim: LifeSimulation, bot: RandomNumberGenerator, p: Dictionary) -> void:
+	if sim.special.active(p).is_empty() and bot.randf() < 0.04:
+		var ids := sim.special.ids()
+		sim.command("sc_start", [ids[bot.randi_range(0, ids.size() - 1)]])
+	if int(p.age) >= 8 and sim.pets.alive(p).is_empty() and bot.randf() < 0.05:
+		sim.command("adopt_pet", ["dog" if bot.randf() < 0.5 else "cat"])
+	for id in sim.special.active(p):
+		var acts: Array = sim.special.actions(p, id).filter(func(a): return a.locked == "" and a.id not in ["retire", "sell", "fire"])
+		if not acts.is_empty() and bot.randf() < 0.7:
+			sim.command("sc_action", [id, acts[bot.randi_range(0, acts.size() - 1)].id])
 
 
 func _romance(sim: LifeSimulation, bot: RandomNumberGenerator, p: Dictionary) -> void:

@@ -31,6 +31,8 @@ var events: EventEngine
 var activities: ActivitySystem
 var achievements: AchievementSystem
 var legacy: LegacySystem
+var pets: PetSystem
+var special: SpecialCareerSystem
 var pipeline: YearPipeline
 
 
@@ -59,6 +61,8 @@ func _init(p_data: DataRegistry, p_bus: EventBus = null) -> void:
 	activities = ActivitySystem.new(self)
 	achievements = AchievementSystem.new(self)
 	legacy = LegacySystem.new(self)
+	pets = PetSystem.new(self)
+	special = SpecialCareerSystem.new(self)
 	pipeline = YearPipeline.new(self)
 
 
@@ -76,6 +80,8 @@ func new_life(p_seed: int, options: Dictionary = {}) -> void:
 		state.data.legacy.merge(meta_legacy.duplicate(true), true)
 		state.data.legacy.perks = []
 	world.init_world()
+	state.data.challenge = options.get("challenge", "")
+	state.data.settings = {"mature": bool(options.get("mature", true))}
 	var player := factory.create_newborn_player(options)
 	state.data.player_id = player.id
 	legacy.apply_start_perks(options.get("perks", []))
@@ -188,6 +194,13 @@ func command(name: String, args: Array = []) -> Dictionary:
 		"favorite":
 			activities.toggle_favorite(args[0])
 			result = {"ok": true}
+		"adopt_pet": result = pets.adopt(p, args[0])
+		"pet_action": result = pets.interact(p, args[0], args[1])
+		"sc_start": result = special.start(p, args[0])
+		"sc_quit": result = special.quit(p, args[0])
+		"sc_action": result = special.perform(p, args[0], args[1])
+		"buy_possession": result = finance.buy_possession(p, args[0])
+		"sell_possession": result = finance.sell_possession(p, args[0])
 		"auto_allocate":
 			result = {"ok": gamer.auto_allocate(p)}
 		_:
@@ -283,6 +296,11 @@ func _calc(key: String, ctx: Dictionary):
 		"generation": return int(state.data.generation)
 		"skills_known": return p.gamer.skills.size()
 		"titles": return p.gamer.titles.size()
+		"pets": return pets.alive(p).size()
+		"familiars": return pets.alive(p).filter(func(x): return pets.species(x).get("kind", "") == "familiar").size()
+		"has_vehicle": return finance.has_vehicle(p)
+		"special_active": return special.active(p).size()
+		"fame": return float(p.get("fame", 0))
 		"compat":
 			return relations.compatibility(ctx.get("actor", {}))
 		"actor_age_gap":
@@ -296,6 +314,12 @@ func _calc(key: String, ctx: Dictionary):
 # =========================================================================
 # Small cross-system helpers
 # =========================================================================
+
+## Content rating: items tagged "mature" (alcohol, gambling, flings) are
+## hidden when the player disables mature content.
+func allows(tags: Array) -> bool:
+	return not tags.has("mature") or bool(state.data.get("settings", {}).get("mature", true))
+
 
 func titles_check() -> void:
 	gamer.check_titles(player())

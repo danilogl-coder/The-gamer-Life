@@ -18,12 +18,15 @@ const KIND_STYLE := {
 }
 
 var _stack: VBoxContainer
+var _margin: MarginContainer
+var _top := false
 
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var margin := MarginContainer.new()
+	_margin = margin
 	margin.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
 	margin.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	margin.add_theme_constant_override("margin_bottom", 250)
@@ -34,6 +37,18 @@ func _ready() -> void:
 	_stack = W.vbox(6)
 	_stack.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	margin.add_child(_stack)
+
+
+## Toasts sit above the tab bar, but jump to the top while a sheet/popup is
+## open so they never cover the thing the player is reading.
+func set_top(top: bool) -> void:
+	if top == _top:
+		return
+	_top = top
+	_margin.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE if top else Control.PRESET_BOTTOM_WIDE)
+	_margin.grow_vertical = Control.GROW_DIRECTION_END if top else Control.GROW_DIRECTION_BEGIN
+	_margin.add_theme_constant_override("margin_top", 12 if top else 0)
+	_margin.add_theme_constant_override("margin_bottom", 0 if top else 250)
 
 
 func push(kind: String, text: String, chips: Array) -> void:

@@ -72,7 +72,7 @@ func list(category: String) -> Array:
 	ids.sort_custom(func(a, b): return int(_sim.data.get_def("activities", a).get("order", 50)) < int(_sim.data.get_def("activities", b).get("order", 50)))
 	for id in ids:
 		var def: Dictionary = _sim.data.get_def("activities", id)
-		if def.get("cat", "") != category:
+		if def.get("cat", "") != category or not _sim.allows(def.get("tags", [])):
 			continue
 		if int(p.age) < int(def.get("min_age", 0)) or int(p.age) > int(def.get("max_age", 200)):
 			continue

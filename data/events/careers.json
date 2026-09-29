@@ -1,0 +1,340 @@
+[
+ {
+  "id": "band_offer",
+  "min_age": 14,
+  "max_age": 35,
+  "cooldown": 6,
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "skill.music",
+    "op": ">=",
+    "value": 2
+   }
+  ],
+  "actor": {
+   "role": [
+    "friend",
+    "best_friend",
+    "classmate"
+   ]
+  },
+  "choices": [
+   {
+    "id": "yes",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "START_SPECIAL",
+      "career": "music"
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "band_with_friend"
+     }
+    ]
+   },
+   {
+    "id": "no",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "old_bandmate_tour",
+  "min_age": 24,
+  "once": true,
+  "rarity": "rare",
+  "weight": 20,
+  "conditions": [
+   {
+    "path": "flag.band_with_friend",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.special",
+    "op": "not_has",
+    "value": "music"
+   }
+  ],
+  "actor": {
+   "role": [
+    "friend",
+    "best_friend",
+    "acquaintance"
+   ]
+  },
+  "choices": [
+   {
+    "id": "go",
+    "effects": [
+     {
+      "type": "LOSE_JOB",
+      "reason": "quit"
+     },
+     {
+      "type": "START_SPECIAL",
+      "career": "music"
+     },
+     {
+      "type": "CHANGE_FAME",
+      "amount": 8
+     },
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 20000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "stay",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 30
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "investor_offer",
+  "min_age": 20,
+  "cooldown": 4,
+  "weight": 12,
+  "conditions": [
+   {
+    "path": "player.special",
+    "op": "has",
+    "value": "business"
+   }
+  ],
+  "choices": [
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "business",
+      "path": "brand",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "business",
+      "path": "quality",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "business",
+      "path": "employees",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "decline",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "competitor_attack",
+  "min_age": 20,
+  "cooldown": 4,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "player.special",
+    "op": "has",
+    "value": "business"
+   }
+  ],
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.005,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "stat.int",
+       "per": 0.004,
+       "offset": 10,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_SPECIAL",
+       "career": "business",
+       "path": "brand",
+       "amount": 20
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -15000
+      }
+     ]
+    }
+   },
+   {
+    "id": "niche",
+    "effects": [
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "business",
+      "path": "quality",
+      "amount": 12
+     },
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "business",
+      "path": "price",
+      "set": "high"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "doping_offer",
+  "min_age": 16,
+  "cooldown": 5,
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "player.special",
+    "op": "has",
+    "value": "athlete"
+   }
+  ],
+  "choices": [
+   {
+    "id": "take",
+    "effects": [
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "athlete",
+      "path": "rating",
+      "amount": 20
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.35,
+      "effects": [
+       {
+        "type": "CHANGE_SPECIAL",
+        "career": "athlete",
+        "path": "rating",
+        "amount": -40
+       },
+       {
+        "type": "CHANGE_FAME",
+        "amount": -15
+       },
+       {
+        "type": "CHANGE_STAT",
+        "stat": "reputation",
+        "amount": -20
+       },
+       {
+        "type": "LOG",
+        "key": "log.doping_caught",
+        "kind": "major"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "refuse",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "influencer_collab",
+  "min_age": 14,
+  "cooldown": 3,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "player.special",
+    "op": "has",
+    "value": "influencer"
+   }
+  ],
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_rel": 0,
+    "age_spread": 5,
+    "score": 50
+   }
+  },
+  "choices": [
+   {
+    "id": "yes",
+    "effects": [
+     {
+      "type": "CHANGE_SPECIAL",
+      "career": "influencer",
+      "path": "followers",
+      "mult": 1.3,
+      "amount": 2000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "SET_ROLE",
+      "role": "friend"
+     }
+    ]
+   },
+   {
+    "id": "no"
+   }
+  ]
+ }
+]

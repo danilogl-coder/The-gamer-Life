@@ -108,7 +108,9 @@
     }
    }
   ],
-  "activity_exp_mult": 2.5
+  "activity_exp_mult": 2.5,
+  "yearly_exp_child": 70,
+  "yearly_exp_adult": 30
  },
  "skills": {
   "xp_exponent": 1.35

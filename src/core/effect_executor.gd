@@ -170,6 +170,23 @@ func run(e: Dictionary, ctx: Dictionary) -> void:
 		"OBSERVE":
 			if not actor.is_empty():
 				_sim.skills.observe(actor)
+		"ADD_PET":
+			_sim.pets.add(p, e.species)
+		"ADD_POSSESSION":
+			p.finance.possessions.append({"id": e.possession, "value": float(e.get("value", 1000)), "age": int(e.get("age", 0)), "condition": 60.0})
+			_sim.gamer.invalidate()
+		"START_SPECIAL":
+			if not p.special.has(e.career) and _sim.special.career(e.career) != null:
+				p.special[e.career] = _sim.special.career(e.career).start_state(p)
+				p.special[e.career].years = 0
+				_sim.add_log("log.sc_start", {"career": "@sc." + e.career}, "major")
+		"CHANGE_SPECIAL":
+			var st: Dictionary = p.special.get(e.career, {})
+			if not st.is_empty():
+				if e.has("set"):
+					st[e.path] = e.set
+				else:
+					st[e.path] = maxf(0.0, float(st.get(e.path, 0.0)) * float(e.get("mult", 1.0)) + _num(e, ctx))
 		"WORLD_EVENT":
 			_sim.world.start_event(e.event)
 		_:

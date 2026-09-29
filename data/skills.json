@@ -1,53 +1,784 @@
 [
-  {"id": "gamer_mind", "cat": "core", "tier": "unique", "type": "passive", "max_level": 1, "mods_flat": {"stress_gain": -0.5, "happiness": 0.1, "mind_immune": 1}},
-  {"id": "gamer_body", "cat": "core", "tier": "unique", "type": "passive", "max_level": 1, "mods_flat": {"health_regen": 0.25, "disease_resist": 0.15}},
-  {"id": "observe", "cat": "core", "tier": "common", "type": "active", "max_level": 10, "xp_base": 15, "evolves_to": "eye_of_truth", "mods": {"interview": 0.01}},
-  {"id": "eye_of_truth", "cat": "core", "tier": "unique", "type": "active", "max_level": 10, "xp_base": 60, "mods": {"interview": 0.03, "crit": 0.01}},
-
-  {"id": "speed_reading", "cat": "mind", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "talent": "academic", "learn": {"counter": "act.study", "count": 6}, "evolves_to": "accelerated_mind", "mods": {"study_gain": 0.04, "stat.int": 0.5}},
-  {"id": "accelerated_mind", "cat": "mind", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 50, "evolves_to": "analytic_sage", "mods": {"study_gain": 0.07, "statpct.int": 0.03, "skill_gain": 0.02}},
-  {"id": "analytic_sage", "cat": "mind", "tier": "unique", "type": "passive", "max_level": 10, "xp_base": 150, "mods": {"study_gain": 0.1, "statpct.int": 0.06, "skill_gain": 0.05, "exp_gain": 0.03}},
-  {"id": "focus", "cat": "mind", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "learn": {"counter": "act.meditate", "count": 4}, "mods": {"stress_gain": -0.03, "work_perf": 0.01}},
-  {"id": "meditation", "cat": "mind", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "learn": {"counter": "act.meditate", "count": 8}, "mods": {"stat.wis": 0.6, "max_mp": 0.02}},
-  {"id": "programming", "cat": "craft", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "talent": "academic", "learn": {"counter": "act.code", "count": 5}, "mods": {"work_perf": 0.01, "stat.int": 0.3}},
-  {"id": "cooking", "cat": "craft", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "learn": {"counter": "act.cook", "count": 5}, "mods": {"health_regen": 0.01, "happiness": 0.01}},
-  {"id": "drawing", "cat": "art", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "talent": "talent_art", "learn": {"counter": "act.draw", "count": 5}, "mods": {"stat.dex": 0.3, "happiness": 0.01}},
-  {"id": "music", "cat": "art", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "talent": "talent_music", "learn": {"counter": "act.practice_music", "count": 5}, "evolves_to": "soul_melody", "mods": {"stat.cha": 0.4, "charm": 0.01}},
-  {"id": "soul_melody", "cat": "art", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 60, "mods": {"stat.cha": 1.0, "charm": 0.03, "happiness": 0.02}},
-  {"id": "negotiation", "cat": "social", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "learn": {"counter": "social.total", "count": 25}, "mods": {"salary": 0.02, "interview": 0.02}},
-  {"id": "silver_tongue", "cat": "social", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "learn": {"counter": "social.compliment", "count": 8}, "mods": {"social_gain": 0.04, "charm": 0.02}},
-  {"id": "first_aid", "cat": "craft", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "learn": {"counter": "act.first_aid_course", "count": 1}, "mods": {"treatment": 0.03, "health_regen": 0.01}},
-  {"id": "driving", "cat": "craft", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "learn": {"counter": "act.driving_lessons", "count": 1}, "mods": {"dodge": 0.002}},
-
-  {"id": "body_training", "cat": "body", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "talent": "talent_sport", "learn": {"counter": "act.gym", "count": 6}, "evolves_to": "iron_body", "mods": {"stat.str": 0.6, "train_gain.str": 0.04}},
-  {"id": "iron_body", "cat": "body", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 60, "evolves_to": "adamant_body", "mods": {"statpct.str": 0.04, "statpct.vit": 0.03, "dmg_reduction": 0.02}},
-  {"id": "adamant_body", "cat": "body", "tier": "unique", "type": "passive", "max_level": 10, "xp_base": 160, "mods": {"statpct.str": 0.07, "statpct.vit": 0.06, "dmg_reduction": 0.03, "injury_immune": 0.1}},
-  {"id": "marathoner", "cat": "body", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "talent": "talent_sport", "learn": {"counter": "act.run", "count": 6}, "mods": {"stat.vit": 0.6, "lifespan": 0.005}},
-  {"id": "martial_arts", "cat": "body", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "talent": "talent_sport", "learn": {"counter": "act.martial_arts", "count": 5}, "mods": {"stat.dex": 0.5, "atk": 2, "crit": 0.005}},
-  {"id": "chi_control", "cat": "body", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 50, "learn": {"counter": "act.martial_arts", "count": 20, "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}]}, "mods": {"atk": 4, "statpct.str": 0.02, "health_regen": 0.01}},
-  {"id": "stealth", "cat": "shadow", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 25, "learn": {"counter": "crime.total", "count": 4}, "mods": {"crime_success": 0.02, "stealth": 0.04, "dodge": 0.005}},
-  {"id": "lockpicking", "cat": "shadow", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 20, "learn": {"counter": "crime.burglary", "count": 3}, "mods": {"crime_success": 0.03}},
-
-  {"id": "mana_control", "cat": "magic", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 40, "talent": "mana_affinity", "learn": {"counter": "act.meditate", "count": 12, "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}]}, "evolves_to": "mana_dominion", "mods": {"max_mp": 0.05, "stat.int": 0.5}},
-  {"id": "mana_dominion", "cat": "magic", "tier": "unique", "type": "passive", "max_level": 10, "xp_base": 140, "mods": {"max_mp": 0.1, "statpct.int": 0.05, "statpct.wis": 0.05}},
-  {"id": "yin_yang", "cat": "magic", "tier": "unique", "type": "passive", "max_level": 10, "xp_base": 160, "fusion": {"from": ["chi_control", "mana_control"], "min_level": 5}, "mods": {"statpct.all": 0.04, "health_regen": 0.03, "atk": 8}},
-  {"id": "id_create", "cat": "magic", "tier": "unique", "type": "active", "max_level": 10, "xp_base": 30, "mods": {"drop_rate": 0.03, "exp_gain": 0.01}},
-  {"id": "id_escape", "cat": "magic", "tier": "extra", "type": "active", "max_level": 10, "xp_base": 30, "mods": {"dodge": 0.003}},
-  {"id": "devour", "cat": "predation", "tier": "unique", "type": "passive", "max_level": 10, "xp_base": 40, "learn": {"counter": "use.monster_meat", "count": 3}, "mods": {"health_regen": 0.01, "disease_resist": 0.02}},
-  {"id": "mana_shield", "cat": "magic", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 35, "mods": {"dmg_reduction": 0.025}},
-  {"id": "energy_bolt", "cat": "magic", "tier": "common", "type": "active", "max_level": 15, "xp_base": 20, "combat": {"stat": "int", "base": 12, "mult": 2.4, "per_level": 0.12, "mp": 8}, "evolves_to": "arcane_lance"},
-  {"id": "arcane_lance", "cat": "magic", "tier": "extra", "type": "active", "max_level": 15, "xp_base": 60, "combat": {"stat": "int", "base": 40, "mult": 3.6, "per_level": 0.14, "mp": 18}},
-  {"id": "fireball", "cat": "magic", "tier": "common", "type": "active", "max_level": 15, "xp_base": 25, "combat": {"stat": "int", "base": 20, "mult": 2.8, "per_level": 0.13, "mp": 14}, "evolves_to": "flame_spear"},
-  {"id": "flame_spear", "cat": "magic", "tier": "extra", "type": "active", "max_level": 15, "xp_base": 70, "combat": {"stat": "int", "base": 60, "mult": 4.0, "per_level": 0.15, "mp": 26}, "evolves_to": "inferno"},
-  {"id": "inferno", "cat": "magic", "tier": "ultimate", "type": "active", "max_level": 20, "xp_base": 200, "combat": {"stat": "int", "base": 200, "mult": 7.0, "per_level": 0.18, "mp": 60}, "mods": {"dmg": 0.05}},
-  {"id": "strong_fist", "cat": "body", "tier": "common", "type": "active", "max_level": 15, "xp_base": 20, "learn": {"counter": "kill.total", "count": 15}, "combat": {"stat": "str", "base": 10, "mult": 3.0, "per_level": 0.12, "mp": 5}, "evolves_to": "devastating_fist"},
-  {"id": "devastating_fist", "cat": "body", "tier": "extra", "type": "active", "max_level": 15, "xp_base": 70, "combat": {"stat": "str", "base": 50, "mult": 4.5, "per_level": 0.15, "mp": 15}},
-  {"id": "heal", "cat": "magic", "tier": "common", "type": "passive", "max_level": 10, "xp_base": 30, "mods": {"health_regen": 0.03, "treatment": 0.03}},
-  {"id": "poison_fang", "cat": "predation", "tier": "extra", "type": "active", "max_level": 10, "xp_base": 40, "combat": {"stat": "dex", "base": 25, "mult": 3.0, "per_level": 0.14, "mp": 10}},
-  {"id": "shadow_step", "cat": "predation", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 40, "mods": {"dodge": 0.02, "stealth": 0.05}},
-  {"id": "ogre_strength", "cat": "predation", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 50, "mods": {"statpct.str": 0.05, "atk": 5}},
-  {"id": "dragon_scale", "cat": "predation", "tier": "unique", "type": "passive", "max_level": 10, "xp_base": 120, "mods": {"dmg_reduction": 0.05, "statpct.vit": 0.06, "lifespan": 0.03}},
-  {"id": "lucky_star", "cat": "fortune", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 50, "learn": {"counter": "act.lottery", "count": 25}, "mods": {"stat.luk": 1.5, "drop_rate": 0.02}},
-  {"id": "leadership", "cat": "social", "tier": "extra", "type": "passive", "max_level": 10, "xp_base": 45, "learn": {"counter": "job.promotions", "count": 3}, "mods": {"promotion": 0.02, "salary": 0.02, "stat.cha": 0.5}},
-  {"id": "sovereign_aura", "cat": "social", "tier": "ultimate", "type": "passive", "max_level": 10, "xp_base": 250, "fusion": {"from": ["leadership", "soul_melody"], "min_level": 8}, "mods": {"statpct.cha": 0.1, "promotion": 0.05, "charm": 0.05}}
+ {
+  "id": "gamer_mind",
+  "cat": "core",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 1,
+  "mods_flat": {
+   "stress_gain": -0.5,
+   "happiness": 0.1,
+   "mind_immune": 1
+  }
+ },
+ {
+  "id": "gamer_body",
+  "cat": "core",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 1,
+  "mods_flat": {
+   "health_regen": 0.25,
+   "disease_resist": 0.15,
+   "injury_heal": 1
+  }
+ },
+ {
+  "id": "observe",
+  "cat": "core",
+  "tier": "common",
+  "type": "active",
+  "max_level": 10,
+  "xp_base": 15,
+  "evolves_to": "eye_of_truth",
+  "mods": {
+   "interview": 0.01
+  }
+ },
+ {
+  "id": "eye_of_truth",
+  "cat": "core",
+  "tier": "unique",
+  "type": "active",
+  "max_level": 10,
+  "xp_base": 60,
+  "mods": {
+   "interview": 0.03,
+   "crit": 0.01
+  }
+ },
+ {
+  "id": "speed_reading",
+  "cat": "mind",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "talent": "academic",
+  "learn": {
+   "counter": "act.study",
+   "count": 6
+  },
+  "evolves_to": "accelerated_mind",
+  "mods": {
+   "study_gain": 0.04,
+   "stat.int": 0.5
+  }
+ },
+ {
+  "id": "accelerated_mind",
+  "cat": "mind",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 50,
+  "evolves_to": "analytic_sage",
+  "mods": {
+   "study_gain": 0.07,
+   "statpct.int": 0.03,
+   "skill_gain": 0.02
+  }
+ },
+ {
+  "id": "analytic_sage",
+  "cat": "mind",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 150,
+  "mods": {
+   "study_gain": 0.1,
+   "statpct.int": 0.06,
+   "skill_gain": 0.05,
+   "exp_gain": 0.03
+  }
+ },
+ {
+  "id": "focus",
+  "cat": "mind",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "learn": {
+   "counter": "act.meditate",
+   "count": 4
+  },
+  "mods": {
+   "stress_gain": -0.03,
+   "work_perf": 0.01
+  }
+ },
+ {
+  "id": "meditation",
+  "cat": "mind",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "learn": {
+   "counter": "act.meditate",
+   "count": 8
+  },
+  "mods": {
+   "stat.wis": 0.6,
+   "max_mp": 0.02
+  }
+ },
+ {
+  "id": "programming",
+  "cat": "craft",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "talent": "academic",
+  "learn": {
+   "counter": "act.code",
+   "count": 5
+  },
+  "mods": {
+   "work_perf": 0.01,
+   "stat.int": 0.3
+  }
+ },
+ {
+  "id": "cooking",
+  "cat": "craft",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "learn": {
+   "counter": "act.cook",
+   "count": 5
+  },
+  "mods": {
+   "health_regen": 0.01,
+   "happiness": 0.01
+  }
+ },
+ {
+  "id": "drawing",
+  "cat": "art",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "talent": "talent_art",
+  "learn": {
+   "counter": "act.draw",
+   "count": 5
+  },
+  "mods": {
+   "stat.dex": 0.3,
+   "happiness": 0.01
+  }
+ },
+ {
+  "id": "music",
+  "cat": "art",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "talent": "talent_music",
+  "learn": {
+   "counter": "act.practice_music",
+   "count": 5
+  },
+  "evolves_to": "soul_melody",
+  "mods": {
+   "stat.cha": 0.4,
+   "charm": 0.01
+  }
+ },
+ {
+  "id": "soul_melody",
+  "cat": "art",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 60,
+  "mods": {
+   "stat.cha": 1.0,
+   "charm": 0.03,
+   "happiness": 0.02
+  }
+ },
+ {
+  "id": "negotiation",
+  "cat": "social",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "learn": {
+   "counter": "social.total",
+   "count": 25
+  },
+  "mods": {
+   "salary": 0.02,
+   "interview": 0.02
+  }
+ },
+ {
+  "id": "silver_tongue",
+  "cat": "social",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "learn": {
+   "counter": "social.compliment",
+   "count": 8
+  },
+  "mods": {
+   "social_gain": 0.04,
+   "charm": 0.02
+  }
+ },
+ {
+  "id": "first_aid",
+  "cat": "craft",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "learn": {
+   "counter": "act.first_aid_course",
+   "count": 1
+  },
+  "mods": {
+   "treatment": 0.03,
+   "health_regen": 0.01
+  }
+ },
+ {
+  "id": "driving",
+  "cat": "craft",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "learn": {
+   "counter": "act.driving_lessons",
+   "count": 1
+  },
+  "mods": {
+   "dodge": 0.002
+  }
+ },
+ {
+  "id": "body_training",
+  "cat": "body",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "talent": "talent_sport",
+  "learn": {
+   "counter": "act.gym",
+   "count": 6
+  },
+  "evolves_to": "iron_body",
+  "mods": {
+   "stat.str": 0.6,
+   "train_gain.str": 0.04
+  }
+ },
+ {
+  "id": "iron_body",
+  "cat": "body",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 60,
+  "evolves_to": "adamant_body",
+  "mods": {
+   "statpct.str": 0.04,
+   "statpct.vit": 0.03,
+   "dmg_reduction": 0.02
+  }
+ },
+ {
+  "id": "adamant_body",
+  "cat": "body",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 160,
+  "mods": {
+   "statpct.str": 0.07,
+   "statpct.vit": 0.06,
+   "dmg_reduction": 0.03,
+   "injury_immune": 0.1
+  }
+ },
+ {
+  "id": "marathoner",
+  "cat": "body",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "talent": "talent_sport",
+  "learn": {
+   "counter": "act.run",
+   "count": 6
+  },
+  "mods": {
+   "stat.vit": 0.6,
+   "lifespan": 0.005
+  }
+ },
+ {
+  "id": "martial_arts",
+  "cat": "body",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "talent": "talent_sport",
+  "learn": {
+   "counter": "act.martial_arts",
+   "count": 5
+  },
+  "mods": {
+   "stat.dex": 0.5,
+   "atk": 2,
+   "crit": 0.005
+  }
+ },
+ {
+  "id": "chi_control",
+  "cat": "body",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 50,
+  "learn": {
+   "counter": "act.martial_arts",
+   "count": 20,
+   "conditions": [
+    {
+     "path": "flag.world_revealed",
+     "op": "==",
+     "value": true
+    }
+   ]
+  },
+  "mods": {
+   "atk": 4,
+   "statpct.str": 0.02,
+   "health_regen": 0.01
+  }
+ },
+ {
+  "id": "stealth",
+  "cat": "shadow",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "learn": {
+   "counter": "crime.total",
+   "count": 4
+  },
+  "mods": {
+   "crime_success": 0.02,
+   "stealth": 0.04,
+   "dodge": 0.005
+  }
+ },
+ {
+  "id": "lockpicking",
+  "cat": "shadow",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 20,
+  "learn": {
+   "counter": "crime.burglary",
+   "count": 3
+  },
+  "mods": {
+   "crime_success": 0.03
+  }
+ },
+ {
+  "id": "mana_control",
+  "cat": "magic",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 40,
+  "talent": "mana_affinity",
+  "learn": {
+   "counter": "act.meditate",
+   "count": 12,
+   "conditions": [
+    {
+     "path": "flag.world_revealed",
+     "op": "==",
+     "value": true
+    }
+   ]
+  },
+  "evolves_to": "mana_dominion",
+  "mods": {
+   "max_mp": 0.05,
+   "stat.int": 0.5
+  }
+ },
+ {
+  "id": "mana_dominion",
+  "cat": "magic",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 140,
+  "mods": {
+   "max_mp": 0.1,
+   "statpct.int": 0.05,
+   "statpct.wis": 0.05
+  }
+ },
+ {
+  "id": "yin_yang",
+  "cat": "magic",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 160,
+  "fusion": {
+   "from": [
+    "chi_control",
+    "mana_control"
+   ],
+   "min_level": 5
+  },
+  "mods": {
+   "statpct.all": 0.04,
+   "health_regen": 0.03,
+   "atk": 8
+  }
+ },
+ {
+  "id": "id_create",
+  "cat": "magic",
+  "tier": "unique",
+  "type": "active",
+  "max_level": 10,
+  "xp_base": 30,
+  "mods": {
+   "drop_rate": 0.03,
+   "exp_gain": 0.01
+  }
+ },
+ {
+  "id": "id_escape",
+  "cat": "magic",
+  "tier": "extra",
+  "type": "active",
+  "max_level": 10,
+  "xp_base": 30,
+  "mods": {
+   "dodge": 0.003
+  }
+ },
+ {
+  "id": "devour",
+  "cat": "predation",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 40,
+  "learn": {
+   "counter": "use.monster_meat",
+   "count": 3
+  },
+  "mods": {
+   "health_regen": 0.01,
+   "disease_resist": 0.02
+  }
+ },
+ {
+  "id": "mana_shield",
+  "cat": "magic",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 35,
+  "mods": {
+   "dmg_reduction": 0.025
+  }
+ },
+ {
+  "id": "energy_bolt",
+  "cat": "magic",
+  "tier": "common",
+  "type": "active",
+  "max_level": 15,
+  "xp_base": 20,
+  "combat": {
+   "stat": "int",
+   "base": 12,
+   "mult": 2.4,
+   "per_level": 0.12,
+   "mp": 8
+  },
+  "evolves_to": "arcane_lance"
+ },
+ {
+  "id": "arcane_lance",
+  "cat": "magic",
+  "tier": "extra",
+  "type": "active",
+  "max_level": 15,
+  "xp_base": 60,
+  "combat": {
+   "stat": "int",
+   "base": 40,
+   "mult": 3.6,
+   "per_level": 0.14,
+   "mp": 18
+  }
+ },
+ {
+  "id": "fireball",
+  "cat": "magic",
+  "tier": "common",
+  "type": "active",
+  "max_level": 15,
+  "xp_base": 25,
+  "combat": {
+   "stat": "int",
+   "base": 20,
+   "mult": 2.8,
+   "per_level": 0.13,
+   "mp": 14
+  },
+  "evolves_to": "flame_spear"
+ },
+ {
+  "id": "flame_spear",
+  "cat": "magic",
+  "tier": "extra",
+  "type": "active",
+  "max_level": 15,
+  "xp_base": 70,
+  "combat": {
+   "stat": "int",
+   "base": 60,
+   "mult": 4.0,
+   "per_level": 0.15,
+   "mp": 26
+  },
+  "evolves_to": "inferno"
+ },
+ {
+  "id": "inferno",
+  "cat": "magic",
+  "tier": "ultimate",
+  "type": "active",
+  "max_level": 20,
+  "xp_base": 200,
+  "combat": {
+   "stat": "int",
+   "base": 200,
+   "mult": 7.0,
+   "per_level": 0.18,
+   "mp": 60
+  },
+  "mods": {
+   "dmg": 0.05
+  }
+ },
+ {
+  "id": "strong_fist",
+  "cat": "body",
+  "tier": "common",
+  "type": "active",
+  "max_level": 15,
+  "xp_base": 20,
+  "learn": {
+   "counter": "kill.total",
+   "count": 15
+  },
+  "combat": {
+   "stat": "str",
+   "base": 10,
+   "mult": 3.0,
+   "per_level": 0.12,
+   "mp": 5
+  },
+  "evolves_to": "devastating_fist"
+ },
+ {
+  "id": "devastating_fist",
+  "cat": "body",
+  "tier": "extra",
+  "type": "active",
+  "max_level": 15,
+  "xp_base": 70,
+  "combat": {
+   "stat": "str",
+   "base": 50,
+   "mult": 4.5,
+   "per_level": 0.15,
+   "mp": 15
+  }
+ },
+ {
+  "id": "heal",
+  "cat": "magic",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 30,
+  "mods": {
+   "health_regen": 0.03,
+   "treatment": 0.03
+  }
+ },
+ {
+  "id": "poison_fang",
+  "cat": "predation",
+  "tier": "extra",
+  "type": "active",
+  "max_level": 10,
+  "xp_base": 40,
+  "combat": {
+   "stat": "dex",
+   "base": 25,
+   "mult": 3.0,
+   "per_level": 0.14,
+   "mp": 10
+  }
+ },
+ {
+  "id": "shadow_step",
+  "cat": "predation",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 40,
+  "mods": {
+   "dodge": 0.02,
+   "stealth": 0.05
+  }
+ },
+ {
+  "id": "ogre_strength",
+  "cat": "predation",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 50,
+  "mods": {
+   "statpct.str": 0.05,
+   "atk": 5
+  }
+ },
+ {
+  "id": "dragon_scale",
+  "cat": "predation",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 120,
+  "mods": {
+   "dmg_reduction": 0.05,
+   "statpct.vit": 0.06,
+   "lifespan": 0.03
+  }
+ },
+ {
+  "id": "lucky_star",
+  "cat": "fortune",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 50,
+  "learn": {
+   "counter": "act.lottery",
+   "count": 25
+  },
+  "mods": {
+   "stat.luk": 1.5,
+   "drop_rate": 0.02
+  }
+ },
+ {
+  "id": "leadership",
+  "cat": "social",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 45,
+  "learn": {
+   "counter": "job.promotions",
+   "count": 3
+  },
+  "mods": {
+   "promotion": 0.02,
+   "salary": 0.02,
+   "stat.cha": 0.5
+  }
+ },
+ {
+  "id": "sovereign_aura",
+  "cat": "social",
+  "tier": "ultimate",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 250,
+  "fusion": {
+   "from": [
+    "leadership",
+    "soul_melody"
+   ],
+   "min_level": 8
+  },
+  "mods": {
+   "statpct.cha": 0.1,
+   "promotion": 0.05,
+   "charm": 0.05
+  }
+ },
+ {
+  "id": "taming",
+  "cat": "predation",
+  "tier": "extra",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 35,
+  "learn": {
+   "counter": "kill.total",
+   "count": 40,
+   "conditions": [
+    {
+     "path": "stat.cha",
+     "op": ">=",
+     "value": 15
+    }
+   ]
+  },
+  "mods": {
+   "charm": 0.01
+  }
+ },
+ {
+  "id": "naming",
+  "cat": "magic",
+  "tier": "unique",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 80,
+  "mods": {
+   "max_mp": 0.04,
+   "social_gain": 0.02
+  }
+ }
 ]

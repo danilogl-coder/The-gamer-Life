@@ -25,6 +25,7 @@ func refresh() -> void:
 	W.clear(_list)
 	var sim: LifeSimulation = App.sim
 	var p := sim.player()
+	_render_pets(sim, p)
 	for group in GROUPS:
 		var ids: Array = []
 		for role in GROUPS[group]:
@@ -36,6 +37,93 @@ func refresh() -> void:
 			_list.add_child(_npc_row(sim, id))
 	if int(p.age) >= 21:
 		_list.add_child(W.button(App.t("ui.adopt"), func(): ui.show_result(App.sim.command("adopt")), 76, UiTheme.FONT_S))
+
+
+func _render_pets(sim: LifeSimulation, p: Dictionary) -> void:
+	var living := sim.pets.alive(p)
+	if living.is_empty() and int(p.age) < 6:
+		return
+	_list.add_child(W.section(App.t("ui.pets")))
+	for x in living:
+		var def := sim.pets.species(x)
+		var b := Button.new()
+		b.custom_minimum_size = Vector2(0, 96)
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.pressed.connect(_open_pet.bind(x.id))
+		var row := W.hbox(12)
+		row.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		row.offset_left = 12
+		var art := TextureRect.new()
+		art.texture = CreatureArt.texture(x.species, 4)
+		art.custom_minimum_size = Vector2(80, 80)
+		art.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		row.add_child(art)
+		var col := W.vbox(2)
+		col.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var tag := " ✦" if x.named else ""
+		col.add_child(W.label("%s%s" % [x.name, tag], UiTheme.FONT_M, UiTheme.GOLD if def.kind == "familiar" else UiTheme.TEXT))
+		var sub := "%s · %s" % [App.t("pet." + x.species), App.t("ui.years_old", {"n": x.age})]
+		if def.kind == "familiar":
+			sub += " · Lv.%d" % int(x.level)
+		col.add_child(W.label(sub, 17, UiTheme.TEXT_DIM))
+		col.add_child(W.bar(float(x.bond), 100, UiTheme.GOOD, "", 12))
+		row.add_child(col)
+		b.add_child(row)
+		_list.add_child(b)
+	if int(p.age) >= 6:
+		_list.add_child(W.button(App.t("ui.adopt_pet"), _open_pet_shop, 72, UiTheme.FONT_S))
+
+
+func _open_pet_shop() -> void:
+	var box := W.vbox(8)
+	for id in App.data.table("pets"):
+		var def: Dictionary = App.data.get_def("pets", id)
+		if def.kind != "pet":
+			continue
+		var row := W.hbox(10)
+		var art := TextureRect.new()
+		art.texture = CreatureArt.texture(id, 3)
+		art.custom_minimum_size = Vector2(60, 60)
+		row.add_child(art)
+		row.add_child(W.button("%s · %s" % [App.t("pet." + id), Fmt.money(float(def.cost))], func(): ui.close_overlays(); ui.show_result(App.sim.command("adopt_pet", [id])), 72, UiTheme.FONT_S))
+		box.add_child(row)
+	box.add_child(W.label(App.t("ui.familiar_hint"), 18, UiTheme.SYSTEM_EDGE, true))
+	ui.open_sheet(App.t("ui.adopt_pet"), box)
+
+
+func _open_pet(pet_id: String) -> void:
+	var sim: LifeSimulation = App.sim
+	var x := sim.pets.get_pet(sim.player(), pet_id)
+	var def := sim.pets.species(x)
+	var box := W.vbox(10)
+	var head := W.hbox(14)
+	var art := TextureRect.new()
+	art.texture = CreatureArt.texture(x.species, 6)
+	art.custom_minimum_size = Vector2(120, 120)
+	head.add_child(art)
+	var col := W.vbox(4)
+	col.add_child(W.label(App.t("pet." + x.species), UiTheme.FONT_M, UiTheme.SYSTEM_EDGE))
+	col.add_child(W.label(App.t("ui.years_old", {"n": x.age}), UiTheme.FONT_S))
+	col.add_child(W.bar(float(x.health), 100, UiTheme.HP, App.t("attr.health"), 20))
+	col.add_child(W.bar(float(x.bond), 100, UiTheme.GOOD, App.t("ui.relationship"), 20))
+	if def.kind == "familiar":
+		col.add_child(W.label("Lv.%d · ATK %s" % [int(x.level), Fmt.num(float(def.get("atk", 0)) * (1.0 + float(x.level) * float(def.get("growth", 0.15))))], UiTheme.FONT_S, UiTheme.GOLD))
+		if def.has("mods"):
+			col.add_child(W.label(Fmt.mods(def.mods), 17, UiTheme.TEXT_DIM, true))
+	head.add_child(col)
+	box.add_child(head)
+	var grid := W.grid(2, 8)
+	for action in ["play", "vet", "name", "release"]:
+		if action == "name" and (def.kind != "familiar" or x.named or not def.has("named")):
+			continue
+		var label := App.t("pet.act." + action)
+		if action == "name":
+			label += " (MP %d)" % int(sim.gamer.max_mp(sim.player()) * 0.8)
+		grid.add_child(W.button(label, func(): ui.close_overlays(); ui.show_result(App.sim.command("pet_action", [pet_id, action])), 76, UiTheme.FONT_S))
+	box.add_child(grid)
+	ui.open_sheet(x.name, box, def.kind == "familiar")
 
 
 func _with_role(p: Dictionary, role: String) -> Array:

@@ -25,3 +25,18 @@ func check(at_death: bool = false) -> void:
 			unlocked[id] = _sim.state.data.world_year
 			_sim.notify("achievement", "sys.achievement", {"ach": "@ach." + id + ".title"})
 			_sim.bus.achievement_unlocked.emit(id)
+	_check_challenge()
+
+
+## Optional challenge chosen at birth ("From teacher to millionaire"...).
+func _check_challenge() -> void:
+	var id: String = _sim.state.data.get("challenge", "")
+	if id == "" or _sim.state.flag("challenge_done", false):
+		return
+	var def: Dictionary = _sim.data.get_def("challenges", id)
+	if def.is_empty() or not _sim.cond.check_all(def.get("goals", []), {}):
+		return
+	_sim.state.set_flag("challenge_done")
+	_sim.notify("achievement", "sys.challenge_done", {"ch": "@ch.%s.title" % id, "n": int(def.get("reward", 20))})
+	_sim.add_log("log.challenge_done", {"ch": "@ch.%s.title" % id}, "major")
+	_sim.bus.challenge_completed.emit(id, int(def.get("reward", 20)))

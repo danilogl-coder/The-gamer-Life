@@ -5,11 +5,13 @@ extends RefCounted
 ##  CLOSE THE YEAR THAT PASSED (uses this year's actions/counters)
 ##   1. Finance       salary, taxes, living costs, loans, interest, credit
 ##   2. Career        performance, promotion/firing, job EXP & stress
+##      Special       music / sports / business / influencer yearly ticks
 ##   3. Education     grades, tuition, graduation / failing a year
 ##   4. Crime         heat decay, prison sentence countdown
 ##   5. Gamer         Gamer's Body rest (HP/MP), natural growth / decline
 ##   6. Health        aging, stress, habits, diseases, DEATH CHECK
 ##   7. Relations     bond decay, memory fading, romance checks (cheating...)
+##      Pets          aging, bond, familiars
 ##   8. NPCs          relevant NPCs age, work, marry, have kids, die, pruning
 ##  OPEN THE NEW YEAR
 ##   9. Calendar      age+1, world year+1, milestones
@@ -32,6 +34,7 @@ func advance() -> void:
 	_sim.gamer.invalidate()
 	_sim.finance.process_year(p)
 	_sim.career.process_year(p)
+	_sim.special.process_year(p)
 	_sim.education.process_year(p)
 	_sim.crime.process_year(p)
 	_sim.gamer.process_year(p)
@@ -39,6 +42,7 @@ func advance() -> void:
 	if _sim.is_dead():
 		return
 	_sim.relations.process_year(p)
+	_sim.pets.process_year(p)
 	_sim.npcs.process_year(p)
 	# --- new year ---
 	p.age = int(p.age) + 1

@@ -4,7 +4,7 @@ extends RefCounted
 ## serializes to JSON trivially and migrations can patch it. No gameplay rules
 ## live here: systems read and write through the helpers below.
 
-const SAVE_VERSION := 1
+const SAVE_VERSION := 2
 
 var data: Dictionary = {}
 
@@ -31,6 +31,8 @@ static func create_empty(p_seed: int) -> GameState:
 		"legacy": {"soul_points": 0, "dynasty": "", "lives": [], "perks": []},
 		"dead": false,
 		"death": {},
+		"challenge": "",
+		"settings": {"mature": true},
 	}
 	return gs
 

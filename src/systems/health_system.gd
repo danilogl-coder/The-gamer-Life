@@ -68,6 +68,8 @@ func process_year(p: Dictionary) -> void:
 	var decline := maxf(0.0, age - float(_sim.data.bal("health.decline_start", 35))) * float(_sim.data.bal("health.decline_rate", 0.09))
 	var h := float(p.attrs.health) - decline * (1.0 - mitigation)
 	h += _sim.gamer.mod("health_regen") * 10.0
+	# Bodies recover on their own; youth recovers faster.
+	h += (100.0 - h) * (0.12 if age < 40 else 0.05)
 	h += (float(p.health.fitness) - 40.0) * 0.05
 	# Stress: decays with WIS, hurts when high.
 	var stress := float(p.attrs.stress)
@@ -93,6 +95,10 @@ func _progress_conditions(p: Dictionary) -> float:
 	var delta := 0.0
 	for id in p.health.conditions.keys():
 		var def: Dictionary = _sim.data.get_def("diseases", id)
+		# The Gamer's Body: a night in a bed closes any wound.
+		if def.get("injury", false) and p.get("is_player", false) and _sim.gamer.mod("injury_heal") > 0.0:
+			remove_condition(p, id)
+			continue
 		var c: Dictionary = p.health.conditions[id]
 		c.years = int(c.years) + 1
 		delta -= float(def.get("yearly_health", 3))

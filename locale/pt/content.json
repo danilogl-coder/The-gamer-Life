@@ -526,6 +526,7 @@
  "mod.gold_find": "ouro",
  "mod.happiness": "felicidade",
  "mod.health_regen": "regeneração",
+ "mod.injury_heal": "cura ferimentos ao dormir",
  "mod.injury_immune": "imunidade a lesões",
  "mod.interview": "entrevistas",
  "mod.lifespan": "longevidade",

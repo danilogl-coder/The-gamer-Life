@@ -36,7 +36,7 @@ func danger(p: Dictionary, def: Dictionary) -> int:
 
 
 func player_attack(p: Dictionary) -> float:
-	return (_sim.gamer.effective_stat(p, "str") * 2.2 + float(p.gamer.level) * 2.0 + _sim.gamer.mod("atk")) * (1.0 + _sim.gamer.mod("dmg"))
+	return (_sim.gamer.effective_stat(p, "str") * 2.2 + float(p.gamer.level) * 2.0 + _sim.gamer.mod("atk") + _sim.pets.combat_bonus(p)) * (1.0 + _sim.gamer.mod("dmg"))
 
 
 func player_defense(p: Dictionary) -> float:
@@ -67,6 +67,7 @@ func run(dungeon_id: String, ctx: Dictionary) -> Dictionary:
 			escaped_flag = true
 			break
 	var exp_gain: int = _sim.gamer.add_exp(p, totals.exp)
+	_sim.pets.share_exp(p, totals.exp)
 	ctx.gains["exp"] = int(ctx.gains.get("exp", 0)) + exp_gain
 	var gold := float(totals.gold) * float(_sim.finance.country(p).get("salary_mult", 1.0))
 	_sim.finance.add_cash(p, gold)
@@ -154,6 +155,9 @@ func _on_kill(p: Dictionary, mid: String, m: Dictionary, dungeon: Dictionary, li
 			_sim.gamer.add_item(p, drop.item, 1)
 			ctx.gains["item:" + drop.item] = int(ctx.gains.get("item:" + drop.item, 0)) + 1
 			lines.append({"key": "dng.drop", "params": {"item": "@item." + drop.item}})
+	var tamed: String = _sim.pets.try_tame(p, mid)
+	if tamed != "":
+		lines.append({"key": "dng.tamed", "params": {"monster": "@mon." + mid, "name": tamed}})
 	# Re:Monster-style predation: devour what you defeat, steal its power.
 	if m.has("absorb") and _sim.skills.knows(p, "devour") and not _sim.skills.knows(p, m.absorb):
 		var chance: float = 0.04 + _sim.skills.level(p, "devour") * 0.02

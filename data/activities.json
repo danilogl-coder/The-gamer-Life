@@ -515,6 +515,9 @@
     "event": "party_stranger",
     "chance": 0.3
    }
+  ],
+  "tags": [
+   "mature"
   ]
  },
  {
@@ -668,6 +671,9 @@
      }
     ]
    }
+  ],
+  "tags": [
+   "mature"
   ]
  },
  {
@@ -705,6 +711,9 @@
      }
     ]
    }
+  ],
+  "tags": [
+   "mature"
   ]
  },
  {

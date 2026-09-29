@@ -47,6 +47,8 @@ func net_worth(p: Dictionary) -> float:
 		worth -= float(loan.balance)
 	for asset_id in p.finance.get("investments", {}):
 		worth += float(p.finance.investments[asset_id]) * _sim.world.price(asset_id)
+	for item in p.finance.get("possessions", []):
+		worth += float(item.value)
 	return worth
 
 
@@ -95,7 +97,7 @@ func process_year(p: Dictionary) -> Dictionary:
 	var expenses := 0.0
 	if not is_dependent(p):
 		expenses += living_cost(p) + housing_cost(p)
-	expenses += _sim.health.habit_costs(p)
+	expenses += _sim.health.habit_costs(p) + _update_possessions(p)
 	report.expenses = expenses
 	add_cash(p, gross - tax - expenses)
 	_pay_loans(p, report)
@@ -277,6 +279,73 @@ func sell_investment(p: Dictionary, asset_id: String) -> Dictionary:
 	p.finance.investments.erase(asset_id)
 	add_cash(p, value)
 	return {"ok": true, "key": "ui.sold", "params": {"value": int(value)}}
+
+
+# ---------------------------------------------------------------------------
+# Possessions (vehicles & collectibles)
+# ---------------------------------------------------------------------------
+
+func possession_price(p: Dictionary, def_id: String) -> float:
+	var def: Dictionary = _sim.data.get_def("possessions", def_id)
+	return float(def.get("price", 0)) * float(_sim.state.data.world.price_index) * maxf(0.6, float(country(p).get("cost_of_living", 1.0)))
+
+
+func buy_possession(p: Dictionary, def_id: String) -> Dictionary:
+	var def: Dictionary = _sim.data.get_def("possessions", def_id)
+	if def.is_empty() or not _sim.cond.check_all(def.get("conditions", []), {}):
+		return {"ok": false, "reason": "ui.invalid"}
+	var price := possession_price(p, def_id)
+	if float(p.finance.cash) < price:
+		return {"ok": false, "reason": "ui.no_money"}
+	add_cash(p, -price)
+	p.finance.possessions.append({"id": def_id, "value": price, "age": 0, "condition": 100.0})
+	_sim.gamer.invalidate()
+	_sim.add_log("log.bought_possession", {"thing": "@poss." + def_id}, "major" if price > 100000 else "info")
+	_sim.activities.bump_counter("buy." + def.kind)
+	if def.kind == "vehicle" and not _sim.skills.knows(p, "driving") and int(p.age) >= 16:
+		_sim.state.set_flag("drives_unlicensed")
+	return {"ok": true, "key": "ui.bought", "params": {"thing": "@poss." + def_id}}
+
+
+func sell_possession(p: Dictionary, index: int) -> Dictionary:
+	if index < 0 or index >= p.finance.possessions.size():
+		return {"ok": false, "reason": "ui.invalid"}
+	var item: Dictionary = p.finance.possessions[index]
+	p.finance.possessions.remove_at(index)
+	add_cash(p, float(item.value) * 0.9)
+	_sim.gamer.invalidate()
+	return {"ok": true, "key": "ui.sold", "params": {"value": int(float(item.value) * 0.9)}}
+
+
+func has_vehicle(p: Dictionary) -> bool:
+	for item in p.finance.get("possessions", []):
+		if _sim.data.get_def("possessions", item.id).get("kind", "") == "vehicle":
+			return true
+	return false
+
+
+## Value drift, wear, maintenance and the joy of owning things.
+## Returns the yearly upkeep. Breakdowns/thefts/accidents come as events.
+func _update_possessions(p: Dictionary) -> float:
+	var upkeep := 0.0
+	var world: Dictionary = _sim.state.data.world
+	for item in p.finance.get("possessions", []):
+		var def: Dictionary = _sim.data.get_def("possessions", item.id)
+		item.age = int(item.age) + 1
+		if def.kind == "vehicle":
+			var drift := -float(def.get("depreciation", 0.12))
+			if def.has("classic_age") and int(item.age) >= int(def.classic_age):
+				drift = 0.06
+			item.value = maxf(100.0, float(item.value) * (1.0 + drift))
+			item.condition = maxf(0.0, float(item.condition) - 6.0)
+			upkeep += float(def.get("maintenance", 500)) * float(world.price_index)
+			if _sim.prob.roll_neutral((1.0 - float(def.get("reliability", 0.9))) * (1.5 - float(item.condition) / 100.0)):
+				_sim.events.queue_event("vehicle_breakdown")
+		else:
+			item.value = maxf(10.0, float(item.value) * (1.0 + float(def.get("trend", 0.03)) + _sim.rng.randn(0, float(def.get("vol", 0.1)))))
+		p.attrs.happiness = clampf(float(p.attrs.happiness) + float(def.get("happiness", 0)) * 0.5, 0, 100)
+		p.fame = clampf(float(p.get("fame", 0)) + float(def.get("fame", 0)), 0, 100)
+	return upkeep
 
 
 func npc_starting_cash(npc: Dictionary) -> float:

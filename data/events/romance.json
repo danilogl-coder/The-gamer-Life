@@ -92,6 +92,9 @@
  {
   "id": "party_stranger",
   "special": true,
+  "tags": [
+   "mature"
+  ],
   "actor": {
    "new": {
     "role": "acquaintance",
@@ -173,6 +176,9 @@
  {
   "id": "travel_romance",
   "special": true,
+  "tags": [
+   "mature"
+  ],
   "actor": {
    "new": {
     "role": "acquaintance",
@@ -230,6 +236,9 @@
  {
   "id": "partner_finds_out",
   "special": true,
+  "tags": [
+   "mature"
+  ],
   "actor": {
    "role": [
     "spouse",
@@ -337,6 +346,9 @@
  {
   "id": "rom_partner_cheated",
   "special": true,
+  "tags": [
+   "mature"
+  ],
   "choices": [
    {
     "id": "forgive",

@@ -1,0 +1,289 @@
+[
+ {
+  "id": "neighbor_noise",
+  "min_age": 18,
+  "cooldown": 5,
+  "weight": 6,
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_min": 20,
+    "age_max": 70,
+    "score": 35
+   }
+  },
+  "choices": [
+   {
+    "id": "talk",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 15
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -10
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 6
+      }
+     ]
+    }
+   },
+   {
+    "id": "join",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 6
+     },
+     {
+      "type": "SET_ROLE",
+      "role": "friend"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "health",
+      "amount": -2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "jury_duty",
+  "min_age": 21,
+  "cooldown": 10,
+  "weight": 4,
+  "choices": [
+   {
+    "id": "serve",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 40
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": 2
+     }
+    ]
+   },
+   {
+    "id": "observe",
+    "conditions": [
+     {
+      "path": "skill.observe",
+      "op": ">=",
+      "value": 5
+     }
+    ],
+    "effects": [
+     {
+      "type": "SKILL_XP",
+      "skill": "observe",
+      "amount": 40
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 100
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "blackout",
+  "min_age": 6,
+  "cooldown": 6,
+  "weight": 5,
+  "choices": [
+   {
+    "id": "family",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:spouse",
+      "amount": 6
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "mana",
+    "conditions": [
+     {
+      "path": "flag.world_revealed",
+      "op": "==",
+      "value": true
+     }
+    ],
+    "effects": [
+     {
+      "type": "SKILL_XP",
+      "skill": "mana_control",
+      "amount": 25
+     },
+     {
+      "type": "CHANGE_FAME",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "mysterious_shop",
+  "min_age": 12,
+  "cooldown": 8,
+  "weight": 6,
+  "rarity": "uncommon",
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "book",
+    "conditions": [
+     {
+      "path": "player.finance.cash",
+      "op": ">=",
+      "value": 5000
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -5000
+     },
+     {
+      "type": "ADD_ITEM",
+      "item": "book_fireball"
+     }
+    ]
+   },
+   {
+    "id": "fruit",
+    "conditions": [
+     {
+      "path": "player.finance.cash",
+      "op": ">=",
+      "value": 8000
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -8000
+     },
+     {
+      "type": "ADD_ITEM",
+      "item": "stat_fruit"
+     }
+    ]
+   },
+   {
+    "id": "leave"
+   }
+  ]
+ },
+ {
+  "id": "system_glitch",
+  "min_age": 10,
+  "once": true,
+  "rarity": "very_rare",
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 20
+   }
+  ],
+  "choices": [
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "resist",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.wis",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.5
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "LEARN_SKILL",
+       "skill": "eye_of_truth"
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "dyn_saw_the_code"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "health",
+       "amount": -20
+      }
+     ]
+    }
+   }
+  ]
+ }
+]

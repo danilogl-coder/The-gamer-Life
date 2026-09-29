@@ -1,0 +1,183 @@
+[
+ {
+  "id": "pet_sick",
+  "min_age": 5,
+  "cooldown": 4,
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "calc.pets",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "choices": [
+   {
+    "id": "vet",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -600
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 3
+     }
+    ]
+   },
+   {
+    "id": "heal",
+    "conditions": [
+     {
+      "path": "skill.heal",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "SKILL_XP",
+      "skill": "heal",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "wait",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 6
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "pet_hero",
+  "min_age": 4,
+  "once": true,
+  "rarity": "rare",
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "calc.pets",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 12
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": 5
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 50
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "familiar_bond",
+  "min_age": 12,
+  "cooldown": 3,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "calc.familiars",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "choices": [
+   {
+    "id": "train",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "cha",
+      "amount": 30
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 120,
+      "scale_level": true
+     }
+    ]
+   },
+   {
+    "id": "feed",
+    "conditions": [
+     {
+      "path": "player.gamer.inventory.mana_core_small",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "REMOVE_ITEM",
+      "item": "mana_core_small"
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 200,
+      "scale_level": true
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "stray_animal",
+  "min_age": 6,
+  "cooldown": 6,
+  "weight": 5,
+  "conditions": [
+   {
+    "path": "calc.pets",
+    "op": "==",
+    "value": 0
+   }
+  ],
+  "choices": [
+   {
+    "id": "adopt",
+    "effects": [
+     {
+      "type": "ADD_PET",
+      "species": "dog"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "shelter",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": 2
+     }
+    ]
+   }
+  ]
+ }
+]

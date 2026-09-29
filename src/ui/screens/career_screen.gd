@@ -19,6 +19,7 @@ func refresh() -> void:
 	var p := sim.player()
 	_render_education(sim, p)
 	_render_job(sim, p)
+	_render_special(sim, p)
 	_render_board(sim, p)
 
 
@@ -79,6 +80,53 @@ func _render_job(sim: LifeSimulation, p: Dictionary) -> void:
 	if p.faction.id != "":
 		card.add_child(W.label(App.t("ui.faction_line", {"f": App.t("faction." + p.faction.id), "rep": int(p.faction.rep.get(p.faction.id, 0))}), UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
 	_box.add_child(W.card(card))
+
+
+## Special careers: small games inside the life sim (music, sports, business, influencer).
+func _render_special(sim: LifeSimulation, p: Dictionary) -> void:
+	if int(p.age) < 12:
+		return
+	_box.add_child(W.section(App.t("ui.special_careers")))
+	for id in sim.special.ids():
+		if p.special.has(id):
+			_box.add_child(_special_card(sim, p, id))
+		else:
+			var reason := sim.special.block_reason(p, id)
+			var cost := float(sim.special.career(id).def.get("start_cost", 0))
+			var text := App.t("ui.sc_start", {"career": App.t("sc." + id)}) + (" · " + Fmt.money(cost) if cost > 0 else "")
+			if reason != "":
+				text += "\n" + App.t(reason)
+			var b := W.button(text, func(): ui.show_result(App.sim.command("sc_start", [id])), 80, UiTheme.FONT_S)
+			b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			b.disabled = reason != ""
+			_box.add_child(b)
+
+
+func _special_card(sim: LifeSimulation, p: Dictionary, id: String) -> Control:
+	var box := W.vbox(6)
+	box.add_child(W.label("★ " + App.t("sc." + id), UiTheme.FONT_M, UiTheme.GOLD))
+	var grid := W.grid(2, 6)
+	for row in sim.special.career(id).summary(p, p.special[id]):
+		grid.add_child(W.label(App.t(row[0]), 18, UiTheme.TEXT_DIM))
+		var v: String = row[1]
+		grid.add_child(W.label(App.t(v.substr(1)) if v.begins_with("@") else v, 18, UiTheme.TEXT))
+	box.add_child(grid)
+	var actions := W.grid(2, 6)
+	for a in sim.special.actions(p, id):
+		var label := App.t("sc.%s.act.%s" % [id, a.id])
+		if int(a.time) > 0:
+			label += " ⏱%d" % int(a.time)
+		if float(a.cost) > 0:
+			label += " " + Fmt.money(float(a.cost))
+		var b := W.button(label, func(): ui.show_result(App.sim.command("sc_action", [id, a.id])), 72, 18)
+		b.disabled = a.locked != ""
+		if a.locked != "":
+			b.tooltip_text = App.t(a.locked)
+		actions.add_child(b)
+	box.add_child(actions)
+	var quit := W.button(App.t("ui.sc_quit"), func(): App.sim.command("sc_quit", [id]), 60, 17)
+	box.add_child(quit)
+	return W.system_card(box)
 
 
 func _render_board(sim: LifeSimulation, p: Dictionary) -> void:

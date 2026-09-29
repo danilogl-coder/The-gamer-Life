@@ -1,0 +1,16 @@
+[
+  {"id": "dog", "kind": "pet", "cost": 600, "lifespan": 13, "happiness": 4, "atk": 0},
+  {"id": "cat", "kind": "pet", "cost": 300, "lifespan": 15, "happiness": 3, "atk": 0},
+  {"id": "parrot", "kind": "pet", "cost": 900, "lifespan": 40, "happiness": 2, "atk": 0},
+  {"id": "hamster", "kind": "pet", "cost": 60, "lifespan": 3, "happiness": 2, "atk": 0},
+  {"id": "slime_fam", "kind": "familiar", "from": "slime", "lifespan": 300, "happiness": 2, "atk": 6, "growth": 0.18, "named": "slime_named"},
+  {"id": "slime_named", "kind": "familiar", "lifespan": 900, "happiness": 4, "atk": 40, "growth": 0.25, "mods": {"health_regen": 0.03, "skill_gain": 0.05}},
+  {"id": "goblin_fam", "kind": "familiar", "from": "goblin", "lifespan": 40, "happiness": 1, "atk": 10, "growth": 0.15, "named": "hobgoblin_named"},
+  {"id": "hobgoblin_named", "kind": "familiar", "lifespan": 120, "happiness": 2, "atk": 70, "growth": 0.2, "mods": {"atk": 5, "work_perf": 0.03}},
+  {"id": "wolf_fam", "kind": "familiar", "from": "wolf", "lifespan": 25, "happiness": 4, "atk": 22, "growth": 0.18, "named": "tempest_wolf"},
+  {"id": "tempest_wolf", "kind": "familiar", "lifespan": 400, "happiness": 6, "atk": 160, "growth": 0.25, "mods": {"dodge": 0.03, "crit": 0.02}},
+  {"id": "spider_fam", "kind": "familiar", "from": "giant_spider", "lifespan": 60, "happiness": 1, "atk": 45, "growth": 0.17, "named": "arachne"},
+  {"id": "arachne", "kind": "familiar", "lifespan": 500, "happiness": 3, "atk": 260, "growth": 0.22, "mods": {"stealth": 0.1, "crime_success": 0.05}},
+  {"id": "wyvern_fam", "kind": "familiar", "from": "wyvern", "lifespan": 200, "happiness": 5, "atk": 180, "growth": 0.2, "named": "storm_dragon"},
+  {"id": "storm_dragon", "kind": "familiar", "lifespan": 2000, "happiness": 10, "atk": 1200, "growth": 0.3, "mods": {"statpct.all": 0.05, "fame_gain": 0.1}}
+]

@@ -67,6 +67,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	toasts.set_top(overlay.get_child_count() > 0)
 	if _dirty:
 		_dirty = false
 		refresh()

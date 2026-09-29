@@ -23,6 +23,7 @@ func refresh() -> void:
 	_lifestyle(p)
 	_loans(sim, p)
 	_properties(sim, p)
+	_possessions(sim, p)
 	_markets(sim, p)
 
 
@@ -46,6 +47,7 @@ func _lifestyle(p: Dictionary) -> void:
 	for s in FinanceSystem.LIFESTYLES:
 		var sel: bool = p.finance.lifestyle == s
 		var b := W.tinted_button(App.t("lifestyle." + s), func(): App.sim.command("lifestyle", [s]), UiTheme.SYSTEM if sel else UiTheme.PANEL, 64)
+		b.add_theme_font_size_override("font_size", 18)
 		b.size_flags_horizontal = Control.SIZE_FILL
 		b.custom_minimum_size.x = 150
 		row.add_child(b)
@@ -94,6 +96,29 @@ func _properties(sim: LifeSimulation, p: Dictionary) -> void:
 		mort.size_flags_horizontal = Control.SIZE_SHRINK_END
 		row.add_child(mort)
 		_box.add_child(row)
+
+
+func _possessions(sim: LifeSimulation, p: Dictionary) -> void:
+	_box.add_child(W.section(App.t("ui.possessions")))
+	for i in p.finance.possessions.size():
+		var item: Dictionary = p.finance.possessions[i]
+		var row := W.hbox(8)
+		row.add_child(W.label("%s · %s" % [App.t("poss." + item.id), Fmt.money(float(item.value))], UiTheme.FONT_S, UiTheme.TEXT, true))
+		var sell := W.button(App.t("ui.sell"), func(): ui.show_result(App.sim.command("sell_possession", [i])), 64, 18)
+		sell.custom_minimum_size.x = 150
+		sell.size_flags_horizontal = Control.SIZE_SHRINK_END
+		row.add_child(sell)
+		_box.add_child(W.card(row))
+	var flow := W.grid(2, 6)
+	for id in App.data.table("possessions"):
+		var def: Dictionary = App.data.get_def("possessions", id)
+		if not sim.cond.check_all(def.get("conditions", []), {}):
+			continue
+		var price := sim.finance.possession_price(p, id)
+		var b := W.button("%s\n%s" % [App.t("poss." + id), Fmt.money(price)], func(): ui.show_result(App.sim.command("buy_possession", [id])), 76, 18)
+		b.disabled = float(p.finance.cash) < price
+		flow.add_child(b)
+	_box.add_child(flow)
 
 
 func _markets(sim: LifeSimulation, p: Dictionary) -> void:

@@ -66,6 +66,8 @@ docs/                    Este documento
 | `WorldSystem` | Ciclo econômico, inflação, desemprego, imóveis, mercados, **atividade de fendas**, eventos mundiais | — | mundo, mods globais |
 | `AchievementSystem` | Conquistas por condição (por vida + meta global) | estado | conquistas |
 | `LegacySystem` | Morte, retrospectiva, herança/testamento, **herdeiro herda o Sistema**, Pontos de Alma e perks | tudo | nova geração |
+| `SpecialCareerSystem` | Registro de **carreiras-minijogo modulares** (`SpecialCareer`): Música, Atleta, Empresa, Criador de conteúdo. Nova carreira = novo script + 1 linha em `special_careers.json` | stats, skills, mundo, fama | dinheiro, fama, EXP, saúde |
+| `PetSystem` | Pets (envelhecem, dão felicidade) e **familiares**: monstros domados (skill Domar) que lutam, sobem de nível e, ao serem **nomeados** (gasta 80% do MP), evoluem para espécies nomeadas com bônus | dungeon, MP, CAR | combate, mods, felicidade |
 | `YearPipeline` | Ordem exata do "+1 ANO" | — | — |
 | `LifeSimulation` | Orquestrador + API pública (`advance_year`, `do_activity`, `interact`, `choose`, `allocate_stat`, `command`) + `resolve(path)` | — | — |
 
@@ -172,11 +174,13 @@ Tabelas de conteúdo (`data/*.json`, indexadas por `id`): `activities`, `jobs`, 
 FECHA O ANO QUE PASSOU (usa as ações/contadores deste ano)
  1. Finance       salário, impostos, custo de vida, moradia, filhos, empréstimos, juros, crédito
  2. Career        desempenho (stat-chave), promoção/demissão/layoff, EXP e estresse do trabalho
+    Special       ticks das carreiras especiais (streaming, patrocínio, lucro da empresa, seguidores)
  3. Education     notas, mensalidade (pais podem pagar), formatura / repetência
  4. Crime         calor decai, pena da prisão diminui
  5. Gamer         Corpo do Jogador (HP/MP cheios), crescimento natural / declínio da velhice
  6. Health        envelhecimento, estresse, hábitos, doenças, CHECK DE MORTE  ─► se morreu: fim
  7. Relations     decaimento, memórias esmaecem (personalidade), traição/divórcio
+    Pets          idade, vínculo, morte de pets, familiares
  8. NPCs          NPCs relevantes envelhecem, trabalham, casam, têm filhos, morrem (herança), poda
 ABRE O ANO NOVO
  9. Calendário    idade+1, ano+1, marcos (maioridade, décadas)
@@ -197,7 +201,7 @@ Performance: nada roda por frame. A simulação só acontece quando o jogador ag
 * `user://saves/slot_1.json` — a vida/dinastia (o `GameState.data` inteiro). Autosave a cada ano e na morte.
 * `user://meta.json` — perfil entre vidas: idioma, Pontos de Alma, conquistas globais, histórico de vidas.
 * Escrita **atômica** (arquivo `.tmp` → rename).
-* `save_version` + `SaveSystem.MIGRATIONS[v] = func(data)` aplicadas em sequência até a versão atual.
+* `save_version` + `SaveSystem.MIGRATIONS[v] = func(data)` aplicadas em sequência até a versão atual. Exemplo real: v1→v2 adiciona `special`, `pets`, `possessions`, `challenge` e `settings` a saves antigos (coberto por teste).
 * JSON devolve números como float: `SaveSystem.normalize` converte floats inteiros em int. O estado do RNG (64 bits) é salvo como **string**.
 * Teste garante: salvar → carregar → continuar produz **exatamente** a mesma vida (determinismo).
 
@@ -238,12 +242,14 @@ Performance: nada roda por frame. A simulação só acontece quando o jogador ag
 | 1 Core | GameState, RNG, Probabilidade, Condições, Efeitos, Dados, Localização, Save, Bus | ✅ |
 | 2 Vida básica | Nascimento, família, infância, escola, faculdade, emprego, saúde, morte | ✅ |
 | 2b **Sistema** | Nível/EXP, 7 stats sem teto, pontos, títulos, skills por repetição, evolução, fusão, Observar, missões, dungeons, devorar, ranks | ✅ |
-| 3 Economia | Dinheiro, impostos, dívida, crédito, empréstimos, imóveis, mercado (inclui Núcleos de Mana) | ✅ (veículos/colecionáveis: próximo) |
+| 3 Economia | Dinheiro, impostos, dívida, crédito, empréstimos, imóveis, veículos, colecionáveis, mercado (inclui Núcleos de Mana) | ✅ |
 | 4 Sociedade | Amizades, romance, casamento, divórcio, filhos, netos, memórias, reputação | ✅ (redes sociais profundas: próximo) |
 | 5 Vida alternativa | Crime, investigação, julgamento, prisão (estado próprio), fuga, recurso | ✅ |
-| 6 Carreiras especiais | Arquitetura pronta (facções + jobs com `faction`); próximos: Músico, Atleta, Empresário (mini-jogos) como módulos `SpecialCareer` que assinam o EventBus | ⏳ |
-| 7 Meta | Conquistas, legado, dinastias, Pontos de Alma, perks | ✅ (desafios periódicos: próximo) |
-| 8 Pets/Familiares | Domar monstros (Re:Monster), **nomear** familiares (Tensura) gasta MP e os faz evoluir | ⏳ |
+| 6 Carreiras especiais | Módulos `SpecialCareer`: Música (compor, gravar, turnê, gravadora), Atleta (ligas, temporadas, títulos, patrocínio, doping), Empresa (setor, preço, contratações, marketing, P&D, concorrência, venda/falência), Influenciador (plataformas fictícias, viral, cancelamento, publis). Próximos: Político, Ator, Astronauta | ✅ (4) |
+| 7 Meta | Conquistas, legado, dinastias, Pontos de Alma, perks, **desafios** ("De Professor a Milionário"…) com recompensa em Pontos de Alma | ✅ |
+| 8 Pets/Familiares | Pets comuns; domar monstros (Re:Monster); **nomear** familiares (Tensura) gasta MP e os faz evoluir; lutam e dividem EXP | ✅ |
+| 8b Patrimônio | Veículos (depreciação, clássicos valorizam, pane/acidente/blitz) e colecionáveis (random walk) | ✅ |
+| 8c Classificação | Tag `mature` em atividades/eventos + opção na tela inicial | ✅ |
 | 9 Conteúdo | Escalar para 1000+ eventos, 300 empregos, 100 doenças… (só dados) | ⏳ |
 
 ---
@@ -279,15 +285,17 @@ Os testes cobrem: determinismo do RNG, condições, probabilidade, save/load det
 
 ### Resultado da simulação em massa (referência de balanceamento)
 
-| Métrica | Casual (60 vidas) | Grinder de dungeons (20 vidas) |
+| Métrica | Casual (40 vidas) | Grinder de dungeons (30 vidas) |
 |---|---|---|
-| Idade média de morte | 72 | 96 |
-| Patrimônio (média / mediana) | 2,4M / 0,54M | 20M |
-| Casados | 65% | 30% |
-| Nível aos 18 / 40 / morte | 6 / 10 / 14 | 6 / 54 / 264 |
-| Evoluiu de rank (1 / 2) | 0% / 0% | 100% / 85% |
-| Mortes em dungeon | 0% | 10% |
-| Eventos por vida | ~127 | ~150 |
+| Idade média de morte | 70 | 110 |
+| Patrimônio (média / mediana) | 1,1M / 0,21M | 41M / 27M |
+| Casados | 55% | 17% |
+| Nível aos 18 / 40 / morte | 8 / 12 / 16 | 20 / 75 / 332 |
+| Evoluiu de rank (1 / 2) | 0% / 0% | 97% / 93% |
+| Mortes em dungeon | 0% | 3% |
+| Eventos por vida | ~123 | ~182 |
+
+Correções que a simulação encontrou: seguidores/fãs cresciam sem limite com atributos OP (agora crescimento logístico até o teto da população do mundo); lesões graves se acumulavam até matar (agora o *Corpo do Jogador* fecha ferimentos ao dormir, como no manhwa, e a saúde se recupera naturalmente).
 
 A diferença entre as colunas é o objetivo: quem abraça o Sistema vira uma força absurda (escala OP), mas paga com tempo (menos casamentos e filhos) e risco real de morte.
 

@@ -4,7 +4,7 @@ extends Control
 
 var ui
 var _body: VBoxContainer
-var _opts := {"sex": "", "country": "", "perks": []}
+var _opts := {"sex": "", "country": "", "perks": [], "challenge": ""}
 var _name_edit: LineEdit
 
 
@@ -65,7 +65,25 @@ func _render_home() -> void:
 	lang.add_child(W.button("Português", func(): App.set_locale("pt"); _render_home()))
 	lang.add_child(W.button("English", func(): App.set_locale("en"); _render_home()))
 	_body.add_child(lang)
+	_body.add_child(W.button(App.t("ui.challenges"), _render_challenges))
+	var mature := W.button(App.t("ui.mature_on") if App.meta.mature else App.t("ui.mature_off"), func(): App.set_mature(not App.meta.mature); _render_home())
+	_body.add_child(mature)
 	_body.add_child(W.label(App.t("ui.soul_points", {"n": int(App.meta.soul_points)}), UiTheme.FONT_S, UiTheme.PURPLE))
+
+
+func _render_challenges() -> void:
+	W.clear(_body)
+	_body.add_child(W.label(App.t("ui.challenges"), UiTheme.FONT_XL, UiTheme.GOLD))
+	for id in App.data.table("challenges"):
+		var def: Dictionary = App.data.get_def("challenges", id)
+		var done: bool = App.meta.challenges.has(id)
+		var box := W.vbox(6)
+		box.add_child(W.label(("✔ " if done else "") + App.t("ch.%s.title" % id), UiTheme.FONT_M, UiTheme.GOLD if done else UiTheme.TEXT, true))
+		box.add_child(W.label(App.t("ch.%s.desc" % id), UiTheme.FONT_S, UiTheme.TEXT_DIM, true))
+		box.add_child(W.label(App.t("ui.reward_soul", {"n": int(def.reward)}), 18, UiTheme.PURPLE))
+		box.add_child(W.tinted_button(App.t("ui.accept_challenge"), func(): _opts.challenge = id; _opts.merge(def.get("options", {}), true); _render_new_life(), UiTheme.SYSTEM, 72))
+		_body.add_child(W.card(box))
+	_body.add_child(W.button(App.t("ui.back"), _render_home))
 
 
 func _continue() -> void:
@@ -78,6 +96,8 @@ func _continue() -> void:
 func _render_new_life() -> void:
 	W.clear(_body)
 	_body.add_child(W.label(App.t("ui.new_life"), UiTheme.FONT_XL, UiTheme.GOLD))
+	if _opts.challenge != "":
+		_body.add_child(W.chip(App.t("ch.%s.title" % _opts.challenge), UiTheme.GOLD))
 	var card := W.vbox(12)
 	card.add_child(W.label(App.t("ui.name_optional"), UiTheme.FONT_S, UiTheme.TEXT_DIM))
 	_name_edit = LineEdit.new()
@@ -133,7 +153,9 @@ func _toggle_perk(id: String) -> void:
 
 
 func _start() -> void:
-	var options := {"perks": _opts.perks.duplicate()}
+	var options := {"perks": _opts.perks.duplicate(), "challenge": _opts.challenge}
+	if _opts.has("wealth"):
+		options.wealth = _opts.wealth
 	if _opts.sex != "":
 		options.sex = _opts.sex
 	if _opts.country != "":

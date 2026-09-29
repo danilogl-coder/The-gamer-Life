@@ -1,0 +1,227 @@
+[
+ {
+  "id": "vehicle_breakdown",
+  "special": true,
+  "choices": [
+   {
+    "id": "repair",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -1500
+     }
+    ]
+   },
+   {
+    "id": "diy",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.5
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "dex",
+       "amount": 30
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -2500
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "car_accident",
+  "min_age": 16,
+  "cooldown": 6,
+  "weight": 5,
+  "conditions": [
+   {
+    "path": "calc.has_vehicle",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "dodge",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.45
+      },
+      {
+       "path": "skill.driving",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "dex",
+       "amount": 25
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 8
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_minor"
+      },
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -4000
+      }
+     ]
+    }
+   },
+   {
+    "id": "brace",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -2500
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.3,
+      "effects": [
+       {
+        "type": "ADD_DISEASE",
+        "disease": "injury_minor"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "unlicensed_stop",
+  "min_age": 16,
+  "cooldown": 3,
+  "weight": 12,
+  "conditions": [
+   {
+    "path": "calc.has_vehicle",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "flag.drives_unlicensed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "skill.driving",
+    "op": "==",
+    "value": 0
+   }
+  ],
+  "choices": [
+   {
+    "id": "honest",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -1200
+     },
+     {
+      "type": "ADD_CRIMINAL_RECORD",
+      "crime": "unlicensed"
+     }
+    ]
+   },
+   {
+    "id": "talk",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -2500
+      },
+      {
+       "type": "ADD_CRIMINAL_RECORD",
+       "crime": "unlicensed"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "classic_car_offer",
+  "min_age": 30,
+  "once": true,
+  "rarity": "rare",
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 30000
+   }
+  ],
+  "choices": [
+   {
+    "id": "buy",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -30000
+     },
+     {
+      "type": "ADD_POSSESSION",
+      "possession": "sports_car",
+      "value": 30000,
+      "age": 30
+     }
+    ]
+   },
+   {
+    "id": "pass"
+   }
+  ]
+ }
+]

@@ -127,5 +127,24 @@
   ],
   "fine": 1500,
   "exp": 5
+ },
+ {
+  "id": "unlicensed",
+  "stat": "dex",
+  "success": 0.5,
+  "reward": [
+   0,
+   0
+  ],
+  "heat": 5,
+  "investigation": 0.0,
+  "evidence": 0.9,
+  "severity": 3,
+  "sentence": [
+   0,
+   0
+  ],
+  "fine": 1200,
+  "exp": 1
  }
 ]

@@ -82,7 +82,7 @@ static func mods(m: Dictionary, scale: float = 1.0) -> String:
 			parts.append("%s %s" % [App.t("stat." + key.substr(5)), ("+" if v >= 0 else "") + ("%.1f" % v).trim_suffix(".0")])
 		elif key.begins_with("train_gain."):
 			parts.append("%s %s %s" % [App.t("mod.train_gain"), App.t("stat." + key.substr(11)), _pct_signed(v)])
-		elif key in ["atk", "def", "mind_immune", "death_save", "time_slots"]:
+		elif key in ["atk", "def", "mind_immune", "death_save", "time_slots", "injury_heal"]:
 			parts.append("%s %s" % [App.t("mod." + key), ("+" if v >= 0 else "") + str(int(v)) if key in ["atk", "def", "time_slots"] else ""])
 		else:
 			parts.append("%s %s" % [App.t("mod." + key), _pct_signed(v)])

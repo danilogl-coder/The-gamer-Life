@@ -1,0 +1,11 @@
+[
+  {"id": "ch_teacher_millionaire", "reward": 40, "options": {"wealth": "working"}, "goals": [{"path": "counter.job.cat.education", "op": ">=", "value": 1}, {"path": "calc.net_worth", "op": ">=", "value": 1000000}]},
+  {"id": "ch_rags_to_hunter", "reward": 50, "options": {"wealth": "poor"}, "goals": [{"path": "player.faction.id", "op": "!=", "value": ""}, {"path": "calc.level", "op": ">=", "value": 40}]},
+  {"id": "ch_prison_to_ceo", "reward": 80, "options": {}, "goals": [{"path": "counter.prison.sentences", "op": ">=", "value": 1}, {"path": "player.career.job", "op": "==", "value": "ceo"}]},
+  {"id": "ch_rockstar", "reward": 40, "options": {}, "goals": [{"path": "counter.music.platinum", "op": ">=", "value": 1}]},
+  {"id": "ch_champion", "reward": 40, "options": {}, "goals": [{"path": "counter.sport.titles", "op": ">=", "value": 3}]},
+  {"id": "ch_unicorn", "reward": 70, "options": {}, "goals": [{"path": "counter.biz.unicorn", "op": ">=", "value": 1}]},
+  {"id": "ch_tamer", "reward": 50, "options": {"country": "hanseong"}, "goals": [{"path": "counter.pets.named", "op": ">=", "value": 2}]},
+  {"id": "ch_big_family", "reward": 30, "options": {}, "goals": [{"path": "calc.children", "op": ">=", "value": 4}, {"path": "calc.married", "op": "==", "value": true}]},
+  {"id": "ch_transcend", "reward": 90, "options": {}, "goals": [{"path": "calc.rank", "op": ">=", "value": 2}, {"path": "player.age", "op": "<=", "value": 40}]}
+]

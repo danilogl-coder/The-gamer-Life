@@ -68,6 +68,9 @@ func _rebuild_mods() -> void:
 	for perk in _sim.state.data.legacy.get("perks", []):
 		_add_mods(_sim.data.get_def("items", perk).get("mods", {}), 1.0)
 	_add_mods(_sim.world.active_mods(), 1.0)
+	_add_mods(_sim.pets.mods(p), 1.0)
+	for item in p.finance.get("possessions", []):
+		_add_mods(_sim.data.get_def("possessions", item.id).get("mods", {}), 1.0)
 	var rank := int(p.gamer.get("rank", 0))
 	var ranks: Array = _sim.data.bal("gamer.ranks", [])
 	if rank < ranks.size():
@@ -204,6 +207,9 @@ func heal(p: Dictionary, hp: float, mp: float = 0.0) -> void:
 ## Year tick: the body rests, hidden gifts may surface, titles are checked.
 func process_year(p: Dictionary) -> void:
 	refill(p)
+	# The System rewards simply living: generous in childhood, modest later.
+	var yearly: float = _sim.data.bal("gamer.yearly_exp_child", 70) if int(p.age) < 18 else _sim.data.bal("gamer.yearly_exp_adult", 30)
+	add_exp(p, yearly * (1.0 + float(p.gamer.level) * 0.08))
 	# Natural growth while young: bodies and minds grow even without the System.
 	if int(p.age) <= 18:
 		for s in STAT_IDS:

@@ -14,13 +14,14 @@ var slot := 1
 func _ready() -> void:
 	data = DataRegistry.new().load_all()
 	meta = SaveSystem.load_meta()
-	meta.merge({"locale": _default_locale(), "soul_points": 0, "achievements": {}, "lives": [], "dev": false}, false)
+	meta.merge({"locale": _default_locale(), "soul_points": 0, "achievements": {}, "lives": [], "challenges": {}, "mature": true, "dev": false}, false)
 	loc = Localization.new(meta.locale)
 	bus = EventBus.new()
 	sim = LifeSimulation.new(data, bus)
 	bus.year_advanced.connect(func(_a): autosave())
 	bus.character_died.connect(_on_death)
 	bus.achievement_unlocked.connect(func(id): meta.achievements[id] = true; save_meta())
+	bus.challenge_completed.connect(_on_challenge)
 
 
 func t(key: String, params: Dictionary = {}) -> String:
@@ -45,6 +46,7 @@ func has_save() -> bool:
 func start_new_life(options: Dictionary = {}) -> void:
 	var seed := int(options.get("seed", Time.get_ticks_usec() ^ int(Time.get_unix_time_from_system())))
 	options.legacy = {"soul_points": 0, "lives": meta.lives.slice(-20)}
+	options.mature = bool(meta.mature)
 	sim.new_life(seed, options)
 	autosave()
 
@@ -70,6 +72,18 @@ func _on_death(summary: Dictionary) -> void:
 	meta.lives.append({"name": summary.name, "age": summary.age, "level": summary.level, "worth": summary.net_worth, "gen": summary.generation})
 	save_meta()
 	autosave()
+
+
+func _on_challenge(id: String, reward: int) -> void:
+	meta.challenges[id] = true
+	meta.soul_points = int(meta.soul_points) + reward
+	save_meta()
+
+
+func set_mature(on: bool) -> void:
+	meta.mature = on
+	sim.state.data.get("settings", {})["mature"] = on
+	save_meta()
 
 
 func _default_locale() -> String:

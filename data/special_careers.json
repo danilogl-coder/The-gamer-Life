@@ -1,0 +1,6 @@
+[
+  {"id": "music", "order": 1, "script": "res://src/systems/careers/music_career.gd", "min_age": 12, "conditions": [{"path": "skill.music", "op": ">=", "value": 1}], "lock_key": "sc.music.lock"},
+  {"id": "athlete", "order": 2, "script": "res://src/systems/careers/athlete_career.gd", "min_age": 14, "conditions": [{"path": "stat.vit", "op": ">=", "value": 14}, {"path": "stat.str", "op": ">=", "value": 12}, {"path": "player.age", "op": "<=", "value": 32}], "lock_key": "sc.ath.lock"},
+  {"id": "business", "order": 3, "script": "res://src/systems/careers/business_career.gd", "min_age": 18, "start_cost": 10000, "conditions": [], "lock_key": "sc.biz.lock"},
+  {"id": "influencer", "order": 4, "script": "res://src/systems/careers/influencer_career.gd", "min_age": 13, "conditions": [], "lock_key": "job.block.locked"}
+]

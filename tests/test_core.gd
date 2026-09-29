@@ -52,6 +52,12 @@ func test_migration_runs() -> void:
 	var d := {"save_version": 0}
 	SaveSystem.migrate(d)
 	check(int(d.save_version) == GameState.SAVE_VERSION, "migrated to current version")
+	# A v1 save gains the v2 fields.
+	var v1 := {"save_version": 1, "npcs": {"c1": {"is_player": true, "finance": {"cash": 1}}}}
+	SaveSystem.migrate(v1)
+	check(v1.npcs.c1.has("pets") and v1.npcs.c1.has("special"), "player got pets/special")
+	check(v1.npcs.c1.finance.has("possessions"), "player got possessions")
+	check(v1.has("settings") and v1.has("challenge"), "state got settings/challenge")
 
 
 func test_data_references_are_valid() -> void:
@@ -121,6 +127,14 @@ func _check_effect_refs() -> void:
 					check(data.table("titles").has(e.title), "unknown title ref %s" % e.title)
 				"JOIN_FACTION", "FACTION_REP":
 					check(data.table("factions").has(e.faction), "unknown faction %s" % e.faction)
+				"ADD_PET":
+					check(data.table("pets").has(e.species), "unknown pet %s" % e.species)
+				"ADD_POSSESSION":
+					check(data.table("possessions").has(e.possession), "unknown possession %s" % e.possession)
+				"START_SPECIAL", "CHANGE_SPECIAL":
+					check(data.table("special_careers").has(e.career), "unknown special career %s" % e.career)
+				"ADD_CRIMINAL_RECORD":
+					check(data.table("crimes").has(e.crime), "unknown crime %s" % e.crime)
 				"CHANCE":
 					stack.append(e.get("effects", []))
 					stack.append(e.get("else", []))
@@ -132,13 +146,14 @@ func test_locale_keys_exist() -> void:
 		for id in data.events:
 			for k in ["title", "desc"]:
 				check(loc.has("ev.%s.%s" % [id, k]), "[%s] missing ev.%s.%s" % [code, id, k])
-		for t in ["skills", "titles", "jobs", "activities", "items", "diseases", "monsters", "dungeons", "education", "traits", "crimes", "achievements", "quests", "world_events", "properties", "factions", "countries", "interactions"]:
+		for t in ["skills", "titles", "jobs", "activities", "items", "diseases", "monsters", "dungeons", "education", "traits", "crimes", "achievements", "quests", "world_events", "properties", "factions", "countries", "interactions", "pets", "possessions", "special_careers", "challenges"]:
 			var prefix: String = {"skills": "skill", "titles": "title", "jobs": "job", "activities": "act", "items": "item",
 				"diseases": "disease", "monsters": "mon", "dungeons": "dng", "education": "edu", "traits": "trait",
 				"crimes": "crime", "achievements": "ach", "quests": "quest", "world_events": "wevent",
-				"properties": "prop", "factions": "faction", "countries": "country", "interactions": "int"}[t]
+				"properties": "prop", "factions": "faction", "countries": "country", "interactions": "int",
+				"pets": "pet", "possessions": "poss", "special_careers": "sc", "challenges": "ch"}[t]
 			for id in data.table(t):
 				var key := "%s.%s" % [prefix, id]
-				if t in ["achievements", "quests", "world_events"]:
+				if t in ["achievements", "quests", "world_events", "challenges"]:
 					key += ".title"
 				check(loc.has(key), "[%s] missing %s" % [code, key])

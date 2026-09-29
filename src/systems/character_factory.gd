@@ -83,10 +83,12 @@ func _add_player_fields(p: Dictionary) -> void:
 		"faction": {"id": "", "rank": 0, "rep": {}},
 		"recent_actions": [],
 		"favorites": [],
+		"special": {},
+		"pets": [],
 	}, false)
 	p.gamer.merge({"awakened": true, "exp": 0.0, "stat_points": 0, "stat_xp": {},
 		"skills": {}, "titles": [], "title": "", "inventory": {}, "equipment": {}}, false)
-	p.finance.merge({"debt": 0.0, "credit": 650.0, "loans": [], "properties": [], "investments": {}, "lifestyle": "normal"}, false)
+	p.finance.merge({"debt": 0.0, "credit": 650.0, "loans": [], "properties": [], "investments": {}, "lifestyle": "normal", "possessions": []}, false)
 
 
 # ---------------------------------------------------------------------------
