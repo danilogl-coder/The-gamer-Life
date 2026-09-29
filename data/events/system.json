@@ -434,7 +434,7 @@
      {
       "path": "calc.level",
       "op": ">=",
-      "value": 8
+      "value": 6
      },
      {
       "path": "flag.awakened_suspicious",

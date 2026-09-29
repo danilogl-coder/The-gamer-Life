@@ -212,6 +212,7 @@
  "disease.mana_sickness": "Mana Sickness",
  "dng.absorbed": "DEVOUR! Skill absorbed from {monster}: {skill}",
  "dng.clear": "{dungeon}: CLEARED!",
+ "dng.crawled": "Nearly dead, you crawl out of the dungeon.",
  "dng.danger0": "Trivial",
  "dng.danger1": "Safe",
  "dng.danger2": "Dangerous",

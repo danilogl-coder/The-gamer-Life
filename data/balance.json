@@ -107,7 +107,8 @@
      "aging_resist": 0.9
     }
    }
-  ]
+  ],
+  "activity_exp_mult": 2.5
  },
  "skills": {
   "xp_exponent": 1.35
@@ -208,7 +209,8 @@
   "max_active": 4
  },
  "dungeon": {
-  "death_chance": 0.3
+  "death_chance": 0.18,
+  "desperate_escape": 0.45
  },
  "justice": {
   "lawyer_cost": 8000,

@@ -1,5 +1,5 @@
 extends Control
-## Stacked System notifications at the top of the screen ("LEVEL UP!",
+## Stacked System notifications above the tab bar ("LEVEL UP!",
 ## "New skill!", activity results). Non-blocking; each fades after a moment.
 
 const MAX_VISIBLE := 3

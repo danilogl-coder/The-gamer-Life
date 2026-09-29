@@ -212,6 +212,7 @@
  "disease.mana_sickness": "Enjoo de Mana",
  "dng.absorbed": "DEVORAR! Habilidade absorvida de {monster}: {skill}",
  "dng.clear": "{dungeon}: LIMPA!",
+ "dng.crawled": "Quase morto, você se arrasta para fora da dungeon.",
  "dng.danger0": "Trivial",
  "dng.danger1": "Seguro",
  "dng.danger2": "Perigoso",

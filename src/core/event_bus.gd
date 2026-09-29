@@ -6,7 +6,7 @@ signal year_advanced(age: int)
 signal state_changed
 signal log_added(entry: Dictionary)
 signal event_queued(event_instance: Dictionary)
-signal notification(kind: String, text: String)
+signal system_notice(kind: String, payload: String)
 signal character_died(summary: Dictionary)
 signal new_life_started
 signal level_up(new_level: int)

@@ -138,7 +138,7 @@ func perform(id: String, params: Dictionary = {}) -> Dictionary:
 	for sid in def.get("skill_xp", {}):
 		_sim.skills.add_xp(p, sid, float(def.skill_xp[sid]))
 	if def.has("exp"):
-		ctx.gains.exp = int(ctx.gains.get("exp", 0)) + _sim.gamer.add_exp(p, float(def.exp) * (1.0 + float(p.gamer.level) * 0.05))
+		ctx.gains.exp = int(ctx.gains.get("exp", 0)) + _sim.gamer.add_exp(p, float(def.exp) * float(_sim.data.bal("gamer.activity_exp_mult", 1.0)) * (1.0 + float(p.gamer.level) * 0.05))
 	if def.has("fitness"):
 		p.health.fitness = clampf(float(p.health.fitness) + float(def.fitness), 0, 100)
 	if def.has("year_counter"):

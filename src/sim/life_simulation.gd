@@ -220,7 +220,7 @@ func current_event() -> Dictionary:
 
 
 func notify(kind: String, key: String, params: Dictionary = {}) -> void:
-	bus.notification.emit(kind, JSON.stringify({"key": key, "params": params}))
+	bus.system_notice.emit(kind, JSON.stringify({"key": key, "params": params}))
 
 
 func add_log(key: String, params: Dictionary = {}, kind: String = "info") -> void:

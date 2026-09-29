@@ -60,7 +60,7 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_apply_safe_area)
 	_apply_safe_area()
 	App.bus.state_changed.connect(func(): _dirty = true)
-	App.bus.notification.connect(_on_notification)
+	App.bus.system_notice.connect(_on_notice)
 	App.bus.character_died.connect(func(_s): _show_death.call_deferred())
 	App.bus.new_life_started.connect(func(): select_tab("life"))
 	_show_title()
@@ -195,7 +195,7 @@ func show_result(result: Dictionary) -> void:
 	toasts.push("result", text, chips)
 
 
-func _on_notification(kind: String, payload: String) -> void:
+func _on_notice(kind: String, payload: String) -> void:
 	var entry = JSON.parse_string(payload)
 	if typeof(entry) == TYPE_DICTIONARY:
 		toasts.push(kind, App.tr_entry(entry), [])

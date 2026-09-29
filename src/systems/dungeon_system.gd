@@ -127,6 +127,11 @@ func _fight(p: Dictionary, mid: String, dungeon: Dictionary, lines: Array, total
 		if float(p.gamer.hp) <= 0.0:
 			lines.append({"key": "dng.fell", "params": {"monster": "@mon." + mid}})
 			return "dead"
+		# Without the escape skill you can still try to crawl out (DEX + luck).
+		if float(p.gamer.hp) < _sim.gamer.max_hp(p) * 0.12 and not _sim.skills.knows(p, "id_escape"):
+			if _sim.prob.roll_spec({"base": float(_sim.data.bal("dungeon.desperate_escape", 0.4)), "mods": [{"path": "stat.dex", "per": 0.004, "max": 0.3}]}):
+				lines.append({"key": "dng.crawled", "params": {"monster": "@mon." + mid}})
+				return "fled"
 		if float(p.gamer.hp) < _sim.gamer.max_hp(p) * 0.2 and _sim.skills.knows(p, "id_escape"):
 			lines.append({"key": "dng.fled", "params": {"monster": "@mon." + mid}})
 			_sim.skills.add_xp(p, "id_escape", 5.0)
