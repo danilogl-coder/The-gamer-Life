@@ -33,9 +33,12 @@ func test_personas_exist_and_inherit() -> void:
 	p.age = 40
 	Persona.refresh_voice(p)
 	check(p.persona.voice != "kid", "voice matures with age")
-	var kind := _friend(sim, ["kind"])
-	var cruel := _friend(sim, ["cruel"])
-	check(float(kind.persona.big5.a) > float(cruel.persona.big5.a) - 5.0, "traits shape agreeableness")
+	var ka := 0.0
+	var ca := 0.0
+	for i in 20:
+		ka += float(_friend(sim, ["kind"]).persona.big5.a)
+		ca += float(_friend(sim, ["cruel"]).persona.big5.a)
+	check(ka > ca + 200.0, "kind people are more agreeable than cruel ones on average")
 
 
 func test_dialogue_picks_most_specific_rule() -> void:
@@ -108,6 +111,8 @@ func test_gossip_judged_by_values() -> void:
 	devout.hidden.religiousness = 95.0
 	var crook := _friend(sim, ["cruel"])
 	crook.hidden.religiousness = 5.0
+	crook.persona.politics = 0.0
+	devout.persona.politics = 0.0
 	var b1 := sim.relations.score(devout.id)
 	var b2 := sim.relations.score(crook.id)
 	sim.player().fame = 80.0
@@ -168,7 +173,7 @@ func test_society_runs_without_player() -> void:
 	check(not sim.society.soc().tech.eras.is_empty(), "technology advanced")
 	check(sim.society.soc().news.size() > 20, "the newspaper filled up")
 	check(sim.society.soc().celebs.size() >= 12, "celebrities keep coming")
-	var open := sim.society.city().places.filter(func(x): return x.open).size()
+	var open: int = sim.society.city().places.filter(func(x): return x.open).size()
 	check(open >= 10, "city has open places (%d)" % open)
 
 
