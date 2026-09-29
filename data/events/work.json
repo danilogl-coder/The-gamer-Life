@@ -1,0 +1,425 @@
+[
+ {
+  "id": "work_boss_conflict",
+  "min_age": 16,
+  "cooldown": 3,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.attrs.stress",
+    "op": ">=",
+    "value": 45
+   }
+  ],
+  "actor": {
+   "role": "boss"
+  },
+  "actor_conditions": [
+   {
+    "path": "rel.actor",
+    "op": "<",
+    "value": 45
+   }
+  ],
+  "choices": [
+   {
+    "id": "confront",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "player.career.performance",
+       "per": 0.005,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 15
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": -10
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -15
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "career.performance",
+       "amount": -10,
+       "min": 0
+      }
+     ]
+    }
+   },
+   {
+    "id": "endure",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 8
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "quit",
+    "effects": [
+     {
+      "type": "LOSE_JOB",
+      "reason": "quit"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": -20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "work_overtime",
+  "min_age": 16,
+  "cooldown": 2,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 0.08,
+      "scale_income": true
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "career.performance",
+      "amount": 6,
+      "max": 100
+     }
+    ]
+   },
+   {
+    "id": "decline",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:boss",
+      "amount": -4
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "work_credit_stolen",
+  "min_age": 18,
+  "cooldown": 4,
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "actor": {
+   "role": "coworker"
+  },
+  "choices": [
+   {
+    "id": "expose",
+    "chance": {
+     "base": 0.45,
+     "mods": [
+      {
+       "path": "stat.int",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "career.performance",
+       "amount": 12,
+       "max": 100
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -30
+      },
+      {
+       "type": "SET_ROLE",
+       "role": "enemy"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "career.performance",
+       "amount": -8,
+       "min": 0
+      }
+     ]
+    }
+   },
+   {
+    "id": "letgo",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -5
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "owes_me",
+      "severity": -20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "work_headhunter",
+  "min_age": 20,
+  "cooldown": 4,
+  "weight": 8,
+  "rarity": "uncommon",
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.career.performance",
+    "op": ">=",
+    "value": 70
+   }
+  ],
+  "choices": [
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "career.salary",
+      "mult": 1.25,
+      "amount": 0
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "career.performance",
+      "mult": 0,
+      "amount": 50
+     }
+    ]
+   },
+   {
+    "id": "leverage",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "skill.negotiation",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "career.salary",
+       "mult": 1.15,
+       "amount": 0
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:boss",
+       "amount": -10
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "burnout_event",
+  "min_age": 18,
+  "cooldown": 4,
+  "weight": 30,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.attrs.stress",
+    "op": ">=",
+    "value": 82
+   }
+  ],
+  "choices": [
+   {
+    "id": "leave",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": -35
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "career.performance",
+      "amount": -10,
+      "min": 0
+     },
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -0.1,
+      "scale_income": true
+     }
+    ]
+   },
+   {
+    "id": "push",
+    "effects": [
+     {
+      "type": "ADD_DISEASE",
+      "disease": "burnout"
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "career.performance",
+      "amount": 5,
+      "max": 100
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "work_office_romance",
+  "min_age": 20,
+  "cooldown": 5,
+  "weight": 6,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "calc.has_partner",
+    "op": "==",
+    "value": false
+   }
+  ],
+  "actor": {
+   "role": "coworker"
+  },
+  "actor_conditions": [
+   {
+    "path": "rel.actor",
+    "op": ">=",
+    "value": 55
+   }
+  ],
+  "choices": [
+   {
+    "id": "go",
+    "chance": {
+     "base": 0.45,
+     "mods": [
+      {
+       "path": "calc.compat",
+       "per": 0.008,
+       "offset": 40
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_ROLE",
+       "role": "partner"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 15
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -5
+      }
+     ]
+    }
+   },
+   {
+    "id": "no"
+   }
+  ]
+ }
+]

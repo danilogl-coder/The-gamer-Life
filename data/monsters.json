@@ -1,0 +1,248 @@
+[
+ {
+  "id": "slime",
+  "level": 1,
+  "hp": 30,
+  "atk": 6,
+  "def": 1,
+  "exp": 30,
+  "gold": 5,
+  "drops": [
+   {
+    "item": "mana_core_small",
+    "chance": 0.15
+   },
+   {
+    "item": "potion_hp",
+    "chance": 0.05
+   }
+  ]
+ },
+ {
+  "id": "goblin",
+  "level": 3,
+  "hp": 55,
+  "atk": 11,
+  "def": 3,
+  "exp": 55,
+  "gold": 12,
+  "absorb": "stealth",
+  "drops": [
+   {
+    "item": "goblin_ear",
+    "chance": 0.5
+   },
+   {
+    "item": "wooden_bat",
+    "chance": 0.05
+   },
+   {
+    "item": "book_energy_bolt",
+    "chance": 0.02
+   }
+  ]
+ },
+ {
+  "id": "zombie",
+  "level": 5,
+  "hp": 90,
+  "atk": 14,
+  "def": 4,
+  "exp": 85,
+  "gold": 15,
+  "drops": [
+   {
+    "item": "monster_meat",
+    "chance": 0.25
+   },
+   {
+    "item": "mana_core_small",
+    "chance": 0.2
+   }
+  ]
+ },
+ {
+  "id": "wolf",
+  "level": 8,
+  "hp": 120,
+  "atk": 22,
+  "def": 6,
+  "exp": 137,
+  "gold": 20,
+  "absorb": "shadow_step",
+  "drops": [
+   {
+    "item": "wolf_pelt",
+    "chance": 0.4
+   },
+   {
+    "item": "monster_meat",
+    "chance": 0.4
+   }
+  ]
+ },
+ {
+  "id": "hobgoblin",
+  "level": 12,
+  "hp": 220,
+  "atk": 32,
+  "def": 10,
+  "exp": 275,
+  "gold": 60,
+  "drops": [
+   {
+    "item": "iron_sword",
+    "chance": 0.05
+   },
+   {
+    "item": "leather_armor",
+    "chance": 0.08
+   },
+   {
+    "item": "book_id_escape",
+    "chance": 0.04
+   }
+  ]
+ },
+ {
+  "id": "giant_spider",
+  "level": 16,
+  "hp": 300,
+  "atk": 45,
+  "def": 14,
+  "exp": 425,
+  "gold": 80,
+  "absorb": "poison_fang",
+  "drops": [
+   {
+    "item": "mana_core_medium",
+    "chance": 0.2
+   },
+   {
+    "item": "potion_mp",
+    "chance": 0.15
+   }
+  ]
+ },
+ {
+  "id": "ogre",
+  "level": 22,
+  "hp": 600,
+  "atk": 70,
+  "def": 22,
+  "exp": 800,
+  "gold": 150,
+  "absorb": "ogre_strength",
+  "drops": [
+   {
+    "item": "mana_core_medium",
+    "chance": 0.35
+   },
+   {
+    "item": "monster_meat",
+    "chance": 0.5
+   },
+   {
+    "item": "book_fireball",
+    "chance": 0.04
+   }
+  ]
+ },
+ {
+  "id": "dark_mage",
+  "level": 30,
+  "hp": 700,
+  "atk": 110,
+  "def": 25,
+  "exp": 1300,
+  "gold": 300,
+  "drops": [
+   {
+    "item": "book_mana_shield",
+    "chance": 0.08
+   },
+   {
+    "item": "mana_staff",
+    "chance": 0.06
+   },
+   {
+    "item": "book_heal",
+    "chance": 0.05
+   },
+   {
+    "item": "stat_fruit",
+    "chance": 0.02
+   }
+  ]
+ },
+ {
+  "id": "wyvern",
+  "level": 45,
+  "hp": 1800,
+  "atk": 190,
+  "def": 50,
+  "exp": 3250,
+  "gold": 700,
+  "drops": [
+   {
+    "item": "mana_core_large",
+    "chance": 0.3
+   },
+   {
+    "item": "guardian_plate",
+    "chance": 0.04
+   }
+  ]
+ },
+ {
+  "id": "demon_knight",
+  "level": 70,
+  "hp": 4200,
+  "atk": 380,
+  "def": 110,
+  "exp": 9500,
+  "gold": 2500,
+  "drops": [
+   {
+    "item": "demon_blade",
+    "chance": 0.06
+   },
+   {
+    "item": "mana_core_large",
+    "chance": 0.5
+   },
+   {
+    "item": "stat_fruit",
+    "chance": 0.08
+   },
+   {
+    "item": "book_devour",
+    "chance": 0.03
+   }
+  ]
+ },
+ {
+  "id": "ancient_dragon",
+  "level": 120,
+  "hp": 25000,
+  "atk": 1200,
+  "def": 320,
+  "exp": 75000,
+  "gold": 30000,
+  "absorb": "dragon_scale",
+  "drops": [
+   {
+    "item": "dragon_heart",
+    "chance": 0.25
+   },
+   {
+    "item": "elixir_youth",
+    "chance": 0.08
+   },
+   {
+    "item": "stat_fruit",
+    "chance": 0.5
+   }
+  ]
+ }
+]

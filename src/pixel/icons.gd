@@ -1,0 +1,157 @@
+class_name PixelIcons
+extends RefCounted
+## Hand-authored 12×12 icon masks rendered with a hue-shifted ramp.
+## Legend: o = outline, d = dark, m = mid, l = light, h = highlight, w = white.
+
+const MASKS := {
+	"life": [
+		"............",
+		"..oo....oo..",
+		".ommo..ommo.",
+		"ommlmooomhmo",
+		"omlhmmmmmmmo",
+		"ommmmmmmmmdo",
+		".ommmmmmmdo.",
+		"..ommmmmdo..",
+		"...ommmdo...",
+		"....ommo....",
+		".....oo.....",
+		"............"],
+	"system": [
+		"oooooooooooo",
+		"ohhhhhhhhhho",
+		"oooooooooooo",
+		"ommmmmmmmmmo",
+		"omwwmmmmmmmo",
+		"ommmmwwwwmmo",
+		"omwwmmmmmmmo",
+		"ommmmwwwmmmo",
+		"omwwmmmmmmmo",
+		"ommmmmmmmmdo",
+		"odddddddddd0",
+		"oooooooooooo"],
+	"people": [
+		"............",
+		"..ooo..ooo..",
+		".ohlmooolmo.",
+		".ommmo.ommo.",
+		"..ooo..ooo..",
+		".ommmooommo.",
+		"ohllmmolmmdo",
+		"ommmmmommmdo",
+		"ommmmdommmdo",
+		"ommmmdommmdo",
+		"oooooooooooo",
+		"............"],
+	"bolt": [
+		"......oooo..",
+		".....ohhmo..",
+		"....ohlmo...",
+		"...ohlmo....",
+		"..ohlmmoooo.",
+		".ooooolhhmo.",
+		".....ohlmo..",
+		"....ohmmo...",
+		"...ohmmo....",
+		"..ommdo.....",
+		"..oddo......",
+		"..ooo......."],
+	"case": [
+		"............",
+		"....oooo....",
+		"...o....o...",
+		"oooooooooooo",
+		"ohhllllllllo",
+		"olmmmmmmmmmo",
+		"ommmmoommmmo",
+		"oooooddooooo",
+		"ommmmoommmdo",
+		"ommmmmmmmmdo",
+		"oddddddddddo",
+		"oooooooooooo"],
+	"coin": [
+		"....oooo....",
+		"..oohhllo...",
+		".ohhllmmmo..",
+		".ohlmoommdo.",
+		"ohlmo.ommdo.",
+		"ohlmmoommmdo",
+		"olmmmmoommdo",
+		"olmmo.ommddo",
+		".ommoommddo.",
+		".odmmmmdddo.",
+		"..ooddddoo..",
+		"....oooo...."],
+	"clock": [
+		"...oooooo...",
+		"..ohhllllo..",
+		".ohlmmwmmdo.",
+		"ohlmmmwmmmdo",
+		"olmmmmwmmmdo",
+		"olmmmmwwwmdo",
+		"olmmmmmmmmdo",
+		"ommmmmmmmmdo",
+		".ommmmmmmdo.",
+		"..oddddddo..",
+		"...oooooo...",
+		"............"],
+	"sword": [
+		"..........oo",
+		".........ohw",
+		"........ohlo",
+		".......ohlo.",
+		"......ohlo..",
+		".....ohlo...",
+		"..o.ohlo....",
+		"..oohlo.....",
+		"...omo......",
+		"..odoo......",
+		".odo.o......",
+		".oo........."],
+	"star": [
+		".....oo.....",
+		".....ohd....",
+		"....ohlmo...",
+		"ooooohlmoooo",
+		"ohhlllmmmmdo",
+		".ohllmmmmdo.",
+		"..olmmmmdo..",
+		"..ommmmmdo..",
+		".ommdooommo.",
+		".omdo..odmo.",
+		".ooo....ooo.",
+		"............"],
+	"lock": [
+		"....oooo....",
+		"...o....o...",
+		"..o......o..",
+		"..o......o..",
+		".oooooooooo.",
+		".ohhllllllo.",
+		".olmmoommmo.",
+		".ommmoommmo.",
+		".ommmmmmmdo.",
+		".odddddddd0.",
+		".oooooooooo.",
+		"............"],
+}
+
+
+static var _cache: Dictionary = {}
+
+
+static func texture(name: String, base: Color, scale: int = 3) -> ImageTexture:
+	var key := name + base.to_html() + str(scale)
+	if _cache.has(key):
+		return _cache[key]
+	var ramp := PixelPalette.ramp(base, 4, 0.3)
+	var legend := {
+		"o": PixelPalette.outline_of(ramp[0]), "0": PixelPalette.outline_of(ramp[0]),
+		"d": ramp[0], "m": ramp[1], "l": ramp[2], "h": ramp[3], "w": Color("f4f6ff"),
+	}
+	var c := PixelCanvas.new(12, 12)
+	c.stamp(MASKS.get(name, MASKS.star), 0, 0, legend)
+	c.img.resize(12 * scale, 12 * scale, Image.INTERPOLATE_NEAREST)
+	var tex := c.to_texture()
+	_cache[key] = tex
+	return tex

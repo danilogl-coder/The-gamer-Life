@@ -1,0 +1,27 @@
+{
+  "pt": {
+    "m": ["Lucas", "Gabriel", "Rafael", "Mateus", "Pedro", "Thiago", "Enzo", "Davi", "Caio", "Bruno", "Diego", "Felipe", "Heitor", "Igor", "João", "Leo", "Murilo", "Otávio", "Renan", "Vitor", "Danilo", "André"],
+    "f": ["Ana", "Beatriz", "Camila", "Débora", "Elisa", "Fernanda", "Giovana", "Helena", "Isabela", "Júlia", "Larissa", "Manuela", "Natália", "Olívia", "Paula", "Rafaela", "Sofia", "Tainá", "Valentina", "Yasmin", "Lívia", "Clara"],
+    "last": ["Silva", "Souza", "Oliveira", "Costa", "Pereira", "Almeida", "Ferreira", "Rocha", "Barbosa", "Cardoso", "Teixeira", "Moura", "Nogueira", "Ribeiro", "Azevedo", "Campos", "Duarte", "Farias", "Lacerda", "Monteiro"]
+  },
+  "en": {
+    "m": ["James", "Noah", "Liam", "Ethan", "Mason", "Logan", "Caleb", "Owen", "Wyatt", "Hunter", "Miles", "Declan", "Grant", "Ryan", "Tyler", "Jack", "Cole", "Evan"],
+    "f": ["Emma", "Olivia", "Ava", "Mia", "Harper", "Ella", "Chloe", "Grace", "Nora", "Riley", "Zoe", "Hazel", "Aria", "Violet", "Ruby", "Ivy", "Claire", "Sadie"],
+    "last": ["Walker", "Bennett", "Carter", "Hayes", "Brooks", "Foster", "Reed", "Morgan", "Parker", "Sullivan", "Hughes", "Porter", "Ward", "Fletcher", "Grayson", "Holt"]
+  },
+  "kr": {
+    "m": ["Jihan", "Minjun", "Seojun", "Dohyun", "Hajun", "Jiho", "Yejun", "Siwoo", "Junwoo", "Taeyang", "Hyunwoo", "Sungmin"],
+    "f": ["Seoyeon", "Jiwoo", "Haeun", "Sua", "Minseo", "Yuna", "Chaewon", "Jiyoon", "Dahye", "Sora", "Eunbi", "Hana"],
+    "last": ["Han", "Kim", "Lee", "Park", "Choi", "Jung", "Kang", "Yoon", "Jang", "Lim", "Seo", "Shin"]
+  },
+  "jp": {
+    "m": ["Haruto", "Sota", "Yuto", "Riku", "Kaito", "Ren", "Takumi", "Daiki", "Kenji", "Shun", "Yamato", "Ryo"],
+    "f": ["Yui", "Hina", "Sakura", "Aoi", "Mei", "Rin", "Yuna", "Mio", "Akari", "Koharu", "Emi", "Nanami"],
+    "last": ["Sato", "Suzuki", "Takahashi", "Tanaka", "Watanabe", "Ito", "Nakamura", "Kobayashi", "Kato", "Yamada", "Mori", "Ishikawa"]
+  },
+  "fr": {
+    "m": ["Louis", "Hugo", "Jules", "Arthur", "Théo", "Nathan", "Mathis", "Gabin", "Rémi", "Bastien", "Émile", "Lucien"],
+    "f": ["Chloé", "Léa", "Manon", "Camille", "Inès", "Jade", "Louise", "Margaux", "Élodie", "Anaïs", "Célia", "Juliette"],
+    "last": ["Martin", "Bernard", "Dubois", "Moreau", "Laurent", "Lefèvre", "Roux", "Fournier", "Girard", "Bonnet", "Mercier", "Faure"]
+  }
+}

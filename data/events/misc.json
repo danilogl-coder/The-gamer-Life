@@ -1,0 +1,412 @@
+[
+ {
+  "id": "humor_pigeon",
+  "min_age": 5,
+  "cooldown": 8,
+  "weight": 5,
+  "choices": [
+   {
+    "id": "chase",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 5,
+       "max": 0.6
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 1
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 5
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -2
+      }
+     ]
+    }
+   },
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "humor_celebrity",
+  "min_age": 16,
+  "cooldown": 8,
+  "weight": 4,
+  "rarity": "uncommon",
+  "conditions": [
+   {
+    "path": "player.attrs.looks",
+    "op": ">=",
+    "value": 68
+   }
+  ],
+  "choices": [
+   {
+    "id": "play",
+    "effects": [
+     {
+      "type": "CHANGE_FAME",
+      "amount": 2
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 8
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.2,
+      "effects": [
+       {
+        "type": "CHANGE_STAT",
+        "stat": "reputation",
+        "amount": -5
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "deny"
+   }
+  ]
+ },
+ {
+  "id": "viral_post",
+  "special": true,
+  "choices": [
+   {
+    "id": "monetize",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "min_amount": 500,
+      "max_amount": 5000
+     },
+     {
+      "type": "CHANGE_FAME",
+      "amount": 4
+     }
+    ]
+   },
+   {
+    "id": "hot_take",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_FAME",
+       "amount": 10
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_FAME",
+       "amount": -6
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "reputation",
+       "amount": -10
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 15
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "music_discovered",
+  "special": true,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": false
+   }
+  ],
+  "choices": [
+   {
+    "id": "sign",
+    "effects": [
+     {
+      "type": "START_JOB",
+      "job": "musician"
+     },
+     {
+      "type": "CHANGE_FAME",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "no"
+   }
+  ]
+ },
+ {
+  "id": "sports_scout",
+  "special": true,
+  "choices": [
+   {
+    "id": "tryout",
+    "chance": {
+     "base": 0.25,
+     "mods": [
+      {
+       "path": "stat.vit",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "stat.str",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.2
+      },
+      {
+       "path": "player.hidden.talent_sport",
+       "per": 0.005,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "DISCOVER_HIDDEN",
+       "hidden": "talent_sport"
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "scouted"
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": 3
+      },
+      {
+       "type": "START_JOB",
+       "job": "pro_athlete",
+       "if": [
+        {
+         "path": "player.age",
+         "op": ">=",
+         "value": 17
+        }
+       ]
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -8
+      }
+     ]
+    }
+   },
+   {
+    "id": "no",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "health_warning",
+  "min_age": 40,
+  "cooldown": 5,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "player.attrs.health",
+    "op": "<",
+    "value": 50
+   }
+  ],
+  "choices": [
+   {
+    "id": "change",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "health.fitness",
+      "amount": 15,
+      "max": 100
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "health",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "ignore",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "midlife_crisis",
+  "min_age": 40,
+  "max_age": 55,
+  "once": true,
+  "weight": 8,
+  "rarity": "uncommon",
+  "choices": [
+   {
+    "id": "car",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -40000
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 15
+     }
+    ]
+   },
+   {
+    "id": "dream",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 3
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": -15
+     }
+    ]
+   },
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 60
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "old_age_reflection",
+  "min_age": 70,
+  "cooldown": 8,
+  "weight": 8,
+  "choices": [
+   {
+    "id": "share",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:child",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:grandchild",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "write",
+    "effects": [
+     {
+      "type": "CHANGE_FAME",
+      "amount": 2
+     },
+     {
+      "type": "CHANGE_MONEY",
+      "min_amount": 0,
+      "max_amount": 20000
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 40
+     }
+    ]
+   }
+  ]
+ }
+]

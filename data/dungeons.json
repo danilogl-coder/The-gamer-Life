@@ -1,0 +1,11 @@
+[
+  {"id": "slime_cave", "min_level": 1, "monsters": ["slime", "slime", "goblin"], "waves": 3, "exp_mult": 1.0},
+  {"id": "zombie_city", "min_level": 5, "monsters": ["zombie", "goblin"], "waves": 4, "boss": "zombie", "scale": 1.2},
+  {"id": "wolf_forest", "min_level": 10, "monsters": ["wolf", "goblin", "hobgoblin"], "waves": 4, "boss": "hobgoblin", "conditions": [{"path": "calc.level", "op": ">=", "value": 6}]},
+  {"id": "spider_nest", "min_level": 16, "monsters": ["giant_spider", "wolf"], "waves": 4, "boss": "giant_spider", "scale": 1.3, "conditions": [{"path": "calc.level", "op": ">=", "value": 10}]},
+  {"id": "ogre_fortress", "min_level": 24, "monsters": ["ogre", "hobgoblin"], "waves": 4, "boss": "ogre", "scale": 1.3, "conditions": [{"path": "calc.level", "op": ">=", "value": 16}]},
+  {"id": "mage_tower", "min_level": 34, "monsters": ["dark_mage", "giant_spider"], "waves": 5, "boss": "dark_mage", "scale": 1.4, "conditions": [{"path": "calc.level", "op": ">=", "value": 24}]},
+  {"id": "wyvern_peak", "min_level": 50, "monsters": ["wyvern", "ogre"], "waves": 5, "boss": "wyvern", "scale": 1.3, "conditions": [{"path": "calc.level", "op": ">=", "value": 35}]},
+  {"id": "demon_gate", "min_level": 80, "monsters": ["demon_knight", "dark_mage"], "waves": 5, "boss": "demon_knight", "scale": 1.4, "conditions": [{"path": "calc.level", "op": ">=", "value": 55}], "on_clear": [{"type": "GRANT_TITLE", "title": "gatebreaker"}]},
+  {"id": "dragon_lair", "min_level": 140, "monsters": ["wyvern", "demon_knight"], "waves": 4, "boss": "ancient_dragon", "scale": 1.2, "conditions": [{"path": "calc.level", "op": ">=", "value": 90}], "on_clear": [{"type": "GRANT_TITLE", "title": "dragon_slayer"}]}
+]

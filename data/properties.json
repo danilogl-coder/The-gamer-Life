@@ -1,0 +1,9 @@
+[
+  {"id": "studio", "price": 60000, "wear": 2, "happiness": 1},
+  {"id": "apartment", "price": 140000, "wear": 2, "happiness": 3},
+  {"id": "house", "price": 260000, "wear": 2, "happiness": 5},
+  {"id": "farm", "price": 320000, "wear": 3, "appreciation": 0.01, "happiness": 5},
+  {"id": "penthouse", "price": 900000, "wear": 1, "happiness": 8},
+  {"id": "mansion", "price": 3200000, "wear": 2, "appreciation": 0.01, "happiness": 12},
+  {"id": "hunter_estate", "price": 12000000, "wear": 1, "appreciation": 0.02, "happiness": 15}
+]

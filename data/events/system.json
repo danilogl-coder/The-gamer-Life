@@ -1,0 +1,1216 @@
+[
+ {
+  "id": "sys_welcome",
+  "special": true,
+  "log_kind": "system"
+ },
+ {
+  "id": "sys_inheritance",
+  "special": true,
+  "log_kind": "system"
+ },
+ {
+  "id": "sys_evolution_1",
+  "special": true,
+  "log_kind": "major",
+  "choices": [
+   {
+    "id": "body",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "str",
+      "amount": 8
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "vit",
+      "amount": 8
+     }
+    ]
+   },
+   {
+    "id": "mind",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "int",
+      "amount": 8
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "wis",
+      "amount": 8
+     }
+    ]
+   },
+   {
+    "id": "soul",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "luk",
+      "amount": 6
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "cha",
+      "amount": 6
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "dex",
+      "amount": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "sys_evolution_2",
+  "special": true,
+  "log_kind": "major",
+  "choices": [
+   {
+    "id": "body",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "str",
+      "amount": 16
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "vit",
+      "amount": 16
+     }
+    ]
+   },
+   {
+    "id": "mind",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "int",
+      "amount": 16
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "wis",
+      "amount": 16
+     }
+    ]
+   },
+   {
+    "id": "soul",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "luk",
+      "amount": 12
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "cha",
+      "amount": 12
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "dex",
+      "amount": 10
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "sys_evolution_3",
+  "special": true,
+  "log_kind": "major",
+  "choices": [
+   {
+    "id": "body",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 30
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "str",
+      "amount": 24
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "vit",
+      "amount": 24
+     }
+    ]
+   },
+   {
+    "id": "mind",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 30
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "int",
+      "amount": 24
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "wis",
+      "amount": 24
+     }
+    ]
+   },
+   {
+    "id": "soul",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 30
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "luk",
+      "amount": 18
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "cha",
+      "amount": 18
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "dex",
+      "amount": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "sys_evolution_4",
+  "special": true,
+  "log_kind": "major",
+  "choices": [
+   {
+    "id": "body",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 40
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "str",
+      "amount": 32
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "vit",
+      "amount": 32
+     }
+    ]
+   },
+   {
+    "id": "mind",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 40
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "int",
+      "amount": 32
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "wis",
+      "amount": 32
+     }
+    ]
+   },
+   {
+    "id": "soul",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "gamer.rank",
+      "amount": 1
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 40
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "luk",
+      "amount": 24
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "cha",
+      "amount": 24
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "dex",
+      "amount": 20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "sys_first_awakened_seen",
+  "special": true,
+  "choices": [
+   {
+    "id": "approach",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "world_revealed"
+      },
+      {
+       "type": "SET_ROLE",
+       "role": "mentor"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 15
+      },
+      {
+       "type": "LEARN_SKILL",
+       "skill": "id_create"
+      },
+      {
+       "type": "SCHEDULE_EVENT",
+       "event": "guild_invite",
+       "min": 1,
+       "max": 2
+      },
+      {
+       "type": "LOG",
+       "key": "log.world_revealed",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -10
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "awakened_suspicious"
+      }
+     ]
+    }
+   },
+   {
+    "id": "hide",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "awakened_hidden"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "world_reveal",
+  "once": true,
+  "min_age": 12,
+  "rarity": "uncommon",
+  "weight": 30,
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "!=",
+    "value": true
+   },
+   {
+    "any": [
+     {
+      "path": "calc.level",
+      "op": ">=",
+      "value": 8
+     },
+     {
+      "path": "flag.awakened_suspicious",
+      "op": "==",
+      "value": true
+     }
+    ]
+   }
+  ],
+  "actor": {
+   "new": {
+    "role": "mentor",
+    "age_min": 25,
+    "age_max": 60,
+    "awakened": true,
+    "level_min": 30,
+    "level_max": 60,
+    "score": 40
+   }
+  },
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.str",
+       "per": 0.012,
+       "offset": 5,
+       "max": 0.5
+      },
+      {
+       "path": "calc.level",
+       "per": 0.015
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 400
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "world_revealed"
+      },
+      {
+       "type": "LEARN_SKILL",
+       "skill": "id_create"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 25
+      },
+      {
+       "type": "SCHEDULE_EVENT",
+       "event": "guild_invite",
+       "min": 1,
+       "max": 2
+      },
+      {
+       "type": "LOG",
+       "key": "log.world_revealed",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_minor"
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "world_revealed"
+      },
+      {
+       "type": "LEARN_SKILL",
+       "skill": "id_create"
+      },
+      {
+       "type": "LOG",
+       "key": "log.world_revealed",
+       "kind": "major"
+      }
+     ]
+    }
+   },
+   {
+    "id": "run",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "world_revealed"
+     },
+     {
+      "type": "LEARN_SKILL",
+      "skill": "id_create"
+     },
+     {
+      "type": "LOG",
+      "key": "log.world_revealed",
+      "kind": "major"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "guild_invite",
+  "special": true,
+  "conditions": [
+   {
+    "path": "player.faction.id",
+    "op": "==",
+    "value": ""
+   }
+  ],
+  "choices": [
+   {
+    "id": "iron",
+    "effects": [
+     {
+      "type": "JOIN_FACTION",
+      "faction": "iron_fist"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "str",
+      "amount": 3
+     }
+    ]
+   },
+   {
+    "id": "arcane",
+    "effects": [
+     {
+      "type": "JOIN_FACTION",
+      "faction": "arcane_order"
+     },
+     {
+      "type": "ADD_ITEM",
+      "item": "book_energy_bolt"
+     }
+    ]
+   },
+   {
+    "id": "shadow",
+    "effects": [
+     {
+      "type": "JOIN_FACTION",
+      "faction": "moon_shadow"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "dex",
+      "amount": 3
+     }
+    ]
+   },
+   {
+    "id": "solo",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "lone_wolf"
+     },
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "guild_noticed",
+  "special": true,
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "reveal",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "guild_noticed"
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "guild_invite"
+     },
+     {
+      "type": "CHANGE_FAME",
+      "amount": 3
+     }
+    ]
+   },
+   {
+    "id": "deny",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "guild_noticed"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "guild_noticed"
+      },
+      {
+       "type": "SCHEDULE_EVENT",
+       "event": "rival_awakened",
+       "min": 1,
+       "max": 3
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "rival_awakened",
+  "min_age": 14,
+  "cooldown": 5,
+  "weight": 8,
+  "rarity": "uncommon",
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 10
+   }
+  ],
+  "actor": {
+   "new": {
+    "role": "rival",
+    "age_rel": 0,
+    "age_spread": 5,
+    "awakened": true,
+    "score": 20
+   }
+  },
+  "choices": [
+   {
+    "id": "duel",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "calc.actor_level_gap",
+       "per": -0.04
+      },
+      {
+       "path": "stat.str",
+       "per": 0.002,
+       "max": 0.1
+      },
+      {
+       "path": "stat.dex",
+       "per": 0.002,
+       "max": 0.1
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 300,
+       "scale_level": true
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": 4
+      },
+      {
+       "type": "ADD_MEMORY",
+       "memory": "humiliated",
+       "severity": 40
+      },
+      {
+       "type": "SCHEDULE_EVENT",
+       "event": "rival_rematch",
+       "min": 2,
+       "max": 5
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_minor"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -8
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "vit",
+       "amount": 30
+      }
+     ]
+    }
+   },
+   {
+    "id": "decline",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rival_rematch",
+  "special": true,
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.45,
+     "mods": [
+      {
+       "path": "calc.actor_level_gap",
+       "per": -0.04
+      },
+      {
+       "path": "stat.str",
+       "per": 0.002,
+       "max": 0.1
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 600,
+       "scale_level": true
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": 6
+      },
+      {
+       "type": "SET_ROLE",
+       "role": "friend"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 40
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_severe"
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": -3
+      }
+     ]
+    }
+   },
+   {
+    "id": "talk",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_ROLE",
+       "role": "acquaintance"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 20
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -10
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "mentor_lesson",
+  "min_age": 12,
+  "cooldown": 3,
+  "weight": 14,
+  "actor": {
+   "role": "mentor"
+  },
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "magic",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.int",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.5
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "LEARN_SKILL",
+       "skill": "energy_bolt"
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 200
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "int",
+       "amount": 40
+      }
+     ]
+    }
+   },
+   {
+    "id": "combat",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "str",
+      "amount": 40
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "dex",
+      "amount": 40
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 150
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "escape",
+    "conditions": [
+     {
+      "path": "skill.id_escape",
+      "op": "==",
+      "value": 0
+     }
+    ],
+    "effects": [
+     {
+      "type": "LEARN_SKILL",
+      "skill": "id_escape"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "sys_dungeon_break",
+  "special": true,
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "calc.level",
+       "per": 0.012,
+       "max": 0.55
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 800,
+       "scale_level": true
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": 10
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "reputation",
+       "amount": 10
+      },
+      {
+       "type": "ADD_ITEM",
+       "item": "mana_core_medium",
+       "qty": 2
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_severe"
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 200
+      }
+     ]
+    }
+   },
+   {
+    "id": "family",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:spouse",
+      "amount": 10
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 150
+     }
+    ]
+   },
+   {
+    "id": "hide",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "fin_bankruptcy",
+  "special": true,
+  "choices": [
+   {
+    "id": "declare",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "finance.debt",
+      "mult": 0,
+      "amount": 0
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "finance.credit",
+      "mult": 0,
+      "amount": 320
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": -10
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "bankrupt"
+     },
+     {
+      "type": "LOG",
+      "key": "log.bankrupt",
+      "kind": "major"
+     }
+    ]
+   },
+   {
+    "id": "family",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "rel.mother",
+       "per": 0.006,
+       "offset": 50
+      },
+      {
+       "path": "rel.father",
+       "per": 0.006,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "finance.debt",
+       "mult": 0.5,
+       "amount": 0
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:mother",
+       "amount": -10
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -10
+      }
+     ]
+    }
+   },
+   {
+    "id": "grind",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 20
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 30
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rare_time_loop",
+  "once": true,
+  "min_age": 16,
+  "rarity": "legendary",
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 15
+   }
+  ],
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "wis",
+      "amount": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rare_meteor",
+  "once": true,
+  "min_age": 8,
+  "rarity": "legendary",
+  "weight": 10,
+  "choices": [
+   {
+    "id": "absorb",
+    "effects": [
+     {
+      "type": "GIVE_STAT_POINTS",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "luk",
+      "amount": 10
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.5,
+      "effects": [
+       {
+        "type": "LEARN_SKILL",
+        "skill": "lucky_star"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "sell",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 250000
+     }
+    ]
+   }
+  ]
+ }
+]

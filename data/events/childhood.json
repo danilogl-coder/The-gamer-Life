@@ -1,0 +1,467 @@
+[
+ {
+  "id": "kid_new_friend",
+  "special": true,
+  "actor": {
+   "new": {
+    "role": "friend",
+    "age_rel": 0,
+    "age_spread": 1,
+    "score": 50
+   }
+  },
+  "choices": [
+   {
+    "id": "share",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "refuse",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "kid_tantrum",
+  "min_age": 2,
+  "max_age": 6,
+  "cooldown": 3,
+  "weight": 10,
+  "actor": {
+   "role": [
+    "mother",
+    "father"
+   ]
+  },
+  "choices": [
+   {
+    "id": "scream",
+    "chance": {
+     "base": 0.3,
+     "mods": []
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 5
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -5
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -8
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "discipline",
+       "amount": -2
+      }
+     ]
+    }
+   },
+   {
+    "id": "calm",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 6
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 3
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "kid_pet_request",
+  "min_age": 4,
+  "max_age": 12,
+  "once": true,
+  "weight": 8,
+  "actor": {
+   "role": [
+    "mother",
+    "father"
+   ]
+  },
+  "choices": [
+   {
+    "id": "ask",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "rel.actor",
+       "per": 0.008,
+       "offset": 50
+      },
+      {
+       "path": "actor.finance.cash",
+       "per": 1e-05,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "has_pet"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 15
+      },
+      {
+       "type": "LOG",
+       "key": "log.got_pet",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -5
+      }
+     ]
+    }
+   },
+   {
+    "id": "drop",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "kid_parents_fight",
+  "min_age": 4,
+  "max_age": 17,
+  "cooldown": 4,
+  "weight": 6,
+  "actor": {
+   "role": [
+    "mother",
+    "father"
+   ]
+  },
+  "conditions": [
+   {
+    "path": "rel.mother",
+    "op": ">=",
+    "value": 0
+   },
+   {
+    "path": "rel.father",
+    "op": ">=",
+    "value": 0
+   }
+  ],
+  "choices": [
+   {
+    "id": "intervene",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 5,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:mother",
+       "amount": 5
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:father",
+       "amount": 5
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 10
+      }
+     ]
+    }
+   },
+   {
+    "id": "headphones",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "parents_divorce",
+  "min_age": 2,
+  "max_age": 17,
+  "once": true,
+  "rarity": "uncommon",
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "rel.mother",
+    "op": ">=",
+    "value": 0
+   },
+   {
+    "path": "rel.father",
+    "op": ">=",
+    "value": 0
+   },
+   {
+    "path": "flag.parents_divorced",
+    "op": "!=",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "mom",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "parents_divorced"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:father",
+      "amount": -15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -15
+     },
+     {
+      "type": "LOG",
+      "key": "log.parents_divorced",
+      "kind": "major"
+     }
+    ]
+   },
+   {
+    "id": "dad",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "parents_divorced"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:father",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": -15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -15
+     },
+     {
+      "type": "LOG",
+      "key": "log.parents_divorced",
+      "kind": "major"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "kid_genius_test",
+  "min_age": 5,
+  "max_age": 10,
+  "once": true,
+  "weight": 12,
+  "conditions": [
+   {
+    "path": "stat.int",
+    "op": ">=",
+    "value": 14
+   }
+  ],
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "education.grades",
+      "amount": 10,
+      "max": 100
+     },
+     {
+      "type": "DISCOVER_HIDDEN",
+      "hidden": "academic"
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "gifted"
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 100
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "kid_talent_show",
+  "min_age": 6,
+  "max_age": 16,
+  "cooldown": 4,
+  "weight": 8,
+  "choices": [
+   {
+    "id": "sing",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 5,
+       "max": 0.3
+      },
+      {
+       "path": "skill.music",
+       "per": 0.05
+      },
+      {
+       "path": "player.hidden.talent_music",
+       "per": 0.004,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_FAME",
+       "amount": 2
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 10
+      },
+      {
+       "type": "DISCOVER_HIDDEN",
+       "hidden": "talent_music"
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 60
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -8
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 8
+      }
+     ]
+    }
+   },
+   {
+    "id": "skip"
+   }
+  ]
+ },
+ {
+  "id": "tooth_fairy",
+  "min_age": 5,
+  "max_age": 8,
+  "once": true,
+  "weight": 8,
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ }
+]

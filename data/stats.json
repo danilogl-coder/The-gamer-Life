@@ -1,0 +1,9 @@
+[
+  {"id": "str", "color": "e05a47"},
+  {"id": "vit", "color": "6cc24a"},
+  {"id": "dex", "color": "f2c14e"},
+  {"id": "int", "color": "4fa3e0"},
+  {"id": "wis", "color": "9b6ee0"},
+  {"id": "luk", "color": "4ee0c1"},
+  {"id": "cha", "color": "e06fb5"}
+]

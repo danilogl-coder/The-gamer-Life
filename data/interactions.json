@@ -1,0 +1,810 @@
+[
+ {
+  "id": "observe",
+  "order": 1,
+  "min_age": 3,
+  "unlimited": true,
+  "exp": 2,
+  "cha_xp": 0,
+  "conditions": [
+   {
+    "path": "skill.observe",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "OBSERVE"
+    }
+   ]
+  }
+ },
+ {
+  "id": "talk",
+  "order": 2,
+  "min_age": 2,
+  "exp": 2,
+  "not_roles": [
+   "enemy"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 4
+    }
+   ]
+  }
+ },
+ {
+  "id": "compliment",
+  "order": 3,
+  "min_age": 4,
+  "chance": {
+   "base": 0.75,
+   "mods": [
+    {
+     "path": "stat.cha",
+     "per": 0.005,
+     "offset": 10
+    },
+    {
+     "path": "calc.compat",
+     "per": 0.003,
+     "offset": 50
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 6
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "compliment",
+     "severity": -5
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -2
+    }
+   ]
+  }
+ },
+ {
+  "id": "spend_time",
+  "order": 4,
+  "min_age": 3,
+  "time": 1,
+  "exp": 5,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 12
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 4
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "stress",
+     "amount": -4
+    }
+   ]
+  }
+ },
+ {
+  "id": "gift",
+  "order": 5,
+  "min_age": 6,
+  "cost": 150,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 10
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "gift",
+     "severity": -8
+    }
+   ]
+  }
+ },
+ {
+  "id": "ask_money",
+  "order": 6,
+  "min_age": 6,
+  "roles": [
+   "mother",
+   "father",
+   "grandparent",
+   "stepparent",
+   "spouse",
+   "sibling",
+   "best_friend"
+  ],
+  "chance": {
+   "base": 0.25,
+   "mods": [
+    {
+     "path": "rel.actor",
+     "per": 0.007,
+     "offset": 40
+    },
+    {
+     "path": "actor.finance.cash",
+     "per": 4e-06,
+     "max": 0.25
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_MONEY",
+     "min_amount": 50,
+     "max_amount": 600
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -2
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -5
+    }
+   ]
+  }
+ },
+ {
+  "id": "apologize",
+  "order": 7,
+  "min_age": 4,
+  "chance": {
+   "base": 0.5,
+   "mods": [
+    {
+     "path": "stat.cha",
+     "per": 0.006,
+     "offset": 10
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 10
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "apology",
+     "severity": -15
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 1
+    }
+   ]
+  }
+ },
+ {
+  "id": "argue",
+  "order": 8,
+  "min_age": 4,
+  "exp": 1,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -10
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "argument",
+     "severity": 15
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "stress",
+     "amount": 4
+    }
+   ]
+  }
+ },
+ {
+  "id": "insult",
+  "order": 9,
+  "min_age": 6,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -18
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "insult",
+     "severity": 30
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.2,
+     "effects": [
+      {
+       "type": "SET_ROLE",
+       "role": "enemy"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "befriend",
+  "order": 10,
+  "min_age": 4,
+  "roles": [
+   "classmate",
+   "coworker",
+   "acquaintance",
+   "inmate",
+   "teacher",
+   "rival"
+  ],
+  "chance": {
+   "base": 0.35,
+   "mods": [
+    {
+     "path": "rel.actor",
+     "per": 0.01,
+     "offset": 40
+    },
+    {
+     "path": "calc.compat",
+     "per": 0.005,
+     "offset": 50
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "SET_ROLE",
+     "role": "friend"
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 10
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -3
+    }
+   ]
+  }
+ },
+ {
+  "id": "flirt",
+  "order": 11,
+  "min_age": 14,
+  "not_roles": [
+   "mother",
+   "father",
+   "sibling",
+   "grandparent",
+   "child",
+   "grandchild",
+   "stepparent",
+   "teacher"
+  ],
+  "conditions": [
+   {
+    "path": "calc.actor_age_gap",
+    "op": "<=",
+    "value": 15
+   },
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 14
+   }
+  ],
+  "chance": {
+   "base": 0.3,
+   "mods": [
+    {
+     "path": "calc.compat",
+     "per": 0.008,
+     "offset": 40
+    },
+    {
+     "path": "rel.actor",
+     "per": 0.005,
+     "offset": 40
+    },
+    {
+     "path": "mod.charm",
+     "per": 1.0
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 8
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "flirt",
+     "severity": -6
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -6
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": -3
+    }
+   ]
+  }
+ },
+ {
+  "id": "ask_out",
+  "order": 12,
+  "min_age": 14,
+  "roles": [
+   "friend",
+   "best_friend",
+   "classmate",
+   "coworker",
+   "acquaintance",
+   "ex"
+  ],
+  "conditions": [
+   {
+    "path": "calc.has_partner",
+    "op": "==",
+    "value": false
+   },
+   {
+    "path": "calc.actor_age_gap",
+    "op": "<=",
+    "value": 15
+   },
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 14
+   },
+   {
+    "path": "actor.family.spouse",
+    "op": "==",
+    "value": ""
+   }
+  ],
+  "chance": {
+   "base": 0.15,
+   "mods": [
+    {
+     "path": "calc.compat",
+     "per": 0.01,
+     "offset": 40
+    },
+    {
+     "path": "rel.actor",
+     "per": 0.008,
+     "offset": 45
+    },
+    {
+     "path": "mod.charm",
+     "per": 1.0
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "SET_ROLE",
+     "role": "partner"
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 10
+    },
+    {
+     "type": "LOG",
+     "key": "log.dating",
+     "kind": "major"
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -8
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": -6
+    }
+   ]
+  }
+ },
+ {
+  "id": "date",
+  "order": 13,
+  "min_age": 14,
+  "roles": [
+   "partner",
+   "fiance",
+   "spouse"
+  ],
+  "time": 1,
+  "cost": 120,
+  "exp": 5,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 14
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 6
+    }
+   ]
+  }
+ },
+ {
+  "id": "propose",
+  "order": 14,
+  "min_age": 18,
+  "roles": [
+   "partner"
+  ],
+  "cost": 2000,
+  "chance": {
+   "base": 0.2,
+   "mods": [
+    {
+     "path": "rel.actor",
+     "per": 0.012,
+     "offset": 50
+    },
+    {
+     "path": "calc.compat",
+     "per": 0.004,
+     "offset": 50
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "SET_ROLE",
+     "role": "fiance"
+    },
+    {
+     "type": "LOG",
+     "key": "log.engaged",
+     "kind": "major"
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -15
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": -10
+    }
+   ]
+  }
+ },
+ {
+  "id": "marry",
+  "order": 15,
+  "min_age": 18,
+  "roles": [
+   "fiance"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "MARRY"
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 15
+    }
+   ]
+  }
+ },
+ {
+  "id": "prenup_marry",
+  "order": 16,
+  "min_age": 18,
+  "roles": [
+   "fiance"
+  ],
+  "chance": {
+   "base": 0.55,
+   "mods": [
+    {
+     "path": "rel.actor",
+     "per": 0.008,
+     "offset": 60
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "MARRY",
+     "prenup": true
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -20
+    }
+   ]
+  }
+ },
+ {
+  "id": "try_baby",
+  "order": 17,
+  "min_age": 16,
+  "roles": [
+   "partner",
+   "fiance",
+   "spouse"
+  ],
+  "time": 1,
+  "success": {
+   "effects": [
+    {
+     "type": "CONCEIVE"
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 4
+    }
+   ]
+  }
+ },
+ {
+  "id": "break_up",
+  "order": 18,
+  "min_age": 12,
+  "roles": [
+   "partner",
+   "fiance"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "END_RELATIONSHIP",
+     "reason": "breakup"
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": -6
+    }
+   ]
+  }
+ },
+ {
+  "id": "divorce",
+  "order": 19,
+  "min_age": 18,
+  "roles": [
+   "spouse"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "DIVORCE"
+    }
+   ]
+  }
+ },
+ {
+  "id": "teach_child",
+  "order": 20,
+  "min_age": 18,
+  "roles": [
+   "child",
+   "grandchild"
+  ],
+  "time": 1,
+  "exp": 6,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 8
+    },
+    {
+     "type": "CHANGE_ACTOR",
+     "path": "gamer.stats.int",
+     "amount": 1
+    },
+    {
+     "type": "CHANGE_ACTOR",
+     "path": "education.grades",
+     "amount": 4,
+     "max": 100
+    }
+   ]
+  }
+ },
+ {
+  "id": "give_money",
+  "order": 21,
+  "min_age": 16,
+  "cost": 1000,
+  "not_roles": [
+   "enemy"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 12
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "helped",
+     "severity": -20
+    }
+   ]
+  }
+ },
+ {
+  "id": "fight",
+  "order": 22,
+  "min_age": 8,
+  "not_roles": [
+   "mother",
+   "father",
+   "grandparent",
+   "child",
+   "grandchild"
+  ],
+  "chance": {
+   "base": 0.4,
+   "mods": [
+    {
+     "path": "stat.str",
+     "per": 0.01,
+     "offset": 10,
+     "max": 0.45
+    },
+    {
+     "path": "stat.dex",
+     "per": 0.005,
+     "offset": 10,
+     "max": 0.15
+    },
+    {
+     "path": "calc.actor_level_gap",
+     "per": -0.03
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -20
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "beaten",
+     "severity": 45
+    },
+    {
+     "type": "STAT_XP",
+     "stat": "str",
+     "amount": 12
+    },
+    {
+     "type": "GAIN_EXP",
+     "amount": 12
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.15,
+     "effects": [
+      {
+       "type": "TRIGGER_EVENT",
+       "event": "fight_police"
+      }
+     ]
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -10
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "health",
+     "amount": -8
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.3,
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_minor"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "cut_contact",
+  "order": 30,
+  "min_age": 12,
+  "success": {
+   "effects": [
+    {
+     "type": "END_RELATIONSHIP",
+     "reason": "cut"
+    }
+   ]
+  }
+ }
+]

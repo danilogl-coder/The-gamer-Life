@@ -1,0 +1,604 @@
+[
+ {
+  "id": "fam_parent_sick",
+  "min_age": 16,
+  "cooldown": 5,
+  "weight": 7,
+  "actor": {
+   "role": [
+    "mother",
+    "father"
+   ]
+  },
+  "actor_conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 50
+   }
+  ],
+  "choices": [
+   {
+    "id": "pay",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -8000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_ACTOR",
+      "path": "attrs.health",
+      "amount": 25,
+      "max": 100
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "saved_life",
+      "severity": -40
+     }
+    ]
+   },
+   {
+    "id": "visit",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 6
+     },
+     {
+      "type": "CHANGE_ACTOR",
+      "path": "attrs.health",
+      "amount": -10,
+      "min": 0
+     }
+    ]
+   },
+   {
+    "id": "heal",
+    "conditions": [
+     {
+      "path": "skill.heal",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_ACTOR",
+      "path": "attrs.health",
+      "amount": 50,
+      "max": 100
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "SKILL_XP",
+      "skill": "heal",
+      "amount": 30
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "fam_sibling_loan",
+  "min_age": 18,
+  "cooldown": 6,
+  "weight": 6,
+  "actor": {
+   "role": "sibling"
+  },
+  "actor_conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 18
+   }
+  ],
+  "conditions": [
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 3000
+   }
+  ],
+  "choices": [
+   {
+    "id": "lend",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -3000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 10
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "lent_sibling"
+     },
+     {
+      "type": "SCHEDULE_EVENT",
+      "event": "loan_return",
+      "min": 1,
+      "max": 4
+     }
+    ]
+   },
+   {
+    "id": "refuse",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -12
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "refused_help",
+      "severity": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "friend_loan",
+  "min_age": 16,
+  "cooldown": 6,
+  "weight": 7,
+  "actor": {
+   "role": [
+    "friend",
+    "best_friend"
+   ]
+  },
+  "conditions": [
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 2000
+   }
+  ],
+  "choices": [
+   {
+    "id": "lend",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -2000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "helped",
+      "severity": -35
+     },
+     {
+      "type": "SCHEDULE_EVENT",
+      "event": "loan_return",
+      "min": 2,
+      "max": 4
+     }
+    ]
+   },
+   {
+    "id": "refuse",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -15
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "refused_help",
+      "severity": 20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "loan_return",
+  "special": true,
+  "choices": [
+   {
+    "id": "collect",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "actor.hidden.loyalty",
+       "per": 0.006,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": 2800
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 5
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -20
+      },
+      {
+       "type": "CHANCE",
+       "p": 0.5,
+       "effects": [
+        {
+         "type": "SET_ROLE",
+         "role": "enemy"
+        }
+       ],
+       "else": [
+        {
+         "type": "SCHEDULE_EVENT",
+         "event": "loan_more",
+         "min": 1,
+         "max": 2
+        }
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "id": "forgive",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "debt_forgiven",
+      "severity": -50
+     },
+     {
+      "type": "SCHEDULE_EVENT",
+      "event": "friend_saves_you",
+      "min": 5,
+      "max": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "loan_more",
+  "special": true,
+  "choices": [
+   {
+    "id": "no",
+    "effects": [
+     {
+      "type": "END_RELATIONSHIP",
+      "reason": "cut"
+     }
+    ]
+   },
+   {
+    "id": "business",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.int",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "stat.cha",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": 0.3,
+       "scale_income": true
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 20
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "business_partner"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -1500
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "friend_saves_you",
+  "special": true,
+  "rarity": "rare",
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 0.5,
+      "scale_income": true
+     },
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 15000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 15
+     },
+     {
+      "type": "LOG",
+      "key": "log.friend_repaid",
+      "kind": "major"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "child_rebel",
+  "min_age": 28,
+  "cooldown": 4,
+  "weight": 8,
+  "actor": {
+   "role": "child"
+  },
+  "actor_conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 13
+   },
+   {
+    "path": "actor.age",
+    "op": "<=",
+    "value": 19
+   },
+   {
+    "path": "rel.actor",
+    "op": "<",
+    "value": 55
+   }
+  ],
+  "choices": [
+   {
+    "id": "talk",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.wis",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 15
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -5
+      }
+     ]
+    }
+   },
+   {
+    "id": "punish",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -12
+     },
+     {
+      "type": "CHANGE_ACTOR",
+      "path": "attrs.discipline",
+      "amount": 8,
+      "max": 100
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "child_asks_money",
+  "min_age": 38,
+  "cooldown": 4,
+  "weight": 7,
+  "actor": {
+   "role": "child"
+  },
+  "actor_conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 18
+   }
+  ],
+  "conditions": [
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 5000
+   }
+  ],
+  "choices": [
+   {
+    "id": "give",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -5000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_ACTOR",
+      "path": "finance.cash",
+      "amount": 5000
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.4,
+      "effects": [
+       {
+        "type": "SCHEDULE_EVENT",
+        "event": "child_success",
+        "min": 3,
+        "max": 8
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "refuse",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -10
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "child_success",
+  "special": true,
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 40000
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_ACTOR",
+      "path": "finance.cash",
+      "amount": 500000
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "grandparent_wisdom",
+  "min_age": 5,
+  "max_age": 30,
+  "cooldown": 4,
+  "weight": 7,
+  "actor": {
+   "role": "grandparent"
+  },
+  "choices": [
+   {
+    "id": "listen",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 35
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 10
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.15,
+      "effects": [
+       {
+        "type": "CHANGE_MONEY",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "ask",
+    "conditions": [
+     {
+      "path": "flag.world_revealed",
+      "op": "==",
+      "value": true
+     }
+    ],
+    "effects": [
+     {
+      "type": "GAIN_EXP",
+      "amount": 150
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "dyn_bloodline_secret"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     }
+    ]
+   }
+  ]
+ }
+]

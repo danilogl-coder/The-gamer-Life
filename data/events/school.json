@@ -1,0 +1,594 @@
+[
+ {
+  "id": "school_bully",
+  "min_age": 7,
+  "max_age": 16,
+  "cooldown": 3,
+  "weight": 10,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "actor": {
+   "new": {
+    "role": "rival",
+    "age_rel": 1,
+    "age_spread": 1,
+    "score": 15
+   }
+  },
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.str",
+       "per": 0.015,
+       "offset": 5,
+       "max": 0.45
+      },
+      {
+       "path": "stat.dex",
+       "per": 0.008,
+       "offset": 5,
+       "max": 0.15
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "str",
+       "amount": 20
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 40
+      },
+      {
+       "type": "ADD_MEMORY",
+       "memory": "beaten",
+       "severity": 40
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "education.absences",
+       "amount": 1
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "reputation",
+       "amount": 3
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "health",
+       "amount": -6
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -8
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "vit",
+       "amount": 15
+      }
+     ]
+    }
+   },
+   {
+    "id": "teacher",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -10
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.5,
+      "effects": [
+       {
+        "type": "CHANGE_STAT",
+        "stat": "reputation",
+        "amount": -3
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "befriend",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.012,
+       "offset": 5,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_ROLE",
+       "role": "friend"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 40
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -4
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "school_exam",
+  "min_age": 9,
+  "max_age": 30,
+  "cooldown": 2,
+  "weight": 12,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "cheat",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 5,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "education.grades",
+       "amount": 8,
+       "max": 100
+      },
+      {
+       "type": "CHANGE_HIDDEN",
+       "hidden": "greed",
+       "amount": 2
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "education.grades",
+       "amount": -15,
+       "min": 0
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "caught_cheating"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "reputation",
+       "amount": -5
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:mother",
+       "amount": -8
+      }
+     ]
+    }
+   },
+   {
+    "id": "focus",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.int",
+       "per": 0.015,
+       "offset": 5,
+       "max": 0.6
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "education.grades",
+       "amount": 10,
+       "max": 100
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 40
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "education.grades",
+       "amount": -6,
+       "min": 0
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "school_crush",
+  "min_age": 12,
+  "max_age": 19,
+  "cooldown": 3,
+  "weight": 9,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "calc.has_partner",
+    "op": "==",
+    "value": false
+   }
+  ],
+  "actor": {
+   "new": {
+    "role": "classmate",
+    "age_rel": 0,
+    "age_spread": 1,
+    "sex": "pref",
+    "score": 55
+   }
+  },
+  "choices": [
+   {
+    "id": "confess",
+    "chance": {
+     "base": 0.25,
+     "mods": [
+      {
+       "path": "calc.compat",
+       "per": 0.01,
+       "offset": 40
+      },
+      {
+       "path": "stat.cha",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_ROLE",
+       "role": "partner"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 20
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 12
+      },
+      {
+       "type": "LOG",
+       "key": "log.first_love",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -10
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -10
+      }
+     ]
+    }
+   },
+   {
+    "id": "admire",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "school_club",
+  "min_age": 10,
+  "max_age": 17,
+  "cooldown": 3,
+  "weight": 9,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "chess",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 40
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 20
+     },
+     {
+      "type": "SPAWN_NPC",
+      "role": "friend",
+      "age_rel": 0,
+      "age_spread": 1,
+      "score": 50
+     }
+    ]
+   },
+   {
+    "id": "sports",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "str",
+      "amount": 30
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "vit",
+      "amount": 30
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.run",
+      "amount": 2
+     }
+    ]
+   },
+   {
+    "id": "music",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "cha",
+      "amount": 30
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.practice_music",
+      "amount": 3
+     },
+     {
+      "type": "SKILL_XP",
+      "skill": "music",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "none"
+   }
+  ]
+ },
+ {
+  "id": "school_caught_skipping",
+  "special": true,
+  "actor": {
+   "role": [
+    "mother",
+    "father"
+   ]
+  },
+  "choices": [
+   {
+    "id": "lie",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 5,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -15
+      },
+      {
+       "type": "ADD_MEMORY",
+       "memory": "lied",
+       "severity": 20
+      }
+     ]
+    }
+   },
+   {
+    "id": "truth",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "school_expulsion_risk",
+  "min_age": 10,
+  "max_age": 17,
+  "cooldown": 2,
+  "weight": 25,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.education.absences",
+    "op": ">=",
+    "value": 6
+   }
+  ],
+  "choices": [
+   {
+    "id": "promise",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "education.absences",
+      "mult": 0,
+      "amount": 0
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "discipline",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "shrug",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "expelled"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": -20
+     },
+     {
+      "type": "LOG",
+      "key": "log.expelled",
+      "kind": "major"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "teacher_mentor",
+  "min_age": 8,
+  "max_age": 25,
+  "cooldown": 4,
+  "weight": 8,
+  "actor": {
+   "role": "teacher"
+  },
+  "actor_conditions": [
+   {
+    "path": "rel.actor",
+    "op": ">=",
+    "value": 60
+   }
+  ],
+  "choices": [
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 60
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "education.grades",
+      "amount": 8,
+      "max": 100
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 10
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "recommendation"
+     }
+    ]
+   },
+   {
+    "id": "decline",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -5
+     }
+    ]
+   }
+  ]
+ }
+]

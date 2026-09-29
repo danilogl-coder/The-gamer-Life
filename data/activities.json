@@ -1,0 +1,1120 @@
+[
+ {
+  "id": "sleep_well",
+  "cat": "system",
+  "order": 1,
+  "min_age": 5,
+  "time": 1,
+  "special": "sleep",
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -6
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "health",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "observe_self",
+  "cat": "system",
+  "order": 2,
+  "min_age": 6,
+  "time": 1,
+  "skill_xp": {
+   "observe": 8
+  },
+  "exp": 5,
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.45,
+    "effects": [
+     {
+      "type": "DISCOVER_HIDDEN"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "dungeon",
+  "cat": "system",
+  "order": 3,
+  "min_age": 12,
+  "time": 1,
+  "mp": 20,
+  "special": "dungeon",
+  "hidden_until": [
+   {
+    "path": "skill.id_create",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "conditions": [
+   {
+    "path": "skill.id_create",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "skill_xp": {
+   "id_create": 6
+  }
+ },
+ {
+  "id": "meditate",
+  "cat": "system",
+  "order": 4,
+  "min_age": 8,
+  "time": 1,
+  "stat_xp": {
+   "wis": 14
+  },
+  "exp": 6,
+  "skill_xp": {
+   "meditation": 6,
+   "focus": 4,
+   "mana_control": 8
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -10
+   }
+  ]
+ },
+ {
+  "id": "mana_training",
+  "cat": "system",
+  "order": 5,
+  "min_age": 12,
+  "time": 1,
+  "hidden_until": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "stat_xp": {
+   "int": 10,
+   "wis": 10
+  },
+  "exp": 18,
+  "skill_xp": {
+   "mana_control": 12,
+   "chi_control": 8,
+   "energy_bolt": 6,
+   "fireball": 6
+  },
+  "counter": "act.meditate"
+ },
+ {
+  "id": "study",
+  "cat": "mind",
+  "order": 10,
+  "min_age": 6,
+  "time": 1,
+  "stat_xp": {
+   "int": 14
+  },
+  "exp": 6,
+  "year_counter": "study",
+  "skill_xp": {
+   "speed_reading": 6,
+   "accelerated_mind": 6,
+   "analytic_sage": 6
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": 2
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "discipline",
+    "amount": 1
+   }
+  ]
+ },
+ {
+  "id": "skip_class",
+  "cat": "mind",
+  "order": 11,
+  "min_age": 10,
+  "max_age": 24,
+  "time": 0,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANGE_VALUE",
+    "path": "education.absences",
+    "amount": 2
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 4
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "discipline",
+    "amount": -3
+   }
+  ],
+  "events": [
+   {
+    "event": "school_caught_skipping",
+    "chance": 0.35
+   },
+   {
+    "event": "street_crowd",
+    "chance": 0.15
+   }
+  ]
+ },
+ {
+  "id": "read_book",
+  "cat": "mind",
+  "order": 12,
+  "min_age": 5,
+  "time": 1,
+  "cost": 20,
+  "stat_xp": {
+   "int": 8,
+   "wis": 8
+  },
+  "exp": 5,
+  "counter": "act.study",
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -2
+   }
+  ]
+ },
+ {
+  "id": "code",
+  "cat": "mind",
+  "order": 13,
+  "min_age": 10,
+  "time": 1,
+  "stat_xp": {
+   "int": 10
+  },
+  "exp": 6,
+  "skill_xp": {
+   "programming": 8
+  }
+ },
+ {
+  "id": "learn_language",
+  "cat": "mind",
+  "order": 14,
+  "min_age": 8,
+  "time": 1,
+  "cost": 300,
+  "stat_xp": {
+   "int": 6,
+   "cha": 5
+  },
+  "exp": 6,
+  "skill_xp": {
+   "negotiation": 3
+  }
+ },
+ {
+  "id": "practice_music",
+  "cat": "mind",
+  "order": 15,
+  "min_age": 6,
+  "time": 1,
+  "cost": 50,
+  "stat_xp": {
+   "cha": 6,
+   "dex": 6
+  },
+  "exp": 6,
+  "skill_xp": {
+   "music": 8,
+   "soul_melody": 8
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 3
+   }
+  ]
+ },
+ {
+  "id": "draw",
+  "cat": "mind",
+  "order": 16,
+  "min_age": 4,
+  "time": 1,
+  "stat_xp": {
+   "dex": 8
+  },
+  "exp": 4,
+  "skill_xp": {
+   "drawing": 8
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -4
+   }
+  ]
+ },
+ {
+  "id": "first_aid_course",
+  "cat": "mind",
+  "order": 17,
+  "min_age": 14,
+  "time": 1,
+  "cost": 400,
+  "conditions": [
+   {
+    "path": "skill.first_aid",
+    "op": "==",
+    "value": 0
+   }
+  ],
+  "exp": 10
+ },
+ {
+  "id": "driving_lessons",
+  "cat": "mind",
+  "order": 18,
+  "min_age": 17,
+  "time": 1,
+  "cost": 1200,
+  "conditions": [
+   {
+    "path": "skill.driving",
+    "op": "==",
+    "value": 0
+   }
+  ],
+  "exp": 10,
+  "stat_xp": {
+   "dex": 6
+  }
+ },
+ {
+  "id": "play",
+  "cat": "body",
+  "order": 20,
+  "min_age": 2,
+  "max_age": 11,
+  "time": 1,
+  "stat_xp": {
+   "str": 6,
+   "dex": 8,
+   "cha": 3
+  },
+  "exp": 4,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 6
+   }
+  ],
+  "events": [
+   {
+    "event": "kid_new_friend",
+    "chance": 0.25
+   }
+  ]
+ },
+ {
+  "id": "gym",
+  "cat": "body",
+  "order": 21,
+  "min_age": 13,
+  "time": 1,
+  "cost": 300,
+  "stat_xp": {
+   "str": 16,
+   "vit": 6
+  },
+  "fitness": 10,
+  "exp": 7,
+  "skill_xp": {
+   "body_training": 8,
+   "iron_body": 8,
+   "adamant_body": 8
+  },
+  "risk": {
+   "chance": 0.03,
+   "stat": "vit"
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "looks",
+    "amount": 1
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -4
+   }
+  ]
+ },
+ {
+  "id": "run",
+  "cat": "body",
+  "order": 22,
+  "min_age": 8,
+  "time": 1,
+  "stat_xp": {
+   "vit": 16,
+   "dex": 4
+  },
+  "fitness": 8,
+  "exp": 6,
+  "skill_xp": {
+   "marathoner": 8
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -5
+   }
+  ]
+ },
+ {
+  "id": "martial_arts",
+  "cat": "body",
+  "order": 23,
+  "min_age": 7,
+  "time": 1,
+  "cost": 500,
+  "stat_xp": {
+   "str": 8,
+   "dex": 12
+  },
+  "fitness": 7,
+  "exp": 8,
+  "skill_xp": {
+   "martial_arts": 8,
+   "chi_control": 6
+  },
+  "risk": {
+   "chance": 0.05,
+   "stat": "dex"
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "discipline",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "sports_team",
+  "cat": "body",
+  "order": 24,
+  "min_age": 8,
+  "max_age": 22,
+  "time": 1,
+  "stat_xp": {
+   "str": 6,
+   "vit": 8,
+   "dex": 6,
+   "cha": 4
+  },
+  "fitness": 8,
+  "exp": 7,
+  "counter": "act.run",
+  "risk": {
+   "chance": 0.04,
+   "stat": "dex"
+  },
+  "events": [
+   {
+    "event": "sports_scout",
+    "chance": 0.08
+   }
+  ]
+ },
+ {
+  "id": "cook",
+  "cat": "body",
+  "order": 25,
+  "min_age": 10,
+  "time": 1,
+  "cost": 40,
+  "stat_xp": {
+   "dex": 4,
+   "wis": 3
+  },
+  "exp": 4,
+  "skill_xp": {
+   "cooking": 8
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "health",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "party",
+  "cat": "leisure",
+  "order": 30,
+  "min_age": 15,
+  "time": 1,
+  "cost": 100,
+  "stat_xp": {
+   "cha": 8
+  },
+  "exp": 5,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 8
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -8
+   },
+   {
+    "type": "CHANGE_HABIT",
+    "habit": "alcohol",
+    "amount": 14
+   }
+  ],
+  "events": [
+   {
+    "event": "party_stranger",
+    "chance": 0.3
+   }
+  ]
+ },
+ {
+  "id": "video_games",
+  "cat": "leisure",
+  "order": 31,
+  "min_age": 5,
+  "time": 1,
+  "stat_xp": {
+   "dex": 4
+  },
+  "exp": 3,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 6
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -8
+   },
+   {
+    "type": "CHANGE_HABIT",
+    "habit": "social_media",
+    "amount": 5
+   }
+  ]
+ },
+ {
+  "id": "social_media",
+  "cat": "leisure",
+  "order": 32,
+  "min_age": 12,
+  "time": 0,
+  "effects": [
+   {
+    "type": "CHANGE_HABIT",
+    "habit": "social_media",
+    "amount": 12
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 2
+   },
+   {
+    "type": "CHANGE_FAME",
+    "amount": 0.4
+   }
+  ],
+  "events": [
+   {
+    "event": "viral_post",
+    "chance": 0.05
+   }
+  ]
+ },
+ {
+  "id": "volunteer",
+  "cat": "leisure",
+  "order": 33,
+  "min_age": 12,
+  "time": 1,
+  "stat_xp": {
+   "cha": 6,
+   "wis": 6
+  },
+  "exp": 6,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "reputation",
+    "amount": 3
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 4
+   }
+  ]
+ },
+ {
+  "id": "travel",
+  "cat": "leisure",
+  "order": 34,
+  "min_age": 18,
+  "time": 1,
+  "cost": 3000,
+  "stat_xp": {
+   "wis": 8,
+   "cha": 6
+  },
+  "exp": 12,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 14
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -20
+   }
+  ],
+  "events": [
+   {
+    "event": "travel_romance",
+    "chance": 0.2
+   }
+  ]
+ },
+ {
+  "id": "lottery",
+  "cat": "leisure",
+  "order": 35,
+  "min_age": 18,
+  "time": 0,
+  "cost": 20,
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.0006,
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 1500000
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "lottery_winner"
+     },
+     {
+      "type": "LOG",
+      "key": "log.lottery_win",
+      "kind": "major"
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANCE",
+      "p": 0.03,
+      "effects": [
+       {
+        "type": "CHANGE_MONEY",
+        "amount": 500
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "casino",
+  "cat": "leisure",
+  "order": 36,
+  "min_age": 18,
+  "time": 1,
+  "cost": 500,
+  "effects": [
+   {
+    "type": "CHANGE_HABIT",
+    "habit": "gambling",
+    "amount": 12
+   },
+   {
+    "type": "CHANCE",
+    "p": 0.46,
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 1000
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 6
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -4
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "find_love",
+  "cat": "love",
+  "order": 40,
+  "min_age": 15,
+  "time": 1,
+  "stat_xp": {
+   "cha": 4
+  },
+  "conditions": [
+   {
+    "path": "calc.has_partner",
+    "op": "==",
+    "value": false
+   }
+  ],
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "love_meet"
+   }
+  ]
+ },
+ {
+  "id": "make_friends",
+  "cat": "love",
+  "order": 41,
+  "min_age": 6,
+  "time": 1,
+  "stat_xp": {
+   "cha": 6
+  },
+  "exp": 4,
+  "effects": [
+   {
+    "type": "SPAWN_NPC",
+    "role": "friend",
+    "age_rel": 0,
+    "age_spread": 3,
+    "score": 55
+   },
+   {
+    "type": "LOG",
+    "key": "log.new_friend"
+   }
+  ]
+ },
+ {
+  "id": "work_hard",
+  "cat": "work",
+  "order": 50,
+  "min_age": 12,
+  "time": 1,
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "year_counter": "work_hard",
+  "exp": 8,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": 6
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "discipline",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "side_gig",
+  "cat": "work",
+  "order": 51,
+  "min_age": 13,
+  "time": 1,
+  "exp": 5,
+  "stat_xp": {
+   "dex": 4,
+   "cha": 3
+  },
+  "effects": [
+   {
+    "type": "CHANGE_MONEY",
+    "min_amount": 150,
+    "max_amount": 900
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": 3
+   }
+  ]
+ },
+ {
+  "id": "freelance_code",
+  "cat": "work",
+  "order": 52,
+  "min_age": 15,
+  "time": 1,
+  "conditions": [
+   {
+    "path": "skill.programming",
+    "op": ">=",
+    "value": 3
+   }
+  ],
+  "exp": 10,
+  "skill_xp": {
+   "programming": 5
+  },
+  "effects": [
+   {
+    "type": "CHANGE_MONEY",
+    "min_amount": 800,
+    "max_amount": 4000
+   }
+  ]
+ },
+ {
+  "id": "busking",
+  "cat": "work",
+  "order": 53,
+  "min_age": 12,
+  "time": 1,
+  "conditions": [
+   {
+    "path": "skill.music",
+    "op": ">=",
+    "value": 2
+   }
+  ],
+  "exp": 6,
+  "skill_xp": {
+   "music": 5
+  },
+  "effects": [
+   {
+    "type": "CHANGE_MONEY",
+    "min_amount": 50,
+    "max_amount": 700
+   },
+   {
+    "type": "CHANGE_FAME",
+    "amount": 0.5
+   }
+  ],
+  "events": [
+   {
+    "event": "music_discovered",
+    "chance": 0.05
+   }
+  ]
+ },
+ {
+  "id": "doctor",
+  "cat": "health",
+  "order": 60,
+  "min_age": 4,
+  "time": 1,
+  "cost": 200,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "health",
+    "amount": 5
+   }
+  ]
+ },
+ {
+  "id": "therapy",
+  "cat": "health",
+  "order": 61,
+  "min_age": 12,
+  "time": 1,
+  "cost": 800,
+  "stat_xp": {
+   "wis": 6
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -25
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 6
+   }
+  ]
+ },
+ {
+  "id": "rehab",
+  "cat": "health",
+  "order": 62,
+  "min_age": 14,
+  "time": 2,
+  "cost": 5000,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "player.health.conditions",
+      "op": "has",
+      "value": "addiction_alcohol"
+     },
+     {
+      "path": "player.health.conditions",
+      "op": "has",
+      "value": "addiction_gambling"
+     },
+     {
+      "path": "player.health.conditions",
+      "op": "has",
+      "value": "addiction_social_media"
+     }
+    ]
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.7,
+    "effects": [
+     {
+      "type": "REMOVE_DISEASE",
+      "disease": "addiction_alcohol"
+     },
+     {
+      "type": "REMOVE_DISEASE",
+      "disease": "addiction_gambling"
+     },
+     {
+      "type": "REMOVE_DISEASE",
+      "disease": "addiction_social_media"
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "alcohol",
+      "amount": -100
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "gambling",
+      "amount": -100
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "social_media",
+      "amount": -100
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "crime_shoplift",
+  "cat": "crime",
+  "order": 70,
+  "min_age": 10,
+  "time": 1,
+  "special": "crime",
+  "crime": "shoplift"
+ },
+ {
+  "id": "crime_pickpocket",
+  "cat": "crime",
+  "order": 71,
+  "min_age": 13,
+  "time": 1,
+  "special": "crime",
+  "crime": "pickpocket"
+ },
+ {
+  "id": "crime_burglary",
+  "cat": "crime",
+  "order": 72,
+  "min_age": 16,
+  "time": 1,
+  "special": "crime",
+  "crime": "burglary",
+  "counter": "crime.burglary"
+ },
+ {
+  "id": "crime_car_theft",
+  "cat": "crime",
+  "order": 73,
+  "min_age": 17,
+  "time": 1,
+  "special": "crime",
+  "crime": "car_theft"
+ },
+ {
+  "id": "crime_fraud",
+  "cat": "crime",
+  "order": 74,
+  "min_age": 20,
+  "time": 1,
+  "special": "crime",
+  "crime": "fraud"
+ },
+ {
+  "id": "crime_heist",
+  "cat": "crime",
+  "order": 75,
+  "min_age": 22,
+  "time": 2,
+  "special": "crime",
+  "crime": "heist",
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 15
+   }
+  ]
+ },
+ {
+  "id": "prison_workout",
+  "cat": "prison",
+  "order": 80,
+  "prison": true,
+  "time": 1,
+  "stat_xp": {
+   "str": 14,
+   "vit": 8
+  },
+  "fitness": 8,
+  "exp": 6,
+  "counter": "act.gym"
+ },
+ {
+  "id": "prison_study",
+  "cat": "prison",
+  "order": 81,
+  "prison": true,
+  "time": 1,
+  "stat_xp": {
+   "int": 12
+  },
+  "exp": 6,
+  "counter": "act.study",
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.2,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": 2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "prison_work",
+  "cat": "prison",
+  "order": 82,
+  "prison": true,
+  "time": 1,
+  "exp": 4,
+  "effects": [
+   {
+    "type": "CHANGE_MONEY",
+    "amount": 300
+   }
+  ]
+ },
+ {
+  "id": "prison_meditate",
+  "cat": "prison",
+  "order": 83,
+  "prison": true,
+  "time": 1,
+  "stat_xp": {
+   "wis": 14
+  },
+  "counter": "act.meditate",
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -10
+   }
+  ]
+ },
+ {
+  "id": "prison_escape",
+  "cat": "prison",
+  "order": 84,
+  "prison": true,
+  "time": 2,
+  "special": "escape"
+ },
+ {
+  "id": "prison_appeal",
+  "cat": "prison",
+  "order": 85,
+  "prison": true,
+  "time": 1,
+  "special": "appeal"
+ }
+]

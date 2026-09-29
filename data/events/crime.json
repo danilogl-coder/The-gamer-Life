@@ -1,0 +1,362 @@
+[
+ {
+  "id": "crime_investigation",
+  "special": true,
+  "choices": [
+   {
+    "id": "lawyer",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -3000
+     },
+     {
+      "type": "TRIAL",
+      "extra": -0.2
+     }
+    ]
+   },
+   {
+    "id": "confess",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": -5
+     },
+     {
+      "type": "TRIAL",
+      "extra": 0.3
+     }
+    ]
+   },
+   {
+    "id": "flee",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      },
+      {
+       "path": "skill.stealth",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "fugitive"
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "criminal.heat",
+       "amount": 30
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "TRIAL",
+       "extra": 0.4
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "fight_police",
+  "special": true,
+  "choices": [
+   {
+    "id": "run",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "dex",
+       "amount": 20
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_CRIMINAL_RECORD",
+       "crime": "assault"
+      },
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -800
+      }
+     ]
+    }
+   },
+   {
+    "id": "explain",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_CRIMINAL_RECORD",
+       "crime": "assault"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "street_crowd",
+  "special": true,
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_min": 17,
+    "age_max": 30,
+    "score": 45
+   }
+  },
+  "choices": [
+   {
+    "id": "join",
+    "effects": [
+     {
+      "type": "SET_ROLE",
+      "role": "friend"
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "street_crew"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 6
+     },
+     {
+      "type": "SCHEDULE_EVENT",
+      "event": "crew_job",
+      "min": 1,
+      "max": 2
+     }
+    ]
+   },
+   {
+    "id": "leave"
+   }
+  ]
+ },
+ {
+  "id": "crew_job",
+  "special": true,
+  "choices": [
+   {
+    "id": "in",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": 4000
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.total"
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "criminal.heat",
+       "amount": 20
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "TRIAL",
+       "crime": "burglary",
+       "extra": 0.3
+      }
+     ]
+    }
+   },
+   {
+    "id": "out",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -15
+     },
+     {
+      "type": "CLEAR_FLAG",
+      "flag": "street_crew"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "prison_fight",
+  "tags": [
+   "prison"
+  ],
+  "cooldown": 2,
+  "weight": 10,
+  "actor": {
+   "new": {
+    "role": "inmate",
+    "age_min": 20,
+    "age_max": 50,
+    "score": 15
+   }
+  },
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.str",
+       "per": 0.012,
+       "offset": 10,
+       "max": 0.5
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 80
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "str",
+       "amount": 30
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "prison_respect"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_minor"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -8
+      }
+     ]
+    }
+   },
+   {
+    "id": "avoid",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 8
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "prison_mentor",
+  "tags": [
+   "prison"
+  ],
+  "once": true,
+  "weight": 8,
+  "actor": {
+   "new": {
+    "role": "inmate",
+    "age_min": 50,
+    "age_max": 75,
+    "score": 50
+   }
+  },
+  "choices": [
+   {
+    "id": "learn",
+    "effects": [
+     {
+      "type": "LEARN_SKILL",
+      "skill": "lockpicking"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "study",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 50
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "wis",
+      "amount": 2
+     }
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,12 @@
+[
+  {"id": "recession", "weight": 3, "min_years": 1, "max_years": 3, "delta": {"economy": -0.6, "unemployment": 0.06, "housing": -0.06, "market.tech_stock": -0.15, "market.index_fund": -0.1}, "mods": {"interview": -0.1}},
+  {"id": "boom", "weight": 3, "min_years": 2, "max_years": 3, "delta": {"economy": 0.5, "unemployment": -0.03, "housing": 0.05, "market.tech_stock": 0.12}, "mods": {"interview": 0.08}},
+  {"id": "epidemic", "weight": 1, "min_years": 1, "max_years": 2, "delta": {"economy": -0.3}, "mods": {"disease_resist": -0.2, "happiness": -0.05}, "on_start": [{"type": "CHANCE", "p": 0.4, "effects": [{"type": "ADD_DISEASE", "disease": "flu"}]}]},
+  {"id": "tech_revolution", "weight": 2, "min_years": 2, "max_years": 4, "delta": {"market.tech_stock": 0.2, "market.lumen_coin": 0.3}, "mods": {}},
+  {"id": "housing_crash", "weight": 1, "min_years": 1, "max_years": 2, "delta": {"housing": -0.15, "economy": -0.3}, "mods": {}},
+  {"id": "crypto_mania", "weight": 1, "min_years": 1, "max_years": 2, "delta": {"market.lumen_coin": 0.8}, "mods": {}},
+  {"id": "general_strike", "weight": 1, "min_years": 1, "max_years": 1, "delta": {"economy": -0.2}, "mods": {"stress_gain": 0.1}},
+  {"id": "rift_surge", "weight": 2, "min_years": 1, "max_years": 3, "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}], "delta": {"rift": 0.25, "market.mana_cores": 0.25}, "mods": {"drop_rate": 0.1, "exp_gain": 0.1}},
+  {"id": "dungeon_break", "weight": 1, "min_years": 1, "max_years": 1, "conditions": [{"path": "calc.level", "op": ">=", "value": 12}], "delta": {"rift": 0.4, "economy": -0.2, "market.mana_cores": 0.4}, "mods": {}, "on_start": [{"type": "TRIGGER_EVENT", "event": "sys_dungeon_break"}]},
+  {"id": "awakening_wave", "weight": 1, "min_years": 1, "max_years": 2, "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}], "delta": {"rift": 0.1}, "mods": {"exp_gain": 0.05}}
+]

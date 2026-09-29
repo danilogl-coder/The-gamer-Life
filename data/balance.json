@@ -1,0 +1,266 @@
+{
+ "life": {
+  "adult_age": 18
+ },
+ "time": {
+  "slots_by_age": [
+   [
+    0,
+    1
+   ],
+   [
+    3,
+    3
+   ],
+   [
+    6,
+    5
+   ],
+   [
+    11,
+    6
+   ],
+   [
+    14,
+    7
+   ],
+   [
+    18,
+    9
+   ]
+  ],
+  "job_cost": {
+   "full": 3,
+   "part": 1,
+   "none": 0
+  },
+  "college_cost": 2,
+  "prison_slots": 4
+ },
+ "probability": {
+  "luck_per_point": 0.003,
+  "luck_cap": 0.4
+ },
+ "gamer": {
+  "starting_skills": [
+   "gamer_mind",
+   "gamer_body",
+   "observe"
+  ],
+  "exp_base": 50,
+  "exp_exponent": 1.5,
+  "exp_level_scale": 0.12,
+  "points_per_level": 5,
+  "stat_xp_base": 40,
+  "stat_xp_growth": 0.06,
+  "natural_growth_xp": 30,
+  "decline_age": 55,
+  "decline_per_year": 0.4,
+  "hp_base": 100,
+  "hp_per_vit": 12,
+  "hp_per_level": 8,
+  "mp_base": 40,
+  "mp_per_int": 8,
+  "mp_per_wis": 4,
+  "ranks": [
+   {
+    "level": 0,
+    "key": "rank.0",
+    "mods": {}
+   },
+   {
+    "level": 25,
+    "key": "rank.1",
+    "event": "sys_evolution_1",
+    "mods": {
+     "statpct.all": 0.15,
+     "lifespan": 0.1
+    }
+   },
+   {
+    "level": 60,
+    "key": "rank.2",
+    "event": "sys_evolution_2",
+    "mods": {
+     "statpct.all": 0.4,
+     "lifespan": 0.25,
+     "exp_gain": 0.2
+    }
+   },
+   {
+    "level": 120,
+    "key": "rank.3",
+    "event": "sys_evolution_3",
+    "mods": {
+     "statpct.all": 1.0,
+     "lifespan": 0.5,
+     "aging_resist": 0.5
+    }
+   },
+   {
+    "level": 250,
+    "key": "rank.4",
+    "event": "sys_evolution_4",
+    "mods": {
+     "statpct.all": 3.0,
+     "lifespan": 0.9,
+     "aging_resist": 0.9
+    }
+   }
+  ]
+ },
+ "skills": {
+  "xp_exponent": 1.35
+ },
+ "education": {
+  "study_bonus": 6,
+  "absence_penalty": 5,
+  "pass_grade": 40,
+  "scholarship_grades": 88
+ },
+ "career": {
+  "promotion_mult": 1.22,
+  "stat_xp_per_year": 25,
+  "retire_age": 60,
+  "pension_rate": 0.45
+ },
+ "finance": {
+  "base_living_cost": 11000,
+  "lifestyle_mult": {
+   "frugal": 0.65,
+   "normal": 1.0,
+   "comfortable": 1.6,
+   "lavish": 3.2
+  },
+  "lifestyle_happiness": {
+   "frugal": -3,
+   "normal": 0,
+   "comfortable": 3,
+   "lavish": 6
+  },
+  "child_cost": 6000,
+  "rent_base": 9000,
+  "rent_yield": 0.05,
+  "maintenance_rate": 0.012,
+  "overdraft_rate": 0.18,
+  "bankruptcy_income_multiple": 4,
+  "high_income": 150000,
+  "high_income_extra_tax": 0.08,
+  "min_income_scale": 5000,
+  "mortgage_down": 0.2,
+  "mortgage_min_credit": 580,
+  "loan_rates": {
+   "personal": 0.11,
+   "student": 0.05,
+   "mortgage": 0.06
+  }
+ },
+ "health": {
+  "vit_mitigation": 0.012,
+  "decline_start": 35,
+  "decline_rate": 0.09,
+  "stress_decay": 8,
+  "addiction_threshold": 60,
+  "habit_cost": {
+   "alcohol": 25,
+   "tobacco": 20,
+   "gambling": 60,
+   "shopping": 45,
+   "social_media": 0
+  },
+  "gompertz_a": 4e-05,
+  "gompertz_b": 0.088,
+  "infant_mortality": 0.003
+ },
+ "social": {
+  "interactions_per_npc_year": 3,
+  "wedding_cost": 8000,
+  "divorce_split": 0.5,
+  "cheat_base": 0.18
+ },
+ "family": {
+  "structure_weights": [
+   62,
+   16,
+   13,
+   4,
+   5
+  ],
+  "base_fertility": 0.55,
+  "adoption_cost": 15000
+ },
+ "events": {
+  "count_weights": [
+   12,
+   45,
+   32,
+   11
+  ],
+  "rarity": {
+   "common": 1.0,
+   "uncommon": 0.55,
+   "rare": 0.2,
+   "very_rare": 0.07,
+   "legendary": 0.02
+  }
+ },
+ "quests": {
+  "max_active": 4
+ },
+ "dungeon": {
+  "death_chance": 0.3
+ },
+ "justice": {
+  "lawyer_cost": 8000,
+  "appeal_cost": 5000
+ },
+ "legacy": {
+  "stat_inherit": 0.12,
+  "estate_tax": 0.1
+ },
+ "world": {
+  "cycle_years": 9,
+  "event_chance": 0.2,
+  "salary_econ_sensitivity": 0.08
+ },
+ "markets": {
+  "assets": [
+   {
+    "id": "index_fund",
+    "price": 100,
+    "trend": 0.05,
+    "beta": 0.12,
+    "vol": 0.1
+   },
+   {
+    "id": "tech_stock",
+    "price": 50,
+    "trend": 0.07,
+    "beta": 0.3,
+    "vol": 0.28
+   },
+   {
+    "id": "gov_bonds",
+    "price": 100,
+    "trend": 0.03,
+    "beta": -0.02,
+    "vol": 0.02
+   },
+   {
+    "id": "mana_cores",
+    "price": 200,
+    "trend": 0.02,
+    "beta": 0.05,
+    "vol": 0.2,
+    "rift_beta": 0.6
+   },
+   {
+    "id": "lumen_coin",
+    "price": 10,
+    "trend": 0.05,
+    "beta": 0.5,
+    "vol": 0.55
+   }
+  ]
+ }
+}

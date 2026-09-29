@@ -1,0 +1,587 @@
+[
+ {
+  "id": "love_meet",
+  "special": true,
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_rel": 0,
+    "age_spread": 4,
+    "sex": "pref",
+    "score": 45
+   }
+  },
+  "choices": [
+   {
+    "id": "ask",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "calc.compat",
+       "per": 0.012,
+       "offset": 40
+      },
+      {
+       "path": "mod.charm",
+       "per": 1.0
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_ROLE",
+       "role": "partner"
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 15
+      },
+      {
+       "type": "LOG",
+       "key": "log.dating",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -4
+      }
+     ]
+    }
+   },
+   {
+    "id": "friend",
+    "effects": [
+     {
+      "type": "SET_ROLE",
+      "role": "friend"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "observe",
+    "conditions": [
+     {
+      "path": "skill.observe",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "OBSERVE"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "party_stranger",
+  "special": true,
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_rel": 0,
+    "age_spread": 4,
+    "sex": "pref",
+    "score": 40
+   }
+  },
+  "choices": [
+   {
+    "id": "dance",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "player.attrs.looks",
+       "per": 0.004,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 20
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 8
+      },
+      {
+       "type": "CHANCE",
+       "p": 0.4,
+       "effects": [
+        {
+         "type": "SET_ROLE",
+         "role": "partner"
+        }
+       ]
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -3
+      }
+     ]
+    }
+   },
+   {
+    "id": "drink",
+    "effects": [
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "alcohol",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "travel_romance",
+  "special": true,
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_rel": 0,
+    "age_spread": 6,
+    "sex": "pref",
+    "score": 50
+   }
+  },
+  "choices": [
+   {
+    "id": "yes",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "cheated_partner",
+      "if": [
+       {
+        "path": "calc.has_partner",
+        "op": "==",
+        "value": true
+       }
+      ]
+     },
+     {
+      "type": "SCHEDULE_EVENT",
+      "event": "partner_finds_out",
+      "min": 1,
+      "max": 3,
+      "keep_actor": false,
+      "if": [
+       {
+        "path": "calc.has_partner",
+        "op": "==",
+        "value": true
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "no"
+   }
+  ]
+ },
+ {
+  "id": "partner_finds_out",
+  "special": true,
+  "actor": {
+   "role": [
+    "spouse",
+    "fiance",
+    "partner"
+   ]
+  },
+  "conditions": [
+   {
+    "path": "flag.cheated_partner",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "confess",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "rel.actor",
+       "per": 0.008,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -25
+      },
+      {
+       "type": "ADD_MEMORY",
+       "memory": "betrayal",
+       "severity": 50
+      },
+      {
+       "type": "CLEAR_FLAG",
+       "flag": "cheated_partner"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "END_RELATIONSHIP",
+       "reason": "betrayal"
+      },
+      {
+       "type": "DIVORCE"
+      },
+      {
+       "type": "CLEAR_FLAG",
+       "flag": "cheated_partner"
+      }
+     ]
+    }
+   },
+   {
+    "id": "deny",
+    "chance": {
+     "base": 0.25,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -8
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "END_RELATIONSHIP",
+       "reason": "betrayal"
+      },
+      {
+       "type": "DIVORCE"
+      },
+      {
+       "type": "CLEAR_FLAG",
+       "flag": "cheated_partner"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "reputation",
+       "amount": -6
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "rom_partner_cheated",
+  "special": true,
+  "choices": [
+   {
+    "id": "forgive",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -10
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "forgiven",
+      "severity": -30
+     }
+    ]
+   },
+   {
+    "id": "leave",
+    "effects": [
+     {
+      "type": "END_RELATIONSHIP",
+      "reason": "betrayal"
+     },
+     {
+      "type": "DIVORCE"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     }
+    ]
+   },
+   {
+    "id": "observe",
+    "conditions": [
+     {
+      "path": "skill.observe",
+      "op": ">=",
+      "value": 3
+     }
+    ],
+    "effects": [
+     {
+      "type": "GAIN_EXP",
+      "amount": 50
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -15
+     },
+     {
+      "type": "SET_FLAG",
+      "flag": "knows_affair"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rom_divorce_request",
+  "special": true,
+  "choices": [
+   {
+    "id": "accept",
+    "effects": [
+     {
+      "type": "DIVORCE"
+     }
+    ]
+   },
+   {
+    "id": "beg",
+    "chance": {
+     "base": 0.25,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "rel.actor",
+       "per": 0.01,
+       "offset": 10
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 25
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "DIVORCE"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -6
+      }
+     ]
+    }
+   },
+   {
+    "id": "therapy",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -3000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rom_anniversary",
+  "min_age": 19,
+  "cooldown": 3,
+  "weight": 8,
+  "actor": {
+   "role": "spouse"
+  },
+  "choices": [
+   {
+    "id": "gift",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -1500
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     }
+    ]
+   },
+   {
+    "id": "letter",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "skill.music",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 18
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 2
+      }
+     ]
+    }
+   },
+   {
+    "id": "forget",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -15
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "forgot_anniversary",
+      "severity": 20
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rom_partner_proposes",
+  "min_age": 20,
+  "cooldown": 3,
+  "weight": 10,
+  "actor": {
+   "role": "partner"
+  },
+  "actor_conditions": [
+   {
+    "path": "rel.actor",
+    "op": ">=",
+    "value": 78
+   }
+  ],
+  "choices": [
+   {
+    "id": "yes",
+    "effects": [
+     {
+      "type": "SET_ROLE",
+      "role": "fiance"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 15
+     },
+     {
+      "type": "LOG",
+      "key": "log.engaged",
+      "kind": "major"
+     }
+    ]
+   },
+   {
+    "id": "no",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -20
+     }
+    ]
+   }
+  ]
+ }
+]

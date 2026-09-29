@@ -1,0 +1,37 @@
+[
+  {"id": "potion_hp", "cat": "consumable", "value": 80, "use": [{"type": "HEAL", "amount": 300}]},
+  {"id": "potion_mp", "cat": "consumable", "value": 90, "use": [{"type": "HEAL", "amount": 0, "mp": 200}]},
+  {"id": "elixir_youth", "cat": "consumable", "value": 250000, "rarity": "legendary", "use": [{"type": "CHANGE_STAT", "stat": "health", "amount": 40}, {"type": "CHANGE_VALUE", "path": "hidden.longevity", "amount": 10, "max": 100}]},
+  {"id": "monster_meat", "cat": "consumable", "value": 20, "use": [{"type": "HEAL", "amount": 60}, {"type": "STAT_XP", "stat": "vit", "amount": 15}]},
+  {"id": "mana_core_small", "cat": "loot", "value": 150, "market": "mana_cores"},
+  {"id": "mana_core_medium", "cat": "loot", "value": 900, "market": "mana_cores"},
+  {"id": "mana_core_large", "cat": "loot", "value": 6000, "market": "mana_cores"},
+  {"id": "dragon_heart", "cat": "loot", "value": 150000, "market": "mana_cores", "rarity": "legendary"},
+  {"id": "goblin_ear", "cat": "loot", "value": 12},
+  {"id": "wolf_pelt", "cat": "loot", "value": 60},
+
+  {"id": "book_energy_bolt", "cat": "skillbook", "value": 800, "use": [{"type": "LEARN_SKILL", "skill": "energy_bolt"}]},
+  {"id": "book_fireball", "cat": "skillbook", "value": 2500, "use": [{"type": "LEARN_SKILL", "skill": "fireball"}]},
+  {"id": "book_mana_shield", "cat": "skillbook", "value": 3000, "use": [{"type": "LEARN_SKILL", "skill": "mana_shield"}]},
+  {"id": "book_heal", "cat": "skillbook", "value": 3500, "use": [{"type": "LEARN_SKILL", "skill": "heal"}]},
+  {"id": "book_id_escape", "cat": "skillbook", "value": 1500, "use": [{"type": "LEARN_SKILL", "skill": "id_escape"}]},
+  {"id": "book_devour", "cat": "skillbook", "value": 20000, "rarity": "rare", "use": [{"type": "LEARN_SKILL", "skill": "devour"}]},
+  {"id": "stat_fruit", "cat": "consumable", "value": 5000, "rarity": "rare", "use": [{"type": "GIVE_STAT_POINTS", "amount": 3}]},
+
+  {"id": "wooden_bat", "cat": "gear", "slot": "weapon", "value": 40, "mods": {"atk": 4}},
+  {"id": "iron_sword", "cat": "gear", "slot": "weapon", "value": 900, "mods": {"atk": 15}},
+  {"id": "mana_staff", "cat": "gear", "slot": "weapon", "value": 2500, "mods": {"atk": 6, "max_mp": 0.15, "statpct.int": 0.05}},
+  {"id": "demon_blade", "cat": "gear", "slot": "weapon", "value": 60000, "rarity": "rare", "mods": {"atk": 80, "crit": 0.05}},
+  {"id": "leather_armor", "cat": "gear", "slot": "armor", "value": 300, "mods": {"def": 8}},
+  {"id": "guardian_plate", "cat": "gear", "slot": "armor", "value": 12000, "mods": {"def": 45, "max_hp": 0.1}},
+  {"id": "lucky_charm", "cat": "gear", "slot": "accessory", "value": 1200, "mods": {"stat.luk": 5}},
+  {"id": "ring_of_wisdom", "cat": "gear", "slot": "accessory", "value": 8000, "mods": {"statpct.wis": 0.1, "stress_gain": -0.1}},
+
+  {"id": "perk_points", "perk": true, "cost": 20, "use": [{"type": "GIVE_STAT_POINTS", "amount": 10}]},
+  {"id": "perk_lucky", "perk": true, "cost": 35, "use": [{"type": "CHANGE_STAT", "stat": "luk", "amount": 8}]},
+  {"id": "perk_genius", "perk": true, "cost": 40, "use": [{"type": "CHANGE_STAT", "stat": "int", "amount": 8}, {"type": "CHANGE_HIDDEN", "hidden": "academic", "amount": 20}]},
+  {"id": "perk_titan", "perk": true, "cost": 40, "use": [{"type": "CHANGE_STAT", "stat": "str", "amount": 6}, {"type": "CHANGE_STAT", "stat": "vit", "amount": 6}]},
+  {"id": "perk_charming", "perk": true, "cost": 30, "use": [{"type": "CHANGE_STAT", "stat": "cha", "amount": 8}, {"type": "CHANGE_STAT", "stat": "looks", "amount": 15}]},
+  {"id": "perk_old_soul", "perk": true, "cost": 60, "use": [{"type": "LEARN_SKILL", "skill": "speed_reading"}, {"type": "LEARN_SKILL", "skill": "meditation"}], "mods": {"exp_gain": 0.15}},
+  {"id": "perk_predator", "perk": true, "cost": 90, "use": [{"type": "LEARN_SKILL", "skill": "devour"}]}
+]

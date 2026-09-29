@@ -1,0 +1,287 @@
+[
+ {
+  "id": "found_wallet",
+  "min_age": 8,
+  "cooldown": 6,
+  "weight": 7,
+  "choices": [
+   {
+    "id": "return",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": 4
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.3,
+      "effects": [
+       {
+        "type": "CHANGE_MONEY",
+        "amount": 300
+       },
+       {
+        "type": "SPAWN_NPC",
+        "role": "acquaintance",
+        "age_min": 30,
+        "age_max": 70,
+        "wealth": "upper",
+        "score": 70
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "keep",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 400
+     },
+     {
+      "type": "CHANGE_HIDDEN",
+      "hidden": "greed",
+      "amount": 4
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.1,
+      "effects": [
+       {
+        "type": "SCHEDULE_EVENT",
+        "event": "wallet_owner",
+        "min": 1,
+        "max": 3
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "wallet_owner",
+  "special": true,
+  "choices": [
+   {
+    "id": "pay",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -600
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "reputation",
+      "amount": -3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "investment_tip",
+  "min_age": 20,
+  "cooldown": 4,
+  "weight": 7,
+  "conditions": [
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 5000
+   }
+  ],
+  "choices": [
+   {
+    "id": "invest",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -5000
+     }
+    ],
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.int",
+       "per": 0.004,
+       "offset": 10,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": 22000
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -6
+      }
+     ]
+    }
+   },
+   {
+    "id": "observe",
+    "conditions": [
+     {
+      "path": "skill.observe",
+      "op": ">=",
+      "value": 4
+     }
+    ],
+    "effects": [
+     {
+      "type": "SKILL_XP",
+      "skill": "observe",
+      "amount": 20
+     }
+    ]
+   },
+   {
+    "id": "pass"
+   }
+  ]
+ },
+ {
+  "id": "scam_call",
+  "min_age": 16,
+  "cooldown": 5,
+  "weight": 6,
+  "choices": [
+   {
+    "id": "give",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "stat.int",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.5
+      },
+      {
+       "path": "stat.wis",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -2500
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 12
+      }
+     ]
+    }
+   },
+   {
+    "id": "hang"
+   }
+  ]
+ },
+ {
+  "id": "distant_inheritance",
+  "min_age": 18,
+  "once": true,
+  "rarity": "very_rare",
+  "weight": 10,
+  "choices": [
+   {
+    "id": "ok",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "min_amount": 30000,
+      "max_amount": 400000
+     },
+     {
+      "type": "LOG",
+      "key": "log.distant_inheritance",
+      "kind": "major"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "car_breakdown",
+  "min_age": 18,
+  "cooldown": 4,
+  "weight": 6,
+  "conditions": [
+   {
+    "path": "skill.driving",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "choices": [
+   {
+    "id": "repair",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -1200
+     }
+    ]
+   },
+   {
+    "id": "fix",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.5
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "dex",
+       "amount": 30
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -2000
+      }
+     ]
+    }
+   }
+  ]
+ }
+]

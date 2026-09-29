@@ -1,0 +1,5 @@
+[
+  {"id": "iron_fist", "stat": "str"},
+  {"id": "arcane_order", "stat": "int"},
+  {"id": "moon_shadow", "stat": "dex"}
+]
