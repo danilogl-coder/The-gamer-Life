@@ -437,6 +437,11 @@
    ],
    [
     "p.ev.graduated"
+   ],
+   [
+    "p.age",
+    ">=",
+    17
    ]
   ],
   "n": 1,
@@ -1509,6 +1514,45 @@
   ],
   "n": 1,
   "bonus": 2
+ },
+ {
+  "id": "rx_play_adult",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.play"
+   ],
+   [
+    "good"
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ]
+  ],
+  "n": 2,
+  "bonus": 1
+ },
+ {
+  "id": "rx_play_adult_bad",
+  "concept": "react",
+  "crit": [
+   [
+    "reply.play"
+   ],
+   [
+    "good",
+    "!"
+   ],
+   [
+    "sp.age",
+    ">=",
+    16
+   ]
+  ],
+  "n": 1,
+  "bonus": 1
  },
  {
   "id": "rx_play_good",

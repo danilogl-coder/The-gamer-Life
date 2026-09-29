@@ -182,6 +182,8 @@ func show_result(result: Dictionary) -> void:
 		toasts.push("warn", App.t(result.get("reason", "ui.invalid")), [])
 		return
 	var text := App.tr_entry(result) if result.get("key", "") != "" else ""
+	if result.has("quote"):
+		text += "\n“%s”" % App.tr_entry(result.quote)
 	var chips := Fmt.gains(result.get("gains", {}))
 	if result.has("log"):
 		var box := W.vbox(6)

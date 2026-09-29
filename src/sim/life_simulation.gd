@@ -219,7 +219,7 @@ func command(name: String, args: Array = []) -> Dictionary:
 			else:
 				p.vote = args[0]
 				activities.bump_counter("civic.votes")
-				result = {"ok": true, "key": "log.voted", "params": {"party": "@party." + str(args[0])}}
+				result = {"ok": true, "key": "log.voted", "params": {"party": "@partyo." + str(args[0])}}
 		"apply_job": result = career.apply(p, args[0], career.interview_score(p, args[1]) if args.size() > 1 else 0.0)
 		"quit_job":
 			career.fire(p, "quit")
@@ -348,6 +348,13 @@ func resolve(path: String, ctx: Dictionary = {}):
 			return _calc(rest, ctx)
 		"world":
 			return GameState.read_path(state.data.world, rest)
+		"wf":
+			# World facts (tech eras, news tags, government, city bands...)
+			var f := {}
+			society.world_facts(f)
+			return f.get(rest, false)
+		"city":
+			return society.city().get(rest)
 		"player":
 			return GameState.read_path(p, rest)
 		"actor":
@@ -365,6 +372,8 @@ func _calc(key: String, ctx: Dictionary):
 		"net_worth": return finance.net_worth(p)
 		"income": return finance.yearly_income(p)
 		"employed": return career.is_employed(p)
+		"job_automatable":
+			return data.get_def("jobs", p.career.get("job", "")).get("cat", "") in ["commerce", "transport", "food", "admin", "industry"]
 		"in_school": return education.in_school(p)
 		"in_prison": return crime.in_prison(p)
 		"married": return relations.spouse_id(p) != ""

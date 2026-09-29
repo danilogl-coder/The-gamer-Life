@@ -250,6 +250,21 @@ func run(e: Dictionary, ctx: Dictionary) -> void:
 					st[e.path] = maxf(0.0, float(st.get(e.path, 0.0)) * float(e.get("mult", 1.0)) + _num(e, ctx))
 		"WORLD_EVENT":
 			_sim.world.start_event(e.event)
+		"VOTE":
+			# party "ruling" = the party in power, "opposition" = strongest rival
+			var party: String = e.get("party", "ruling")
+			if party == "ruling":
+				party = _sim.society.gov().party
+			elif party == "opposition":
+				party = _sim.society.opposition()
+			p.vote = party
+			_sim.activities.bump_counter("civic.votes")
+		"CITY":
+			# Nudges the player's city (prosperity / crime / pollution).
+			var c: Dictionary = _sim.society.city()
+			c[e.stat] = clampf(float(c.get(e.stat, 50)) + float(e.amount), 3, 97)
+		"GOV_APPROVAL":
+			_sim.society.gov().approval = clampf(float(_sim.society.gov().approval) + float(e.amount), 3, 97)
 		_:
 			push_warning("Unknown effect type: %s" % e)
 

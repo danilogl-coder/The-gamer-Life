@@ -5,6 +5,8 @@ extends Control
 
 signal closed
 
+const ConversationView := preload("res://src/ui/popups/conversation_view.gd")
+
 var _inst: Dictionary
 var _body: VBoxContainer
 
@@ -34,6 +36,14 @@ func setup(inst: Dictionary) -> void:
 func _render_question() -> void:
 	W.clear(_body)
 	var sim: LifeSimulation = App.sim
+	if _inst.id == "__talk":
+		sim.events.visible_choices(_inst)
+		_body.add_child(W.label(App.t("ui.calls_you", {"name": sim.state.npc(_inst.actor).get("first_name", "")}), UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
+		var view = ConversationView.new()
+		view.setup(sim.state.data.get("conversation", {}), true)
+		view.finished.connect(_close)
+		_body.add_child(view)
+		return
 	var params := sim.events.params_for(_inst)
 	var head := W.hbox(14)
 	var actor: Dictionary = sim.state.npc(_inst.get("actor", ""))
@@ -45,6 +55,7 @@ func _render_question() -> void:
 	head.add_child(titles)
 	_body.add_child(head)
 	_body.add_child(W.label(_resolve_params("ev.%s.desc" % _inst.id, params), UiTheme.FONT_M, UiTheme.TEXT, true))
+
 	for choice in sim.events.visible_choices(_inst):
 		var text := App.t("ev.%s.%s" % [_inst.id, choice.id], params) if choice.id != "ok" else App.t("ui.continue")
 		var odds := sim.events.choice_chance(_inst, choice)

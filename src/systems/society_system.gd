@@ -239,7 +239,7 @@ func _celebs_year() -> void:
 			continue
 		c.age = int(c.age) + 1
 		var nm := celeb_name(c)
-		var prm := {"celeb": nm, "field": "@celebfield." + str(c.field)}
+		var prm := {"celeb": nm, "field": "@celebfield.%s.%s" % [c.field, c.sex]}
 		if _sim.prob.roll_neutral(_celeb_mortality(int(c.age))):
 			c.alive = false
 			var dprm := prm.duplicate()
@@ -248,7 +248,7 @@ func _celebs_year() -> void:
 			continue
 		alive += 1
 		if c.status == "jailed":
-			if _sim.rng.randf() < 0.4:
+			if _sim.rng.randf() < 0.45:
 				c.status = "active"
 				news("news.celeb_released", prm, "world", "neutral", ["celeb_released"])
 			continue
@@ -256,34 +256,34 @@ func _celebs_year() -> void:
 			continue
 		c.fame = clampf(float(c.fame) + _sim.rng.randn(0, 6), 0, 100)
 		var r: float = _sim.rng.randf()
-		if r < 0.05:
+		if r < 0.025:
 			c.scandals = int(c.scandals) + 1
 			c.fame = maxf(0, float(c.fame) - 14)
 			news("news.celeb_scandal", prm, "world", "bad", ["celeb_scandal", "celeb." + str(c.field)])
-		elif r < 0.12 and c.field in ["music", "film", "sport", "business"]:
+		elif r < 0.07 and c.field in ["music", "film", "sport", "business"]:
 			c.awards = int(c.awards) + 1
 			c.fame = minf(100, float(c.fame) + 10)
 			news("news.celeb_award." + str(c.field), prm, "world", "good", ["celeb_award", "celeb." + str(c.field)])
-		elif r < 0.14:
+		elif r < 0.078:
 			c.status = "jailed"
 			c.fame = maxf(0, float(c.fame) - 20)
 			news("news.celeb_arrested", prm, "world", "bad", ["celeb_arrested"])
-		elif r < 0.17 and c.spouse == "":
+		elif r < 0.095 and c.spouse == "":
 			var other := _find_single_celeb(c)
 			if not other.is_empty():
 				c.spouse = other.id
 				other.spouse = c.id
 				news("news.celeb_wedding", {"celeb": nm, "celeb2": celeb_name(other)}, "world", "good", ["celeb_wedding"])
-		elif r < 0.19 and c.spouse != "":
+		elif r < 0.105 and c.spouse != "":
 			var sp: Dictionary = soc().celebs.get(c.spouse, {})
 			if not sp.is_empty():
 				sp.spouse = ""
 				news("news.celeb_divorce", {"celeb": nm, "celeb2": celeb_name(sp)}, "world", "bad", ["celeb_divorce"])
 			c.spouse = ""
-		elif r < 0.25 and c.field == "hunter" and (float(_sim.state.data.world.rift) > 0.5 or _sim.state.data.world.events.has("dungeon_break")):
+		elif r < 0.14 and c.field == "hunter" and (float(_sim.state.data.world.rift) > 0.5 or _sim.state.data.world.events.has("dungeon_break")):
 			c.fame = minf(100, float(c.fame) + 8)
 			news("news.hunter_hero", prm, "world", "good", ["hunter_hero"])
-		elif r < 0.33:
+		elif r < 0.2:
 			news("news.celeb_work." + str(c.field), prm, "world", "neutral", ["celeb_work", "celeb." + str(c.field)])
 		if (int(c.age) > 62 and _sim.rng.randf() < 0.12) or float(c.fame) < 6:
 			c.status = "retired"
@@ -291,7 +291,7 @@ func _celebs_year() -> void:
 	if alive < 12:
 		for i in 12 - alive:
 			var c = _spawn_celeb(_sim.rng.randi_range(17, 30), "")
-			news("news.celeb_debut." + str(c.field), {"celeb": celeb_name(c), "field": "@celebfield." + str(c.field)}, "world", "good", ["celeb_debut"])
+			news("news.celeb_debut." + str(c.field), {"celeb": celeb_name(c), "field": "@celebfield.%s.%s" % [c.field, c.sex]}, "world", "good", ["celeb_debut"])
 	_trim_celebs()
 
 
@@ -336,16 +336,19 @@ func _city_year(c: Dictionary, home: bool) -> void:
 		if pl.open and pl.owner == p.id:
 			player_biz += 1
 	var donations := float(p.get("year_counters", {}).get("act.donate", 0)) if home else 0.0
-	c.prosperity = clampf(float(c.prosperity) + econ * 4.0 + player_biz * 1.5 + donations * 0.8 + _sim.rng.randn(0, 2.5)
-		+ float(pol.get("welfare", 0.4)) * 1.0 - 0.4, 3, 97)
 	var player_crimes := 0.0
 	if home:
 		for k in p.get("year_counters", {}):
 			if str(k).begins_with("crime."):
 				player_crimes += float(p.year_counters[k])
-	c.crime = clampf(float(c.crime) + (float(w.unemployment) - 0.08) * 40.0 + (50.0 - float(c.prosperity)) * 0.04
-		- float(pol.get("police", 0.2)) * 3.0 + player_crimes * 1.5 + _sim.rng.randn(0, 2.5) + 0.5, 3, 97)
-	c.pollution = clampf(float(c.pollution) + float(soc().tech.level) * 0.01 + _sim.rng.randn(0, 1.5) - (2.0 if has_era("green_energy") else 0.0), 2, 95)
+	# Each value drifts toward a target set by the economy, policies and the
+	# player's own deeds, so cities have momentum but never run away.
+	var prosp_target := 50.0 + econ * 25.0 + player_biz * 3.0 + donations * 2.0 + (float(pol.get("welfare", 0.4)) - 0.4) * 15.0
+	c.prosperity = clampf(lerpf(float(c.prosperity), prosp_target, 0.2) + _sim.rng.randn(0, 3), 3, 97)
+	var crime_target := 35.0 + (float(w.unemployment) - 0.08) * 300.0 + (50.0 - float(c.prosperity)) * 0.4 - (float(pol.get("police", 0.2)) - 0.3) * 30.0 + player_crimes * 3.0
+	c.crime = clampf(lerpf(float(c.crime), crime_target, 0.2) + _sim.rng.randn(0, 3), 3, 97)
+	var poll_target := 30.0 + float(soc().tech.level) * 0.5 - (25.0 if has_era("green_energy") else 0.0) + float(c.prosperity) * 0.1
+	c.pollution = clampf(lerpf(float(c.pollution), poll_target, 0.15) + _sim.rng.randn(0, 2), 2, 95)
 	var year = int(_sim.state.data.world_year)
 	# Businesses close and open with the economy.
 	var open_n := 0
@@ -486,11 +489,11 @@ func _election(country: String, n: Dictionary, home: bool, player_leader: bool) 
 	g.history.append({"y": _sim.state.data.world_year, "party": winner, "leader": g.leader})
 	if home:
 		var key := "news.election_change" if changed else "news.election_keep"
-		news(key, {"party": "@party." + winner, "leader": leader_name(g)}, "politics", "neutral", ["election", "party." + winner])
+		news(key, {"party": "@partyo." + winner, "Party": "@partyO." + winner, "leader": leader_name(g)}, "politics", "neutral", ["election", "party." + winner])
 		p.erase("vote")
 		if voted != "":
 			var won := voted == winner
-			_sim.add_log("log.vote_result_" + ("won" if won else "lost"), {"party": "@party." + winner}, "info")
+			_sim.add_log("log.vote_result_" + ("won" if won else "lost"), {"party": "@partyo." + winner, "Party": "@partyO." + winner}, "info")
 
 
 func _pick_leader(party: String, country: String) -> String:
@@ -504,6 +507,25 @@ func _pick_leader(party: String, country: String) -> String:
 	c.party = party
 	c.country = country
 	return c.id
+
+
+## The party furthest (ideologically) from the one in power.
+func opposition() -> String:
+	var g := gov()
+	var mine := float(_sim.data.get_def("parties", g.party).get("ideology", 0))
+	var best: String = g.party
+	var dist := -1.0
+	var ids: Array = _sim.data.table("parties").keys()
+	ids.sort()
+	for id in ids:
+		var def: Dictionary = _sim.data.get_def("parties", id)
+		if def.has("era") and not has_era(def.era):
+			continue
+		var d := absf(float(def.get("ideology", 0)) - mine)
+		if d > dist:
+			dist = d
+			best = id
+	return best
 
 
 func leader_name(g: Dictionary) -> String:
@@ -724,7 +746,8 @@ func text_params(npc: Dictionary, place_type: String) -> Dictionary:
 		out.closed_place = place_name(closed[-1])
 	var g := gov()
 	out.leader = leader_name(g)
-	out.party = "@party." + str(g.party)
+	out.party = "@partyo." + str(g.party)
+	out.Party = "@partyO." + str(g.party)
 	var nat := nation()
 	var pz: Dictionary = npc.get("persona", {})
 	if pz.get("interests", []).has("sports") and not pz.has("team"):

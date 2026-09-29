@@ -2,6 +2,8 @@ extends VBoxContainer
 ## VIDA — the main screen: who you are right now, the life timeline, quick
 ## repeat of recent actions and the big "+1 YEAR" button.
 
+const WorldView := preload("res://src/ui/popups/world_view.gd")
+
 var ui
 var _header: VBoxContainer
 var _timeline: VBoxContainer
@@ -25,6 +27,10 @@ func _ready() -> void:
 	_age_btn = W.tinted_button("", _advance, Color("b8860b"), 118)
 	_age_btn.add_theme_font_size_override("font_size", UiTheme.FONT_XL)
 	add_child(_age_btn)
+
+
+func _open_world() -> void:
+	ui.open_sheet(App.t("ui.world"), WorldView.new())
 
 
 func refresh() -> void:
@@ -68,6 +74,10 @@ func _render_header(sim: LifeSimulation, p: Dictionary) -> void:
 		money.add_child(W.label(App.t("ui.debt_short", {"v": Fmt.money(float(p.finance.debt))}), UiTheme.FONT_S, UiTheme.BAD))
 	money.add_child(W.icon("clock", UiTheme.SYSTEM_EDGE, 3))
 	money.add_child(W.label(App.t("ui.free_time", {"n": sim.activities.free_slots(p), "max": int(p.time.slots)}), UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
+	var spacer := Control.new()
+	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	money.add_child(spacer)
+	money.add_child(W.button("🌍 " + App.t("ui.world"), _open_world, 56, UiTheme.FONT_S))
 	card.get_child(0).add_child(money)
 	var bars := W.grid(2, 8)
 	for a in ["health", "happiness", "stress", "looks"]:

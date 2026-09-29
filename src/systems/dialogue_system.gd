@@ -26,6 +26,8 @@ extends RefCounted
 ## fail by the speaker's personality, and change the bond, their mood and
 ## what they remember.
 
+## Topics adults don't discuss with small children.
+const GROWN_UP_TOPICS := ["politics", "news", "money", "city", "work", "gossip", "love", "faith", "grudge"]
 const OPS := {"=": "==", "==": "==", "!=": "!=", "<": "<", ">": ">", "<=": "<=", ">=": ">=", "in": "in", "!in": "not_in"}
 
 var _sim
@@ -245,11 +247,11 @@ func _scene_facts(npc: Dictionary, role: String, f: Dictionary) -> void:
 	var loc := "home"
 	if _sim.crime.in_prison(p):
 		loc = "prison"
-	elif role in ["classmate", "teacher"] or (role in ["friend", "best_friend", "rival"] and int(p.age) < 18 and _sim.rng.randf() < 0.5):
+	elif (role in ["classmate", "teacher"] and p.education.get("stage", "") != "") or (role in ["friend", "best_friend", "rival"] and int(p.age) < 18 and _sim.rng.randf() < 0.5):
 		loc = "school"
 	elif role in ["coworker", "boss"]:
 		loc = "work"
-	elif role in ["friend", "best_friend", "partner", "ex", "acquaintance", "rival", "enemy"]:
+	elif role in ["friend", "best_friend", "partner", "ex", "acquaintance", "rival", "enemy", "classmate", "teacher"]:
 		loc = _sim.rng.pick(["cafe", "bar", "park", "street", "phone"]) if int(p.age) >= 16 else _sim.rng.pick(["park", "street", "phone"])
 	elif role in ["mother", "father", "stepparent", "grandparent", "sibling", "child", "grandchild", "spouse"]:
 		loc = _sim.rng.pick(["kitchen", "living_room", "car", "phone", "table"]) if not p.get("moved_out", int(p.age) >= 18) or role in ["spouse", "child"] else _sim.rng.pick(["phone", "visit", "table"])
@@ -303,7 +305,8 @@ func _crit(c: Array, facts: Dictionary) -> bool:
 ## Best rule for a concept, or {} when nothing matches.
 func best(concept: String, npc: Dictionary, facts: Dictionary) -> Dictionary:
 	var said: Dictionary = npc.get("said", {})
-	var year = int(_sim.state.data.world_year)
+	var year := int(_sim.state.data.world_year)
+	var young := int(_sim.player().get("age", 30)) < 12
 	var scored: Array = []
 	var top := -1
 	for r in _by_concept.get(concept, []):
@@ -314,9 +317,14 @@ func best(concept: String, npc: Dictionary, facts: Dictionary) -> Dictionary:
 			continue
 		if year - last < int(r.get("cd", 0)):
 			continue
+		if young and GROWN_UP_TOPICS.has(r.get("topic", "")) and not r.get("kid_ok", false):
+			continue
 		if not matches(r, facts):
 			continue
 		var s: int = r.get("crit", []).size() + int(r.get("bonus", 0))
+		# Recently said lines step aside so people don't repeat themselves.
+		if year - last <= 3 and r.get("crit", []).size() > 0:
+			s -= 2
 		scored.append([r, s])
 		top = maxi(top, s)
 	if scored.is_empty():
@@ -395,6 +403,12 @@ func params_for(npc: Dictionary, facts: Dictionary, rule: Dictionary = {}) -> Di
 		"voice_catch": "@dlgcatch.%s.%d" % [npc.persona.get("voice", "calm"), int(npc.persona.get("catch", 0))],
 	}
 	prm.merge(_sim.society.text_params(npc, rule.get("place", "")), true)
+	var pref: String = _sim.factory._preferred_sex(p) if p.get("sexuality", "straight") != "bi" else ("m" if p.sex == "f" else "f")
+	prm.pref_o = "a" if pref == "f" else "o"
+	prm.pref_art = prm.pref_o
+	prm.Pref_art = prm.pref_o.to_upper()
+	prm.nephew = "niece" if pref == "f" else "nephew"
+	prm.pref_kid = "daughter" if pref == "f" else "son"
 	var spouse = _sim.relations.spouse_id(p)
 	prm.spouse = _sim.state.npc(spouse).get("first_name", "") if spouse != "" else ""
 	var partner = _sim.relations.partner_id(p)
@@ -448,6 +462,8 @@ func start_conversation(npc_id: String, concept: String = "talk", extra: Diction
 	if not greet.is_empty():
 		greet.kind = "quote"
 		lines.append(greet)
+	if int(_sim.player().age) < 4:
+		concept = "baby"
 	var topic_rule := best(concept, npc, facts)
 	if topic_rule.is_empty():
 		topic_rule = best("talk", npc, facts)
@@ -553,7 +569,7 @@ func reply(reply_id: String) -> Dictionary:
 	if not react.is_empty():
 		react.kind = "quote"
 		out_lines.append(react)
-	var outcome := {"key": "dlgui.%s.%s" % [reply_id, "good" if good else "bad"], "params": {"name": npc.first_name}, "kind": "narration"}
+	var outcome := {"key": "dlgui.%s.%s" % [reply_id, "good" if good else "bad"], "params": params_for(npc, facts), "kind": "narration"}
 	out_lines.append(outcome)
 	_sim.activities.bump_counter("social.replies")
 	if good:
@@ -604,6 +620,8 @@ func react_to_event(npc: Dictionary, tags: Array) -> Dictionary:
 ## something in their life, yours, or the world. The scene is queued as a
 ## pending "talk" the player must answer (like an event).
 func process_year(p: Dictionary) -> void:
+	if int(p.age) < 5:
+		return
 	var budget: int = _sim.rng.pick_weighted([0, 1, 1, 2, 2, 3], [1, 2, 2, 2, 1, 1])
 	var ids: Array = p.get("rels", {}).keys()
 	ids.sort()

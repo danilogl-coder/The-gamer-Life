@@ -4292,5 +4292,147 @@
   "reply": "advice",
   "topic": "future",
   "bonus": 2
+ },
+ {
+  "id": "baby_parent",
+  "concept": "baby",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father",
+     "stepparent",
+     "grandparent"
+    ]
+   ]
+  ],
+  "n": 3,
+  "reply": "kid",
+  "topic": "family"
+ },
+ {
+  "id": "baby_parent_tired",
+  "concept": "baby",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "sp.stress",
+    ">=",
+    50
+   ]
+  ],
+  "n": 1,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "baby_parent_nerdy",
+  "concept": "baby",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "sp.voice.nerdy"
+   ]
+  ],
+  "n": 1,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "baby_parent_sarc",
+  "concept": "baby",
+  "crit": [
+   [
+    "role",
+    "in",
+    [
+     "mother",
+     "father"
+    ]
+   ],
+   [
+    "sp.voice.sarcastic"
+   ]
+  ],
+  "n": 1,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "baby_grand",
+  "concept": "baby",
+  "crit": [
+   [
+    "role.grandparent"
+   ]
+  ],
+  "n": 2,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "baby_sibling",
+  "concept": "baby",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "sp.age",
+    "<",
+    12
+   ]
+  ],
+  "n": 2,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "baby_sibling_teen",
+  "concept": "baby",
+  "crit": [
+   [
+    "role.sibling"
+   ],
+   [
+    "sp.age",
+    ">=",
+    12
+   ]
+  ],
+  "n": 1,
+  "reply": "kid",
+  "topic": "family",
+  "bonus": 1
+ },
+ {
+  "id": "baby_any",
+  "concept": "baby",
+  "crit": [],
+  "n": 1,
+  "w": 0.3,
+  "reply": "kid",
+  "topic": "family"
  }
 ]

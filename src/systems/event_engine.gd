@@ -157,6 +157,8 @@ func params_for(inst: Dictionary) -> Dictionary:
 	var p: Dictionary = _sim.player()
 	var actor: Dictionary = _sim.state.npc(inst.get("actor", ""))
 	var params := {"player": p.get("first_name", ""), "age": p.get("age", 0), "level": p.gamer.level}
+	params.o = "a" if p.get("sex", "m") == "f" else "o"
+	params.merge(_sim.society.text_params(actor if not actor.is_empty() else p, ""), false)
 	if not actor.is_empty():
 		params.name = actor.first_name
 		params.actor_level = actor.gamer.level
@@ -207,11 +209,14 @@ func resolve_current(choice_id: String) -> Dictionary:
 	var inst: Dictionary = pending()[0]
 	if inst.id == "__talk":
 		_talk_choices(inst)
-		pending().pop_front()
 		if choice_id == "ok":
+			pending().pop_front()
 			_sim.dialogue.end_conversation()
 			return {"ok": true, "key": ""}
-		return _sim.dialogue.reply(choice_id)
+		var res: Dictionary = _sim.dialogue.reply(choice_id)
+		if res.get("ok", false):
+			pending().pop_front()
+		return res
 	var def: Dictionary = _sim.data.events.get(inst.id, {})
 	var choice: Dictionary = {}
 	for c in visible_choices(inst):

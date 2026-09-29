@@ -2,6 +2,7 @@ extends VBoxContainer
 ## RELAÇÕES — every persistent NPC bond, grouped. Tap a person to open their
 ## sheet: what the Observe skill reveals, their memories of you, and actions.
 
+const ConversationView := preload("res://src/ui/popups/conversation_view.gd")
 const GROUPS := {
 	"family": ["spouse", "mother", "father", "stepparent", "sibling", "child", "grandchild", "grandparent", "late_spouse"],
 	"love": ["partner", "fiance", "ex"],
@@ -180,6 +181,7 @@ func open_npc(id: String) -> void:
 	head.add_child(col)
 	box.add_child(head)
 	box.add_child(_observe_window(sim, npc))
+	box.add_child(_persona_card(sim, npc, id))
 	var mems: Array = npc.get("memory", [])
 	if not mems.is_empty():
 		var flow := W.flow()
@@ -200,6 +202,66 @@ func open_npc(id: String) -> void:
 		grid.add_child(W.button(label, _interact.bind(id, iid), 76, UiTheme.FONT_S))
 	box.add_child(grid)
 	_sheet = ui.open_sheet("%s %s" % [npc.first_name, npc.last_name], box)
+
+
+## Who this person is: what you know grows with closeness, conversations and
+## the Observe skill. Their own life (jobs, weddings, illnesses...) is listed.
+func _persona_card(sim: LifeSimulation, npc: Dictionary, id: String) -> Control:
+	Persona.ensure(npc, sim)
+	var pz: Dictionary = npc.persona
+	var obs := int(npc.get("observed", 0))
+	var role := sim.relations.role_of(id)
+	var close := RelationshipSystem.FAMILY_ROLES.has(role) or sim.relations.score(id) >= 50 or int(npc.get("said", {}).get("_n", 0)) >= 3
+	var box := W.vbox(6)
+	box.add_child(W.label(App.t("ui.personality"), UiTheme.FONT_S, UiTheme.GOLD))
+	var chips := W.flow(4)
+	var mood_col := UiTheme.GOOD if Persona.mood(npc) >= 70 else (UiTheme.WARN if Persona.mood(npc) >= 40 else UiTheme.BAD)
+	chips.add_child(W.chip(App.t("ui.mood") + ": " + App.t("ui.mood_band." + Persona.mood_band(npc)), mood_col, 16))
+	if close or obs >= 2:
+		chips.add_child(W.chip(App.t("ui.voice") + ": " + App.t("voice." + str(pz.get("voice", "calm"))), UiTheme.PURPLE, 16))
+		chips.add_child(W.chip(App.t("ui.quirk") + ": " + App.t("quirk." + str(pz.get("quirk", "late"))), UiTheme.TEXT_DIM, 16))
+	if npc.get("far", false):
+		chips.add_child(W.chip(App.t("ui.moved_to", {"city": npc.get("city", "?")}), UiTheme.WARN, 16))
+	if int(npc.get("jailed", 0)) > 0:
+		chips.add_child(W.chip(App.t("ui.in_jail"), UiTheme.BAD, 16))
+	box.add_child(chips)
+	if close or obs >= 2:
+		var ints: Array = []
+		for i in pz.get("interests", []):
+			ints.append(App.t("interest." + str(i)))
+		box.add_child(W.label(App.t("ui.interests") + ": " + ", ".join(ints), UiTheme.FONT_S, UiTheme.TEXT, true))
+	if obs >= 3 or (close and sim.relations.score(id) >= 70):
+		box.add_child(W.label(App.t("ui.dream") + ": " + App.t("aspiration." + str(pz.get("aspiration", "peace"))), UiTheme.FONT_S, UiTheme.TEXT, true))
+		box.add_child(W.label(App.t("ui.politics") + ": " + App.t("politics." + Persona.politics_label(float(pz.get("politics", 0)))), UiTheme.FONT_S, UiTheme.TEXT_DIM, true))
+	if obs >= 4:
+		for k in Persona.BIG5:
+			box.add_child(W.bar(float(pz.big5[k]), 100, UiTheme.SYSTEM_EDGE, App.t("big5." + k) + " %d" % int(pz.big5[k]), 16))
+	var log: Array = npc.get("life_log", [])
+	if not log.is_empty() and (close or obs >= 1):
+		box.add_child(W.label(App.t("ui.life_of", {"name": npc.first_name}), UiTheme.FONT_S, UiTheme.GOLD))
+		for e in log.slice(-5):
+			var entry := {"key": "lifeev.%s.%s" % [e.e, npc.sex], "params": {}}
+			for k in e.get("p", {}):
+				entry.params[k] = e.p[k]
+			if App.loc.has(entry.key):
+				box.add_child(W.label("%d · %s" % [int(e.y), App.tr_entry(entry)], UiTheme.FONT_S, UiTheme.TEXT_DIM, true))
+	return W.card(box, UiTheme.PANEL)
+
+
+func _open_conversation(id: String, conv: Dictionary) -> void:
+	if _sheet and is_instance_valid(_sheet):
+		_sheet.close()
+	var view = ConversationView.new()
+	view.setup(conv, false)
+	var sheet = ui.open_sheet(App.t("int.talk"), view)
+	sheet.closed.connect(func():
+		if not App.sim.state.data.get("conversation", {}).is_empty():
+			App.sim.command("end_talk"))
+	view.finished.connect(func():
+		sheet.close()
+		App.sim.bus.state_changed.emit()
+		if App.sim.state.has_npc(id) and App.sim.player().rels.has(id) and not App.sim.has_pending_events():
+			open_npc(id))
 
 
 ## What the Observe skill reveals depends on its level (The Gamer style).
@@ -231,6 +293,9 @@ func _observe_window(sim: LifeSimulation, npc: Dictionary) -> Control:
 
 func _interact(id: String, iid: String) -> void:
 	var r: Dictionary = App.sim.interact(id, iid)
+	if r.get("ok", false) and r.has("conversation"):
+		_open_conversation(id, r.conversation)
+		return
 	ui.show_result(r)
 	if r.get("ok", false) and App.sim.state.has_npc(id) and App.sim.player().rels.has(id) and not App.sim.has_pending_events():
 		open_npc(id)

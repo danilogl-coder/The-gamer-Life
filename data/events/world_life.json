@@ -1,0 +1,621 @@
+[
+ {
+  "id": "city_mugging",
+  "min_age": 13,
+  "weight": 8,
+  "cooldown": 4,
+  "tags": [
+   "city"
+  ],
+  "conditions": [
+   {
+    "path": "city.crime",
+    "op": ">=",
+    "value": 55
+   }
+  ],
+  "choices": [
+   {
+    "id": "give",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -300
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.str",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.4
+      },
+      {
+       "path": "skill.martial_arts",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_FAME",
+       "amount": 1
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "str",
+       "amount": 30
+      },
+      {
+       "type": "KARMA",
+       "amount": 2
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "health",
+       "amount": -20
+      },
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -300
+      }
+     ]
+    }
+   },
+   {
+    "id": "run",
+    "chance": {
+     "base": 0.45,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "STAT_XP",
+       "stat": "dex",
+       "amount": 20
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "health",
+       "amount": -8
+      },
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -300
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "election_day",
+  "min_age": 18,
+  "weight": 30,
+  "cooldown": 3,
+  "tags": [
+   "politics"
+  ],
+  "conditions": [
+   {
+    "path": "wf.election_year",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "ruling",
+    "effects": [
+     {
+      "type": "VOTE",
+      "party": "ruling"
+     }
+    ]
+   },
+   {
+    "id": "opposition",
+    "effects": [
+     {
+      "type": "VOTE",
+      "party": "opposition"
+     }
+    ]
+   },
+   {
+    "id": "skip",
+    "effects": []
+   }
+  ]
+ },
+ {
+  "id": "automation_layoffs",
+  "min_age": 18,
+  "weight": 14,
+  "cooldown": 6,
+  "tags": [
+   "work"
+  ],
+  "conditions": [
+   {
+    "path": "wf.tech.automation",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.career.job",
+    "op": "!=",
+    "value": ""
+   },
+   {
+    "path": "calc.job_automatable",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "severance",
+    "effects": [
+     {
+      "type": "LOSE_JOB"
+     },
+     {
+      "type": "CHANGE_MONEY",
+      "amount": 15000
+     }
+    ]
+   },
+   {
+    "id": "retrain",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -2000
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 60
+     },
+     {
+      "type": "SKILL_XP",
+      "skill": "programming",
+      "amount": 40
+     }
+    ]
+   },
+   {
+    "id": "gamble",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "player.career.performance",
+       "per": 0.006,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "LOSE_JOB"
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "protest_march",
+  "min_age": 15,
+  "weight": 10,
+  "cooldown": 3,
+  "tags": [
+   "politics"
+  ],
+  "conditions": [
+   {
+    "path": "wf.news.protests",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "join",
+    "effects": [
+     {
+      "type": "GOV_APPROVAL",
+      "amount": -1
+     },
+     {
+      "type": "KARMA",
+      "amount": 1
+     }
+    ],
+    "chance": {
+     "base": 0.8,
+     "mods": [
+      {
+       "path": "wf.gov.ideology",
+       "per": -0.004
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 6
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "cha",
+       "amount": 15
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_CRIMINAL_RECORD",
+       "crime": "assault"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "health",
+       "amount": -10
+      }
+     ]
+    }
+   },
+   {
+    "id": "watch",
+    "effects": []
+   }
+  ]
+ },
+ {
+  "id": "celeb_encounter",
+  "min_age": 10,
+  "weight": 5,
+  "cooldown": 8,
+  "choices": [
+   {
+    "id": "selfie",
+    "chance": {
+     "base": 0.6,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.004,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 8
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": 1
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -3
+      }
+     ]
+    }
+   },
+   {
+    "id": "talk",
+    "chance": {
+     "base": 0.35,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.4
+      },
+      {
+       "path": "player.fame",
+       "per": 0.004
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SPAWN_NPC",
+       "role": "acquaintance",
+       "age_min": 20,
+       "age_max": 60,
+       "wealth": "elite",
+       "score": 55
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "cha",
+       "amount": 25
+      }
+     ]
+    },
+    "fail": {
+     "effects": []
+    }
+   },
+   {
+    "id": "ignore",
+    "effects": [
+     {
+      "type": "KARMA",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rift_law_raid",
+  "min_age": 14,
+  "weight": 12,
+  "cooldown": 4,
+  "tags": [
+   "dungeon"
+  ],
+  "conditions": [
+   {
+    "path": "wf.gov.rift.ban",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "counter.dungeon.runs",
+    "op": ">=",
+    "value": 1
+   }
+  ],
+  "choices": [
+   {
+    "id": "deny",
+    "chance": {
+     "base": 0.45,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.005,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "skill.stealth",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": -5000
+      },
+      {
+       "type": "ADD_CRIMINAL_RECORD",
+       "crime": "unlicensed"
+      }
+     ]
+    }
+   },
+   {
+    "id": "bribe",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -3000
+     },
+     {
+      "type": "KARMA",
+      "amount": -2
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "favorite_place_closing",
+  "min_age": 16,
+  "weight": 6,
+  "cooldown": 6,
+  "tags": [
+   "city"
+  ],
+  "conditions": [
+   {
+    "path": "wf.news.place_closed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 20000
+   }
+  ],
+  "choices": [
+   {
+    "id": "save",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -20000
+     },
+     {
+      "type": "CITY",
+      "stat": "prosperity",
+      "amount": 3
+     },
+     {
+      "type": "KARMA",
+      "amount": 4
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "let_go",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "tech_new_gadget",
+  "min_age": 10,
+  "weight": 6,
+  "cooldown": 10,
+  "conditions": [
+   {
+    "path": "wf.tech.vr_worlds",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "buy",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -1500
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "social_media",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "pass",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 10
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "longevity_offer",
+  "min_age": 55,
+  "weight": 10,
+  "once": true,
+  "conditions": [
+   {
+    "path": "wf.tech.longevity",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "take",
+    "conditions": [
+     {
+      "path": "player.finance.cash",
+      "op": ">=",
+      "value": 60000
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -60000
+     },
+     {
+      "type": "CHANGE_HIDDEN",
+      "hidden": "longevity",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "health",
+      "amount": 15
+     }
+    ]
+   },
+   {
+    "id": "decline",
+    "effects": [
+     {
+      "type": "KARMA",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ }
+]
