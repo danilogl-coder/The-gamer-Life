@@ -1,0 +1,452 @@
+[
+ {
+  "id": "horse_race",
+  "special": true,
+  "tags": [
+   "mature"
+  ],
+  "choices": [
+   {
+    "id": "fav",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -500
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "gambling",
+      "amount": 6
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.42,
+      "luck": true,
+      "effects": [
+       {
+        "type": "CHANGE_MONEY",
+        "amount": 1000
+       },
+       {
+        "type": "LOG",
+        "key": "log.horse_win"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "mid",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -500
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "gambling",
+      "amount": 6
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.17,
+      "luck": true,
+      "effects": [
+       {
+        "type": "CHANGE_MONEY",
+        "amount": 2500
+       },
+       {
+        "type": "LOG",
+        "key": "log.horse_win"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "long",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -500
+     },
+     {
+      "type": "CHANGE_HABIT",
+      "habit": "gambling",
+      "amount": 6
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.045,
+      "luck": true,
+      "effects": [
+       {
+        "type": "CHANGE_MONEY",
+        "amount": 10000
+       },
+       {
+        "type": "LOG",
+        "key": "log.horse_win"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "watch",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 3
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "vacation_pick",
+  "special": true,
+  "choices": [
+   {
+    "id": "beach",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -3000
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": -25
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.travel"
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.25,
+      "effects": [
+       {
+        "type": "TRIGGER_EVENT",
+        "event": "travel_romance"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "mountains",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -1500
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "vit",
+      "amount": 40
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": -18
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.travel"
+     }
+    ]
+   },
+   {
+    "id": "metropolis",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -5000
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 25
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "cha",
+      "amount": 25
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.travel"
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.learn_language"
+     }
+    ]
+   },
+   {
+    "id": "temple",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -2000
+     },
+     {
+      "type": "KARMA",
+      "amount": 6
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 40
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.travel"
+     }
+    ]
+   },
+   {
+    "id": "rift_resort",
+    "conditions": [
+     {
+      "path": "flag.world_revealed",
+      "op": "==",
+      "value": true
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -12000
+     },
+     {
+      "type": "HEAL",
+      "amount": 9999,
+      "mp": 9999
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 400,
+      "scale_level": true
+     },
+     {
+      "type": "COUNTER",
+      "key": "act.travel"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "club_night",
+  "special": true,
+  "tags": [
+   "mature"
+  ],
+  "actor": {
+   "new": {
+    "role": "acquaintance",
+    "age_rel": 0,
+    "age_spread": 5,
+    "sex": "pref",
+    "score": 45
+   }
+  },
+  "choices": [
+   {
+    "id": "dance",
+    "chance": {
+     "base": 0.5,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "stat.cha",
+       "per": 0.004,
+       "offset": 10,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 20
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 8
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -3
+      }
+     ]
+    }
+   },
+   {
+    "id": "vip",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "player.fame",
+       "per": 0.01
+      },
+      {
+       "path": "stat.cha",
+       "per": 0.005,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SPAWN_NPC",
+       "role": "acquaintance",
+       "age_min": 25,
+       "age_max": 50,
+       "wealth": "elite",
+       "score": 50
+      },
+      {
+       "type": "CHANGE_FAME",
+       "amount": 1
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -4
+      }
+     ]
+    }
+   },
+   {
+    "id": "home",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "health",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "mafia_revenge",
+  "special": true,
+  "tags": [
+   "mature"
+  ],
+  "choices": [
+   {
+    "id": "run",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.4
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "stress",
+       "amount": 20
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_severe"
+      }
+     ]
+    }
+   },
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.3,
+     "mods": [
+      {
+       "path": "stat.str",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.5
+      },
+      {
+       "path": "calc.level",
+       "per": 0.004,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 400,
+       "scale_level": true
+      },
+      {
+       "type": "CLEAR_FLAG",
+       "flag": "mafia_informant"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_severe"
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "health",
+       "amount": -20
+      }
+     ]
+    }
+   }
+  ]
+ }
+]

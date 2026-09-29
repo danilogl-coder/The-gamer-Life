@@ -69,7 +69,10 @@ func save_meta() -> void:
 
 func _on_death(summary: Dictionary) -> void:
 	meta.soul_points = int(meta.soul_points) + int(summary.soul_points)
-	meta.lives.append({"name": summary.name, "age": summary.age, "level": summary.level, "worth": summary.net_worth, "gen": summary.generation})
+	meta.lives.append({"name": summary.name, "age": summary.age, "level": summary.level, "worth": summary.net_worth, "gen": summary.generation, "ribbon": summary.get("ribbon", "")})
+	if not meta.has("ribbons"):
+		meta.ribbons = {}
+	meta.ribbons[summary.get("ribbon", "rb_ordinary")] = int(meta.ribbons.get(summary.get("ribbon", "rb_ordinary"), 0)) + 1
 	save_meta()
 	autosave()
 

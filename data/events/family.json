@@ -266,6 +266,10 @@
     "id": "forgive",
     "effects": [
      {
+      "type": "KARMA",
+      "amount": 5
+     },
+     {
       "type": "CHANGE_RELATIONSHIP",
       "amount": 20
      },

@@ -1,20 +1,543 @@
 [
-  {"id": "flu", "chance": 0.12, "severity": 10, "yearly_health": 2, "natural_cure": 0.9, "treat_cost": 150, "treat_success": 0.95, "mods": {"work_perf": -0.05}},
-  {"id": "asthma", "chance": 0.01, "max_age": 12, "chronic": true, "yearly_health": 1, "treat_cost": 900, "treat_success": 0.3, "mods": {"train_gain.vit": -0.2}},
-  {"id": "depression", "chance": 0.02, "min_age": 13, "yearly_health": 3, "natural_cure": 0.2, "treat_cost": 3000, "treat_success": 0.55, "factors": [{"path": "player.attrs.stress", "above": 70, "mult": 4}, {"path": "player.attrs.happiness", "above": 0, "mult": 1}], "mods": {"happiness": -0.3, "work_perf": -0.1, "study_gain": -0.1}},
-  {"id": "anxiety", "chance": 0.025, "min_age": 12, "yearly_health": 1, "natural_cure": 0.25, "treat_cost": 1800, "treat_success": 0.6, "factors": [{"path": "player.attrs.stress", "above": 60, "mult": 3}], "mods": {"stress_gain": 0.3, "interview": -0.05}},
-  {"id": "burnout", "chance": 0.0, "min_age": 18, "yearly_health": 4, "natural_cure": 0.35, "treat_cost": 2500, "treat_success": 0.7, "mods": {"work_perf": -0.25, "happiness": -0.2}},
-  {"id": "hypertension", "chance": 0.01, "min_age": 30, "age_ramp_from": 40, "age_ramp": 0.08, "chronic": true, "yearly_health": 2, "treat_cost": 1200, "treat_success": 0.4, "factors": [{"path": "player.attrs.stress", "above": 65, "mult": 2}, {"path": "player.health.habits.alcohol", "above": 40, "mult": 1.8}]},
-  {"id": "diabetes", "chance": 0.006, "min_age": 25, "age_ramp_from": 40, "age_ramp": 0.06, "chronic": true, "yearly_health": 3, "treat_cost": 2500, "treat_success": 0.25, "factors": [{"path": "player.health.fitness", "above": 0, "mult": 1}]},
-  {"id": "heart_disease", "chance": 0.002, "min_age": 40, "age_ramp_from": 50, "age_ramp": 0.12, "chronic": true, "yearly_health": 6, "death_chance": 0.05, "treat_cost": 25000, "treat_success": 0.55},
-  {"id": "cancer", "chance": 0.002, "min_age": 30, "age_ramp_from": 50, "age_ramp": 0.1, "yearly_health": 12, "death_chance": 0.18, "natural_cure": 0.03, "treat_cost": 60000, "treat_success": 0.5, "factors": [{"path": "player.health.habits.tobacco", "above": 30, "mult": 3}]},
-  {"id": "dementia", "chance": 0.003, "min_age": 65, "age_ramp_from": 70, "age_ramp": 0.15, "chronic": true, "yearly_health": 4, "treat_cost": 8000, "treat_success": 0.1, "mods": {"statpct.int": -0.3}},
-  {"id": "mana_sickness", "chance": 0.0, "yearly_health": 5, "natural_cure": 0.5, "treat_cost": 10000, "treat_success": 0.6, "mods": {"max_mp": -0.3}},
-  {"id": "injury_minor", "injury": true, "severity": 10, "on_add_health": 6, "yearly_health": 1, "natural_cure": 0.85, "treat_cost": 400, "treat_success": 0.95, "mods": {"train_gain": -0.2}},
-  {"id": "injury_severe", "injury": true, "severity": 40, "on_add_health": 22, "yearly_health": 5, "natural_cure": 0.4, "death_chance": 0.01, "treat_cost": 12000, "treat_success": 0.8, "mods": {"train_gain": -0.5, "work_perf": -0.15, "atk": -10}},
-  {"id": "burns", "injury": true, "severity": 30, "on_add_health": 15, "yearly_health": 2, "natural_cure": 0.5, "treat_cost": 6000, "treat_success": 0.85, "mods": {}},
-  {"id": "addiction_alcohol", "yearly_health": 5, "chronic": true, "mods": {"work_perf": -0.15, "happiness": -0.1, "study_gain": -0.15}},
-  {"id": "addiction_gambling", "yearly_health": 1, "chronic": true, "mods": {"happiness": -0.1}},
-  {"id": "addiction_social_media", "yearly_health": 1, "chronic": true, "mods": {"study_gain": -0.1, "stress_gain": 0.1}},
-  {"id": "addiction_tobacco", "yearly_health": 3, "chronic": true, "mods": {"train_gain.vit": -0.15}}
+ {
+  "id": "flu",
+  "chance": 0.12,
+  "severity": 10,
+  "yearly_health": 2,
+  "natural_cure": 0.9,
+  "treat_cost": 150,
+  "treat_success": 0.95,
+  "mods": {
+   "work_perf": -0.05
+  }
+ },
+ {
+  "id": "asthma",
+  "chance": 0.006,
+  "max_age": 12,
+  "chronic": true,
+  "yearly_health": 1,
+  "treat_cost": 900,
+  "treat_success": 0.3,
+  "mods": {
+   "train_gain.vit": -0.2
+  }
+ },
+ {
+  "id": "depression",
+  "chance": 0.02,
+  "min_age": 13,
+  "yearly_health": 3,
+  "natural_cure": 0.2,
+  "treat_cost": 3000,
+  "treat_success": 0.55,
+  "factors": [
+   {
+    "path": "player.attrs.stress",
+    "above": 70,
+    "mult": 4
+   },
+   {
+    "path": "player.attrs.happiness",
+    "above": 0,
+    "mult": 1
+   }
+  ],
+  "mods": {
+   "happiness": -0.3,
+   "work_perf": -0.1,
+   "study_gain": -0.1
+  }
+ },
+ {
+  "id": "anxiety",
+  "chance": 0.025,
+  "min_age": 12,
+  "yearly_health": 1,
+  "natural_cure": 0.25,
+  "treat_cost": 1800,
+  "treat_success": 0.6,
+  "factors": [
+   {
+    "path": "player.attrs.stress",
+    "above": 60,
+    "mult": 3
+   }
+  ],
+  "mods": {
+   "stress_gain": 0.3,
+   "interview": -0.05
+  }
+ },
+ {
+  "id": "burnout",
+  "chance": 0.0,
+  "min_age": 18,
+  "yearly_health": 4,
+  "natural_cure": 0.35,
+  "treat_cost": 2500,
+  "treat_success": 0.7,
+  "mods": {
+   "work_perf": -0.25,
+   "happiness": -0.2
+  }
+ },
+ {
+  "id": "hypertension",
+  "chance": 0.01,
+  "min_age": 30,
+  "age_ramp_from": 40,
+  "age_ramp": 0.08,
+  "chronic": true,
+  "yearly_health": 2,
+  "treat_cost": 1200,
+  "treat_success": 0.4,
+  "factors": [
+   {
+    "path": "player.attrs.stress",
+    "above": 65,
+    "mult": 2
+   },
+   {
+    "path": "player.health.habits.alcohol",
+    "above": 40,
+    "mult": 1.8
+   }
+  ]
+ },
+ {
+  "id": "diabetes",
+  "chance": 0.006,
+  "min_age": 25,
+  "age_ramp_from": 40,
+  "age_ramp": 0.06,
+  "chronic": true,
+  "yearly_health": 3,
+  "treat_cost": 2500,
+  "treat_success": 0.25,
+  "factors": [
+   {
+    "path": "player.health.fitness",
+    "above": 0,
+    "mult": 1
+   }
+  ]
+ },
+ {
+  "id": "heart_disease",
+  "chance": 0.002,
+  "min_age": 40,
+  "age_ramp_from": 50,
+  "age_ramp": 0.12,
+  "chronic": true,
+  "yearly_health": 6,
+  "death_chance": 0.05,
+  "treat_cost": 25000,
+  "treat_success": 0.55
+ },
+ {
+  "id": "cancer",
+  "chance": 0.002,
+  "min_age": 30,
+  "age_ramp_from": 50,
+  "age_ramp": 0.1,
+  "yearly_health": 12,
+  "death_chance": 0.18,
+  "natural_cure": 0.03,
+  "treat_cost": 60000,
+  "treat_success": 0.5,
+  "factors": [
+   {
+    "path": "player.health.habits.tobacco",
+    "above": 30,
+    "mult": 3
+   }
+  ]
+ },
+ {
+  "id": "dementia",
+  "chance": 0.003,
+  "min_age": 65,
+  "age_ramp_from": 70,
+  "age_ramp": 0.15,
+  "chronic": true,
+  "yearly_health": 4,
+  "treat_cost": 8000,
+  "treat_success": 0.1,
+  "mods": {
+   "statpct.int": -0.3
+  }
+ },
+ {
+  "id": "mana_sickness",
+  "chance": 0.0,
+  "yearly_health": 5,
+  "natural_cure": 0.5,
+  "treat_cost": 10000,
+  "treat_success": 0.6,
+  "mods": {
+   "max_mp": -0.3
+  }
+ },
+ {
+  "id": "injury_minor",
+  "injury": true,
+  "severity": 10,
+  "on_add_health": 6,
+  "yearly_health": 1,
+  "natural_cure": 0.85,
+  "treat_cost": 400,
+  "treat_success": 0.95,
+  "mods": {
+   "train_gain": -0.2
+  }
+ },
+ {
+  "id": "injury_severe",
+  "injury": true,
+  "severity": 40,
+  "on_add_health": 22,
+  "yearly_health": 5,
+  "natural_cure": 0.4,
+  "death_chance": 0.01,
+  "treat_cost": 12000,
+  "treat_success": 0.8,
+  "mods": {
+   "train_gain": -0.5,
+   "work_perf": -0.15,
+   "atk": -10
+  }
+ },
+ {
+  "id": "burns",
+  "injury": true,
+  "severity": 30,
+  "on_add_health": 15,
+  "yearly_health": 2,
+  "natural_cure": 0.5,
+  "treat_cost": 6000,
+  "treat_success": 0.85,
+  "mods": {}
+ },
+ {
+  "id": "addiction_alcohol",
+  "yearly_health": 5,
+  "chronic": true,
+  "mods": {
+   "work_perf": -0.15,
+   "happiness": -0.1,
+   "study_gain": -0.15
+  }
+ },
+ {
+  "id": "addiction_gambling",
+  "yearly_health": 1,
+  "chronic": true,
+  "mods": {
+   "happiness": -0.1
+  }
+ },
+ {
+  "id": "addiction_social_media",
+  "yearly_health": 1,
+  "chronic": true,
+  "mods": {
+   "study_gain": -0.1,
+   "stress_gain": 0.1
+  }
+ },
+ {
+  "id": "addiction_tobacco",
+  "yearly_health": 3,
+  "chronic": true,
+  "mods": {
+   "train_gain.vit": -0.15
+  }
+ },
+ {
+  "id": "common_cold",
+  "chance": 0.2,
+  "severity": 5,
+  "yearly_health": 1,
+  "natural_cure": 0.95,
+  "treat_cost": 50,
+  "treat_success": 0.97
+ },
+ {
+  "id": "acne",
+  "chance": 0.15,
+  "min_age": 12,
+  "max_age": 24,
+  "yearly_health": 0,
+  "natural_cure": 0.4,
+  "treat_cost": 200,
+  "treat_success": 0.8,
+  "mods": {
+   "charm": -0.05
+  }
+ },
+ {
+  "id": "appendicitis",
+  "chance": 0.008,
+  "min_age": 5,
+  "yearly_health": 8,
+  "death_chance": 0.03,
+  "treat_cost": 6000,
+  "treat_success": 0.97
+ },
+ {
+  "id": "arthritis",
+  "chance": 0.004,
+  "min_age": 40,
+  "age_ramp_from": 55,
+  "age_ramp": 0.08,
+  "chronic": true,
+  "yearly_health": 2,
+  "treat_cost": 2000,
+  "treat_success": 0.3,
+  "mods": {
+   "train_gain.dex": -0.2
+  }
+ },
+ {
+  "id": "bronchitis",
+  "chance": 0.02,
+  "yearly_health": 3,
+  "natural_cure": 0.7,
+  "treat_cost": 300,
+  "treat_success": 0.9,
+  "factors": [
+   {
+    "path": "player.health.habits.tobacco",
+    "above": 20,
+    "mult": 3
+   }
+  ]
+ },
+ {
+  "id": "chickenpox",
+  "chance": 0.08,
+  "max_age": 12,
+  "yearly_health": 2,
+  "natural_cure": 0.99,
+  "treat_cost": 100,
+  "treat_success": 0.95
+ },
+ {
+  "id": "migraine",
+  "chance": 0.006,
+  "min_age": 10,
+  "chronic": true,
+  "yearly_health": 1,
+  "treat_cost": 900,
+  "treat_success": 0.5,
+  "mods": {
+   "work_perf": -0.05,
+   "study_gain": -0.05
+  },
+  "factors": [
+   {
+    "path": "player.attrs.stress",
+    "above": 60,
+    "mult": 2
+   }
+  ]
+ },
+ {
+  "id": "kidney_stones",
+  "chance": 0.006,
+  "min_age": 25,
+  "yearly_health": 5,
+  "natural_cure": 0.4,
+  "treat_cost": 3000,
+  "treat_success": 0.9
+ },
+ {
+  "id": "gout",
+  "chance": 0.004,
+  "min_age": 35,
+  "chronic": true,
+  "yearly_health": 2,
+  "treat_cost": 1500,
+  "treat_success": 0.4,
+  "factors": [
+   {
+    "path": "player.health.habits.alcohol",
+    "above": 30,
+    "mult": 2.5
+   }
+  ]
+ },
+ {
+  "id": "insomnia",
+  "chance": 0.02,
+  "min_age": 14,
+  "yearly_health": 2,
+  "natural_cure": 0.35,
+  "treat_cost": 800,
+  "treat_success": 0.6,
+  "mods": {
+   "work_perf": -0.08
+  },
+  "factors": [
+   {
+    "path": "player.attrs.stress",
+    "above": 55,
+    "mult": 3
+   }
+  ]
+ },
+ {
+  "id": "obesity",
+  "yearly_health": 3,
+  "chronic": true,
+  "treat_cost": 9000,
+  "treat_success": 0.5,
+  "mods": {
+   "charm": -0.05,
+   "train_gain.vit": -0.1
+  }
+ },
+ {
+  "id": "pneumonia",
+  "chance": 0.006,
+  "yearly_health": 8,
+  "death_chance": 0.02,
+  "natural_cure": 0.5,
+  "treat_cost": 2500,
+  "treat_success": 0.9,
+  "age_ramp_from": 65,
+  "age_ramp": 0.08
+ },
+ {
+  "id": "food_poisoning",
+  "chance": 0.03,
+  "yearly_health": 2,
+  "natural_cure": 0.99,
+  "treat_cost": 150,
+  "treat_success": 0.98
+ },
+ {
+  "id": "broken_bone",
+  "injury": true,
+  "severity": 20,
+  "on_add_health": 10,
+  "yearly_health": 2,
+  "natural_cure": 0.8,
+  "treat_cost": 2500,
+  "treat_success": 0.95,
+  "mods": {
+   "train_gain": -0.3
+  }
+ },
+ {
+  "id": "bulimia",
+  "chance": 0.004,
+  "min_age": 13,
+  "max_age": 35,
+  "yearly_health": 5,
+  "natural_cure": 0.1,
+  "treat_cost": 6000,
+  "treat_success": 0.5,
+  "factors": [
+   {
+    "path": "player.attrs.happiness",
+    "above": 0,
+    "mult": 1
+   }
+  ]
+ },
+ {
+  "id": "bipolar",
+  "chance": 0.002,
+  "min_age": 15,
+  "chronic": true,
+  "yearly_health": 2,
+  "treat_cost": 3500,
+  "treat_success": 0.35,
+  "mods": {
+   "stress_gain": 0.2
+  }
+ },
+ {
+  "id": "ocd",
+  "chance": 0.0015,
+  "min_age": 8,
+  "chronic": true,
+  "yearly_health": 1,
+  "treat_cost": 2500,
+  "treat_success": 0.35,
+  "mods": {
+   "study_gain": 0.03,
+   "stress_gain": 0.1
+  }
+ },
+ {
+  "id": "alzheimers",
+  "chance": 0.002,
+  "min_age": 65,
+  "age_ramp_from": 70,
+  "age_ramp": 0.18,
+  "chronic": true,
+  "yearly_health": 5,
+  "death_chance": 0.04,
+  "treat_cost": 10000,
+  "treat_success": 0.05,
+  "mods": {
+   "statpct.int": -0.4,
+   "statpct.wis": -0.3
+  }
+ },
+ {
+  "id": "std",
+  "yearly_health": 2,
+  "natural_cure": 0.1,
+  "treat_cost": 400,
+  "treat_success": 0.9,
+  "tags": [
+   "mature"
+  ]
+ },
+ {
+  "id": "hernia",
+  "chance": 0.005,
+  "min_age": 20,
+  "yearly_health": 3,
+  "treat_cost": 4000,
+  "treat_success": 0.95,
+  "factors": [
+   {
+    "path": "counter.act.gym",
+    "above": 30,
+    "mult": 2
+   }
+  ]
+ },
+ {
+  "id": "cataracts",
+  "chance": 0.004,
+  "min_age": 55,
+  "age_ramp_from": 65,
+  "age_ramp": 0.1,
+  "yearly_health": 1,
+  "treat_cost": 3000,
+  "treat_success": 0.95,
+  "mods": {
+   "dodge": -0.02
+  }
+ },
+ {
+  "id": "osteoporosis",
+  "chance": 0.003,
+  "min_age": 50,
+  "age_ramp_from": 60,
+  "age_ramp": 0.1,
+  "chronic": true,
+  "yearly_health": 2,
+  "treat_cost": 2000,
+  "treat_success": 0.3,
+  "mods": {
+   "dmg_reduction": -0.05
+  }
+ }
 ]

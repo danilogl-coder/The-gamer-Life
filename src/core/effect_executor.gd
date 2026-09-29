@@ -118,6 +118,9 @@ func run(e: Dictionary, ctx: Dictionary) -> void:
 			_sim.gamer.discover_hidden(p, e.get("hidden", ""))
 		"CHANGE_HIDDEN":
 			p.hidden[e.hidden] = clampf(float(p.hidden.get(e.hidden, 50)) + _num(e, ctx), 0.0, 100.0)
+		"KARMA":
+			p.hidden.karma = clampf(float(p.hidden.get("karma", 50)) + _num(e, ctx), 0.0, 100.0)
+			_sim.activities.bump_counter("karma." + ("good" if _num(e, ctx) > 0 else "bad"))
 		"ADD_TRAIT":
 			if not p.traits.has(e.trait):
 				p.traits.append(e.trait)
@@ -133,8 +136,8 @@ func run(e: Dictionary, ctx: Dictionary) -> void:
 			var crime_id: String = p.criminal.get("pending", "")
 			if crime_id == "":
 				crime_id = e.get("crime", "burglary")
-			p.criminal.erase("pending")
-			_sim.crime.arrest_and_trial(p, crime_id, float(e.get("extra", 0.0)))
+			var extra := float(e.get("extra", 0.0)) + float(p.criminal.get("pending_extra", 0.0))
+			_sim.crime.arrest_and_trial(p, crime_id, extra, e.get("lawyer", "auto"))
 		"GO_TO_PRISON":
 			_sim.crime.imprison(p, _sim.rng.randi_range(int(e.get("min", 1)), int(e.get("max", 3))))
 		"KILL":
@@ -146,7 +149,10 @@ func run(e: Dictionary, ctx: Dictionary) -> void:
 		"NOTIFY":
 			_sim.notify(e.get("kind", "system"), e.key, _log_params(e, ctx))
 		"CHANCE":
-			if _sim.rng.randf() < float(e.get("p", 0.5)):
+			var chance_p := float(e.get("p", 0.5))
+			if e.get("luck", false):
+				chance_p = _sim.prob.apply_luck(chance_p) * (1.0 + _sim.gamer.mod(e.get("mod", "gamble_luck")))
+			if _sim.rng.randf() < chance_p:
 				run_all(e.get("effects", []), ctx)
 			else:
 				run_all(e.get("else", []), ctx)
@@ -164,9 +170,64 @@ func run(e: Dictionary, ctx: Dictionary) -> void:
 			if not actor.is_empty():
 				_sim.relations.divorce(actor.id)
 		"CONCEIVE":
-			if not actor.is_empty():
-				var born: bool = _sim.relations.conceive(actor.id)
-				_gain(ctx, "baby", 1 if born else 0)
+			var mode: String = e.get("mode", "natural")
+			var partner_id: String = actor.get("id", "")
+			if partner_id == "" and mode != "surrogate":
+				partner_id = _sim.relations.partner_id(p)
+			var born: int = _sim.relations.conceive(partner_id, mode)
+			_gain(ctx, "baby", born)
+		"POPULARITY":
+			_sim.school_life.change_popularity(p, _num(e, ctx))
+			_gain(ctx, "popularity", _num(e, ctx))
+		"ADD_LICENSE":
+			if not p.licenses.has(e.license):
+				p.licenses.append(e.license)
+				_sim.add_log("log.license", {"license": "@license." + e.license}, "info")
+		"GIVE_HEIRLOOM":
+			var pool: Array = []
+			var weights: Array = []
+			for iid in _sim.data.table("items"):
+				var idef: Dictionary = _sim.data.table("items")[iid]
+				if idef.get("cat", "") == "heirloom" and not p.gamer.inventory.has(iid):
+					pool.append(iid)
+					weights.append(0.35 if idef.get("rarity", "") == "rare" else 1.0)
+			pool.sort()
+			var found = _sim.rng.pick_weighted(pool, weights)
+			if found != null:
+				_sim.gamer.add_item(p, found)
+				_sim.gamer.invalidate()
+				_sim.add_log("log.heirloom", {"item": "@item." + found}, "major")
+				_gain(ctx, "item:" + found, 1)
+		"PRISON_BEHAVIOR":
+			_sim.crime.change_behavior(p, _num(e, ctx))
+		"KILL_ACTOR":
+			if not actor.is_empty() and actor.get("alive", false):
+				actor.alive = false
+				actor.death_cause = e.get("cause", "cause.murder")
+				_sim.add_log("log.npc_killed", {"name": actor.first_name}, "major")
+				if p.family.get("spouse", "") == actor.id:
+					p.family.spouse = ""
+					_sim.relations.set_role(actor.id, "late_spouse")
+					_sim.finance.add_cash(p, float(actor.finance.get("cash", 0.0)) * 0.8)
+		"SUE":
+			var r: Dictionary = _sim.crime.sue(p, e.target, e.get("lawyer", "cheap"))
+			if r.get("ok", false):
+				_gain(ctx, "money", float(r.get("gains", {}).get("money", 0)))
+		"APPEAL":
+			_sim.crime.appeal(p, e.get("lawyer", "cheap"))
+		"JOIN_GANG":
+			_sim.crime.join_gang(p, e.gang)
+		"SET_VALUE":
+			GameState.write_path(p, e.path, e.value)
+		"DOCTOR_VISIT":
+			var q := float(e.get("quality", 0.8))
+			for cid in p.health.conditions.keys():
+				var cdef: Dictionary = _sim.data.get_def("diseases", cid)
+				if not cdef.get("chronic", false) and _sim.rng.randf() < q * float(cdef.get("treat_success", 0.5)) * 0.5:
+					_sim.health.remove_condition(p, cid)
+					_gain(ctx, "cured", 1)
+		"STERILIZE":
+			_sim.state.set_flag("sterile")
 		"OBSERVE":
 			if not actor.is_empty():
 				_sim.skills.observe(actor)

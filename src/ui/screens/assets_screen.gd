@@ -25,6 +25,7 @@ func refresh() -> void:
 	_properties(sim, p)
 	_possessions(sim, p)
 	_markets(sim, p)
+	_will(sim, p)
 	_migration(sim, p)
 
 
@@ -83,6 +84,7 @@ func _properties(sim: LifeSimulation, p: Dictionary) -> void:
 		var row := W.hbox(8)
 		row.add_child(W.button(App.t("ui.sell"), func(): ui.show_result(App.sim.command("sell_property", [i])), 68, UiTheme.FONT_S))
 		row.add_child(W.button(App.t("ui.toggle_rent"), func(): App.sim.command("toggle_rent", [i]), 68, UiTheme.FONT_S))
+		row.add_child(W.button(App.t("ui.renovate"), func(): ui.show_result(App.sim.command("renovate", [i])), 68, UiTheme.FONT_S))
 		card.add_child(row)
 		_box.add_child(W.card(card))
 	for id in App.data.table("properties"):
@@ -116,8 +118,12 @@ func _possessions(sim: LifeSimulation, p: Dictionary) -> void:
 		if not sim.cond.check_all(def.get("conditions", []), {}):
 			continue
 		var price := sim.finance.possession_price(p, id)
-		var b := W.button("%s\n%s" % [App.t("poss." + id), Fmt.money(price)], func(): ui.show_result(App.sim.command("buy_possession", [id])), 76, 18)
-		b.disabled = float(p.finance.cash) < price
+		var lic_ok := sim.finance.license_ok(p, def)
+		var label := "%s\n%s" % [App.t("poss." + id), Fmt.money(price)]
+		if not lic_ok:
+			label = "%s\n%s" % [App.t("poss." + id), App.t("license.required_" + def.license)]
+		var b := W.button(label, func(): ui.show_result(App.sim.command("buy_possession", [id])), 76, 18)
+		b.disabled = float(p.finance.cash) < price or not lic_ok
 		flow.add_child(b)
 	_box.add_child(flow)
 
@@ -162,3 +168,30 @@ func _migration(sim: LifeSimulation, p: Dictionary) -> void:
 		var b := W.button(text, func(): ui.show_result(App.sim.command("emigrate", [id])), 84, 18)
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		_box.add_child(b)
+
+
+func _will(sim: LifeSimulation, p: Dictionary) -> void:
+	if int(p.age) < 18:
+		return
+	_box.add_child(W.section(App.t("ui.will")))
+	var mode: String = p.get("will", {}).get("mode", "equal")
+	var row := W.grid(2, 6)
+	for m in ["equal", "spouse", "favorite", "charity"]:
+		var b := W.tinted_button(App.t("will." + m), func(): App.sim.command("set_will", [m, _first_child(sim, p)]), UiTheme.SYSTEM if mode == m else UiTheme.PANEL, 64)
+		b.add_theme_font_size_override("font_size", 18)
+		row.add_child(b)
+	_box.add_child(row)
+	if mode == "favorite":
+		var kids := W.flow(6)
+		for cid in sim.relations.all_with_role(p, "child"):
+			var fav: bool = p.will.get("favorite", "") == cid
+			var kb := W.tinted_button(sim.state.npc(cid).first_name, func(): App.sim.command("set_will", ["favorite", cid]), UiTheme.GOLD.darkened(0.5) if fav else UiTheme.PANEL, 60)
+			kb.size_flags_horizontal = Control.SIZE_FILL
+			kb.custom_minimum_size.x = 150
+			kids.add_child(kb)
+		_box.add_child(kids)
+
+
+func _first_child(sim: LifeSimulation, p: Dictionary) -> String:
+	var kids := sim.relations.all_with_role(p, "child")
+	return kids[0] if not kids.is_empty() else ""

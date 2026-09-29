@@ -69,6 +69,11 @@ func _rebuild_mods() -> void:
 		_add_mods(_sim.data.get_def("items", perk).get("mods", {}), 1.0)
 	_add_mods(_sim.world.active_mods(), 1.0)
 	_add_mods(_sim.pets.mods(p), 1.0)
+	_add_mods(_sim.school_life.mods(p), 1.0)
+	for item_id in p.gamer.get("inventory", {}):
+		var idef: Dictionary = _sim.data.get_def("items", item_id)
+		if idef.get("cat", "") == "heirloom":
+			_add_mods(idef.get("mods", {}), 1.0)
 	for item in p.finance.get("possessions", []):
 		_add_mods(_sim.data.get_def("possessions", item.id).get("mods", {}), 1.0)
 	var rank := int(p.gamer.get("rank", 0))

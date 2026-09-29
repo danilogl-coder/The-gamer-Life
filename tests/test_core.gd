@@ -58,6 +58,7 @@ func test_migration_runs() -> void:
 	check(v1.npcs.c1.has("pets") and v1.npcs.c1.has("special"), "player got pets/special")
 	check(v1.npcs.c1.finance.has("possessions"), "player got possessions")
 	check(v1.has("settings") and v1.has("challenge"), "state got settings/challenge")
+	check(v1.npcs.c1.has("school") and v1.npcs.c1.has("will"), "v3 fields added")
 
 
 func test_data_references_are_valid() -> void:
@@ -146,14 +147,15 @@ func test_locale_keys_exist() -> void:
 		for id in data.events:
 			for k in ["title", "desc"]:
 				check(loc.has("ev.%s.%s" % [id, k]), "[%s] missing ev.%s.%s" % [code, id, k])
-		for t in ["skills", "titles", "jobs", "activities", "items", "diseases", "monsters", "dungeons", "education", "traits", "crimes", "achievements", "quests", "world_events", "properties", "factions", "countries", "interactions", "pets", "possessions", "special_careers", "challenges"]:
+		for t in ["skills", "titles", "jobs", "activities", "items", "diseases", "monsters", "dungeons", "education", "traits", "crimes", "achievements", "quests", "world_events", "properties", "factions", "countries", "interactions", "pets", "possessions", "special_careers", "challenges", "cliques", "clubs", "ribbons", "gangs", "lawsuits"]:
 			var prefix: String = {"skills": "skill", "titles": "title", "jobs": "job", "activities": "act", "items": "item",
 				"diseases": "disease", "monsters": "mon", "dungeons": "dng", "education": "edu", "traits": "trait",
 				"crimes": "crime", "achievements": "ach", "quests": "quest", "world_events": "wevent",
 				"properties": "prop", "factions": "faction", "countries": "country", "interactions": "int",
-				"pets": "pet", "possessions": "poss", "special_careers": "sc", "challenges": "ch"}[t]
+				"pets": "pet", "possessions": "poss", "special_careers": "sc", "challenges": "ch",
+				"cliques": "clique", "clubs": "club", "ribbons": "ribbon", "gangs": "gang", "lawsuits": "lawsuit"}[t]
 			for id in data.table(t):
 				var key := "%s.%s" % [prefix, id]
-				if t in ["achievements", "quests", "world_events", "challenges"]:
+				if t in ["achievements", "quests", "world_events", "challenges", "ribbons"]:
 					key += ".title"
 				check(loc.has(key), "[%s] missing %s" % [code, key])

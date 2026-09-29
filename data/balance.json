@@ -39,7 +39,8 @@
  },
  "probability": {
   "luck_per_point": 0.003,
-  "luck_cap": 0.4
+  "luck_cap": 0.4,
+  "karma_per_point": 0.0015
  },
  "gamer": {
   "starting_skills": [

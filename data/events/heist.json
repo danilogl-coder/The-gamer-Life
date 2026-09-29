@@ -1,0 +1,351 @@
+[
+ {
+  "id": "bank_plan_target",
+  "special": true,
+  "choices": [
+   {
+    "id": "local",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_reward",
+      "amount": 40000
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_weapon"
+     }
+    ]
+   },
+   {
+    "id": "central",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_reward",
+      "amount": 400000
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_weapon"
+     }
+    ]
+   },
+   {
+    "id": "vault",
+    "conditions": [
+     {
+      "path": "flag.world_revealed",
+      "op": "==",
+      "value": true
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": -20
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_reward",
+      "amount": 3000000
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_weapon"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "bank_plan_weapon",
+  "special": true,
+  "choices": [
+   {
+    "id": "words",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": "stat.cha"
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_disguise"
+     }
+    ]
+   },
+   {
+    "id": "fake",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": 5
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_disguise"
+     }
+    ]
+   },
+   {
+    "id": "magic",
+    "conditions": [
+     {
+      "path": "skill.energy_bolt",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": "stat.int"
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_disguise"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "bank_plan_disguise",
+  "special": true,
+  "choices": [
+   {
+    "id": "mask",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": 5
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_getaway"
+     }
+    ]
+   },
+   {
+    "id": "uniform",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": 12
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_getaway"
+     }
+    ]
+   },
+   {
+    "id": "none",
+    "effects": [
+     {
+      "type": "CHANGE_VALUE",
+      "path": "year_counters.heist_bonus",
+      "amount": -25
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "bank_plan_getaway"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "bank_plan_getaway",
+  "special": true,
+  "choices": [
+   {
+    "id": "car",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "yc.heist_bonus",
+       "per": 0.01
+      },
+      {
+       "path": "stat.dex",
+       "per": 0.004,
+       "offset": 10,
+       "max": 0.2
+      },
+      {
+       "path": "skill.driving",
+       "per": 0.02
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": "yc.heist_reward"
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.total"
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.bank_robbery"
+      },
+      {
+       "type": "KARMA",
+       "amount": -15
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "criminal.heat",
+       "amount": 50
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 300,
+       "scale_level": true
+      },
+      {
+       "type": "CHANCE",
+       "p": 0.4,
+       "effects": [
+        {
+         "type": "SET_VALUE",
+         "path": "criminal.pending",
+         "value": "bank_robbery"
+        },
+        {
+         "type": "SCHEDULE_EVENT",
+         "event": "crime_investigation",
+         "min": 1,
+         "max": 3
+        }
+       ]
+      },
+      {
+       "type": "LOG",
+       "key": "log.bank_robbed",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "SET_VALUE",
+       "path": "criminal.pending",
+       "value": "bank_robbery"
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.total"
+      },
+      {
+       "type": "KARMA",
+       "amount": -10
+      },
+      {
+       "type": "TRIGGER_EVENT",
+       "event": "trial_lawyer"
+      }
+     ]
+    }
+   },
+   {
+    "id": "sewer",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "yc.heist_bonus",
+       "per": 0.01
+      },
+      {
+       "path": "stat.vit",
+       "per": 0.004,
+       "offset": 10,
+       "max": 0.2
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_MONEY",
+       "amount": "yc.heist_reward"
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.total"
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.bank_robbery"
+      },
+      {
+       "type": "KARMA",
+       "amount": -15
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "criminal.heat",
+       "amount": 40
+      },
+      {
+       "type": "GAIN_EXP",
+       "amount": 300,
+       "scale_level": true
+      },
+      {
+       "type": "LOG",
+       "key": "log.bank_robbed",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "SET_VALUE",
+       "path": "criminal.pending",
+       "value": "bank_robbery"
+      },
+      {
+       "type": "COUNTER",
+       "key": "crime.total"
+      },
+      {
+       "type": "TRIGGER_EVENT",
+       "event": "trial_lawyer"
+      }
+     ]
+    }
+   },
+   {
+    "id": "abort",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 20
+     }
+    ]
+   }
+  ]
+ }
+]

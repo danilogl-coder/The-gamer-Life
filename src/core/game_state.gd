@@ -4,7 +4,7 @@ extends RefCounted
 ## serializes to JSON trivially and migrations can patch it. No gameplay rules
 ## live here: systems read and write through the helpers below.
 
-const SAVE_VERSION := 2
+const SAVE_VERSION := 3
 
 var data: Dictionary = {}
 

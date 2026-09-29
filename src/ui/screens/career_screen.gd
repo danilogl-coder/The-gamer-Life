@@ -18,6 +18,7 @@ func refresh() -> void:
 	var sim: LifeSimulation = App.sim
 	var p := sim.player()
 	_render_education(sim, p)
+	_render_school_life(sim, p)
 	_render_job(sim, p)
 	_render_special(sim, p)
 	_render_board(sim, p)
@@ -69,6 +70,12 @@ func _render_job(sim: LifeSimulation, p: Dictionary) -> void:
 		card.add_child(W.label("%s — %s" % [App.t("job." + p.career.job), App.t("joblevel.%d" % int(p.career.level))], UiTheme.FONT_M, UiTheme.GOLD, true))
 		card.add_child(W.label(App.t("ui.salary_line", {"v": Fmt.money(sim.career.current_salary(p)), "y": int(p.career.years)}), UiTheme.FONT_S, UiTheme.TEXT))
 		card.add_child(W.bar(float(p.career.performance), 100, UiTheme.GOOD, App.t("ui.performance") + " %d" % int(p.career.performance), 22))
+		var hours := W.hbox(6)
+		for h in ["part", "normal", "overtime"]:
+			var hb := W.tinted_button(App.t("job.hours_" + h), func(): App.sim.command("set_hours", [h]), UiTheme.SYSTEM if p.get("job_hours", "normal") == h else UiTheme.PANEL, 60)
+			hb.add_theme_font_size_override("font_size", 17)
+			hours.add_child(hb)
+		card.add_child(hours)
 		var row := W.hbox(8)
 		row.add_child(W.button(App.t("ui.ask_raise"), func(): ui.show_result(App.sim.command("ask_raise")), 72, UiTheme.FONT_S))
 		row.add_child(W.button(App.t("ui.quit_job"), func(): App.sim.command("quit_job"), 72, UiTheme.FONT_S))
@@ -80,6 +87,64 @@ func _render_job(sim: LifeSimulation, p: Dictionary) -> void:
 	if p.faction.id != "":
 		card.add_child(W.label(App.t("ui.faction_line", {"f": App.t("faction." + p.faction.id), "rep": int(p.faction.rep.get(p.faction.id, 0))}), UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
 	_box.add_child(W.card(card))
+
+
+## Popularity, cliques and clubs (only while at school).
+func _render_school_life(sim: LifeSimulation, p: Dictionary) -> void:
+	if not sim.education.in_school(p) or int(p.age) < 7:
+		return
+	var sch: Dictionary = sim.school_life.school(p)
+	_box.add_child(W.section(App.t("ui.school_life")))
+	var card := W.vbox(6)
+	card.add_child(W.bar(float(sch.popularity), 100, UiTheme.PURPLE, App.t("ui.popularity") + " %d" % int(sch.popularity), 22))
+	card.add_child(W.label(App.t("ui.clique_line", {"c": App.t("clique." + sch.clique) if sch.clique != "" else "—"}), UiTheme.FONT_S))
+	for cid in sch.clubs:
+		var row := W.hbox(8)
+		row.add_child(W.label("%s · %s" % [App.t("club." + cid), App.t("club_rank.%d" % int(sch.clubs[cid].rank))], UiTheme.FONT_S, UiTheme.TEXT, true))
+		var b := W.button(App.t("ui.practice") + " ⏱", func(): ui.show_result(App.sim.command("practice_club", [cid])), 64, 18)
+		b.custom_minimum_size.x = 170
+		b.size_flags_horizontal = Control.SIZE_SHRINK_END
+		row.add_child(b)
+		card.add_child(row)
+	_box.add_child(W.card(card))
+	var cl := W.grid(2, 6)
+	for id in App.data.table("cliques"):
+		var reason := sim.school_life.clique_block_reason(p, id)
+		if reason in ["job.block.age"]:
+			continue
+		var b := W.button(App.t("clique." + id) + ("\n" + App.t(reason) if reason != "" else ""), func(): ui.show_result(App.sim.command("join_clique", [id])), 72, 17)
+		b.disabled = reason != ""
+		cl.add_child(b)
+	_box.add_child(W.label(App.t("ui.cliques"), 18, UiTheme.TEXT_DIM))
+	_box.add_child(cl)
+	if sch.clubs.size() < 2:
+		var clubs := W.grid(2, 6)
+		for id in App.data.table("clubs"):
+			if sch.clubs.has(id) or int(p.age) < int(App.data.get_def("clubs", id).min_age):
+				continue
+			clubs.add_child(W.button(App.t("club." + id), func(): ui.show_result(App.sim.command("join_club", [id])), 64, 17))
+		_box.add_child(W.label(App.t("ui.clubs"), 18, UiTheme.TEXT_DIM))
+		_box.add_child(clubs)
+
+
+## Job interview: two questions, then the application with the bonus.
+func _interview(job_id: String) -> void:
+	var qs: Array = App.sim.career.interview_questions()
+	var answers := {}
+	var box := W.vbox(10)
+	var sheet = null
+	var render := func(step: int, self_ref: Callable) -> void:
+		W.clear(box)
+		if step >= qs.size():
+			ui.close_overlays()
+			ui.show_result(App.sim.command("apply_job", [job_id, answers]))
+			return
+		var q: Dictionary = qs[step]
+		box.add_child(W.label(App.t("iq.%s" % q.id), UiTheme.FONT_M, UiTheme.TEXT, true))
+		for a in q.answers:
+			box.add_child(W.button(App.t("iq.%s.%s" % [q.id, a]), func(): answers[q.id] = a; self_ref.call(step + 1, self_ref), 80, UiTheme.FONT_S))
+	render.call(0, render)
+	sheet = ui.open_sheet(App.t("ui.interview", {"job": App.t("job." + job_id)}), box, true)
 
 
 ## Special careers: small games inside the life sim (music, sports, business, influencer).
@@ -153,7 +218,7 @@ func _render_board(sim: LifeSimulation, p: Dictionary) -> void:
 		var text := "%s · %s/%s · %s" % [App.t("job." + id), Fmt.money(salary), App.t("ui.year_short"), App.t("jobcat." + def.get("cat", "admin"))]
 		if reason != "":
 			text += "\n" + App.t(reason)
-		var b := W.button(text, func(): ui.show_result(App.sim.command("apply_job", [id])), 84, UiTheme.FONT_S)
+		var b := W.button(text, _interview.bind(id), 84, UiTheme.FONT_S)
 		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		b.disabled = reason != ""
 		_box.add_child(b)

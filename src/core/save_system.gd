@@ -20,6 +20,19 @@ static var MIGRATIONS: Dictionary = {
 				ch.merge({"special": {}, "pets": []}, false)
 				ch.get("finance", {}).merge({"possessions": []}, false)
 		d.merge({"challenge": "", "settings": {"mature": true}}, false),
+	# v2 -> v3: BitLife-depth update (karma & new hidden traits, zodiac, school
+	# life, will, licenses, job hours, weight).
+	2: func(d: Dictionary) -> void:
+		var extra := ["karma", "willpower", "generosity", "craziness", "religiousness", "professionalism", "athleticism"]
+		for id in d.get("npcs", {}):
+			var ch: Dictionary = d.npcs[id]
+			for h in extra:
+				ch.get("hidden", {}).merge({h: 50.0}, false)
+			ch.merge({"birth_month": 1}, false)
+			ch.get("health", {}).merge({"weight": 0.0}, false)
+			if ch.get("is_player", false):
+				ch.merge({"school": {"popularity": 30.0, "clique": "", "clubs": {}}, "will": {"mode": "equal", "favorite": ""},
+					"licenses": [], "job_hours": "normal", "surgeries": {}}, false),
 }
 
 

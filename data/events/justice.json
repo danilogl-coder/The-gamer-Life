@@ -1,0 +1,238 @@
+[
+ {
+  "id": "trial_lawyer",
+  "special": true,
+  "log_kind": "major",
+  "choices": [
+   {
+    "id": "public",
+    "effects": [
+     {
+      "type": "TRIAL",
+      "lawyer": "public"
+     }
+    ]
+   },
+   {
+    "id": "cheap",
+    "effects": [
+     {
+      "type": "TRIAL",
+      "lawyer": "cheap"
+     }
+    ]
+   },
+   {
+    "id": "elite",
+    "effects": [
+     {
+      "type": "TRIAL",
+      "lawyer": "elite"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "appeal_firm",
+  "special": true,
+  "tags": [
+   "prison"
+  ],
+  "choices": [
+   {
+    "id": "cheap",
+    "effects": [
+     {
+      "type": "APPEAL",
+      "lawyer": "cheap"
+     }
+    ]
+   },
+   {
+    "id": "elite",
+    "effects": [
+     {
+      "type": "APPEAL",
+      "lawyer": "elite"
+     }
+    ]
+   },
+   {
+    "id": "cancel"
+   }
+  ]
+ },
+ {
+  "id": "murder_investigation",
+  "special": true,
+  "tags": [
+   "mature"
+  ],
+  "choices": [
+   {
+    "id": "lawyer",
+    "effects": [
+     {
+      "type": "SET_VALUE",
+      "path": "criminal.pending",
+      "value": "murder"
+     },
+     {
+      "type": "TRIAL",
+      "lawyer": "auto",
+      "extra": -0.1
+     }
+    ]
+   },
+   {
+    "id": "flee",
+    "chance": {
+     "base": 0.25,
+     "mods": [
+      {
+       "path": "stat.dex",
+       "per": 0.006,
+       "offset": 10,
+       "max": 0.3
+      },
+      {
+       "path": "skill.stealth",
+       "per": 0.03
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "fugitive"
+      },
+      {
+       "type": "CHANGE_VALUE",
+       "path": "criminal.heat",
+       "amount": 60
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "SET_VALUE",
+       "path": "criminal.pending",
+       "value": "murder"
+      },
+      {
+       "type": "TRIAL",
+       "lawyer": "public",
+       "extra": 0.3
+      }
+     ]
+    }
+   }
+  ]
+ },
+ {
+  "id": "lawsuit_pick",
+  "special": true,
+  "choices": [
+   {
+    "id": "employer",
+    "conditions": [
+     {
+      "path": "counter.job.fired",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "SUE",
+      "target": "employer"
+     }
+    ]
+   },
+   {
+    "id": "doctor",
+    "conditions": [
+     {
+      "path": "counter.disease.cancer",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "SUE",
+      "target": "doctor"
+     }
+    ]
+   },
+   {
+    "id": "neighbor",
+    "effects": [
+     {
+      "type": "SUE",
+      "target": "neighbor"
+     }
+    ]
+   },
+   {
+    "id": "ex",
+    "conditions": [
+     {
+      "path": "counter.social.divorces",
+      "op": ">=",
+      "value": 1
+     }
+    ],
+    "effects": [
+     {
+      "type": "SUE",
+      "target": "ex_partner"
+     }
+    ]
+   },
+   {
+    "id": "burger",
+    "conditions": [
+     {
+      "path": "counter.act.junk_food",
+      "op": ">=",
+      "value": 5
+     }
+    ],
+    "effects": [
+     {
+      "type": "SUE",
+      "target": "burger_chain"
+     }
+    ]
+   },
+   {
+    "id": "guild",
+    "conditions": [
+     {
+      "path": "counter.dungeon.defeats",
+      "op": ">=",
+      "value": 1
+     },
+     {
+      "path": "player.faction.id",
+      "op": "!=",
+      "value": ""
+     }
+    ],
+    "effects": [
+     {
+      "type": "SUE",
+      "target": "guild"
+     }
+    ]
+   },
+   {
+    "id": "none"
+   }
+  ]
+ }
+]

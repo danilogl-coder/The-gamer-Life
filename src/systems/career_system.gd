@@ -21,10 +21,28 @@ func is_employed(p: Dictionary) -> bool:
 	return p.career.job != ""
 
 
+const HOURS := {
+	"part": {"salary": 0.55, "perf": -12.0, "stress": 0.5, "slots": 1},
+	"normal": {"salary": 1.0, "perf": 0.0, "stress": 1.0, "slots": 3},
+	"overtime": {"salary": 1.3, "perf": 12.0, "stress": 1.7, "slots": 4},
+}
+
+
+func hours(p: Dictionary) -> Dictionary:
+	return HOURS.get(p.get("job_hours", "normal"), HOURS.normal)
+
+
+func set_hours(p: Dictionary, h: String) -> Dictionary:
+	if not HOURS.has(h) or not is_employed(p):
+		return {"ok": false, "reason": "ui.invalid"}
+	p.job_hours = h
+	return {"ok": true, "key": "job.hours_set", "params": {"h": "@job.hours_" + h}}
+
+
 func current_salary(p: Dictionary) -> float:
 	if not is_employed(p) or _sim.crime.in_prison(p):
 		return float(p.career.get("pension", 0.0))
-	return float(p.career.salary) * _sim.world.salary_mult()
+	return float(p.career.salary) * _sim.world.salary_mult() * float(hours(p).salary)
 
 
 func level_mult(level: int) -> float:
@@ -59,7 +77,7 @@ func block_reason(p: Dictionary, id: String) -> String:
 	return ""
 
 
-func apply(p: Dictionary, id: String) -> Dictionary:
+func apply(p: Dictionary, id: String, interview_bonus: float = 0.0) -> Dictionary:
 	var reason := block_reason(p, id)
 	if reason != "":
 		return {"ok": false, "reason": reason}
@@ -73,6 +91,7 @@ func apply(p: Dictionary, id: String) -> Dictionary:
 			{"path": "mod.interview", "per": 1.0},
 		],
 	}
+	spec.base = float(spec.base) + interview_bonus
 	if not p.criminal.record.is_empty():
 		spec.base = float(spec.base) - 0.2
 	_sim.activities.bump_counter("job.applications")
@@ -81,6 +100,32 @@ func apply(p: Dictionary, id: String) -> Dictionary:
 		return {"ok": false, "reason": "job.rejected"}
 	hire(p, id)
 	return {"ok": true, "key": "job.hired", "params": {"job": "@job." + id}}
+
+
+## Interview: 2 questions drawn from data; each answer is scored by the stat
+## it relies on. Returns [{id, answers: [ids]}] for the UI.
+func interview_questions() -> Array:
+	var ids: Array = _sim.data.table("interview_questions").keys()
+	ids.sort()
+	_sim.rng.shuffle(ids)
+	var out: Array = []
+	for qid in ids.slice(0, 2):
+		var answers: Array = []
+		for a in _sim.data.get_def("interview_questions", qid).answers:
+			answers.append(a.id)
+		out.append({"id": qid, "answers": answers})
+	return out
+
+
+## Interview bonus for chosen answers {question_id: answer_id}.
+func interview_score(p: Dictionary, choices: Dictionary) -> float:
+	var total := 0.0
+	for qid in choices:
+		for a in _sim.data.get_def("interview_questions", qid).get("answers", []):
+			if a.id == choices[qid]:
+				var stat_v: float = _sim.gamer.effective_stat(p, a.get("stat", "cha"))
+				total += float(a.get("base", 0.0)) + clampf((stat_v - 12.0) * float(a.get("per", 0.006)), -0.1, 0.12)
+	return total
 
 
 func hire(p: Dictionary, id: String, _forced: bool = false) -> void:
@@ -96,6 +141,7 @@ func hire(p: Dictionary, id: String, _forced: bool = false) -> void:
 	p.career.performance = 55.0
 	p.career.salary = float(def.salary) * float(c.get("salary_mult", 1.0)) * (1.0 + _sim.gamer.mod("salary"))
 	p.career.pension = 0.0
+	p.job_hours = "normal" if def.get("hours", "full") == "full" else "part"
 	_sim.add_log("log.job_start", {"job": "@job." + id}, "major")
 	_sim.activities.bump_counter("job.hired")
 	_sim.activities.bump_counter("job.cat." + def.get("cat", "misc"))
@@ -146,7 +192,7 @@ func process_year(p: Dictionary) -> void:
 	var def := job_def(p)
 	p.career.years = int(p.career.years) + 1
 	_update_performance(p, def)
-	p.attrs.stress = clampf(float(p.attrs.stress) + float(def.get("stress", 5)) * maxf(0.1, 1.0 + _sim.gamer.mod("stress_gain")), 0, 100)
+	p.attrs.stress = clampf(float(p.attrs.stress) + float(def.get("stress", 5)) * float(hours(p).stress) * maxf(0.1, 1.0 + _sim.gamer.mod("stress_gain")), 0, 100)
 	_sim.gamer.add_exp(p, float(def.get("exp", 30)) * (1.0 + int(p.career.level) * 0.3))
 	_sim.gamer.add_stat_xp(p, def.get("key_stat", "int"), float(_sim.data.bal("career.stat_xp_per_year", 25)))
 	if def.has("skill"):
@@ -167,7 +213,8 @@ func _update_performance(p: Dictionary, def: Dictionary) -> void:
 	var need := float(def.get("stat_req", {}).get(def.get("key_stat", "int"), 10)) + int(p.career.level) * 4.0
 	var target := 50.0 + (key - need) * 1.5 + (float(p.attrs.discipline) - 50.0) * 0.3
 	target += float(p.year_counters.get("work_hard", 0)) * 8.0
-	target += _sim.gamer.mod("work_perf") * 40.0
+	target += _sim.gamer.mod("work_perf") * 40.0 + float(hours(p).perf)
+	target += (float(p.hidden.get("professionalism", 50)) - 50.0) * 0.1
 	target += (_sim.relations.role_score(p, "boss") - 50.0) * 0.2
 	target -= maxf(0.0, float(p.attrs.stress) - 60.0) * 0.5
 	target -= 15.0 if float(p.attrs.health) < 30.0 else 0.0

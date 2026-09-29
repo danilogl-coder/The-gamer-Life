@@ -119,6 +119,10 @@
      "type": "ADD_MEMORY",
      "memory": "gift",
      "severity": -8
+    },
+    {
+     "type": "KARMA",
+     "amount": 1
     }
    ]
   }
@@ -148,6 +152,11 @@
      "path": "actor.finance.cash",
      "per": 4e-06,
      "max": 0.25
+    },
+    {
+     "path": "actor.hidden.generosity",
+     "per": 0.005,
+     "offset": 50
     }
    ]
   },
@@ -197,6 +206,10 @@
      "type": "ADD_MEMORY",
      "memory": "apology",
      "severity": -15
+    },
+    {
+     "type": "KARMA",
+     "amount": 2
     }
    ]
   },
@@ -257,6 +270,10 @@
        "role": "enemy"
       }
      ]
+    },
+    {
+     "type": "KARMA",
+     "amount": -3
     }
    ]
   }
@@ -702,6 +719,10 @@
      "type": "ADD_MEMORY",
      "memory": "helped",
      "severity": -20
+    },
+    {
+     "type": "KARMA",
+     "amount": 3
     }
    ]
   }
@@ -767,6 +788,10 @@
        "event": "fight_police"
       }
      ]
+    },
+    {
+     "type": "KARMA",
+     "amount": -3
     }
    ]
   },
@@ -803,6 +828,826 @@
     {
      "type": "END_RELATIONSHIP",
      "reason": "cut"
+    },
+    {
+     "type": "KARMA",
+     "amount": -1
+    }
+   ]
+  }
+ },
+ {
+  "id": "bully",
+  "order": 23,
+  "min_age": 7,
+  "roles": [
+   "classmate",
+   "acquaintance"
+  ],
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "chance": {
+   "base": 0.55,
+   "mods": [
+    {
+     "path": "stat.str",
+     "per": 0.01,
+     "offset": 10,
+     "max": 0.3
+    },
+    {
+     "path": "calc.actor_level_gap",
+     "per": -0.02
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "POPULARITY",
+     "amount": 3
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -25
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "bullied",
+     "severity": 40
+    },
+    {
+     "type": "KARMA",
+     "amount": -4
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.25,
+     "effects": [
+      {
+       "type": "TRIGGER_EVENT",
+       "event": "principal_office"
+      }
+     ]
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "POPULARITY",
+     "amount": -5
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": -5
+    },
+    {
+     "type": "KARMA",
+     "amount": -2
+    }
+   ]
+  }
+ },
+ {
+  "id": "ask_help",
+  "order": 24,
+  "min_age": 6,
+  "roles": [
+   "teacher"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_VALUE",
+     "path": "education.grades",
+     "amount": 4,
+     "max": 100
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    },
+    {
+     "type": "STAT_XP",
+     "stat": "int",
+     "amount": 10
+    }
+   ]
+  }
+ },
+ {
+  "id": "suck_up",
+  "order": 25,
+  "min_age": 6,
+  "roles": [
+   "teacher"
+  ],
+  "chance": {
+   "base": 0.5,
+   "mods": [
+    {
+     "path": "stat.cha",
+     "per": 0.01,
+     "offset": 10,
+     "max": 0.3
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_VALUE",
+     "path": "education.grades",
+     "amount": 6,
+     "max": 100
+    },
+    {
+     "type": "POPULARITY",
+     "amount": -4
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 8
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "POPULARITY",
+     "amount": -6
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -4
+    }
+   ]
+  }
+ },
+ {
+  "id": "recommendation",
+  "order": 26,
+  "min_age": 15,
+  "roles": [
+   "teacher",
+   "boss",
+   "mentor"
+  ],
+  "conditions": [
+   {
+    "path": "rel.actor",
+    "op": ">=",
+    "value": 70
+   },
+   {
+    "path": "flag.recommendation",
+    "op": "!=",
+    "value": true
+   }
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "SET_FLAG",
+     "flag": "recommendation"
+    },
+    {
+     "type": "LOG",
+     "key": "log.recommendation"
+    }
+   ]
+  }
+ },
+ {
+  "id": "prank",
+  "order": 27,
+  "min_age": 8,
+  "roles": [
+   "coworker",
+   "friend",
+   "best_friend",
+   "sibling",
+   "classmate"
+  ],
+  "chance": {
+   "base": 0.5,
+   "mods": [
+    {
+     "path": "stat.dex",
+     "per": 0.008,
+     "offset": 10,
+     "max": 0.3
+    },
+    {
+     "path": "calc.compat",
+     "per": 0.004,
+     "offset": 50
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 6
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 5
+    },
+    {
+     "type": "POPULARITY",
+     "amount": 2
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -12
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "prank",
+     "severity": 15
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.3,
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:boss",
+       "amount": -10
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "compete",
+  "order": 28,
+  "min_age": 18,
+  "roles": [
+   "coworker"
+  ],
+  "time": 1,
+  "chance": {
+   "base": 0.45,
+   "mods": [
+    {
+     "path": "player.career.performance",
+     "per": 0.006,
+     "offset": 50
+    },
+    {
+     "path": "calc.actor_level_gap",
+     "per": -0.02
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_VALUE",
+     "path": "career.performance",
+     "amount": 10,
+     "max": 100
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -8
+    },
+    {
+     "type": "SET_ROLE",
+     "role": "rival"
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_VALUE",
+     "path": "career.performance",
+     "amount": -5,
+     "min": 0
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "stress",
+     "amount": 6
+    }
+   ]
+  }
+ },
+ {
+  "id": "rumor",
+  "order": 29,
+  "min_age": 10,
+  "not_roles": [
+   "mother",
+   "father",
+   "child",
+   "grandchild"
+  ],
+  "chance": {
+   "base": 0.6,
+   "mods": [
+    {
+     "path": "stat.cha",
+     "per": 0.006,
+     "offset": 10,
+     "max": 0.3
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "KARMA",
+     "amount": -4
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "rumor",
+     "severity": 20
+    },
+    {
+     "type": "CHANGE_ACTOR",
+     "path": "attrs.reputation",
+     "amount": -10,
+     "min": 0
+    },
+    {
+     "type": "POPULARITY",
+     "amount": 2
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "KARMA",
+     "amount": -4
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -30
+    },
+    {
+     "type": "SET_ROLE",
+     "role": "enemy"
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "reputation",
+     "amount": -6
+    }
+   ]
+  }
+ },
+ {
+  "id": "ask_car",
+  "order": 30,
+  "min_age": 16,
+  "max_age": 22,
+  "roles": [
+   "mother",
+   "father"
+  ],
+  "conditions": [
+   {
+    "path": "flag.got_car_from_parents",
+    "op": "!=",
+    "value": true
+   }
+  ],
+  "chance": {
+   "base": 0.1,
+   "mods": [
+    {
+     "path": "rel.actor",
+     "per": 0.006,
+     "offset": 50
+    },
+    {
+     "path": "actor.finance.cash",
+     "per": 3e-06,
+     "max": 0.4
+    },
+    {
+     "path": "actor.hidden.generosity",
+     "per": 0.004,
+     "offset": 50
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "ADD_POSSESSION",
+     "possession": "used_car",
+     "value": 8000
+    },
+    {
+     "type": "SET_FLAG",
+     "flag": "got_car_from_parents"
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 10
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": -3
+    }
+   ]
+  }
+ },
+ {
+  "id": "family_vacation",
+  "order": 31,
+  "min_age": 6,
+  "roles": [
+   "mother",
+   "father",
+   "spouse",
+   "child"
+  ],
+  "time": 1,
+  "cost": 2500,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 18
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 10
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "stress",
+     "amount": -15
+    }
+   ]
+  }
+ },
+ {
+  "id": "couple_trip",
+  "order": 32,
+  "min_age": 18,
+  "roles": [
+   "partner",
+   "fiance",
+   "spouse"
+  ],
+  "time": 1,
+  "cost": 4000,
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 20
+    },
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 10
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.25,
+     "effects": [
+      {
+       "type": "CONCEIVE"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ {
+  "id": "elope",
+  "order": 33,
+  "min_age": 18,
+  "roles": [
+   "fiance"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "MARRY"
+    },
+    {
+     "type": "CHANGE_MONEY",
+     "amount": 7000
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "target": "role:mother",
+     "amount": -12
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "target": "role:father",
+     "amount": -12
+    },
+    {
+     "type": "LOG",
+     "key": "log.eloped",
+     "kind": "major"
+    }
+   ]
+  }
+ },
+ {
+  "id": "discipline",
+  "order": 34,
+  "min_age": 20,
+  "roles": [
+   "child"
+  ],
+  "conditions": [
+   {
+    "path": "actor.age",
+    "op": "<",
+    "value": 18
+   },
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 3
+   }
+  ],
+  "chance": {
+   "base": 0.5,
+   "mods": [
+    {
+     "path": "stat.wis",
+     "per": 0.008,
+     "offset": 10,
+     "max": 0.3
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_ACTOR",
+     "path": "attrs.discipline",
+     "amount": 10,
+     "max": 100
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -3
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -10
+    },
+    {
+     "type": "ADD_MEMORY",
+     "memory": "harsh_parent",
+     "severity": 15
+    }
+   ]
+  }
+ },
+ {
+  "id": "hookup",
+  "order": 35,
+  "min_age": 18,
+  "tags": [
+   "mature"
+  ],
+  "roles": [
+   "acquaintance",
+   "friend",
+   "ex",
+   "coworker"
+  ],
+  "conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 18
+   }
+  ],
+  "chance": {
+   "base": 0.3,
+   "mods": [
+    {
+     "path": "calc.compat",
+     "per": 0.008,
+     "offset": 40
+    },
+    {
+     "path": "actor.hidden.craziness",
+     "per": 0.004,
+     "offset": 50
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "CHANGE_STAT",
+     "stat": "happiness",
+     "amount": 6
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.05,
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "std"
+      }
+     ]
+    },
+    {
+     "type": "SET_FLAG",
+     "flag": "cheated_partner",
+     "if": [
+      {
+       "path": "calc.has_partner",
+       "op": "==",
+       "value": true
+      }
+     ]
+    },
+    {
+     "type": "SCHEDULE_EVENT",
+     "event": "partner_finds_out",
+     "min": 1,
+     "max": 3,
+     "keep_actor": false,
+     "if": [
+      {
+       "path": "calc.has_partner",
+       "op": "==",
+       "value": true
+      }
+     ]
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -10
+    }
+   ]
+  }
+ },
+ {
+  "id": "ask_advice",
+  "order": 36,
+  "min_age": 6,
+  "roles": [
+   "grandparent",
+   "mentor",
+   "mother",
+   "father"
+  ],
+  "success": {
+   "effects": [
+    {
+     "type": "STAT_XP",
+     "stat": "wis",
+     "amount": 18
+    },
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": 5
+    }
+   ]
+  }
+ },
+ {
+  "id": "murder",
+  "order": 40,
+  "min_age": 18,
+  "tags": [
+   "mature"
+  ],
+  "not_roles": [
+   "child",
+   "grandchild"
+  ],
+  "time": 1,
+  "conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 14
+   }
+  ],
+  "chance": {
+   "base": 0.35,
+   "mods": [
+    {
+     "path": "stat.str",
+     "per": 0.006,
+     "offset": 10,
+     "max": 0.3
+    },
+    {
+     "path": "stat.dex",
+     "per": 0.004,
+     "offset": 10,
+     "max": 0.2
+    },
+    {
+     "path": "calc.actor_level_gap",
+     "per": -0.03
+    }
+   ]
+  },
+  "success": {
+   "effects": [
+    {
+     "type": "KILL_ACTOR"
+    },
+    {
+     "type": "KARMA",
+     "amount": -40
+    },
+    {
+     "type": "COUNTER",
+     "key": "crime.murder"
+    },
+    {
+     "type": "COUNTER",
+     "key": "crime.total"
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.6,
+     "effects": [
+      {
+       "type": "SET_FLAG",
+       "flag": "pending_murder"
+      },
+      {
+       "type": "SCHEDULE_EVENT",
+       "event": "murder_investigation",
+       "min": 1,
+       "max": 3,
+       "keep_actor": false
+      }
+     ]
+    }
+   ]
+  },
+  "fail": {
+   "effects": [
+    {
+     "type": "CHANGE_RELATIONSHIP",
+     "amount": -100
+    },
+    {
+     "type": "SET_ROLE",
+     "role": "enemy"
+    },
+    {
+     "type": "KARMA",
+     "amount": -20
+    },
+    {
+     "type": "CHANCE",
+     "p": 0.5,
+     "effects": [
+      {
+       "type": "TRIGGER_EVENT",
+       "event": "murder_investigation"
+      }
+     ]
     }
    ]
   }

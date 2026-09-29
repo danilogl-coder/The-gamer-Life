@@ -80,6 +80,7 @@ func process_year(p: Dictionary) -> void:
 		_sim.activities.bump_counter("stress.high_years")
 	p.attrs.stress = clampf(stress, 0, 100)
 	p.health.fitness = clampf(float(p.health.fitness) - 4.0, 0, 100)
+	_update_weight(p)
 	for habit in p.health.habits.keys():
 		p.health.habits[habit] = maxf(0.0, float(p.health.habits[habit]) - 6.0)
 	h += _progress_conditions(p)
@@ -89,6 +90,20 @@ func process_year(p: Dictionary) -> void:
 	var base_happy: float = 55.0 + (float(p.hidden.get("stress_tolerance", 50)) - 50.0) * 0.2 + _sim.gamer.mod("happiness") * 20.0
 	p.attrs.happiness = clampf(lerpf(float(p.attrs.happiness), base_happy, 0.15), 0, 100)
 	_death_check(p)
+
+
+## Weight drifts with fitness and junk food; obesity hurts looks and health.
+func _update_weight(p: Dictionary) -> void:
+	var w := float(p.health.get("weight", 0.0)) * 0.92
+	w += 0.4 - float(p.health.fitness) * 0.015 + (0.4 if int(p.age) > 40 else 0.0)
+	w = clampf(w, -20.0, 60.0)
+	p.health.weight = w
+	if w >= 22.0 and not p.health.conditions.has("obesity"):
+		add_condition(p, "obesity")
+	elif w < 12.0 and p.health.conditions.has("obesity"):
+		remove_condition(p, "obesity")
+	if w > 15.0:
+		p.attrs.looks = clampf(float(p.attrs.looks) - (w - 15.0) * 0.08, 0, 100)
 
 
 func _progress_conditions(p: Dictionary) -> float:
@@ -131,12 +146,25 @@ func _roll_new_conditions(p: Dictionary) -> void:
 			add_condition(p, id)
 
 
+## Death certificate: blame the condition that hurt the most, if any.
+func _worst_condition_cause(p: Dictionary) -> String:
+	var worst := ""
+	var dmg := 0.0
+	for id in p.health.conditions:
+		var y := float(_sim.data.get_def("diseases", id).get("yearly_health", 0))
+		if y > dmg:
+			dmg = y
+			worst = id
+	return "cause.disease." + worst if worst != "" else "cause.health"
+
+
 func mortality(ch: Dictionary) -> float:
 	var age := float(ch.age)
 	var a := float(_sim.data.bal("health.gompertz_a", 0.00004))
 	var b := float(_sim.data.bal("health.gompertz_b", 0.088))
 	var m := a * exp(b * age)
 	var longevity := (float(ch.hidden.get("longevity", 50)) - 50.0) / 150.0
+	longevity += (float(ch.hidden.get("karma", 50)) - 50.0) / 400.0
 	if ch.get("is_player", false):
 		longevity += clampf(_sim.gamer.effective_stat(ch, "vit") * 0.003, 0.0, 0.5) + _sim.gamer.mod("lifespan")
 	m *= clampf(1.0 - longevity, 0.03, 2.0)
@@ -151,7 +179,7 @@ func _death_check(p: Dictionary) -> void:
 	if not p.alive:
 		return
 	if float(p.attrs.health) <= 0.0:
-		kill(p, "cause.health")
+		kill(p, _worst_condition_cause(p))
 		return
 	if _sim.prob.roll_neutral(mortality(p)):
 		kill(p, "cause.old_age" if int(p.age) >= 70 else "cause.natural")

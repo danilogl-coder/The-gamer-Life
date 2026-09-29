@@ -450,7 +450,7 @@
   "salary": 350000,
   "min_age": 32,
   "education": [
-   "uni_business"
+   "business_school"
   ],
   "stat_req": {
    "cha": 35,
@@ -785,7 +785,7 @@
   "salary": 130000,
   "min_age": 24,
   "education": [
-   "uni_medicine"
+   "dental_school"
   ],
   "stress": 9,
   "key_stat": "dex",
@@ -859,5 +859,78 @@
     "value": 3
    }
   ]
+ },
+ {
+  "id": "pharmacist",
+  "cat": "health",
+  "tier": 4,
+  "salary": 115000,
+  "min_age": 24,
+  "education": [
+   "pharmacy_school"
+  ],
+  "stress": 8,
+  "key_stat": "int",
+  "exp": 80,
+  "hire_chance": 0.6
+ },
+ {
+  "id": "veterinarian",
+  "cat": "health",
+  "tier": 4,
+  "salary": 95000,
+  "min_age": 24,
+  "education": [
+   "vet_school"
+  ],
+  "stress": 9,
+  "key_stat": "wis",
+  "exp": 80,
+  "hire_chance": 0.6
+ },
+ {
+  "id": "nurse_practitioner",
+  "cat": "health",
+  "tier": 4,
+  "salary": 105000,
+  "min_age": 23,
+  "education": [
+   "nursing_school"
+  ],
+  "stress": 12,
+  "key_stat": "wis",
+  "exp": 75,
+  "hire_chance": 0.6
+ },
+ {
+  "id": "investment_banker",
+  "cat": "finance",
+  "tier": 5,
+  "salary": 240000,
+  "min_age": 24,
+  "education": [
+   "business_school"
+  ],
+  "stat_req": {
+   "int": 22
+  },
+  "stress": 18,
+  "key_stat": "int",
+  "exp": 130,
+  "hire_chance": 0.3
+ },
+ {
+  "id": "biologist",
+  "cat": "science",
+  "tier": 3,
+  "salary": 62000,
+  "min_age": 22,
+  "education": [
+   "uni_biology"
+  ],
+  "stress": 8,
+  "key_stat": "int",
+  "exp": 55,
+  "hire_chance": 0.6
  }
 ]

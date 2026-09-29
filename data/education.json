@@ -1,23 +1,364 @@
 [
-  {"id": "preschool", "auto": true, "start_age": 3, "years": 3, "next": "primary", "can_fail": false, "classmates": 1, "teacher": false, "exp": 20},
-  {"id": "primary", "auto": true, "years": 5, "next": "middle", "classmates": 2, "exp": 50},
-  {"id": "middle", "auto": true, "years": 4, "next": "high", "classmates": 2, "exp": 80},
-  {"id": "high", "auto": true, "years": 3, "drop_age": 16, "classmates": 2, "exp": 120},
-  {"id": "technical", "type": "technical", "min_age": 17, "years": 2, "requires": ["high"], "tuition": 3000, "admission": 0.9, "exp": 120},
-  {"id": "uni_medicine", "type": "university", "min_age": 17, "years": 6, "requires": ["high"], "min_grades": 78, "stat_req": {"int": 22}, "tuition": 22000, "admission": 0.45, "exp": 400},
-  {"id": "uni_law", "type": "university", "min_age": 17, "years": 5, "requires": ["high"], "min_grades": 68, "stat_req": {"int": 16}, "tuition": 15000, "admission": 0.55, "exp": 300},
-  {"id": "uni_cs", "type": "university", "min_age": 17, "years": 4, "requires": ["high"], "min_grades": 62, "stat_req": {"int": 16}, "tuition": 12000, "admission": 0.6, "exp": 260},
-  {"id": "uni_engineering", "type": "university", "min_age": 17, "years": 5, "requires": ["high"], "min_grades": 66, "stat_req": {"int": 18}, "tuition": 13000, "admission": 0.55, "exp": 300},
-  {"id": "uni_business", "type": "university", "min_age": 17, "years": 4, "requires": ["high"], "min_grades": 55, "tuition": 11000, "admission": 0.7, "exp": 220},
-  {"id": "uni_arts", "type": "university", "min_age": 17, "years": 4, "requires": ["high"], "min_grades": 45, "tuition": 9000, "admission": 0.75, "exp": 200},
-  {"id": "uni_education", "type": "university", "min_age": 17, "years": 4, "requires": ["high"], "min_grades": 48, "tuition": 7000, "admission": 0.8, "exp": 200},
-  {"id": "uni_psychology", "type": "university", "min_age": 17, "years": 5, "requires": ["high"], "min_grades": 58, "tuition": 10000, "admission": 0.65, "exp": 240},
-  {"id": "uni_physics", "type": "university", "min_age": 17, "years": 4, "requires": ["high"], "min_grades": 70, "stat_req": {"int": 20}, "tuition": 9000, "admission": 0.55, "exp": 300},
-  {"id": "uni_sports", "type": "university", "min_age": 17, "years": 4, "requires": ["high"], "min_grades": 45, "stat_req": {"str": 14}, "tuition": 8000, "admission": 0.75, "exp": 200},
-  {"id": "masters", "type": "postgrad", "min_age": 21, "years": 2, "requires": ["any_university"], "min_grades": 65, "tuition": 14000, "admission": 0.6, "exp": 300},
-  {"id": "doctorate", "type": "postgrad", "min_age": 23, "years": 4, "requires": ["masters"], "min_grades": 75, "stat_req": {"int": 28}, "tuition": 8000, "admission": 0.5, "exp": 600},
-  {"id": "residency", "type": "postgrad", "min_age": 23, "years": 3, "requires": ["uni_medicine"], "min_grades": 60, "tuition": 0, "admission": 0.7, "exp": 500},
-  {"id": "hunter_academy", "type": "special", "min_age": 16, "years": 2, "requires": [], "tuition": 5000, "admission": 0.6,
-   "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}, {"path": "calc.level", "op": ">=", "value": 10}],
-   "on_complete": [{"type": "GRANT_TITLE", "title": "academy_graduate"}, {"type": "LEARN_SKILL", "skill": "mana_control"}], "exp": 800}
+ {
+  "id": "preschool",
+  "auto": true,
+  "start_age": 3,
+  "years": 3,
+  "next": "primary",
+  "can_fail": false,
+  "classmates": 1,
+  "teacher": false,
+  "exp": 20
+ },
+ {
+  "id": "primary",
+  "auto": true,
+  "years": 5,
+  "next": "middle",
+  "classmates": 2,
+  "exp": 50
+ },
+ {
+  "id": "middle",
+  "auto": true,
+  "years": 4,
+  "next": "high",
+  "classmates": 2,
+  "exp": 80
+ },
+ {
+  "id": "high",
+  "auto": true,
+  "years": 3,
+  "drop_age": 16,
+  "classmates": 2,
+  "exp": 120
+ },
+ {
+  "id": "technical",
+  "type": "technical",
+  "min_age": 17,
+  "years": 2,
+  "requires": [
+   "high"
+  ],
+  "tuition": 3000,
+  "admission": 0.9,
+  "exp": 120
+ },
+ {
+  "id": "uni_medicine",
+  "type": "university",
+  "min_age": 17,
+  "years": 6,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 78,
+  "stat_req": {
+   "int": 22
+  },
+  "tuition": 22000,
+  "admission": 0.45,
+  "exp": 400
+ },
+ {
+  "id": "uni_law",
+  "type": "university",
+  "min_age": 17,
+  "years": 5,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 68,
+  "stat_req": {
+   "int": 16
+  },
+  "tuition": 15000,
+  "admission": 0.55,
+  "exp": 300
+ },
+ {
+  "id": "uni_cs",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 62,
+  "stat_req": {
+   "int": 16
+  },
+  "tuition": 12000,
+  "admission": 0.6,
+  "exp": 260
+ },
+ {
+  "id": "uni_engineering",
+  "type": "university",
+  "min_age": 17,
+  "years": 5,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 66,
+  "stat_req": {
+   "int": 18
+  },
+  "tuition": 13000,
+  "admission": 0.55,
+  "exp": 300
+ },
+ {
+  "id": "uni_business",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 55,
+  "tuition": 11000,
+  "admission": 0.7,
+  "exp": 220
+ },
+ {
+  "id": "uni_arts",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 45,
+  "tuition": 9000,
+  "admission": 0.75,
+  "exp": 200
+ },
+ {
+  "id": "uni_education",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 48,
+  "tuition": 7000,
+  "admission": 0.8,
+  "exp": 200
+ },
+ {
+  "id": "uni_psychology",
+  "type": "university",
+  "min_age": 17,
+  "years": 5,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 58,
+  "tuition": 10000,
+  "admission": 0.65,
+  "exp": 240
+ },
+ {
+  "id": "uni_physics",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 70,
+  "stat_req": {
+   "int": 20
+  },
+  "tuition": 9000,
+  "admission": 0.55,
+  "exp": 300
+ },
+ {
+  "id": "uni_sports",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 45,
+  "stat_req": {
+   "str": 14
+  },
+  "tuition": 8000,
+  "admission": 0.75,
+  "exp": 200
+ },
+ {
+  "id": "masters",
+  "type": "postgrad",
+  "min_age": 21,
+  "years": 2,
+  "requires": [
+   "any_university"
+  ],
+  "min_grades": 65,
+  "tuition": 14000,
+  "admission": 0.6,
+  "exp": 300
+ },
+ {
+  "id": "doctorate",
+  "type": "postgrad",
+  "min_age": 23,
+  "years": 4,
+  "requires": [
+   "masters"
+  ],
+  "min_grades": 75,
+  "stat_req": {
+   "int": 28
+  },
+  "tuition": 8000,
+  "admission": 0.5,
+  "exp": 600
+ },
+ {
+  "id": "residency",
+  "type": "postgrad",
+  "min_age": 23,
+  "years": 3,
+  "requires": [
+   "uni_medicine"
+  ],
+  "min_grades": 60,
+  "tuition": 0,
+  "admission": 0.7,
+  "exp": 500
+ },
+ {
+  "id": "hunter_academy",
+  "type": "special",
+  "min_age": 16,
+  "years": 2,
+  "requires": [],
+  "tuition": 5000,
+  "admission": 0.6,
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   },
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 10
+   }
+  ],
+  "on_complete": [
+   {
+    "type": "GRANT_TITLE",
+    "title": "academy_graduate"
+   },
+   {
+    "type": "LEARN_SKILL",
+    "skill": "mana_control"
+   }
+  ],
+  "exp": 800
+ },
+ {
+  "id": "uni_biology",
+  "type": "university",
+  "min_age": 17,
+  "years": 4,
+  "requires": [
+   "high"
+  ],
+  "min_grades": 60,
+  "stat_req": {
+   "int": 15
+  },
+  "tuition": 10000,
+  "admission": 0.65,
+  "exp": 260
+ },
+ {
+  "id": "dental_school",
+  "type": "postgrad",
+  "min_age": 21,
+  "years": 4,
+  "requires": [
+   "uni_biology"
+  ],
+  "min_grades": 65,
+  "stat_req": {
+   "int": 22
+  },
+  "tuition": 25000,
+  "admission": 0.5,
+  "exp": 450
+ },
+ {
+  "id": "pharmacy_school",
+  "type": "postgrad",
+  "min_age": 21,
+  "years": 4,
+  "requires": [
+   "uni_biology"
+  ],
+  "min_grades": 62,
+  "stat_req": {
+   "int": 20
+  },
+  "tuition": 18000,
+  "admission": 0.55,
+  "exp": 400
+ },
+ {
+  "id": "vet_school",
+  "type": "postgrad",
+  "min_age": 21,
+  "years": 4,
+  "requires": [
+   "uni_biology"
+  ],
+  "min_grades": 65,
+  "stat_req": {
+   "int": 20
+  },
+  "tuition": 20000,
+  "admission": 0.5,
+  "exp": 420
+ },
+ {
+  "id": "nursing_school",
+  "type": "postgrad",
+  "min_age": 20,
+  "years": 2,
+  "requires": [
+   "any_university"
+  ],
+  "min_grades": 55,
+  "tuition": 9000,
+  "admission": 0.7,
+  "exp": 250
+ },
+ {
+  "id": "business_school",
+  "type": "postgrad",
+  "min_age": 22,
+  "years": 2,
+  "requires": [
+   "any_university"
+  ],
+  "min_grades": 65,
+  "stat_req": {
+   "cha": 16
+  },
+  "tuition": 40000,
+  "admission": 0.45,
+  "exp": 400
+ }
 ]

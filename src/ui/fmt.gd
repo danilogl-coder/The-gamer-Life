@@ -64,7 +64,9 @@ static func gains(g: Dictionary) -> Array:
 		elif key == "rel":
 			out.append({"text": "♥ %s" % signed(v), "color": UiTheme.GOOD if v > 0 else UiTheme.BAD})
 		elif key == "baby" and int(v) > 0:
-			out.append({"text": App.t("ui.baby"), "color": UiTheme.GOLD})
+			out.append({"text": App.t("ui.baby") + (" ×%d" % int(v) if int(v) > 1 else ""), "color": UiTheme.GOLD})
+		elif key == "popularity":
+			out.append({"text": "%s %s" % [App.t("ui.popularity"), signed(v)], "color": UiTheme.GOOD if v > 0 else UiTheme.BAD})
 	return out
 
 

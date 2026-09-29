@@ -1,0 +1,104 @@
+[
+ {
+  "id": "employer",
+  "base": 0.3,
+  "award": [
+   20000,
+   250000
+  ],
+  "conditions": [
+   {
+    "path": "counter.job.fired",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "doctor",
+  "base": 0.25,
+  "award": [
+   30000,
+   400000
+  ],
+  "conditions": [
+   {
+    "path": "counter.disease.cancer",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "neighbor",
+  "base": 0.4,
+  "award": [
+   2000,
+   20000
+  ],
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": ">=",
+    "value": 18
+   }
+  ]
+ },
+ {
+  "id": "ex_partner",
+  "base": 0.3,
+  "award": [
+   5000,
+   80000
+  ],
+  "conditions": [
+   {
+    "path": "counter.social.divorces",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "burger_chain",
+  "base": 0.12,
+  "award": [
+   50000,
+   2000000
+  ],
+  "conditions": [
+   {
+    "path": "counter.act.junk_food",
+    "op": ">=",
+    "value": 5
+   }
+  ]
+ },
+ {
+  "id": "guild",
+  "base": 0.2,
+  "award": [
+   100000,
+   1500000
+  ],
+  "conditions": [
+   {
+    "path": "counter.dungeon.defeats",
+    "op": ">=",
+    "value": 1
+   },
+   {
+    "path": "player.faction.id",
+    "op": "!=",
+    "value": ""
+   }
+  ],
+  "on_lose": [
+   {
+    "type": "FACTION_REP",
+    "faction": "iron_fist",
+    "amount": -20
+   }
+  ]
+ }
+]

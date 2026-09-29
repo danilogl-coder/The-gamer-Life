@@ -62,12 +62,14 @@ docs/                    Este documento
 | `EventEngine` | Sorteio por peso×raridade, cooldown, once, atores, escolhas com chance visível, cadeias, agendados | condições | efeitos |
 | `QuestSystem` | Missões do Sistema (contadores desde o início, condições, prazos, recompensas/penalidades) | contadores | efeitos |
 | `DungeonSystem` | Dungeons Instantâneas: combate automático determinístico, drops, **Devorar**, derrota real | stats, skills, mods | EXP, ouro, itens, saúde |
-| `CrimeSystem` | Crime → calor/evidência → investigação agendada → julgamento → prisão (estado próprio) | DES, furtividade, reputação | ficha, prisão |
+| `CrimeSystem` | Crime → calor/evidência → investigação agendada → julgamento **com escolha de advogado** → prisão (comportamento, gangues, suborno, motim, fuga em minijogo, condicional, visitas, recurso com vitória parcial) · processos civis | DES, furtividade, reputação, dinheiro | ficha, prisão |
 | `WorldSystem` | Ciclo econômico, inflação, desemprego, imóveis, mercados, **atividade de fendas**, eventos mundiais | — | mundo, mods globais |
 | `AchievementSystem` | Conquistas por condição (por vida + meta global) | estado | conquistas |
 | `LegacySystem` | Morte, retrospectiva, herança/testamento, **herdeiro herda o Sistema**, Pontos de Alma e perks | tudo | nova geração |
 | `SpecialCareerSystem` | Registro de **carreiras-minijogo modulares** (`SpecialCareer`): Música, Atleta, Empresa, Criador de conteúdo. Nova carreira = novo script + 1 linha em `special_careers.json` | stats, skills, mundo, fama | dinheiro, fama, EXP, saúde |
 | `PetSystem` | Pets (envelhecem, dão felicidade) e **familiares**: monstros domados (skill Domar) que lutam, sobem de nível e, ao serem **nomeados** (gasta 80% do MP), evoluem para espécies nomeadas com bônus | dungeon, MP, CAR | combate, mods, felicidade |
+| `SchoolLifeSystem` | Vida escolar: **popularidade**, panelinhas com requisitos, clubes/equipes com posto (membro → titular → capitão) e treino | CAR, FOR, INT, looks | popularidade, mods, EXP |
+| `DatingSystem` | App de encontros: candidatos gerados com filtros, compatibilidade (inclui signo), escolha | CAR, looks, idade | vínculos |
 | `YearPipeline` | Ordem exata do "+1 ANO" | — | — |
 | `LifeSimulation` | Orquestrador + API pública (`advance_year`, `do_activity`, `interact`, `choose`, `allocate_stat`, `command`) + `resolve(path)` | — | — |
 
@@ -203,6 +205,8 @@ Performance: nada roda por frame. A simulação só acontece quando o jogador ag
 * Escrita **atômica** (arquivo `.tmp` → rename).
 * `save_version` + `SaveSystem.MIGRATIONS[v] = func(data)` aplicadas em sequência até a versão atual. Exemplo real: v1→v2 adiciona `special`, `pets`, `possessions`, `challenge` e `settings` a saves antigos (coberto por teste).
 * JSON devolve números como float: `SaveSystem.normalize` converte floats inteiros em int. O estado do RNG (64 bits) é salvo como **string**.
+* v2→v3 adiciona karma e 6 traços ocultos novos, mês de nascimento (signo), peso, vida escolar, testamento, licenças, carga horária e cirurgias.
+* **Pontos de retorno**: os últimos 5 anos ficam guardados como snapshot; na morte dá para voltar 1–5 anos pagando Pontos de Alma.
 * Teste garante: salvar → carregar → continuar produz **exatamente** a mesma vida (determinismo).
 
 ---
@@ -245,12 +249,13 @@ Performance: nada roda por frame. A simulação só acontece quando o jogador ag
 | 3 Economia | Dinheiro, impostos, dívida, crédito, empréstimos, imóveis, veículos, colecionáveis, mercado (inclui Núcleos de Mana) | ✅ |
 | 4 Sociedade | Amizades, romance, casamento, divórcio, filhos, netos, memórias, reputação | ✅ (redes sociais profundas: próximo) |
 | 5 Vida alternativa | Crime, investigação, julgamento, prisão (estado próprio), fuga, recurso | ✅ |
-| 6 Carreiras especiais | Módulos `SpecialCareer`: Música (compor, gravar, turnê, gravadora), Atleta (ligas, temporadas, títulos, patrocínio, doping), Empresa (setor, preço, contratações, marketing, P&D, concorrência, venda/falência), Influenciador (plataformas fictícias, viral, cancelamento, publis), Política (comícios, arrecadação, eleições vereador→presidente, medidas que mexem na economia do mundo, escândalos da sua ficha). Próximos: Ator, Astronauta | ✅ (5) |
+| 6 Carreiras especiais | Módulos `SpecialCareer`: Música (compor, gravar, turnê, gravadora), Atleta (ligas, temporadas, títulos, patrocínio, doping), Empresa (setor, preço, contratações, marketing, P&D, concorrência, venda/falência), Influenciador (plataformas fictícias, viral, cancelamento, publis), Política (comícios, arrecadação, eleições vereador→presidente, medidas que mexem na economia do mundo, escândalos da sua ficha). Depois: Ator, Astronauta, Militar, Máfia, Modelo, Hustler, Realeza | ✅ (12) |
 | 7 Meta | Conquistas, legado, dinastias, Pontos de Alma, perks, **desafios** ("De Professor a Milionário"…) com recompensa em Pontos de Alma | ✅ |
 | 8 Pets/Familiares | Pets comuns; domar monstros (Re:Monster); **nomear** familiares (Tensura) gasta MP e os faz evoluir; lutam e dividem EXP | ✅ |
 | 8b Patrimônio | Veículos (depreciação, clássicos valorizam, pane/acidente/blitz) e colecionáveis (random walk) | ✅ |
 | 8d Migração | Mudar de país altera salário, impostos, custo de vida e densidade de fendas (drops); perde o emprego; vínculos distantes esfriam (idiomas e CAR ajudam) | ✅ |
 | 8c Classificação | Tag `mature` em atividades/eventos + opção na tela inicial | ✅ |
+| 8e **Profundidade BitLife** | Pesquisa completa em `docs/BITLIFE_GAP_ANALYSIS.md`: vida escolar (popularidade, panelinhas, clubes), entrevistas com perguntas, carga horária, app de encontros, FIV/barriga de aluguel/gêmeos, testamento e heranças de família, fitas de vida, karma, signos, advogados, gangues, condicional, processos, 7 carreiras especiais novas (Ator, Astronauta, Militar, Máfia, Modelo, Hustler, Realeza), cirurgias, licenças, baladas/cassino/blackjack, pontos de retorno | ✅ |
 | 9 Conteúdo | Escalar para 1000+ eventos, 300 empregos, 100 doenças… (só dados) | ⏳ |
 
 ---

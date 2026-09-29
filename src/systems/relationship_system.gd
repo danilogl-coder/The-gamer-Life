@@ -168,7 +168,21 @@ func compatibility(npc: Dictionary) -> float:
 	c -= absf(float(npc.age) - float(p.age)) * 1.2
 	c -= memory_weight(npc.id) * 0.3
 	c += _sim.gamer.mod("charm") * 30.0
+	c += zodiac_affinity(p, npc)
 	return clampf(c, 0, 100)
+
+
+## Same element +6, complementary (fire/air, earth/water) +3, clashing -4.
+func zodiac_affinity(a: Dictionary, b: Dictionary) -> float:
+	var ea: String = CharacterFactory.ZODIAC_ELEMENT[CharacterFactory.zodiac_of(a)]
+	var eb: String = CharacterFactory.ZODIAC_ELEMENT[CharacterFactory.zodiac_of(b)]
+	if ea == eb:
+		return 6.0
+	var pair := [ea, eb]
+	pair.sort()
+	if pair == ["air", "fire"] or pair == ["earth", "water"]:
+		return 3.0
+	return -4.0
 
 
 # ---------------------------------------------------------------------------
@@ -193,6 +207,8 @@ func _visible(def: Dictionary, npc_id: String, ctx: Dictionary) -> bool:
 	if def.has("roles") and not def.roles.has(role):
 		return false
 	if def.get("not_roles", []).has(role):
+		return false
+	if not _sim.allows(def.get("tags", [])):
 		return false
 	if int(p.age) < int(def.get("min_age", 0)):
 		return false
@@ -271,24 +287,63 @@ func divorce(npc_id: String) -> void:
 	p.attrs.happiness = clampf(float(p.attrs.happiness) - 15, 0, 100)
 
 
-## Tries for a child with the current partner. Fertility (hidden) of both
-## sides and age matter.
-func conceive(npc_id: String) -> bool:
+## Tries for a child. Modes: "natural" (fertility + age of both), "ivf"
+## (expensive, better odds, twins/triplets likely) and "surrogate" (works for
+## any couple or a single parent). Returns how many babies were born.
+func conceive(npc_id: String, mode: String = "natural") -> int:
 	var p: Dictionary = _sim.player()
-	var npc: Dictionary = _sim.state.npc(npc_id)
-	if npc.sex == p.sex:
-		return false
-	var mother: Dictionary = p if p.sex == "f" else npc
-	var father: Dictionary = npc if p.sex == "f" else p
-	var chance := fertility_chance(mother, father)
+	if _sim.state.flag("sterile", false) and mode == "natural":
+		return 0
+	var npc: Dictionary = _sim.state.npc(npc_id) if npc_id != "" else {}
+	var mother: Dictionary = {}
+	var father: Dictionary = {}
+	if not npc.is_empty() and npc.sex != p.sex:
+		mother = p if p.sex == "f" else npc
+		father = npc if p.sex == "f" else p
+	elif mode != "surrogate":
+		return 0
+	else:
+		# Surrogacy / donor: the player is the legal parent.
+		mother = p if p.sex == "f" else {}
+		father = p if p.sex == "m" else {}
+	var chance := 0.0
+	var twins := 0.02
+	var triplets := 0.002
+	match mode:
+		"natural":
+			chance = fertility_chance(mother, father)
+		"ivf":
+			chance = clampf(fertility_chance(mother, father) + 0.35, 0.0, 0.85) if int(mother.get("age", 30)) <= 50 else 0.0
+			twins = 0.25
+			triplets = 0.06
+		"surrogate":
+			chance = 0.9
+			twins = 0.1
 	if not _sim.prob.roll_neutral(chance):
-		return false
-	var child: Dictionary = _sim.factory.create_child(mother, father)
-	ensure(child.id, "child", 80)
-	_sim.add_log("log.child_born", {"name": child.first_name}, "major")
-	_sim.activities.bump_counter("family.children")
-	_sim.bus.child_born.emit(child.id)
-	return true
+		return 0
+	var count := 1
+	var r: float = _sim.rng.randf()
+	if r < triplets:
+		count = 3
+	elif r < triplets + twins:
+		count = 2
+	for i in count:
+		var child: Dictionary = _sim.factory.create_child(mother, father)
+		if not npc.is_empty() and mode == "surrogate":
+			child.family.mother = mother.get("id", "")
+			child.family.father = father.get("id", "")
+		if mother.is_empty() or father.is_empty():
+			child.last_name = p.last_name
+			if not p.family.children.has(child.id):
+				p.family.children.append(child.id)
+		ensure(child.id, "child", 80)
+		_sim.add_log("log.child_born", {"name": child.first_name}, "major")
+		_sim.activities.bump_counter("family.children")
+		_sim.bus.child_born.emit(child.id)
+	if count > 1:
+		_sim.add_log("log.multiples", {"n": count}, "major")
+		_sim.activities.bump_counter("family.multiples")
+	return count
 
 
 func fertility_chance(mother: Dictionary, father: Dictionary) -> float:
@@ -366,7 +421,7 @@ func _fade_memories(npc: Dictionary) -> void:
 func _romance_checks(p: Dictionary, npc: Dictionary, r: Dictionary) -> void:
 	if not ROMANTIC_ROLES.has(r.role):
 		return
-	var loyalty := float(npc.hidden.get("loyalty", 50))
+	var loyalty := (float(npc.hidden.get("loyalty", 50)) * 2.0 + float(npc.hidden.get("willpower", 50)) - float(npc.hidden.get("craziness", 50)) + 50.0) / 3.0
 	var cheat := (100.0 - float(r.score)) / 100.0 * (100.0 - loyalty) / 100.0 * float(_sim.data.bal("social.cheat_base", 0.18))
 	if _sim.prob.roll_neutral(cheat):
 		_sim.events.queue_event("rom_partner_cheated", npc.id)

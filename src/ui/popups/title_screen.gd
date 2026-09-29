@@ -69,6 +69,7 @@ func _render_home() -> void:
 	var mature := W.button(App.t("ui.mature_on") if App.meta.mature else App.t("ui.mature_off"), func(): App.set_mature(not App.meta.mature); _render_home())
 	_body.add_child(mature)
 	_body.add_child(W.label(App.t("ui.soul_points", {"n": int(App.meta.soul_points)}), UiTheme.FONT_S, UiTheme.PURPLE))
+	_body.add_child(W.label(App.t("ui.ribbons_count", {"n": App.meta.get("ribbons", {}).size(), "t": App.data.table("ribbons").size()}), UiTheme.FONT_S, UiTheme.GOLD))
 
 
 func _render_challenges() -> void:

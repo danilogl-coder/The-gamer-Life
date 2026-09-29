@@ -14,6 +14,7 @@ func _init(sim) -> void:
 func on_player_death(p: Dictionary, cause: String) -> void:
 	_sim.achievements.check(true)
 	var summary := build_summary(p, cause)
+	summary.ribbon = ribbon_for(p)
 	_sim.state.data.death = summary
 	var legacy: Dictionary = _sim.state.data.legacy
 	legacy.soul_points = int(legacy.get("soul_points", 0)) + int(summary.soul_points)
@@ -45,6 +46,25 @@ func build_summary(p: Dictionary, cause: String) -> Dictionary:
 		"highlights": highlights, "generation": _sim.state.data.generation,
 		"soul_points": soul, "fame": p.get("fame", 0), "record": p.criminal.record.size(),
 	}
+
+
+## One ribbon per life, first match by priority (data/ribbons.json).
+func ribbon_for(_p: Dictionary) -> String:
+	var ids: Array = _sim.data.table("ribbons").keys()
+	ids.sort_custom(func(a, b): return int(_sim.data.get_def("ribbons", a).priority) < int(_sim.data.get_def("ribbons", b).priority))
+	for id in ids:
+		if _sim.cond.check_all(_sim.data.get_def("ribbons", id).get("conditions", []), {}):
+			return id
+	return "rb_ordinary"
+
+
+## Will: "equal" (children share), "spouse" (spouse gets 60%), "favorite"
+## (one child gets 70%) or "charity" (half to charity: karma for the dynasty).
+func set_will(p: Dictionary, mode: String, favorite: String = "") -> Dictionary:
+	if not mode in ["equal", "spouse", "favorite", "charity"]:
+		return {"ok": false, "reason": "ui.invalid"}
+	p.will = {"mode": mode, "favorite": favorite}
+	return {"ok": true, "key": "will.updated", "params": {"mode": "@will." + mode}}
 
 
 func heirs() -> Array:
@@ -106,11 +126,40 @@ func _distribute_estate(old: Dictionary, heir: Dictionary, siblings: Array) -> v
 	for asset in old.finance.get("investments", {}):
 		estate += float(old.finance.investments[asset]) * _sim.world.price(asset)
 	estate *= 1.0 - float(_sim.data.bal("legacy.estate_tax", 0.1))
-	var share := maxf(0.0, estate) / float(siblings.size() + 1)
-	heir.finance.cash = float(heir.finance.get("cash", 0.0)) + share
-	for sid in siblings:
-		var s: Dictionary = _sim.state.npc(sid)
-		s.finance.cash = float(s.finance.cash) + share
+	estate = maxf(0.0, estate)
+	var will: Dictionary = old.get("will", {"mode": "equal"})
+	var spouse_id: String = old.family.get("spouse", "")
+	var children: Array = [heir.id] + siblings
+	var shares := {}
+	match will.get("mode", "equal"):
+		"spouse":
+			if spouse_id != "" and _sim.state.has_npc(spouse_id) and _sim.state.npc(spouse_id).alive:
+				shares[spouse_id] = 0.6
+		"favorite":
+			if children.has(will.get("favorite", "")):
+				shares[will.favorite] = 0.7
+		"charity":
+			shares["charity"] = 0.5
+			_sim.state.set_flag("dyn_philanthropist")
+	var rest := 1.0
+	for k in shares:
+		rest -= float(shares[k])
+	for cid in children:
+		shares[cid] = float(shares.get(cid, 0.0)) + rest / float(children.size())
+	for k in shares:
+		if k == "charity":
+			continue
+		var who: Dictionary = heir if k == heir.id else _sim.state.npc(k)
+		if not who.is_empty():
+			who.finance.cash = float(who.finance.get("cash", 0.0)) + estate * float(shares[k])
+	# Heirlooms and possessions stay in the family line.
+	if not heir.gamer.has("inventory"):
+		heir.gamer.inventory = {}
+	heir.finance.possessions = old.finance.get("possessions", []).duplicate(true)
+	old.finance.possessions = []
+	for item_id in old.gamer.get("inventory", {}).keys():
+		if _sim.data.get_def("items", item_id).get("cat", "") == "heirloom":
+			heir.gamer.inventory[item_id] = int(heir.gamer.inventory.get(item_id, 0)) + int(old.gamer.inventory[item_id])
 	# Properties go to the heir (the one who keeps the family name alive).
 	heir.finance.properties = old.finance.get("properties", []).duplicate(true)
 	old.finance.cash = 0.0

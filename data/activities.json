@@ -598,6 +598,10 @@
     "type": "CHANGE_STAT",
     "stat": "happiness",
     "amount": 4
+   },
+   {
+    "type": "KARMA",
+    "amount": 3
    }
   ]
  },
@@ -887,6 +891,10 @@
     "type": "CHANGE_STAT",
     "stat": "health",
     "amount": 5
+   },
+   {
+    "type": "DOCTOR_VISIT",
+    "quality": 0.85
    }
   ]
  },
@@ -1051,7 +1059,13 @@
   },
   "fitness": 8,
   "exp": 6,
-  "counter": "act.gym"
+  "counter": "act.gym",
+  "effects": [
+   {
+    "type": "PRISON_BEHAVIOR",
+    "amount": 2
+   }
+  ]
  },
  {
   "id": "prison_study",
@@ -1075,6 +1089,10 @@
       "amount": 2
      }
     ]
+   },
+   {
+    "type": "PRISON_BEHAVIOR",
+    "amount": 5
    }
   ]
  },
@@ -1089,6 +1107,10 @@
    {
     "type": "CHANGE_MONEY",
     "amount": 300
+   },
+   {
+    "type": "PRISON_BEHAVIOR",
+    "amount": 5
    }
   ]
  },
@@ -1107,6 +1129,10 @@
     "type": "CHANGE_STAT",
     "stat": "stress",
     "amount": -10
+   },
+   {
+    "type": "PRISON_BEHAVIOR",
+    "amount": 3
    }
   ]
  },
@@ -1123,7 +1149,1076 @@
   "cat": "prison",
   "order": 85,
   "prison": true,
+  "time": 0,
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "appeal_firm"
+   }
+  ]
+ },
+ {
+  "id": "dating_app",
+  "cat": "love",
+  "order": 42,
+  "min_age": 18,
   "time": 1,
-  "special": "appeal"
+  "special": "dating",
+  "conditions": [
+   {
+    "path": "calc.has_partner",
+    "op": "==",
+    "value": false
+   }
+  ]
+ },
+ {
+  "id": "run_away",
+  "cat": "love",
+  "order": 43,
+  "min_age": 10,
+  "max_age": 17,
+  "time": 0,
+  "conditions": [
+   {
+    "path": "flag.ran_away",
+    "op": "!=",
+    "value": true
+   }
+  ],
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "ran_away"
+   }
+  ]
+ },
+ {
+  "id": "donate",
+  "cat": "leisure",
+  "order": 37,
+  "min_age": 16,
+  "time": 0,
+  "cost": 1000,
+  "effects": [
+   {
+    "type": "KARMA",
+    "amount": 4
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "reputation",
+    "amount": 2
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 3
+   }
+  ]
+ },
+ {
+  "id": "pilgrimage",
+  "cat": "leisure",
+  "order": 38,
+  "min_age": 16,
+  "time": 2,
+  "cost": 2500,
+  "stat_xp": {
+   "wis": 25
+  },
+  "effects": [
+   {
+    "type": "KARMA",
+    "amount": 6
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -20
+   },
+   {
+    "type": "CHANCE",
+    "p": 0.3,
+    "effects": [
+     {
+      "type": "DISCOVER_HIDDEN"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ivf",
+  "cat": "fertility",
+  "order": 90,
+  "min_age": 20,
+  "time": 1,
+  "cost": 15000,
+  "conditions": [
+   {
+    "path": "calc.has_partner",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "effects": [
+   {
+    "type": "CONCEIVE",
+    "mode": "ivf"
+   }
+  ]
+ },
+ {
+  "id": "surrogate",
+  "cat": "fertility",
+  "order": 91,
+  "min_age": 21,
+  "time": 1,
+  "cost": 60000,
+  "effects": [
+   {
+    "type": "CONCEIVE",
+    "mode": "surrogate"
+   }
+  ]
+ },
+ {
+  "id": "sterilize",
+  "cat": "fertility",
+  "order": 92,
+  "min_age": 21,
+  "time": 0,
+  "cost": 800,
+  "conditions": [
+   {
+    "path": "flag.sterile",
+    "op": "!=",
+    "value": true
+   }
+  ],
+  "effects": [
+   {
+    "type": "STERILIZE"
+   }
+  ]
+ },
+ {
+  "id": "haircut",
+  "cat": "beauty",
+  "order": 100,
+  "min_age": 5,
+  "time": 0,
+  "cost": 40,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "looks",
+    "amount": 1
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "manicure",
+  "cat": "beauty",
+  "order": 101,
+  "min_age": 10,
+  "time": 0,
+  "cost": 35,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "looks",
+    "amount": 1
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 1
+   }
+  ]
+ },
+ {
+  "id": "massage",
+  "cat": "beauty",
+  "order": 102,
+  "min_age": 16,
+  "time": 0,
+  "cost": 120,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "health",
+    "amount": 2
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -8
+   }
+  ]
+ },
+ {
+  "id": "facial",
+  "cat": "beauty",
+  "order": 103,
+  "min_age": 14,
+  "time": 0,
+  "cost": 150,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "looks",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "license_boat",
+  "cat": "mind",
+  "order": 19,
+  "min_age": 16,
+  "time": 1,
+  "cost": 900,
+  "conditions": [
+   {
+    "path": "player.licenses",
+    "op": "not_has",
+    "value": "boat"
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.7,
+    "luck": true,
+    "mod": "none",
+    "effects": [
+     {
+      "type": "ADD_LICENSE",
+      "license": "boat"
+     }
+    ]
+   }
+  ],
+  "stat_xp": {
+   "dex": 8
+  }
+ },
+ {
+  "id": "license_pilot",
+  "cat": "mind",
+  "order": 20,
+  "min_age": 17,
+  "time": 2,
+  "cost": 8000,
+  "conditions": [
+   {
+    "path": "player.licenses",
+    "op": "not_has",
+    "value": "pilot"
+   },
+   {
+    "path": "stat.int",
+    "op": ">=",
+    "value": 14
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.55,
+    "luck": true,
+    "mod": "none",
+    "effects": [
+     {
+      "type": "ADD_LICENSE",
+      "license": "pilot"
+     }
+    ]
+   }
+  ],
+  "stat_xp": {
+   "dex": 12,
+   "int": 8
+  }
+ },
+ {
+  "id": "library",
+  "cat": "mind",
+  "order": 9,
+  "min_age": 6,
+  "time": 1,
+  "stat_xp": {
+   "int": 10,
+   "wis": 6
+  },
+  "exp": 4,
+  "counter": "act.study",
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -3
+   }
+  ]
+ },
+ {
+  "id": "walk",
+  "cat": "body",
+  "order": 26,
+  "min_age": 4,
+  "time": 1,
+  "stat_xp": {
+   "vit": 8
+  },
+  "fitness": 4,
+  "exp": 3,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -6
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 2
+   }
+  ]
+ },
+ {
+  "id": "gardening",
+  "cat": "body",
+  "order": 27,
+  "min_age": 8,
+  "time": 1,
+  "stat_xp": {
+   "wis": 6,
+   "vit": 4
+  },
+  "exp": 3,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -8
+   },
+   {
+    "type": "KARMA",
+    "amount": 1
+   }
+  ]
+ },
+ {
+  "id": "yoga",
+  "cat": "body",
+  "order": 28,
+  "min_age": 12,
+  "time": 1,
+  "cost": 80,
+  "stat_xp": {
+   "dex": 8,
+   "wis": 8
+  },
+  "fitness": 5,
+  "exp": 4,
+  "counter": "act.meditate",
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -10
+   }
+  ]
+ },
+ {
+  "id": "diet",
+  "cat": "body",
+  "order": 29,
+  "min_age": 14,
+  "time": 0,
+  "cost": 200,
+  "effects": [
+   {
+    "type": "CHANGE_VALUE",
+    "path": "health.weight",
+    "amount": -4,
+    "min": -30
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": -2
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "looks",
+    "amount": 1
+   }
+  ]
+ },
+ {
+  "id": "junk_food",
+  "cat": "leisure",
+  "order": 39,
+  "min_age": 6,
+  "time": 0,
+  "cost": 15,
+  "effects": [
+   {
+    "type": "CHANGE_VALUE",
+    "path": "health.weight",
+    "amount": 4,
+    "max": 60
+   },
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 4
+   }
+  ]
+ },
+ {
+  "id": "surgery_botox",
+  "cat": "beauty",
+  "order": 110,
+  "min_age": 18,
+  "time": 1,
+  "cost": 1500,
+  "conditions": [],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.96,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 3
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -6
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "surgery_rhinoplasty",
+  "cat": "beauty",
+  "order": 111,
+  "min_age": 18,
+  "time": 1,
+  "cost": 6000,
+  "conditions": [
+   {
+    "path": "counter.act.surgery_rhinoplasty",
+    "op": "<",
+    "value": 2
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.88,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 6
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -12
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "surgery_liposuction",
+  "cat": "beauty",
+  "order": 112,
+  "min_age": 18,
+  "time": 1,
+  "cost": 7000,
+  "conditions": [
+   {
+    "path": "counter.act.surgery_liposuction",
+    "op": "<",
+    "value": 3
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.9,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -10
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "surgery_facelift",
+  "cat": "beauty",
+  "order": 113,
+  "min_age": 18,
+  "time": 1,
+  "cost": 12000,
+  "conditions": [],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.88,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 8
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -16
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "surgery_tummy_tuck",
+  "cat": "beauty",
+  "order": 114,
+  "min_age": 18,
+  "time": 1,
+  "cost": 8000,
+  "conditions": [
+   {
+    "path": "counter.act.surgery_tummy_tuck",
+    "op": "<",
+    "value": 2
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.9,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -10
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "surgery_chin_lift",
+  "cat": "beauty",
+  "order": 115,
+  "min_age": 18,
+  "time": 1,
+  "cost": 5000,
+  "conditions": [
+   {
+    "path": "counter.act.surgery_chin_lift",
+    "op": "<",
+    "value": 2
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.9,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 4
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -8
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "surgery_hair_transplant",
+  "cat": "beauty",
+  "order": 116,
+  "min_age": 18,
+  "time": 1,
+  "cost": 9000,
+  "conditions": [
+   {
+    "path": "counter.act.surgery_hair_transplant",
+    "op": "<",
+    "value": 2
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANCE",
+    "p": 0.94,
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": 5
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 4
+     }
+    ],
+    "else": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "looks",
+      "amount": -10
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": -12
+     },
+     {
+      "type": "LOG",
+      "key": "log.botched",
+      "kind": "warning"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "crime_vandalism",
+  "cat": "crime",
+  "order": 69,
+  "min_age": 10,
+  "time": 1,
+  "special": "crime",
+  "crime": "vandalism",
+  "tags": [],
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 3
+   }
+  ]
+ },
+ {
+  "id": "crime_porch",
+  "cat": "crime",
+  "order": 70,
+  "min_age": 12,
+  "time": 1,
+  "special": "crime",
+  "crime": "porch_pirate"
+ },
+ {
+  "id": "crime_embezzle",
+  "cat": "crime",
+  "order": 76,
+  "min_age": 18,
+  "time": 1,
+  "special": "crime",
+  "crime": "embezzle",
+  "conditions": [
+   {
+    "path": "calc.employed",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "crime_armored",
+  "cat": "crime",
+  "order": 77,
+  "min_age": 20,
+  "time": 2,
+  "special": "crime",
+  "crime": "armored_car",
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 20
+   }
+  ]
+ },
+ {
+  "id": "bank_robbery",
+  "cat": "crime",
+  "order": 78,
+  "min_age": 18,
+  "time": 2,
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "bank_plan_target"
+   }
+  ]
+ },
+ {
+  "id": "lawsuit",
+  "cat": "health",
+  "order": 70,
+  "min_age": 18,
+  "time": 1,
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "lawsuit_pick"
+   }
+  ]
+ },
+ {
+  "id": "prison_bribe",
+  "cat": "prison",
+  "order": 86,
+  "prison": true,
+  "time": 0,
+  "special": "bribe"
+ },
+ {
+  "id": "prison_riot",
+  "cat": "prison",
+  "order": 87,
+  "prison": true,
+  "time": 1,
+  "special": "riot"
+ },
+ {
+  "id": "prison_gang",
+  "cat": "prison",
+  "order": 88,
+  "prison": true,
+  "time": 0,
+  "conditions": [
+   {
+    "path": "player.criminal.prison.gang",
+    "op": "==",
+    "value": ""
+   }
+  ],
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "prison_join_gang"
+   }
+  ]
+ },
+ {
+  "id": "acting_class",
+  "cat": "mind",
+  "order": 16,
+  "min_age": 6,
+  "time": 1,
+  "cost": 150,
+  "stat_xp": {
+   "cha": 8
+  },
+  "exp": 5,
+  "counter": "act.acting",
+  "skill_xp": {
+   "acting": 8
+  }
+ },
+ {
+  "id": "alt_doctor",
+  "cat": "health",
+  "order": 60,
+  "min_age": 4,
+  "time": 1,
+  "cost": 60,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "health",
+    "amount": 2
+   },
+   {
+    "type": "DOCTOR_VISIT",
+    "quality": 0.2
+   },
+   {
+    "type": "KARMA",
+    "amount": 0
+   }
+  ]
+ },
+ {
+  "id": "emergency_room",
+  "cat": "health",
+  "order": 61,
+  "min_age": 0,
+  "time": 0,
+  "cost": 1500,
+  "conditions": [
+   {
+    "path": "player.attrs.health",
+    "op": "<",
+    "value": 35
+   }
+  ],
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "health",
+    "amount": 15
+   },
+   {
+    "type": "DOCTOR_VISIT",
+    "quality": 0.95
+   }
+  ]
+ },
+ {
+  "id": "psychiatrist",
+  "cat": "health",
+  "order": 62,
+  "min_age": 12,
+  "time": 1,
+  "cost": 1500,
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "stress",
+    "amount": -15
+   },
+   {
+    "type": "CHANCE",
+    "p": 0.5,
+    "effects": [
+     {
+      "type": "REMOVE_DISEASE",
+      "disease": "depression"
+     },
+     {
+      "type": "REMOVE_DISEASE",
+      "disease": "anxiety"
+     },
+     {
+      "type": "REMOVE_DISEASE",
+      "disease": "insomnia"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "nightclub",
+  "cat": "leisure",
+  "order": 30,
+  "min_age": 18,
+  "time": 1,
+  "cost": 80,
+  "tags": [
+   "mature"
+  ],
+  "stat_xp": {
+   "cha": 8
+  },
+  "effects": [
+   {
+    "type": "CHANGE_STAT",
+    "stat": "happiness",
+    "amount": 8
+   },
+   {
+    "type": "CHANGE_HABIT",
+    "habit": "alcohol",
+    "amount": 10
+   }
+  ],
+  "events": [
+   {
+    "event": "club_night",
+    "chance": 0.6
+   }
+  ]
+ },
+ {
+  "id": "horse_race",
+  "cat": "leisure",
+  "order": 36,
+  "min_age": 18,
+  "time": 1,
+  "cost": 20,
+  "tags": [
+   "mature"
+  ],
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "horse_race"
+   }
+  ]
+ },
+ {
+  "id": "blackjack",
+  "cat": "leisure",
+  "order": 36,
+  "min_age": 18,
+  "time": 1,
+  "cost": 0,
+  "tags": [
+   "mature"
+  ],
+  "special": "blackjack",
+  "conditions": [
+   {
+    "path": "player.finance.cash",
+    "op": ">=",
+    "value": 500
+   }
+  ]
+ },
+ {
+  "id": "vacation",
+  "cat": "leisure",
+  "order": 34,
+  "min_age": 18,
+  "time": 1,
+  "effects": [
+   {
+    "type": "TRIGGER_EVENT",
+    "event": "vacation_pick"
+   }
+  ]
  }
 ]

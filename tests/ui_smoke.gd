@@ -77,6 +77,29 @@ func _run() -> void:
 	main.screens["career"].get_child(0).scroll_vertical = 700
 	await _frames(3)
 	await _shot("08_special")
+	# BitLife-depth screens: school life, dating app, escape mini-game.
+	pl.age = 14
+	pl.education.stage = "middle"
+	app.sim.activities.start_year(pl)
+	app.sim.command("join_club", ["soccer"])
+	main.select_tab("career")
+	await _frames(4)
+	await _shot("09_school")
+	pl.age = 25
+	pl.education.stage = ""
+	app.sim.activities.start_year(pl)
+	main.screens["activities"]._open_dating(app.sim.dating.candidates(false))
+	await _frames(6)
+	await _shot("10_dating")
+	main.close_overlays()
+	app.sim.crime.imprison(pl, 3)
+	app.sim.activities.start_year(pl)
+	main.select_tab("activities")
+	await _frames(3)
+	main.screens["activities"]._perform("prison_escape")
+	await _frames(6)
+	await _shot("11_escape")
+	main.close_overlays()
 	app.sim.health.kill(app.sim.player(), "cause.event")
 	await _frames(8)
 	await _shot("06_death")

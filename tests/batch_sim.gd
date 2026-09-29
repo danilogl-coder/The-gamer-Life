@@ -140,10 +140,11 @@ func _play_year(sim: LifeSimulation, bot: RandomNumberGenerator, grinder: bool) 
 				continue
 		var options: Array = []
 		for c in cats:
+			if c == "crime" and bot.randf() > 0.02:
+				continue
 			for e in sim.activities.list(c):
-				if e.locked == "" and not str(e.id).begins_with("crime_") or bot.randf() < 0.01:
-					if e.locked == "" and e.id != "dungeon":
-						options.append(e.id)
+				if e.locked == "" and e.id != "dungeon" and not e.id in ["run_away", "sterilize", "junk_food"] and not str(e.id).begins_with("surgery_"):
+					options.append(e.id)
 		if options.is_empty():
 			break
 		sim.do_activity(options[bot.randi_range(0, options.size() - 1)])

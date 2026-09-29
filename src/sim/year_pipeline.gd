@@ -36,6 +36,7 @@ func advance() -> void:
 	_sim.career.process_year(p)
 	_sim.special.process_year(p)
 	_sim.education.process_year(p)
+	_sim.school_life.process_year(p)
 	_sim.crime.process_year(p)
 	_sim.gamer.process_year(p)
 	_sim.health.process_year(p)
@@ -70,6 +71,8 @@ func start_year() -> void:
 
 func _milestones(p: Dictionary) -> void:
 	var age := int(p.age)
+	if age == 8:
+		_sim.events.queue_special("attic_search")
 	if age == int(_sim.data.bal("life.adult_age", 18)):
 		_sim.add_log("log.adult", {}, "major")
 	elif age % 10 == 0:

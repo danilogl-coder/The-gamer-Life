@@ -1,14 +1,197 @@
 [
-  {"id": "bike", "kind": "vehicle", "price": 400, "depreciation": 0.1, "maintenance": 50, "reliability": 0.98, "happiness": 1},
-  {"id": "used_car", "kind": "vehicle", "price": 8000, "depreciation": 0.12, "maintenance": 900, "reliability": 0.85, "happiness": 2},
-  {"id": "sedan", "kind": "vehicle", "price": 28000, "depreciation": 0.14, "maintenance": 1200, "reliability": 0.95, "happiness": 3},
-  {"id": "motorcycle", "kind": "vehicle", "price": 12000, "depreciation": 0.12, "maintenance": 700, "reliability": 0.9, "happiness": 4, "risk": 0.04},
-  {"id": "sports_car", "kind": "vehicle", "price": 140000, "depreciation": 0.16, "maintenance": 6000, "reliability": 0.9, "happiness": 7, "looks": 3, "classic_age": 25},
-  {"id": "yacht", "kind": "vehicle", "price": 1500000, "depreciation": 0.08, "maintenance": 90000, "reliability": 0.9, "happiness": 10, "fame": 1},
-  {"id": "private_jet", "kind": "vehicle", "price": 12000000, "depreciation": 0.07, "maintenance": 700000, "reliability": 0.97, "happiness": 12, "fame": 2},
-  {"id": "vintage_watch", "kind": "collectible", "price": 15000, "trend": 0.04, "vol": 0.1, "happiness": 2},
-  {"id": "painting", "kind": "collectible", "price": 60000, "trend": 0.05, "vol": 0.25, "happiness": 3},
-  {"id": "rare_guitar", "kind": "collectible", "price": 25000, "trend": 0.03, "vol": 0.12, "happiness": 2, "mods": {"stat.cha": 1}},
-  {"id": "diamond", "kind": "collectible", "price": 90000, "trend": 0.02, "vol": 0.08, "happiness": 3},
-  {"id": "ancient_relic", "kind": "collectible", "price": 250000, "trend": 0.06, "vol": 0.3, "happiness": 4, "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}], "mods": {"stat.luk": 3}}
+ {
+  "id": "bike",
+  "kind": "vehicle",
+  "price": 400,
+  "depreciation": 0.1,
+  "maintenance": 50,
+  "reliability": 0.98,
+  "happiness": 1,
+  "license": ""
+ },
+ {
+  "id": "used_car",
+  "kind": "vehicle",
+  "price": 8000,
+  "depreciation": 0.12,
+  "maintenance": 900,
+  "reliability": 0.85,
+  "happiness": 2,
+  "license": "driving"
+ },
+ {
+  "id": "sedan",
+  "kind": "vehicle",
+  "price": 28000,
+  "depreciation": 0.14,
+  "maintenance": 1200,
+  "reliability": 0.95,
+  "happiness": 3,
+  "license": "driving"
+ },
+ {
+  "id": "motorcycle",
+  "kind": "vehicle",
+  "price": 12000,
+  "depreciation": 0.12,
+  "maintenance": 700,
+  "reliability": 0.9,
+  "happiness": 4,
+  "risk": 0.04,
+  "license": "driving"
+ },
+ {
+  "id": "sports_car",
+  "kind": "vehicle",
+  "price": 140000,
+  "depreciation": 0.16,
+  "maintenance": 6000,
+  "reliability": 0.9,
+  "happiness": 7,
+  "looks": 3,
+  "classic_age": 25,
+  "license": "driving"
+ },
+ {
+  "id": "yacht",
+  "kind": "vehicle",
+  "price": 1500000,
+  "depreciation": 0.08,
+  "maintenance": 90000,
+  "reliability": 0.9,
+  "happiness": 10,
+  "fame": 1,
+  "license": "boat"
+ },
+ {
+  "id": "private_jet",
+  "kind": "vehicle",
+  "price": 12000000,
+  "depreciation": 0.07,
+  "maintenance": 700000,
+  "reliability": 0.97,
+  "happiness": 12,
+  "fame": 2,
+  "license": "pilot"
+ },
+ {
+  "id": "vintage_watch",
+  "kind": "collectible",
+  "price": 15000,
+  "trend": 0.04,
+  "vol": 0.1,
+  "happiness": 2
+ },
+ {
+  "id": "painting",
+  "kind": "collectible",
+  "price": 60000,
+  "trend": 0.05,
+  "vol": 0.25,
+  "happiness": 3
+ },
+ {
+  "id": "rare_guitar",
+  "kind": "collectible",
+  "price": 25000,
+  "trend": 0.03,
+  "vol": 0.12,
+  "happiness": 2,
+  "mods": {
+   "stat.cha": 1
+  }
+ },
+ {
+  "id": "diamond",
+  "kind": "collectible",
+  "price": 90000,
+  "trend": 0.02,
+  "vol": 0.08,
+  "happiness": 3
+ },
+ {
+  "id": "ancient_relic",
+  "kind": "collectible",
+  "price": 250000,
+  "trend": 0.06,
+  "vol": 0.3,
+  "happiness": 4,
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "mods": {
+   "stat.luk": 3
+  }
+ },
+ {
+  "id": "gold_ring",
+  "kind": "jewelry",
+  "price": 1200,
+  "trend": 0.02,
+  "vol": 0.05,
+  "happiness": 1,
+  "mods": {
+   "charm": 0.01
+  }
+ },
+ {
+  "id": "pearl_necklace",
+  "kind": "jewelry",
+  "price": 6000,
+  "trend": 0.02,
+  "vol": 0.05,
+  "happiness": 2,
+  "mods": {
+   "charm": 0.02
+  }
+ },
+ {
+  "id": "diamond_earrings",
+  "kind": "jewelry",
+  "price": 20000,
+  "trend": 0.03,
+  "vol": 0.06,
+  "happiness": 3,
+  "mods": {
+   "charm": 0.03
+  }
+ },
+ {
+  "id": "acoustic_guitar",
+  "kind": "instrument",
+  "price": 400,
+  "trend": -0.03,
+  "vol": 0.02,
+  "happiness": 1,
+  "mods": {
+   "skill_gain": 0.02
+  }
+ },
+ {
+  "id": "piano",
+  "kind": "instrument",
+  "price": 7000,
+  "trend": -0.01,
+  "vol": 0.03,
+  "happiness": 2,
+  "mods": {
+   "skill_gain": 0.04,
+   "stat.cha": 1
+  }
+ },
+ {
+  "id": "violin",
+  "kind": "instrument",
+  "price": 3000,
+  "trend": 0.0,
+  "vol": 0.04,
+  "happiness": 1,
+  "mods": {
+   "skill_gain": 0.03
+  }
+ }
 ]

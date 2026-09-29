@@ -1,0 +1,576 @@
+[
+ {
+  "id": "attic_search",
+  "special": true,
+  "once": true,
+  "choices": [
+   {
+    "id": "trunk",
+    "effects": [
+     {
+      "type": "CHANCE",
+      "p": 0.55,
+      "luck": true,
+      "mod": "none",
+      "effects": [
+       {
+        "type": "GIVE_HEIRLOOM"
+       }
+      ],
+      "else": [
+       {
+        "type": "CHANGE_STAT",
+        "stat": "happiness",
+        "amount": -1
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "shelf",
+    "effects": [
+     {
+      "type": "CHANCE",
+      "p": 0.45,
+      "luck": true,
+      "mod": "none",
+      "effects": [
+       {
+        "type": "GIVE_HEIRLOOM"
+       }
+      ],
+      "else": [
+       {
+        "type": "CHANGE_STAT",
+        "stat": "happiness",
+        "amount": -1
+       }
+      ]
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.2,
+      "luck": true,
+      "mod": "none",
+      "effects": [
+       {
+        "type": "GIVE_HEIRLOOM"
+       }
+      ],
+      "else": [
+       {
+        "type": "CHANGE_STAT",
+        "stat": "happiness",
+        "amount": -1
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "floor",
+    "effects": [
+     {
+      "type": "CHANCE",
+      "p": 0.35,
+      "luck": true,
+      "mod": "none",
+      "effects": [
+       {
+        "type": "GIVE_HEIRLOOM"
+       }
+      ],
+      "else": [
+       {
+        "type": "CHANGE_STAT",
+        "stat": "happiness",
+        "amount": -1
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ran_away",
+  "special": true,
+  "choices": [
+   {
+    "id": "friend",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "ran_away"
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": -15
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:father",
+      "amount": -15
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:friend",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "street",
+    "effects": [
+     {
+      "type": "SET_FLAG",
+      "flag": "ran_away"
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "health",
+      "amount": -10
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "dex",
+      "amount": 30
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "vit",
+      "amount": 30
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "education.absences",
+      "amount": 6
+     },
+     {
+      "type": "TRIGGER_EVENT",
+      "event": "street_crowd"
+     }
+    ]
+   },
+   {
+    "id": "return",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "wis",
+      "amount": 15
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "principal_office",
+  "special": true,
+  "choices": [
+   {
+    "id": "deny",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "stat.cha",
+       "per": 0.01,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": []
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_VALUE",
+       "path": "education.absences",
+       "amount": 3
+      },
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "target": "role:mother",
+       "amount": -10
+      },
+      {
+       "type": "POPULARITY",
+       "amount": -4
+      }
+     ]
+    }
+   },
+   {
+    "id": "admit",
+    "effects": [
+     {
+      "type": "KARMA",
+      "amount": 3
+     },
+     {
+      "type": "CHANGE_VALUE",
+      "path": "education.absences",
+      "amount": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "coming_out",
+  "min_age": 13,
+  "max_age": 30,
+  "once": true,
+  "weight": 30,
+  "conditions": [
+   {
+    "path": "player.sexuality",
+    "op": "!=",
+    "value": "straight"
+   }
+  ],
+  "actor": {
+   "role": [
+    "mother",
+    "father",
+    "best_friend"
+   ]
+  },
+  "choices": [
+   {
+    "id": "tell",
+    "chance": {
+     "base": 0.6,
+     "mods": [
+      {
+       "path": "rel.actor",
+       "per": 0.006,
+       "offset": 50
+      },
+      {
+       "path": "actor.hidden.religiousness",
+       "per": -0.004,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": 12
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 12
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "out"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_RELATIONSHIP",
+       "amount": -20
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -8
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "out"
+      }
+     ]
+    }
+   },
+   {
+    "id": "wait",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 6
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "parents_ask_help",
+  "min_age": 30,
+  "cooldown": 6,
+  "weight": 7,
+  "actor": {
+   "role": [
+    "mother",
+    "father"
+   ]
+  },
+  "actor_conditions": [
+   {
+    "path": "actor.age",
+    "op": ">=",
+    "value": 65
+   }
+  ],
+  "choices": [
+   {
+    "id": "home",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 20
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "stress",
+      "amount": 12
+     },
+     {
+      "type": "KARMA",
+      "amount": 4
+     }
+    ]
+   },
+   {
+    "id": "care",
+    "effects": [
+     {
+      "type": "CHANGE_MONEY",
+      "amount": -12000
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 5
+     }
+    ]
+   },
+   {
+    "id": "refuse",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": -30
+     },
+     {
+      "type": "KARMA",
+      "amount": -5
+     },
+     {
+      "type": "ADD_MEMORY",
+      "memory": "abandoned",
+      "severity": 50
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "baby_first_words",
+  "min_age": 1,
+  "max_age": 2,
+  "once": true,
+  "weight": 40,
+  "choices": [
+   {
+    "id": "mama",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:mother",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "papa",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:father",
+      "amount": 10
+     }
+    ]
+   },
+   {
+    "id": "status",
+    "effects": [
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 20
+     },
+     {
+      "type": "GAIN_EXP",
+      "amount": 30
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "school_election",
+  "min_age": 11,
+  "max_age": 17,
+  "cooldown": 3,
+  "weight": 8,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "run",
+    "chance": {
+     "base": 0.2,
+     "mods": [
+      {
+       "path": "calc.popularity",
+       "per": 0.008
+      },
+      {
+       "path": "stat.cha",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.3
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "POPULARITY",
+       "amount": 12
+      },
+      {
+       "type": "SET_FLAG",
+       "flag": "class_president"
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "cha",
+       "amount": 40
+      },
+      {
+       "type": "LOG",
+       "key": "log.class_president",
+       "kind": "major"
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "POPULARITY",
+       "amount": -4
+      }
+     ]
+    }
+   },
+   {
+    "id": "no"
+   }
+  ]
+ },
+ {
+  "id": "prom_night",
+  "min_age": 17,
+  "max_age": 18,
+  "once": true,
+  "weight": 30,
+  "conditions": [
+   {
+    "path": "calc.in_school",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "choices": [
+   {
+    "id": "date",
+    "chance": {
+     "base": 0.4,
+     "mods": [
+      {
+       "path": "calc.popularity",
+       "per": 0.006
+      },
+      {
+       "path": "player.attrs.looks",
+       "per": 0.004,
+       "offset": 50
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "SPAWN_NPC",
+       "role": "partner",
+       "age_rel": 0,
+       "age_spread": 1,
+       "sex": "pref",
+       "score": 65
+      },
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": 12
+      },
+      {
+       "type": "POPULARITY",
+       "amount": 5
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "CHANGE_STAT",
+       "stat": "happiness",
+       "amount": -6
+      }
+     ]
+    }
+   },
+   {
+    "id": "friends",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 8
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:friend",
+      "amount": 8
+     }
+    ]
+   },
+   {
+    "id": "skip",
+    "effects": [
+     {
+      "type": "POPULARITY",
+      "amount": -3
+     }
+    ]
+   }
+  ]
+ }
+]

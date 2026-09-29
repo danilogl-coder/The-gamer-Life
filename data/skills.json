@@ -780,5 +780,22 @@
    "max_mp": 0.04,
    "social_gain": 0.02
   }
+ },
+ {
+  "id": "acting",
+  "cat": "art",
+  "tier": "common",
+  "type": "passive",
+  "max_level": 10,
+  "xp_base": 25,
+  "talent": "talent_art",
+  "learn": {
+   "counter": "act.acting",
+   "count": 4
+  },
+  "mods": {
+   "stat.cha": 0.5,
+   "charm": 0.01
+  }
  }
 ]

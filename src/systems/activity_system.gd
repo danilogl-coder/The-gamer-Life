@@ -25,7 +25,7 @@ func start_year(p: Dictionary) -> void:
 			slots = int(bracket[1])
 	var job: Dictionary = _sim.career.job_def(p)
 	if not job.is_empty():
-		slots -= int(_sim.data.bal("time.job_cost." + job.get("hours", "full"), 3))
+		slots -= int(_sim.career.hours(p).slots)
 	if _sim.education.in_school(p) and age >= 18:
 		slots -= int(_sim.data.bal("time.college_cost", 2))
 	if _sim.crime.in_prison(p):
@@ -126,10 +126,23 @@ func perform(id: String, params: Dictionary = {}) -> Dictionary:
 			result = _sim.crime.commit(params.get("crime", def.get("crime", "")), ctx)
 		"sleep":
 			_sim.gamer.refill(p)
+		"dating":
+			result = {"ok": true, "key": "", "dating": _sim.dating.candidates(false)}
 		"escape":
-			result = _sim.crime.attempt_escape(p)
+			result = _sim.crime.escape_result(p, bool(params.get("success", _sim.prob.roll_spec({"base": 0.1, "mods": [{"path": "stat.dex", "per": 0.004, "max": 0.35}]}))))
 		"appeal":
-			result = _sim.crime.appeal(p)
+			result = _sim.crime.appeal(p, params.get("lawyer", "cheap"))
+		"blackjack":
+			var bet := minf(float(params.get("bet", 500.0)), float(p.finance.cash))
+			var won: bool = params.get("won", _sim.rng.randf() < _sim.prob.apply_luck(0.46) * (1.0 + _sim.gamer.mod("gamble_luck")))
+			_sim.finance.add_cash(p, bet if won else -bet)
+			_sim.health.change_habit(p, "gambling", 8.0)
+			ctx.gains["money"] = bet if won else -bet
+			result = {"ok": true, "success": won, "key": "act.blackjack.win" if won else "act.blackjack.lose", "params": {"v": int(bet)}}
+		"bribe":
+			result = _sim.crime.bribe_guard(p)
+		"riot":
+			result = _sim.crime.riot(p)
 	_sim.effects.run_all(def.get("effects", []), ctx)
 	for stat in def.get("stat_xp", {}):
 		var amt := float(def.stat_xp[stat])

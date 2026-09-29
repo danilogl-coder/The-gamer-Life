@@ -1,0 +1,26 @@
+[
+  {"id": "q_weakness", "answers": [
+    {"id": "honest", "stat": "wis", "base": 0.04, "per": 0.006},
+    {"id": "humblebrag", "stat": "cha", "base": 0.0, "per": 0.008},
+    {"id": "none", "stat": "cha", "base": -0.08, "per": 0.004}]},
+  {"id": "q_why_us", "answers": [
+    {"id": "research", "stat": "int", "base": 0.05, "per": 0.006},
+    {"id": "money", "stat": "cha", "base": -0.05, "per": 0.004},
+    {"id": "passion", "stat": "cha", "base": 0.02, "per": 0.008}]},
+  {"id": "q_conflict", "answers": [
+    {"id": "mediate", "stat": "wis", "base": 0.04, "per": 0.007},
+    {"id": "boss", "stat": "cha", "base": 0.0, "per": 0.004},
+    {"id": "fight", "stat": "str", "base": -0.1, "per": 0.003}]},
+  {"id": "q_five_years", "answers": [
+    {"id": "grow", "stat": "wis", "base": 0.04, "per": 0.005},
+    {"id": "your_job", "stat": "cha", "base": -0.02, "per": 0.01},
+    {"id": "dunno", "stat": "luk", "base": -0.06, "per": 0.006}]},
+  {"id": "q_pressure", "answers": [
+    {"id": "calm", "stat": "wis", "base": 0.05, "per": 0.006},
+    {"id": "thrive", "stat": "vit", "base": 0.02, "per": 0.006},
+    {"id": "panic", "stat": "cha", "base": -0.1, "per": 0.002}]},
+  {"id": "q_hobbies", "answers": [
+    {"id": "reading", "stat": "int", "base": 0.03, "per": 0.004},
+    {"id": "sports", "stat": "str", "base": 0.03, "per": 0.004},
+    {"id": "dungeons", "stat": "luk", "base": -0.02, "per": 0.01}]}
+]

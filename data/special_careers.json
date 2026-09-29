@@ -67,5 +67,154 @@
    }
   ],
   "lock_key": "sc.pol.lock"
+ },
+ {
+  "id": "actor",
+  "order": 6,
+  "script": "res://src/systems/careers/actor_career.gd",
+  "min_age": 8,
+  "conditions": [],
+  "lock_key": "job.block.locked"
+ },
+ {
+  "id": "model",
+  "order": 7,
+  "script": "res://src/systems/careers/model_career.gd",
+  "min_age": 15,
+  "conditions": [
+   {
+    "path": "player.attrs.looks",
+    "op": ">=",
+    "value": 68
+   },
+   {
+    "path": "player.age",
+    "op": "<=",
+    "value": 35
+   }
+  ],
+  "lock_key": "sc.mod.lock"
+ },
+ {
+  "id": "hustler",
+  "order": 8,
+  "script": "res://src/systems/careers/hustler_career.gd",
+  "min_age": 14,
+  "conditions": [],
+  "lock_key": "job.block.locked"
+ },
+ {
+  "id": "military",
+  "order": 9,
+  "script": "res://src/systems/careers/military_career.gd",
+  "min_age": 18,
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": "<=",
+    "value": 40
+   },
+   {
+    "path": "player.attrs.health",
+    "op": ">=",
+    "value": 50
+   },
+   {
+    "path": "player.criminal.record",
+    "op": "==",
+    "value": []
+   }
+  ],
+  "lock_key": "sc.mil.lock"
+ },
+ {
+  "id": "astronaut",
+  "order": 10,
+  "script": "res://src/systems/careers/astronaut_career.gd",
+  "min_age": 21,
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": "<=",
+    "value": 45
+   },
+   {
+    "path": "stat.int",
+    "op": ">=",
+    "value": 20
+   },
+   {
+    "path": "stat.vit",
+    "op": ">=",
+    "value": 18
+   },
+   {
+    "any": [
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "uni_physics"
+     },
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "uni_engineering"
+     },
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "uni_cs"
+     },
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "uni_medicine"
+     },
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "uni_biology"
+     }
+    ]
+   }
+  ],
+  "lock_key": "sc.ast.lock"
+ },
+ {
+  "id": "mafia",
+  "order": 11,
+  "script": "res://src/systems/careers/mafia_career.gd",
+  "min_age": 18,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "counter.crime.total",
+      "op": ">=",
+      "value": 5
+     },
+     {
+      "path": "calc.karma",
+      "op": "<=",
+      "value": 30
+     }
+    ]
+   }
+  ],
+  "lock_key": "sc.maf.lock"
+ },
+ {
+  "id": "royalty",
+  "order": 12,
+  "script": "res://src/systems/careers/royalty_career.gd",
+  "min_age": 0,
+  "conditions": [
+   {
+    "path": "flag.royal_birth",
+    "op": "==",
+    "value": true
+   }
+  ],
+  "lock_key": "sc.roy.lock"
  }
 ]

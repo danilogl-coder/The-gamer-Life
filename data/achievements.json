@@ -1,24 +1,654 @@
 [
-  {"id": "ach_level_10", "cat": "system", "any_time": true, "conditions": [{"path": "calc.level", "op": ">=", "value": 10}]},
-  {"id": "ach_level_50", "cat": "system", "any_time": true, "conditions": [{"path": "calc.level", "op": ">=", "value": 50}]},
-  {"id": "ach_level_100", "cat": "system", "any_time": true, "conditions": [{"path": "calc.level", "op": ">=", "value": 100}]},
-  {"id": "ach_first_evolution", "cat": "system", "any_time": true, "conditions": [{"path": "calc.rank", "op": ">=", "value": 1}]},
-  {"id": "ach_skill_collector", "cat": "system", "any_time": true, "conditions": [{"path": "calc.skills_known", "op": ">=", "value": 12}]},
-  {"id": "ach_ultimate", "cat": "system", "any_time": true, "conditions": [{"any": [{"path": "skill.inferno", "op": ">=", "value": 1}, {"path": "skill.sovereign_aura", "op": ">=", "value": 1}]}]},
-  {"id": "ach_millionaire", "cat": "wealth", "any_time": true, "conditions": [{"path": "calc.net_worth", "op": ">=", "value": 1000000}]},
-  {"id": "ach_billionaire", "cat": "wealth", "any_time": true, "conditions": [{"path": "calc.net_worth", "op": ">=", "value": 1000000000}]},
-  {"id": "ach_doctor", "cat": "career", "any_time": true, "conditions": [{"path": "player.career.job", "op": "==", "value": "doctor"}]},
-  {"id": "ach_ceo", "cat": "career", "any_time": true, "conditions": [{"path": "player.career.job", "op": "==", "value": "ceo"}]},
-  {"id": "ach_guild_master", "cat": "career", "any_time": true, "conditions": [{"path": "player.career.job", "op": "==", "value": "guild_master"}]},
-  {"id": "ach_married", "cat": "family", "any_time": true, "conditions": [{"path": "calc.married", "op": "==", "value": true}]},
-  {"id": "ach_big_family", "cat": "family", "any_time": true, "conditions": [{"path": "calc.children", "op": ">=", "value": 5}]},
-  {"id": "ach_prison", "cat": "crime", "any_time": true, "conditions": [{"path": "calc.in_prison", "op": "==", "value": true}]},
-  {"id": "ach_escape", "cat": "crime", "any_time": true, "conditions": [{"path": "flag.fugitive", "op": "==", "value": true}]},
-  {"id": "ach_dragon", "cat": "rare", "any_time": true, "conditions": [{"path": "counter.kill.ancient_dragon", "op": ">=", "value": 1}]},
-  {"id": "ach_lottery", "cat": "rare", "any_time": true, "conditions": [{"path": "flag.lottery_winner", "op": "==", "value": true}]},
-  {"id": "ach_centenarian", "cat": "longevity", "on_death": true, "conditions": [{"path": "player.age", "op": ">=", "value": 100}]},
-  {"id": "ach_short_life", "cat": "longevity", "on_death": true, "conditions": [{"path": "player.age", "op": "<", "value": 25}]},
-  {"id": "ach_generation_3", "cat": "family", "any_time": true, "conditions": [{"path": "calc.generation", "op": ">=", "value": 3}]},
-  {"id": "ach_world_revealed", "cat": "system", "any_time": true, "conditions": [{"path": "flag.world_revealed", "op": "==", "value": true}]},
-  {"id": "ach_rags_to_riches", "cat": "wealth", "any_time": true, "conditions": [{"path": "player.wealth", "op": "==", "value": "poor"}, {"path": "calc.net_worth", "op": ">=", "value": 5000000}]}
+ {
+  "id": "ach_level_10",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 10
+   }
+  ]
+ },
+ {
+  "id": "ach_level_50",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 50
+   }
+  ]
+ },
+ {
+  "id": "ach_level_100",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.level",
+    "op": ">=",
+    "value": 100
+   }
+  ]
+ },
+ {
+  "id": "ach_first_evolution",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.rank",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_skill_collector",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.skills_known",
+    "op": ">=",
+    "value": 12
+   }
+  ]
+ },
+ {
+  "id": "ach_ultimate",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "skill.inferno",
+      "op": ">=",
+      "value": 1
+     },
+     {
+      "path": "skill.sovereign_aura",
+      "op": ">=",
+      "value": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "ach_millionaire",
+  "cat": "wealth",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.net_worth",
+    "op": ">=",
+    "value": 1000000
+   }
+  ]
+ },
+ {
+  "id": "ach_billionaire",
+  "cat": "wealth",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.net_worth",
+    "op": ">=",
+    "value": 1000000000
+   }
+  ]
+ },
+ {
+  "id": "ach_doctor",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.career.job",
+    "op": "==",
+    "value": "doctor"
+   }
+  ]
+ },
+ {
+  "id": "ach_ceo",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.career.job",
+    "op": "==",
+    "value": "ceo"
+   }
+  ]
+ },
+ {
+  "id": "ach_guild_master",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.career.job",
+    "op": "==",
+    "value": "guild_master"
+   }
+  ]
+ },
+ {
+  "id": "ach_married",
+  "cat": "family",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.married",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "ach_big_family",
+  "cat": "family",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.children",
+    "op": ">=",
+    "value": 5
+   }
+  ]
+ },
+ {
+  "id": "ach_prison",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.in_prison",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "ach_escape",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "flag.fugitive",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "ach_dragon",
+  "cat": "rare",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.kill.ancient_dragon",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_lottery",
+  "cat": "rare",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "flag.lottery_winner",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "ach_centenarian",
+  "cat": "longevity",
+  "on_death": true,
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": ">=",
+    "value": 100
+   }
+  ]
+ },
+ {
+  "id": "ach_short_life",
+  "cat": "longevity",
+  "on_death": true,
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": "<",
+    "value": 25
+   }
+  ]
+ },
+ {
+  "id": "ach_generation_3",
+  "cat": "family",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.generation",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "ach_world_revealed",
+  "cat": "system",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "flag.world_revealed",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "ach_rags_to_riches",
+  "cat": "wealth",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.wealth",
+    "op": "==",
+    "value": "poor"
+   },
+   {
+    "path": "calc.net_worth",
+    "op": ">=",
+    "value": 5000000
+   }
+  ]
+ },
+ {
+  "id": "ach_captain",
+  "cat": "school",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.school.captain",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_popular",
+  "cat": "school",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.popularity",
+    "op": ">=",
+    "value": 90
+   }
+  ]
+ },
+ {
+  "id": "ach_class_president",
+  "cat": "school",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "flag.class_president",
+    "op": "==",
+    "value": true
+   }
+  ]
+ },
+ {
+  "id": "ach_dropout_rich",
+  "cat": "wealth",
+  "any_time": true,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "flag.dropout_high",
+      "op": "==",
+      "value": true
+     },
+     {
+      "path": "flag.expelled",
+      "op": "==",
+      "value": true
+     }
+    ]
+   },
+   {
+    "path": "calc.net_worth",
+    "op": ">=",
+    "value": 1000000
+   }
+  ]
+ },
+ {
+  "id": "ach_twins",
+  "cat": "family",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.family.multiples",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_heirloom",
+  "cat": "family",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.gamer.inventory",
+    "op": "has",
+    "value": "lucky_dice"
+   }
+  ]
+ },
+ {
+  "id": "ach_dating_app",
+  "cat": "love",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.love.dating_app",
+    "op": ">=",
+    "value": 10
+   }
+  ]
+ },
+ {
+  "id": "ach_eloped",
+  "cat": "love",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.social.elope",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_bank",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.crime.bank_robbery",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_murder",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.crime.murder",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_don",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.mafia.promotions",
+    "op": ">=",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "ach_parole",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.prison.parole",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_riot",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.prison.riots",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_gang",
+  "cat": "crime",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.prison.gang",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_lawsuit",
+  "cat": "justice",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.lawsuits.won",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_oscar",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.acting.awards",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_moon",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.space.missions",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "ach_general",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.military.medals",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "ach_supermodel",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.special.model.tier",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "ach_president",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.politics.elected",
+    "op": ">=",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "ach_crowned",
+  "cat": "career",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.royal.crowned",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "ach_verified",
+  "cat": "fame",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.special.influencer.followers",
+    "op": ">=",
+    "value": 100000
+   }
+  ]
+ },
+ {
+  "id": "ach_social_star",
+  "cat": "fame",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.special.influencer.followers",
+    "op": ">=",
+    "value": 350000
+   }
+  ]
+ },
+ {
+  "id": "ach_plastic",
+  "cat": "beauty",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.act.surgery_facelift",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "ach_pilot",
+  "cat": "misc",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "player.licenses",
+    "op": "has",
+    "value": "pilot"
+   }
+  ]
+ },
+ {
+  "id": "ach_jet",
+  "cat": "wealth",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.buy.vehicle",
+    "op": ">=",
+    "value": 5
+   }
+  ]
+ },
+ {
+  "id": "ach_saint",
+  "cat": "karma",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.karma",
+    "op": ">=",
+    "value": 95
+   }
+  ]
+ },
+ {
+  "id": "ach_devil",
+  "cat": "karma",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "calc.karma",
+    "op": "<=",
+    "value": 5
+   }
+  ]
+ },
+ {
+  "id": "ach_blackjack",
+  "cat": "leisure",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.act.blackjack",
+    "op": ">=",
+    "value": 20
+   }
+  ]
+ },
+ {
+  "id": "ach_globetrotter",
+  "cat": "leisure",
+  "any_time": true,
+  "conditions": [
+   {
+    "path": "counter.act.travel",
+    "op": ">=",
+    "value": 10
+   }
+  ]
+ }
 ]

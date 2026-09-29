@@ -9,6 +9,10 @@
     "id": "return",
     "effects": [
      {
+      "type": "KARMA",
+      "amount": 6
+     },
+     {
       "type": "CHANGE_STAT",
       "stat": "reputation",
       "amount": 4
@@ -41,6 +45,10 @@
    {
     "id": "keep",
     "effects": [
+     {
+      "type": "KARMA",
+      "amount": -4
+     },
      {
       "type": "CHANGE_MONEY",
       "amount": 400

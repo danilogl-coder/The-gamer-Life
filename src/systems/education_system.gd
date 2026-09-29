@@ -65,7 +65,9 @@ func enroll(p: Dictionary, id: String) -> Dictionary:
 		_sim.add_log("log.edu_rejected", {"school": "@edu." + id}, "warning")
 		return {"ok": false, "reason": "edu.rejected"}
 	_start_stage(p, id)
-	if float(p.education.grades) >= float(_sim.data.bal("education.scholarship_grades", 88)):
+	var bonus := 8.0 if _sim.school_life.has_captaincy(p) else 0.0
+	bonus += 4.0 if _sim.state.flag("recommendation", false) else 0.0
+	if float(p.education.grades) + bonus >= float(_sim.data.bal("education.scholarship_grades", 88)):
 		p.education.scholarship = true
 		_sim.add_log("log.scholarship", {"school": "@edu." + id}, "major")
 	return {"ok": true, "key": "edu.enrolled", "params": {"school": "@edu." + id}}

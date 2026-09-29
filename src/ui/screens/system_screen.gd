@@ -56,6 +56,7 @@ func _render_status(sim: LifeSimulation, p: Dictionary) -> void:
 	# Hidden attributes discovered with Observe.
 	var hid := W.vbox(4)
 	hid.add_child(W.section(App.t("ui.hidden_attrs")))
+	hid.add_child(W.label("%s: %s" % [App.t("ui.zodiac"), App.t("zodiac." + CharacterFactory.zodiac_of(p))], UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
 	if p.discovered.is_empty():
 		hid.add_child(W.label(App.t("ui.hidden_none"), UiTheme.FONT_S, UiTheme.TEXT_DIM, true))
 	for h in p.discovered:

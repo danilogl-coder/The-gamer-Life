@@ -9,8 +9,14 @@ const HIDDEN_IDS := [
 	"fertility", "talent_music", "talent_sport", "talent_art", "academic",
 	"aggression", "impulsivity", "courage", "empathy", "ambition", "loyalty",
 	"greed", "addiction_resist", "disease_risk", "stress_tolerance", "longevity",
-	"mana_affinity",
+	"mana_affinity", "karma", "willpower", "generosity", "craziness", "religiousness",
+	"professionalism", "athleticism",
 ]
+const ZODIAC := ["capricorn", "aquarius", "pisces", "aries", "taurus", "gemini", "cancer",
+	"leo", "virgo", "libra", "scorpio", "sagittarius"]
+const ZODIAC_ELEMENT := {"aries": "fire", "leo": "fire", "sagittarius": "fire", "taurus": "earth",
+	"virgo": "earth", "capricorn": "earth", "gemini": "air", "libra": "air", "aquarius": "air",
+	"cancer": "water", "scorpio": "water", "pisces": "water"}
 const WEALTH_CLASSES := ["poor", "working", "middle", "upper", "elite"]
 
 var _sim
@@ -85,6 +91,11 @@ func _add_player_fields(p: Dictionary) -> void:
 		"favorites": [],
 		"special": {},
 		"pets": [],
+		"school": {"popularity": 30.0, "clique": "", "clubs": {}},
+		"will": {"mode": "equal", "favorite": ""},
+		"licenses": [],
+		"job_hours": "normal",
+		"surgeries": {},
 	}, false)
 	p.gamer.merge({"awakened": true, "exp": 0.0, "stat_points": 0, "stat_xp": {},
 		"skills": {}, "titles": [], "title": "", "inventory": {}, "equipment": {}}, false)
@@ -171,6 +182,7 @@ func _base_character(country: String, sex: String, age: int) -> Dictionary:
 	var hidden := {}
 	for h in HIDDEN_IDS:
 		hidden[h] = clampf(_sim.rng.randn(50, 16), 1, 99)
+	hidden.karma = 50.0
 	var stats := {}
 	for s in STAT_IDS:
 		stats[s] = float(_sim.rng.randi_range(1, 3))
@@ -193,11 +205,16 @@ func _base_character(country: String, sex: String, age: int) -> Dictionary:
 		"education": {"stage": "", "years": 0, "grades": 50.0, "completed": [], "major": "", "absences": 0},
 		"career": {"job": "", "level": 0, "years": 0, "performance": 50.0, "salary": 0.0, "history": []},
 		"finance": {"cash": 0.0},
-		"health": {"conditions": {}, "fitness": 30.0, "habits": {}},
+		"health": {"conditions": {}, "fitness": 30.0, "habits": {}, "weight": 0.0},
 		"family": {"mother": "", "father": "", "spouse": "", "children": [], "siblings": []},
 		"memory": [],
 		"sexuality": _sim.rng.pick_weighted(["straight", "gay", "bi"], [88, 6, 6]),
+		"birth_month": _sim.rng.randi_range(1, 12),
 	}
+
+
+static func zodiac_of(ch: Dictionary) -> String:
+	return ZODIAC[(int(ch.get("birth_month", 1)) - 1) % 12]
 
 
 func _random_traits() -> Array:

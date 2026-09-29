@@ -11,6 +11,10 @@ func _adult(seed: int) -> LifeSimulation:
 	for s in CharacterFactory.STAT_IDS:
 		p.gamer.stats[s] = 30.0
 	sim.skills.learn(p, "music")
+	p.attrs.looks = 90.0
+	p.education.completed.append("uni_physics")
+	sim.state.add_counter("crime.total", 6)
+	sim.state.set_flag("royal_birth")
 	sim.activities.start_year(p)
 	return sim
 
@@ -64,6 +68,7 @@ func test_pets_and_familiar_naming() -> void:
 func test_possessions_value_and_sale() -> void:
 	var sim := _adult(34)
 	var p := sim.player()
+	sim.skills.learn(p, "driving")
 	check(sim.command("buy_possession", ["sedan"]).ok, "buy sedan")
 	check(sim.finance.has_vehicle(p), "has vehicle")
 	var v0 := float(p.finance.possessions[0].value)
@@ -106,7 +111,12 @@ func test_emigration_changes_country_and_job() -> void:
 	var p := sim.player()
 	sim.career.hire(p, "janitor", true)
 	var target := "nortavia" if p.country != "nortavia" else "akitsu"
-	var r := sim.command("emigrate", [target])
+	var r := {}
+	for i in 30:
+		p.finance.cash = 2000000.0
+		r = sim.command("emigrate", [target])
+		if r.ok:
+			break
 	check(r.ok, "emigrate: %s" % r)
 	check(p.country == target, "country changed")
 	check(p.career.job == "", "lost job when moving")

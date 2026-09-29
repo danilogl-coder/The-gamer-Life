@@ -1,0 +1,11 @@
+[
+  {"id": "populars", "min_popularity": 75, "min_age": 11, "max_age": 17, "req": {"path": "player.attrs.looks", "op": ">=", "value": 60}, "mods": {"charm": 0.05, "study_gain": -0.05}, "popularity": 4},
+  {"id": "jocks", "min_popularity": 50, "min_age": 11, "max_age": 17, "req": {"path": "stat.str", "op": ">=", "value": 12}, "mods": {"train_gain.str": 0.1}, "popularity": 3},
+  {"id": "nerds", "min_popularity": 0, "min_age": 11, "max_age": 17, "req": {"path": "stat.int", "op": ">=", "value": 12}, "mods": {"study_gain": 0.1}, "popularity": -1},
+  {"id": "band_geeks", "min_popularity": 10, "min_age": 11, "max_age": 17, "req": {"path": "skill.music", "op": ">=", "value": 1}, "mods": {"skill_gain": 0.03}, "popularity": 0},
+  {"id": "gamers", "min_popularity": 0, "min_age": 11, "max_age": 17, "req": {"path": "counter.act.video_games", "op": ">=", "value": 3}, "mods": {"stress_gain": -0.05}, "popularity": 0},
+  {"id": "artists", "min_popularity": 15, "min_age": 11, "max_age": 17, "req": {"path": "skill.drawing", "op": ">=", "value": 1}, "mods": {"happiness": 0.05}, "popularity": 1},
+  {"id": "goths", "min_popularity": 5, "min_age": 11, "max_age": 17, "req": {"path": "player.attrs.happiness", "op": "<", "value": 60}, "mods": {"stress_gain": -0.05}, "popularity": 0},
+  {"id": "rebels", "min_popularity": 30, "min_age": 11, "max_age": 17, "req": {"path": "counter.act.skip_class", "op": ">=", "value": 2}, "mods": {"crime_success": 0.05, "study_gain": -0.05}, "popularity": 2},
+  {"id": "fraternity", "min_popularity": 40, "min_age": 17, "max_age": 30, "req": {"path": "player.education.stage", "op": "in", "value": ["uni_medicine", "uni_law", "uni_cs", "uni_engineering", "uni_business", "uni_arts", "uni_education", "uni_psychology", "uni_physics", "uni_sports", "uni_biology"]}, "mods": {"interview": 0.08, "charm": 0.03, "study_gain": -0.05}, "popularity": 3}
+]

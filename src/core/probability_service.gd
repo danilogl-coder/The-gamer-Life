@@ -39,7 +39,9 @@ func luck_bonus() -> float:
 	var luk: float = _sim.gamer.effective_stat(_sim.player(), "luk")
 	var per: float = _sim.data.bal("probability.luck_per_point", 0.002)
 	var cap: float = _sim.data.bal("probability.luck_cap", 0.35)
-	return clampf((luk - 10.0) * per, -0.1, cap)
+	# Karma quietly bends fate too: good deeds come back around.
+	var karma: float = (float(_sim.player().get("hidden", {}).get("karma", 50.0)) - 50.0) * float(_sim.data.bal("probability.karma_per_point", 0.0015))
+	return clampf((luk - 10.0) * per + karma, -0.15, cap)
 
 
 func apply_luck(p: float) -> float:

@@ -1,0 +1,232 @@
+[
+ {
+  "id": "prison_join_gang",
+  "special": true,
+  "tags": [
+   "prison"
+  ],
+  "choices": [
+   {
+    "id": "iron",
+    "effects": [
+     {
+      "type": "JOIN_GANG",
+      "gang": "iron_brotherhood"
+     }
+    ]
+   },
+   {
+    "id": "snakes",
+    "effects": [
+     {
+      "type": "JOIN_GANG",
+      "gang": "silent_snakes"
+     }
+    ]
+   },
+   {
+    "id": "syndicate",
+    "effects": [
+     {
+      "type": "JOIN_GANG",
+      "gang": "the_syndicate"
+     }
+    ]
+   },
+   {
+    "id": "alone",
+    "effects": [
+     {
+      "type": "PRISON_BEHAVIOR",
+      "amount": 5
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "prison_gang_war",
+  "special": true,
+  "tags": [
+   "prison"
+  ],
+  "choices": [
+   {
+    "id": "fight",
+    "chance": {
+     "base": 0.45,
+     "mods": [
+      {
+       "path": "stat.str",
+       "per": 0.008,
+       "offset": 10,
+       "max": 0.35
+      }
+     ]
+    },
+    "success": {
+     "effects": [
+      {
+       "type": "GAIN_EXP",
+       "amount": 120,
+       "scale_level": true
+      },
+      {
+       "type": "PRISON_BEHAVIOR",
+       "amount": -15
+      },
+      {
+       "type": "STAT_XP",
+       "stat": "str",
+       "amount": 30
+      }
+     ]
+    },
+    "fail": {
+     "effects": [
+      {
+       "type": "ADD_DISEASE",
+       "disease": "injury_minor"
+      },
+      {
+       "type": "PRISON_BEHAVIOR",
+       "amount": -20
+      }
+     ]
+    }
+   },
+   {
+    "id": "sit",
+    "effects": [
+     {
+      "type": "PRISON_BEHAVIOR",
+      "amount": 5
+     },
+     {
+      "type": "SET_VALUE",
+      "path": "criminal.prison.gang",
+      "value": ""
+     },
+     {
+      "type": "LOG",
+      "key": "log.gang_kicked"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "prison_conjugal",
+  "tags": [
+   "prison",
+   "mature"
+  ],
+  "cooldown": 3,
+  "weight": 6,
+  "actor": {
+   "role": [
+    "spouse",
+    "partner"
+   ]
+  },
+  "actor_conditions": [
+   {
+    "path": "rel.actor",
+    "op": ">=",
+    "value": 50
+   }
+  ],
+  "choices": [
+   {
+    "id": "yes",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 15
+     },
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 10
+     },
+     {
+      "type": "CHANCE",
+      "p": 0.2,
+      "effects": [
+       {
+        "type": "CONCEIVE"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "id": "talk",
+    "effects": [
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "amount": 8
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "prison_care_package",
+  "tags": [
+   "prison"
+  ],
+  "cooldown": 2,
+  "weight": 8,
+  "actor": {
+   "role": [
+    "mother",
+    "father",
+    "sibling",
+    "best_friend"
+   ]
+  },
+  "actor_conditions": [
+   {
+    "path": "rel.actor",
+    "op": ">=",
+    "value": 55
+   }
+  ],
+  "choices": [
+   {
+    "id": "share",
+    "effects": [
+     {
+      "type": "PRISON_BEHAVIOR",
+      "amount": 6
+     },
+     {
+      "type": "KARMA",
+      "amount": 2
+     },
+     {
+      "type": "CHANGE_RELATIONSHIP",
+      "target": "role:inmate",
+      "amount": 15
+     }
+    ]
+   },
+   {
+    "id": "keep",
+    "effects": [
+     {
+      "type": "CHANGE_STAT",
+      "stat": "happiness",
+      "amount": 8
+     },
+     {
+      "type": "STAT_XP",
+      "stat": "int",
+      "amount": 20
+     }
+    ]
+   }
+  ]
+ }
+]

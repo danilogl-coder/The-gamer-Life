@@ -1,0 +1,312 @@
+[
+ {
+  "id": "rb_legendary",
+  "priority": 1,
+  "conditions": [
+   {
+    "path": "calc.rank",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "rb_dragon",
+  "priority": 2,
+  "conditions": [
+   {
+    "path": "counter.kill.ancient_dragon",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "rb_royal",
+  "priority": 3,
+  "conditions": [
+   {
+    "path": "player.special",
+    "op": "has",
+    "value": "royalty"
+   }
+  ]
+ },
+ {
+  "id": "rb_famous",
+  "priority": 4,
+  "conditions": [
+   {
+    "path": "player.fame",
+    "op": ">=",
+    "value": 80
+   }
+  ]
+ },
+ {
+  "id": "rb_billionaire",
+  "priority": 5,
+  "conditions": [
+   {
+    "path": "calc.net_worth",
+    "op": ">=",
+    "value": 1000000000
+   }
+  ]
+ },
+ {
+  "id": "rb_rich",
+  "priority": 6,
+  "conditions": [
+   {
+    "path": "calc.net_worth",
+    "op": ">=",
+    "value": 5000000
+   }
+  ]
+ },
+ {
+  "id": "rb_hero",
+  "priority": 7,
+  "conditions": [
+   {
+    "path": "counter.karma.good",
+    "op": ">=",
+    "value": 25
+   },
+   {
+    "path": "calc.karma",
+    "op": ">=",
+    "value": 80
+   }
+  ]
+ },
+ {
+  "id": "rb_villain",
+  "priority": 8,
+  "conditions": [
+   {
+    "path": "calc.karma",
+    "op": "<=",
+    "value": 10
+   },
+   {
+    "path": "counter.crime.total",
+    "op": ">=",
+    "value": 10
+   }
+  ]
+ },
+ {
+  "id": "rb_criminal",
+  "priority": 9,
+  "conditions": [
+   {
+    "path": "counter.crime.total",
+    "op": ">=",
+    "value": 15
+   }
+  ]
+ },
+ {
+  "id": "rb_hunter",
+  "priority": 10,
+  "conditions": [
+   {
+    "path": "counter.dungeon.clears",
+    "op": ">=",
+    "value": 100
+   }
+  ]
+ },
+ {
+  "id": "rb_tamer",
+  "priority": 11,
+  "conditions": [
+   {
+    "path": "counter.pets.named",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "rb_scholar",
+  "priority": 12,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "doctorate"
+     },
+     {
+      "path": "player.education.completed",
+      "op": "has",
+      "value": "residency"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rb_athlete",
+  "priority": 13,
+  "conditions": [
+   {
+    "path": "counter.sport.titles",
+    "op": ">=",
+    "value": 2
+   }
+  ]
+ },
+ {
+  "id": "rb_star",
+  "priority": 14,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "counter.music.platinum",
+      "op": ">=",
+      "value": 1
+     },
+     {
+      "path": "counter.acting.awards",
+      "op": ">=",
+      "value": 1
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rb_family",
+  "priority": 15,
+  "conditions": [
+   {
+    "path": "calc.children",
+    "op": ">=",
+    "value": 4
+   }
+  ]
+ },
+ {
+  "id": "rb_romantic",
+  "priority": 16,
+  "conditions": [
+   {
+    "path": "counter.social.marriages",
+    "op": ">=",
+    "value": 3
+   }
+  ]
+ },
+ {
+  "id": "rb_old",
+  "priority": 17,
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": ">=",
+    "value": 95
+   }
+  ]
+ },
+ {
+  "id": "rb_young",
+  "priority": 18,
+  "conditions": [
+   {
+    "path": "player.age",
+    "op": "<",
+    "value": 21
+   }
+  ]
+ },
+ {
+  "id": "rb_workaholic",
+  "priority": 19,
+  "conditions": [
+   {
+    "path": "counter.work.years",
+    "op": ">=",
+    "value": 40
+   }
+  ]
+ },
+ {
+  "id": "rb_traveler",
+  "priority": 20,
+  "conditions": [
+   {
+    "any": [
+     {
+      "path": "counter.migration.moves",
+      "op": ">=",
+      "value": 2
+     },
+     {
+      "path": "counter.act.travel",
+      "op": ">=",
+      "value": 8
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "rb_loner",
+  "priority": 21,
+  "conditions": [
+   {
+    "path": "calc.friends",
+    "op": "==",
+    "value": 0
+   },
+   {
+    "path": "calc.married",
+    "op": "==",
+    "value": false
+   },
+   {
+    "path": "calc.children",
+    "op": "==",
+    "value": 0
+   }
+  ]
+ },
+ {
+  "id": "rb_addict",
+  "priority": 22,
+  "conditions": [
+   {
+    "path": "counter.disease.addiction_alcohol",
+    "op": ">=",
+    "value": 1
+   }
+  ]
+ },
+ {
+  "id": "rb_lazy",
+  "priority": 23,
+  "conditions": [
+   {
+    "path": "counter.work.years",
+    "op": "<",
+    "value": 3
+   },
+   {
+    "path": "player.age",
+    "op": ">=",
+    "value": 40
+   }
+  ]
+ },
+ {
+  "id": "rb_ordinary",
+  "priority": 99,
+  "conditions": []
+ }
+]

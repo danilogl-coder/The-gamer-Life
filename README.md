@@ -23,6 +23,8 @@ godot --headless -s res://tests/batch_sim.gd -- 500    # simula 500 vidas e impr
 
 Arquitetura completa, modelo de dados, Event Engine, pipeline do ano, save/versionamento, navegação mobile, roadmap e pesquisa: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
 
+Comparação ponto a ponto com a profundidade do BitLife (o que existe, o que foi adicionado, o que ficou de fora): **[docs/BITLIFE_GAP_ANALYSIS.md](docs/BITLIFE_GAP_ANALYSIS.md)**.
+
 ## Estrutura
 
 ```

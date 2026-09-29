@@ -51,7 +51,25 @@ func setup(p_ui) -> void:
 	for e in s.get("highlights", []):
 		story.add_child(W.label("%d — %s" % [int(e.age), App.tr_entry(e)], UiTheme.FONT_S, UiTheme.TEXT, true))
 	body.add_child(W.card(story))
+	if s.has("ribbon"):
+		var rb := W.vbox(2)
+		rb.add_child(W.label(App.t("ui.ribbon"), UiTheme.FONT_S, UiTheme.SYSTEM_EDGE))
+		rb.add_child(W.label("🎗 " + App.t("ribbon.%s.title" % s.ribbon), UiTheme.FONT_L, UiTheme.GOLD))
+		rb.add_child(W.label(App.t("ribbon.%s.desc" % s.ribbon), UiTheme.FONT_S, UiTheme.TEXT_DIM, true))
+		body.add_child(W.system_card(rb))
 	body.add_child(W.label(App.t("ui.soul_gain", {"n": int(s.get("soul_points", 0))}), UiTheme.FONT_M, UiTheme.PURPLE))
+	# Save points: the System can rewind a few years, for a price.
+	if App.sim.save_points.size() > 0:
+		body.add_child(W.section(App.t("ui.rewind_title")))
+		var rw := W.flow(6)
+		for n in range(1, App.sim.save_points.size() + 1):
+			var cost := 15 * n
+			var b := W.tinted_button(App.t("ui.rewind", {"n": n, "c": cost}), _rewind.bind(n, cost), Color("3a2a6a"), 72)
+			b.disabled = int(App.meta.soul_points) < cost
+			b.size_flags_horizontal = Control.SIZE_FILL
+			b.custom_minimum_size.x = 200
+			rw.add_child(b)
+		body.add_child(rw)
 	var heirs: Array = App.sim.legacy.heirs()
 	if not heirs.is_empty():
 		body.add_child(W.section(App.t("ui.continue_dynasty")))
@@ -62,6 +80,20 @@ func setup(p_ui) -> void:
 			row.add_child(W.tinted_button(App.t("ui.play_as", {"name": h.first_name, "age": h.age, "role": App.t("role." + App.sim.relations.role_of(id))}), _continue_as.bind(id), UiTheme.SYSTEM))
 			body.add_child(row)
 	body.add_child(W.tinted_button(App.t("ui.reincarnate"), _new_life, UiTheme.PANEL_HI, 100))
+
+
+func _rewind(years: int, cost: int) -> void:
+	if int(App.meta.soul_points) < cost:
+		return
+	App.meta.soul_points = int(App.meta.soul_points) - cost
+	# Refund what this death granted: the life isn't over after all.
+	App.meta.soul_points = maxi(0, int(App.meta.soul_points) - int(App.sim.state.data.get("death", {}).get("soul_points", 0)))
+	if not App.meta.lives.is_empty():
+		App.meta.lives.pop_back()
+	App.save_meta()
+	if App.sim.rewind(years):
+		App.autosave()
+		queue_free()
 
 
 func _continue_as(id: String) -> void:

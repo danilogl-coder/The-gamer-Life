@@ -11,7 +11,7 @@ const TABLES := [
 	"activities", "jobs", "education", "skills", "titles", "quests",
 	"monsters", "dungeons", "diseases", "countries", "traits", "items",
 	"achievements", "interactions", "world_events", "properties", "crimes",
-	"factions", "stats", "special_careers", "pets", "possessions", "challenges",
+	"factions", "stats", "special_careers", "pets", "possessions", "challenges", "cliques", "clubs", "interview_questions", "ribbons", "lawyers", "lawsuits", "gangs",
 ]
 
 var tables: Dictionary = {}

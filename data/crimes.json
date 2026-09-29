@@ -146,5 +146,155 @@
   ],
   "fine": 1200,
   "exp": 1
+ },
+ {
+  "id": "vandalism",
+  "stat": "dex",
+  "success": 0.75,
+  "reward": [
+   0,
+   0
+  ],
+  "heat": 4,
+  "investigation": 0.05,
+  "evidence": 0.5,
+  "severity": 3,
+  "sentence": [
+   0,
+   0
+  ],
+  "fine": 400,
+  "exp": 4
+ },
+ {
+  "id": "porch_pirate",
+  "stat": "dex",
+  "success": 0.7,
+  "reward": [
+   30,
+   400
+  ],
+  "heat": 5,
+  "investigation": 0.08,
+  "evidence": 0.45,
+  "severity": 4,
+  "sentence": [
+   0,
+   0
+  ],
+  "fine": 800,
+  "exp": 5
+ },
+ {
+  "id": "embezzle",
+  "stat": "int",
+  "success": 0.5,
+  "reward": [
+   0,
+   0
+  ],
+  "reward_salary": [
+   0.3,
+   2.5
+  ],
+  "heat": 30,
+  "investigation": 0.45,
+  "evidence": 0.6,
+  "severity": 22,
+  "sentence": [
+   2,
+   8
+  ],
+  "exp": 40
+ },
+ {
+  "id": "armored_car",
+  "stat": "str",
+  "success": 0.25,
+  "reward": [
+   150000,
+   900000
+  ],
+  "heat": 55,
+  "investigation": 0.55,
+  "evidence": 0.65,
+  "severity": 45,
+  "sentence": [
+   8,
+   20
+  ],
+  "exp": 150
+ },
+ {
+  "id": "bank_robbery",
+  "stat": "dex",
+  "success": 0.3,
+  "reward": [
+   0,
+   0
+  ],
+  "heat": 60,
+  "investigation": 0.6,
+  "evidence": 0.7,
+  "severity": 50,
+  "sentence": [
+   10,
+   25
+  ],
+  "exp": 200
+ },
+ {
+  "id": "murder",
+  "stat": "str",
+  "success": 0.5,
+  "reward": [
+   0,
+   0
+  ],
+  "heat": 90,
+  "investigation": 0.8,
+  "evidence": 0.55,
+  "severity": 100,
+  "sentence": [
+   25,
+   80
+  ],
+  "exp": 20
+ },
+ {
+  "id": "desertion",
+  "stat": "dex",
+  "success": 0.5,
+  "reward": [
+   0,
+   0
+  ],
+  "heat": 20,
+  "investigation": 0.3,
+  "evidence": 0.8,
+  "severity": 25,
+  "sentence": [
+   1,
+   5
+  ],
+  "exp": 0
+ },
+ {
+  "id": "racketeering",
+  "stat": "int",
+  "success": 0.5,
+  "reward": [
+   0,
+   0
+  ],
+  "heat": 40,
+  "investigation": 0.5,
+  "evidence": 0.6,
+  "severity": 40,
+  "sentence": [
+   5,
+   20
+  ],
+  "exp": 0
  }
 ]

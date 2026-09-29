@@ -1,0 +1,17 @@
+[
+ {
+  "id": "public",
+  "cost": 0,
+  "bonus": 0.0
+ },
+ {
+  "id": "cheap",
+  "cost": 6000,
+  "bonus": 0.12
+ },
+ {
+  "id": "elite",
+  "cost": 45000,
+  "bonus": 0.3
+ }
+]

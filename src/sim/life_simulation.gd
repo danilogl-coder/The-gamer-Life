@@ -33,6 +33,8 @@ var achievements: AchievementSystem
 var legacy: LegacySystem
 var pets: PetSystem
 var special: SpecialCareerSystem
+var school_life: SchoolLifeSystem
+var dating: DatingSystem
 var pipeline: YearPipeline
 
 
@@ -63,6 +65,8 @@ func _init(p_data: DataRegistry, p_bus: EventBus = null) -> void:
 	legacy = LegacySystem.new(self)
 	pets = PetSystem.new(self)
 	special = SpecialCareerSystem.new(self)
+	school_life = SchoolLifeSystem.new(self)
+	dating = DatingSystem.new(self)
 	pipeline = YearPipeline.new(self)
 
 
@@ -85,11 +89,29 @@ func new_life(p_seed: int, options: Dictionary = {}) -> void:
 	var player := factory.create_newborn_player(options)
 	state.data.player_id = player.id
 	legacy.apply_start_perks(options.get("perks", []))
+	_maybe_royal_birth(player, options)
 	gamer.on_player_created()
 	events.queue_special("sys_welcome")
 	pipeline.start_year()
 	bus.new_life_started.emit()
 	bus.state_changed.emit()
+
+
+## Rare royal births in monarchies (or forced by a challenge/option).
+func _maybe_royal_birth(p: Dictionary, options: Dictionary) -> void:
+	var monarchy: bool = data.get_def("countries", p.country).get("monarchy", false)
+	if not options.get("royal", false) and not (monarchy and rng.randf() < float(data.bal("life.royal_chance", 0.02))):
+		return
+	state.set_flag("royal_birth")
+	p.wealth = "elite"
+	p.finance.cash = 0.0
+	for role in ["mother", "father"]:
+		var id := relations.first_with_role(p, role)
+		if id != "":
+			state.npc(id).finance.cash = float(state.npc(id).finance.cash) + 50000000.0
+	p.special["royalty"] = special.career("royalty").start_state(p)
+	p.special.royalty.years = 0
+	add_log("log.royal_birth", {"country": "@country." + p.country}, "major")
 
 
 func load_state(saved: Dictionary) -> void:
@@ -99,6 +121,23 @@ func load_state(saved: Dictionary) -> void:
 	rng.set_state(int(str(saved.get("rng_state", "0"))))
 	gamer.invalidate()
 	bus.state_changed.emit()
+
+
+func can_rewind(years: int) -> bool:
+	return years >= 1 and years <= save_points.size()
+
+
+## Rewinds N years (1..5). Returns false if no save point exists.
+func rewind(years: int) -> bool:
+	if not can_rewind(years):
+		return false
+	var raw: String = save_points[save_points.size() - years]
+	save_points = save_points.slice(0, save_points.size() - years)
+	var saved = JSON.parse_string(raw)
+	load_state(SaveSystem.normalize(saved))
+	add_log("log.rewind", {"n": years}, "system")
+	bus.new_life_started.emit()
+	return true
 
 
 func snapshot() -> Dictionary:
@@ -111,9 +150,18 @@ func snapshot() -> Dictionary:
 # Public actions (the only doors the UI uses)
 # =========================================================================
 
+## Save points ("time machine"): the System quietly keeps the last few
+## years so a death can be undone for a price in Soul Points.
+const SAVE_POINTS := 5
+var save_points: Array = []
+
+
 func advance_year() -> Dictionary:
 	if is_dead() or has_pending_events():
 		return {"ok": false, "reason": "ui.blocked"}
+	save_points.append(JSON.stringify(snapshot()))
+	if save_points.size() > SAVE_POINTS:
+		save_points.pop_front()
 	pipeline.advance()
 	bus.state_changed.emit()
 	return {"ok": true}
@@ -155,7 +203,7 @@ func command(name: String, args: Array = []) -> Dictionary:
 	var p := player()
 	var result = null
 	match name:
-		"apply_job": result = career.apply(p, args[0])
+		"apply_job": result = career.apply(p, args[0], career.interview_score(p, args[1]) if args.size() > 1 else 0.0)
 		"quit_job":
 			career.fire(p, "quit")
 			result = {"ok": true}
@@ -202,6 +250,22 @@ func command(name: String, args: Array = []) -> Dictionary:
 		"buy_possession": result = finance.buy_possession(p, args[0])
 		"sell_possession": result = finance.sell_possession(p, args[0])
 		"emigrate": result = finance.emigrate(p, args[0])
+		"join_clique": result = school_life.join_clique(p, args[0])
+		"leave_clique":
+			school_life.leave_clique(p)
+			result = {"ok": true}
+		"join_club": result = school_life.join_club(p, args[0])
+		"quit_club":
+			school_life.quit_club(p, args[0])
+			result = {"ok": true}
+		"practice_club": result = school_life.practice(p, args[0])
+		"dating_candidates": result = {"ok": true, "ids": dating.candidates()}
+		"dating_pick": result = dating.pick(args[0])
+		"set_hours": result = career.set_hours(p, args[0])
+		"renovate": result = finance.renovate(p, args[0])
+		"join_gang": result = crime.join_gang(p, args[0])
+		"sue": result = crime.sue(p, args[0], args[1])
+		"set_will": result = legacy.set_will(p, args[0], args[1] if args.size() > 1 else "")
 		"auto_allocate":
 			result = {"ok": gamer.auto_allocate(p)}
 		_:
@@ -302,6 +366,10 @@ func _calc(key: String, ctx: Dictionary):
 		"has_vehicle": return finance.has_vehicle(p)
 		"special_active": return special.active(p).size()
 		"fame": return float(p.get("fame", 0))
+		"popularity": return school_life.popularity(p)
+		"karma": return float(p.hidden.get("karma", 50))
+		"zodiac": return CharacterFactory.zodiac_of(p)
+		"captain": return school_life.has_captaincy(p)
 		"compat":
 			return relations.compatibility(ctx.get("actor", {}))
 		"actor_age_gap":

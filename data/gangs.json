@@ -1,0 +1,14 @@
+[
+ {
+  "id": "iron_brotherhood",
+  "stat": "str"
+ },
+ {
+  "id": "silent_snakes",
+  "stat": "dex"
+ },
+ {
+  "id": "the_syndicate",
+  "stat": "int"
+ }
+]

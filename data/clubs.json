@@ -1,0 +1,13 @@
+[
+  {"id": "soccer", "stat": "str", "second": "vit", "min_age": 7, "popularity": 3, "counter": "act.run"},
+  {"id": "basketball", "stat": "dex", "second": "str", "min_age": 7, "popularity": 3, "counter": "act.run"},
+  {"id": "swimming", "stat": "vit", "second": "str", "min_age": 7, "popularity": 2, "counter": "act.run"},
+  {"id": "chess", "stat": "int", "second": "wis", "min_age": 7, "popularity": 0, "counter": "act.study"},
+  {"id": "debate", "stat": "cha", "second": "int", "min_age": 11, "popularity": 1, "counter": "social.total"},
+  {"id": "drama", "stat": "cha", "second": "dex", "min_age": 9, "popularity": 2, "counter": "act.acting"},
+  {"id": "school_band", "stat": "dex", "second": "cha", "min_age": 9, "popularity": 1, "counter": "act.practice_music"},
+  {"id": "robotics", "stat": "int", "second": "dex", "min_age": 11, "popularity": 0, "counter": "act.code"},
+  {"id": "art_club", "stat": "dex", "second": "wis", "min_age": 7, "popularity": 1, "counter": "act.draw"},
+  {"id": "student_council", "stat": "cha", "second": "wis", "min_age": 11, "popularity": 4, "counter": "social.total"},
+  {"id": "martial_club", "stat": "dex", "second": "str", "min_age": 7, "popularity": 2, "counter": "act.martial_arts"}
+]

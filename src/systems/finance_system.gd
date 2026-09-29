@@ -295,6 +295,8 @@ func buy_possession(p: Dictionary, def_id: String) -> Dictionary:
 	if def.is_empty() or not _sim.cond.check_all(def.get("conditions", []), {}):
 		return {"ok": false, "reason": "ui.invalid"}
 	var price := possession_price(p, def_id)
+	if not license_ok(p, def):
+		return {"ok": false, "reason": "license.required_" + def.license}
 	if float(p.finance.cash) < price:
 		return {"ok": false, "reason": "ui.no_money"}
 	add_cash(p, -price)
@@ -305,6 +307,28 @@ func buy_possession(p: Dictionary, def_id: String) -> Dictionary:
 	if def.kind == "vehicle" and not _sim.skills.knows(p, "driving") and int(p.age) >= 16:
 		_sim.state.set_flag("drives_unlicensed")
 	return {"ok": true, "key": "ui.bought", "params": {"thing": "@poss." + def_id}}
+
+
+func license_ok(p: Dictionary, def: Dictionary) -> bool:
+	var lic: String = def.get("license", "")
+	if lic == "":
+		return true
+	if lic == "driving":
+		return _sim.skills.knows(p, "driving") or int(p.age) < 16
+	return p.get("licenses", []).has(lic)
+
+
+func renovate(p: Dictionary, index: int) -> Dictionary:
+	if index < 0 or index >= p.finance.properties.size():
+		return {"ok": false, "reason": "ui.invalid"}
+	var prop: Dictionary = p.finance.properties[index]
+	var cost := float(prop.base_value) * 0.08
+	if float(p.finance.cash) < cost:
+		return {"ok": false, "reason": "ui.no_money"}
+	add_cash(p, -cost)
+	prop.condition = 100.0
+	prop.base_value = float(prop.base_value) * 1.04
+	return {"ok": true, "key": "ui.renovated", "params": {"v": int(cost)}}
 
 
 func sell_possession(p: Dictionary, index: int) -> Dictionary:
@@ -368,6 +392,16 @@ func emigrate(p: Dictionary, country_id: String) -> Dictionary:
 	if float(p.finance.cash) < cost:
 		return {"ok": false, "reason": "ui.no_money"}
 	add_cash(p, -cost)
+	# Visa application: money, a job, education and a clean record help.
+	var visa := {"base": 0.45, "mods": [
+		{"path": "calc.net_worth", "per": 0.000002, "max": 0.2},
+		{"path": "calc.employed", "per": 0.1},
+		{"path": "player.attrs.reputation", "per": 0.003, "offset": 50.0}]}
+	if not p.criminal.record.is_empty():
+		visa.base = float(visa.base) - 0.25
+	if not _sim.prob.roll_spec(visa):
+		_sim.add_log("log.visa_denied", {"country": "@country." + country_id}, "warning")
+		return {"ok": false, "reason": "ui.visa_denied"}
 	var old: String = p.country
 	p.country = country_id
 	if _sim.career.is_employed(p):
